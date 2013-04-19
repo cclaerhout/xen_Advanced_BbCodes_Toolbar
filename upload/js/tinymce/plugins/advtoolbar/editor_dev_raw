@@ -1,0 +1,266 @@
+		/** HIGHLIGHT WORK IN PROGRESS = FOR REFERENCE*/
+		_getHighlight_ARGGGGG :	function (ed, cm, n) {
+
+			var pattern1 = 	/(\[([^\/]+?)(?:=.+?)?\])(?!<\/span>)((?:\[\2(?:=.+?)?\](?:\[\2(?:=.+?)?\][\s\S]*?\[\/\2\]|[\s\S])+?\[\/\2\]|[\s\S])*?)(\[\/\2\])/gi,
+			pattern1b = 	/(\[([^\/]+?)(?:=.+?)?\])(?!<\/span>)((?:\[\2(?:=.+?)?\](?:\[\2(?:=.+?)?\][\s\S]*?\[\/\2\]|[\s\S])+?\[\/\2\]|[\s\S])*?)(\[\/\2\])/i, 
+			pattern2 = 	/(\{([^\/]+?)(?:=.+?)?\})(?!<\/span>)((?:\{\2(?:=.+?)?\}[\s\S]*?\{\/\2\}|[\s\S]*?)*?)(\{\/\2\})/gi, 
+			content = ed.getContent(),
+			checking_n,
+			checking_s,
+			triger_replace = false,
+			NoContent = false;
+
+		/***	
+		*	---------------------------------------------
+		*
+		*	No recursive Regex on js...
+		*
+		*	---------------------------------------------
+		*
+		*	Nested Level concept: (?:\[\2(?:=.+?)?\][\s\S]*?\[\/\2\]|[\s\S])+? replaces inner [\s\S]*? 
+		*	L1 OK : (\[([^\/]+?)(?:=.+?)?\])((?:\[\2(?:=.+?)?\][\s\S]*?\[\/\2\]|[\s\S])+?)(\[\/\2\])
+		*	L2 OK : (\[([^\/]+?)(?:=.+?)?\])((?:\[\2(?:=.+?)?\](?:\[\2(?:=.+?)?\][\s\S]*?\[\/\2\]|[\s\S])+?\[\/\2\]|[\s\S])+?)(\[\/\2\])
+		*	L3 OK : (\[([^\/]+?)(?:=.+?)?\])((?:\[\2(?:=.+?)?\](?:\[\2(?:=.+?)?\](?:\[\2(?:=.+?)?\][\s\S]*?\[\/\2\]|[\s\S])+?\[\/\2\]|[\s\S])+?\[\/\2\]|[\s\S])+?)(\[\/\2\])
+		*
+		*	But still needs a way to prevent loop if regex found=>replace with html...=> regex still matches => continue to replace wrapping and wrapping elemets 
+		*
+		*	---------------------------------------------
+		*
+		*	For example:	(\[([^\/]+?)(?:=.+?)?\])(?!<\/span>)((?:\[\2(?:=.+?)?\](?:\[\2(?:=.+?)?\][\s\S]*?\[\/\2\]|[\s\S])+?\[\/\2\]|[\s\S])*?)(\[\/\2\])
+		*	// The code part (?!<\/span>) is important to avoid infinite loop... but better way to do it ?
+		*	// The code part  (?!\[\2\]) is important to allow to fetch the correct tag ending when wrapped tags have the same tag name as parent tag name (\[\2\])
+		*	// Nice javascript regex tester: http://www.gethifi.com/tools/regex
+		*
+		*
+		*	---------------------------------------------
+		*
+		*	No Lookbehind (positive/negative) in js
+		*
+		*	---------------------------------------------
+		*	
+		*	Info: tried XregExp lib with pluging... Don't know why but the nevative lookbehind doesn't seem to work with my code
+		*	Syntaxe saved:
+		*	//	JS:		content = content.replace(pattern1,
+		*	//	XregExp		content = XRegExp.replaceLb(content, '(?i)(?<!<span id="advhln_open_\d+?".+?>)', pattern1,
+		*
+		*	//	JS:		pattern1.test(content)
+		*	//	XregExp		XRegExp.testLb(content, '(?i)(?<!<span id="advhln_open_\d+?".+?>)', pattern1)		
+		*
+		*
+		*	---------------------------------------------
+		*
+		*	Antiloop developping
+		*
+		*	---------------------------------------------
+		*	replace 'if (triger_replace)' with:	
+		*		
+		*		safety++;
+		*		alert(safety);
+		*		if (triger_replace && safety < 40)
+		*	
+		**/			
+
+
+		/***
+		* Basic Highlighting
+		**/
+
+			//Normal tags
+			if (pattern1.test(content)) 
+			{
+
+				triger_replace = true;
+				checking_n =  replace_id_n;
+				checking_s =  replace_id_s; //=> just to avoid undefined variable for caret management
+
+				content = content.replace(pattern1,
+					function(fullMatch, tagopen, tag, tagcontent, tagclose) {
+
+						replace_id_n++;
+						if(!tagcontent){ NoContent = true; }
+						var builder = new Array;
+						
+						builder.id = replace_id_n;
+						builder.start = '<span id="advhln_open_'+ (replace_id_n) +'" class="adv_hl adv_hln_'+ (replace_id_n) +'" style="background-color:'+ adv_hl_norm_open +'">'+ tagopen +'</span>{AdvContentStarts_'+replace_id_n+'}';
+						
+				/*
+						if (pattern1.test(tagcontent)) 
+						{
+							/*
+								I'm not sure it's needed...
+								The 'g' parameter of the regex has a kind of memory backtrace system. So if the replacement has already be done, it will not do it again
+								If the 'g' parameter is deleted, then it will wrap the main parent inside a same new parent
+							
+								[test]content[/test] => will not change
+								[test]content[test2]content2[/test2] next[/test] => will give [test][test]content[test2]content2[/test2] next[/test][/test]
+								
+							*/
+				/*
+							tagcontent = content.replace(pattern1,
+								function(_fullMatch, _tagopen, _tag, _tagcontent, _tagclose) {
+									replace_id_n++;
+									
+									return '<span id="advhln_open_'+ (replace_id_n) +'" class="adv_hl adv_hln_'+ (replace_id_n) +'" style="background-color:'+ adv_hl_norm_open +'">'+ _tagopen +'</span><span id="advhln_content_'+ (replace_id_n) +'" class="adv_hl  adv_hln_'+ (replace_id_n) +'" style="background-color:'+ adv_hl_norm_content +'">'+ _tagcontent +'</span><span id="advhln_close_'+ (replace_id_n) +'" class="adv_hl adv_hln_'+ (replace_id_n) +'" style="background-color:'+ adv_hl_norm_close +'">'+ _tagclose +'</span>';
+								});
+						}
+				*/
+
+						//Tag content lines background color
+						/*
+						tagcontent = tagcontent
+								.replace(/<p>/gi, '<p><span class="adv_hl adv_hl_children adv_hln_'+ (builder.id) +'" style="background-color:'+ adv_hl_norm_content +'">')
+								.replace(/<\/p>/gi, '</span></p>')
+								.replace(/(\w+)$(?!<\/span>)/gi, '<span class="adv_hl adv_hl_children adv_hln_'+ (builder.id) +'" style="background-color:'+ adv_hl_norm_content +'">\1</span>');
+						*/		
+								
+console.log('AAAA:' + tagcontent);
+
+						builder.end = tagcontent + '{AdvContentStops_'+builder.id+'}<span id="advhln_close_'+ (builder.id) +'" class="adv_hl adv_hln_'+ (builder.id) +'" style="background-color:'+ adv_hl_norm_close +'">'+ tagclose +'</span>';
+
+console.log('tag content:'+builder);
+
+						//Loop to get tags children which have the same tag name than parent ||normal tags
+
+						
+						return builder.start + builder.end;
+
+					});
+
+				console.log('CONTENT:'+content);	
+					
+			}
+
+
+			//Special tags
+			if (pattern2.test(content))
+			{
+				//Special tags
+				triger_replace = true;
+				checking_s =  replace_id_s;
+				checking_n =  replace_id_n; //=> just to avoid undefined variable for caret management
+						
+				content = content.replace(pattern2,
+					function(fullMatch, tagopen, tag, tagcontent, tagclose) {
+						replace_id_s++;
+						if(!tagcontent){ NoContent = true; }
+
+						//Loop to get tags children which have the same tag name than parent ||special tags
+						while (pattern2.test(tagcontent))
+						{
+							tagcontent = tagcontent.replace(pattern2,
+								function(fullMatch, tagopen, tag, tagcontent, tagloop, tagclose) {
+									replace_id_s++;
+									return '<span id="advhls_open_'+ (replace_id_s) +'" class="adv_hl adv_hls_'+ (replace_id_s) +'" style="background-color:'+ adv_hl_spe_open +'">'+ tagopen +'</span><span id="advhls_content_'+ (replace_id_s) +'" class="adv_hl  adv_hls_'+ (replace_id_s) +'" style="background-color:'+ adv_hl_spe_content +'">'+ tagcontent +'</span><span id="advhls_close_'+ (replace_id_s) +'" class="adv_hl  adv_hls_'+ (replace_id_s) +'" style="background-color:'+ adv_hl_spe_close +'">'+ tagclose +'</span>';
+								});
+						}
+						
+						return '<span id="advhls_open_'+ (replace_id_s) +'" class="adv_hl adv_hls_'+ (replace_id_s) +'" style="background-color:'+ adv_hl_spe_open +'">'+ tagopen +'</span><span id="advhls_content_'+ (replace_id_s) +'" class="adv_hl  adv_hls_'+ (replace_id_s) +'" style="background-color:'+ adv_hl_spe_content +'">'+ tagcontent +'</span><span id="advhls_close_'+ (replace_id_s) +'" class="adv_hl  adv_hls_'+ (replace_id_s) +'" style="background-color:'+ adv_hl_spe_close +'">'+ tagclose +'</span>';
+					});
+			}
+
+			if (triger_replace)
+  			{
+
+ 				//Highlight !
+  				ed.setContent(content);
+
+  				/**
+  				* BLOODY CARET MANAGEMENT
+  				* If user is direct typing code with highlight function, place caret just after the new replacement
+
+  				if (((replace_id_n - checking_n) == 1) && ((replace_id_s - checking_s) == 0)) 		//If direct typing, replacement will be one by one... mais bordel pourquoi je suis passé par là...
+  				{
+  					if(NoContent) //If tag has no content, target the open tag to move the caret on the right
+  					{
+  						var builder_temp;
+  						//Select the opening tag
+  						ed.selection.select(ed.dom.select('span#advhln_open_' + replace_id_n)[0]);
+  						//Rebuild the span for the content tag (its content was nulled so the span hadn't been created) and insert in it a "caretfix" span to select later
+  						builder_temp = ed.selection.getContent() + '<span id="advhln_content_'+ (replace_id_n) +'" class="adv_hl  adv_hln_'+ (replace_id_n) +'" style="background-color:'+ adv_hl_norm_content +'"><span id="adv_caretfix"></span></span>';
+  						ed.selection.setContent(builder_temp);
+  						//Select the caretfix tag (will be automatically killed during setContent)
+  						ed.selection.select(ed.dom.select('span#adv_caretfix')[0]);
+  						ed.selection.setContent(ed.selection.getContent());
+  					}
+  					else
+  					{
+  						ed.selection.select(ed.dom.select('span#advhln_close_' + replace_id_n)[0]); 	//Get the selection
+  						ed.selection.setContent(ed.selection.getContent());				//Replace the selection to move the caret outside
+  					}
+  				}
+  				else if ((replace_id_s - checking_s) == 1 && ((replace_id_n - checking_n) == 0)) 	// Same thing than above but for special tags
+  				{
+  					if(NoContent) //If tag has no content, target the open tag to move the caret on the right
+  					{
+  						var builder_temp;
+  						//Select the opening tag
+  						ed.selection.select(ed.dom.select('span#advhls_open_' + replace_id_s)[0]);
+  						//Rebuild the span for the content tag (its content was nulled so the span hadn't been created) and insert in it a "caretfix" span to select later
+  						builder_temp = ed.selection.getContent() + '<span id="advhls_content_'+ (replace_id_n) +'" class="adv_hl  adv_hls_'+ (replace_id_n) +'" style="background-color:'+ adv_hl_spe_content +'"><span id="adv_caretfix"></span></span>';
+  						ed.selection.setContent(builder_temp);
+  						//Select the caretfix tag (will be automatically killed during setContent)
+  						ed.selection.select(ed.dom.select('span#adv_caretfix')[0]);
+  						ed.selection.setContent(ed.selection.getContent());
+  					}
+  					else
+  					{
+  						ed.selection.select(ed.dom.select('span#advhls_close_' + replace_id_s)[0]);
+  						ed.selection.setContent(ed.selection.getContent());
+  					}
+  				}
+  				else
+  				{											//Behaviour when highlight button is clicked
+  					ed.selection.select(ed.dom.select('span.adv_hl')[0]);
+  					ed.selection.setContent(ed.selection.getContent());
+  				}
+  				*/  				
+  			}
+
+		/**
+		* Highlighting Post render corrections
+		*/
+
+/* WIP BUT STILL BUGS
+						//FIX #1 - Unactivate highlight when begining and closing tags are incorrect
+						var pattern_tag = /<span[^>]*id="advhl(n|s)_open_(\d+)[^>]*?>(.+?)(?:=.+?)?(.)?<\/span><span[^<]*id="advhl\1_content_\2[^>]*?>.+?<\/span><span[^<]*id="advhl\1_close_\2[^>]*?>(.+?)<\/span>/gi;
+						content = ed.getContent();
+						if(pattern_tag.test(content))
+						{
+							var tag_matches = content.match(pattern_tag);
+							for(var tag_match in tag_matches)
+							{
+								var tag_builder = new Array();
+								//Same regex than above but without the global 'g' option...
+								var pattern_tag = /<span[^>]*id="advhl(n|s)_open_(\d+)[^>]*?>(.+?)(?:=.+?)?(.)?<\/span><span[^<]*id="advhl\1_content_\2[^>]*?>.+?<\/span><span[^<]*id="advhl\1_close_\2[^>]*?>(.+?)<\/span>/i;
+								tag_builder['elements'] = pattern_tag.exec(tag_matches[tag_match]);
+								if(tag_builder['elements'])
+								{
+									tag_builder['type'] = tag_builder['elements'][1];
+									tag_builder['id'] = tag_builder['elements'][2];
+									tag_builder['opentag'] = tag_builder['elements'][3] + tag_builder['elements'][4];
+									tag_builder['opentag'] = tag_builder['opentag'].replace(/<[^>]+>/ig,''); //strip tags
+									//tag_builder['opentag_first'] = tag_builder['opentag'].substr(0,1);
+									//tag_builder['opentag_last'] = tag_builder['opentag'].substr((tag_builder['opentag'].length - 1),1);
+									tag_builder['opentag_name'] = tag_builder['opentag'].substring(1, (tag_builder['opentag'].length - 1)).toLowerCase();
+									tag_builder['closetag'] = tag_builder['elements'][5];
+									//tag_builder['closetag_first'] = tag_builder['closetag'].substr(0,2);
+									//tag_builder['closetag_last'] = tag_builder['closetag'].substr((tag_builder['closetag'].length - 1),1);
+									tag_builder['closetag_name'] = tag_builder['closetag'].substring(2, (tag_builder['closetag'].length - 1)).toLowerCase();
+
+									//console.log(tag_builder);
+
+									if (tag_builder['opentag_name'] != tag_builder['closetag_name'])
+									{
+										tag_builder['selector'] = 'adv_hl'+ tag_builder['type'] +'_'+ tag_builder['id'];
+										ed.dom.remove(ed.dom.select('.' + tag_builder['selector']), tag_builder['selector']);
+									}
+								}
+							}
+						}
+*/
+			/*
+				Aide mémoire:
+				 > Récupérer html du noeud html sélectionné: var abc = ed.selection.getNode();
+				 > Afficher variable ou object dans la console: console.log(abc);
+			*/
+		},

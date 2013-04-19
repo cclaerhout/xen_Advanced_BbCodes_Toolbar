@@ -1,0 +1,207 @@
+*************************************
+* Advanced BBcodes Toolbar v.3.2.1  *
+* by Cédric CLAERHOUT               *
+*************************************
+
+>Version 3.2 is out. To see what's new, please go here:
+http://www.afioc.com/forums/threads/advanced-bbcodes-toolbar-3-2-whats-new.1603/
+
+>Version 3.1 is out. To see what's new, please go here:
+http://www.afioc.com/forums/threads/advanced-bbcodes-toolbar-3-1-whats-new.1579/
+
+
+**********************************
+*      Addon Presentation        *
+**********************************
+Created in 2007 for vBulletin (http://www.vbulletin.org/forum/showthread.php?t=247338), this application adds a toolbar to the editor with new bbcodes. Those bbcodes help members to design the layout of their messages to make them look like an article from a magazine. You can also add your bbcodes to a custom tool bar.
+
+This third version for Xenforo has been fully rewritten. It has exactly the same functions than the previous vBulletin version... and much more. The bbcodes have new options, the toolbar can be moved, you can add your own bbcodes to a custom toolbar, highlight tags helper function, etc. The Picasa and Private bbcodes are now in separated addons (see in configuration options) but their buttons can still be configured in that addon. The Premium bbcodes buttons have been added.
+
+
+#### Advanced Toolbar: ####
+> Usergroups Display Permissions
+> Line position can be modified (Automatic, first line, second line, etc.)
+> Xenforo buttons integration (will automatically move a few editor icons to have a better view)
+	=> Will add a new function: highlight tags helper function (for normal tags and for special tags of the stop autolinking patch)
+	   Please note that it's just an helper, it's not a full real time highlighting system. If you modify text, you might need to click on button again.
+	   Its main function is to help user to quickly identify tags inside when editing a message.
+> Buttons can been turn on/turn off one by one ; the display of Premium and Private bbcodes buttons can be configurate by usergroups
+> Configure many bbcodes visual options with XenForo Style Properties
+> For vB users: old bbcodes compatibility
+
+#### Custom BBcodes Toolbar: ####
+> Will display below the Advanced Toolbar 
+> Usergroups Display Permissions
+> Add your BBcodes: 1) add the tag name in options, 2) create the phrase for the button definiton, 3) upload bbcode image (see in options)
+
+
+#### New bbcodes list:	####
+
+BIMG BB Code: 		Resize a big picture
+			Display the original size of the picture with the XenForo JS Slideshow
+			Caption above or below/inside or outside the picture
+			[Safety Default&Max Width System included]
+		
+			#option commands:
+			>Img block
+			Numbers (with or without (px): The width of image (can't go over the limit set up in options) in pixels
+			Numbers with %: The width of image in percentage
+			fleft: float left ; the image will be float on the left inside a block
+			fright: float right ; the image will be float on the right inside a block
+			bleft: align the block to the left
+			bcenter: align the block to the center
+			bright: align the block to the right
+		
+			>Caption
+			Normal Text: The image caption,
+			top|bottom: The position of image caption (above or below image); the default behaviour is bottom,
+			inside: The position of image caption (inside or outside image)
+			left|center|right: The alignement of image caption; the default behaviour is left,
+
+			#replace the following bbcodes on previous vBulletin version:
+			igauche, igauchex, idroite, idroitex, bimgx
+
+
+ARTICLE BB Code: 	Display an article inside a message.
+			Custom CSS system according to the browser (IE or not)
+
+			#option commands:
+			Normal text: article source (will be displayed below the article box)
+			
+
+ENCADRE BB Code:	This BB Code insert a text box to the right of a message. Default width is 20% of window
+			Custom CSS system according to the browser (IE or not)
+			[SDMWS included]
+
+			#option commands:
+			Normal Text: The text box title
+			Numbers (with or without %): The width of text box (can't go over the limit set up in options) in percentage
+			Numbers with px: The width of text box (can't go over the limit set up in options) in pixels
+			skin2: To use another skin for the encadre bbcode
+			fleft: float left
+			fright or nothing: default float right option
+
+			#replace the following bbcodes on previous vBulletin version:
+			encadrex
+
+
+FIELDSET BB Code: 	This BB Code inserts a [fieldset] with a custom title
+			Custom CSS system according to the browser (IE or not)
+			[SDMWS included]
+
+			#option commands:
+			Normal Text: The fieldset title
+			Numbers (with or without %): The width of fieldset (can't go over the limit set up in options) in percentage
+			Numbers with px: The width of fieldset (can't go over the limit set up in options) in pixels
+			bleft: align the block to the left
+			bcenter: align the block to the center
+			bright: align the block to the right
+
+
+Google DOCS Viewers: 	This BB Code allows to display documents using the "Google Docs - Viewer" (supports many different file types: pdf,ppt,doc,xls...).
+			Can be wrapped inside another bbcode inside options (for ie: spoiler)
+			Width and height are specified inside Admin options		
+
+			#option commands:
+			Normal Text: The title of document
+
+
+
+SPOILERBB BB Code: 	This [spoilerbb] code hides the part of a text. Because the spoiler bbcode created by King Kovifor is really good, 
+			the Advanced BBcodes Toolbar original spoiler tag name has been modified from [spoiler] to [spoilerbb]. 
+
+			#option commands:
+			Normal Text: The title of spoiler
+
+JUSTIFY Text BB Code: 	Display full justified text
+
+LATEX BB Code: 		Display mathematical content with mimetex
+
+			#option commands:
+			Normal Text: The Latex box title (default:none)
+			Numbers (with or without px): The width of text box (can't go over the limit set up in options) in pixels
+			Numbers with %: The width of text box (can't go over the limit set up in options) in percentage
+			fleft: block will float left
+			fright: block will float right
+			bleft: align the block to the left
+			bcenter: align the block to the center
+			bright: align the block to the right
+
+ACCORDION BB Code: 	Display an accordion box
+
+			#Master tag commands (tag: accordion)
+
+			Numbers (with or without px): The width of text box (can't go over the limit set up in options) in pixels
+			Numbers with %: The width of text box (can't go over the limit set up in options) in percentage
+			Num1(px/%)xNum2: Set the width of the accordion box and the default height for all slides
+
+			fleft: block will float left
+			fright: block will float right
+			bleft: align the block to the left
+			bcenter: align the block to the center
+			bright: align the block to the right
+
+			#Slave tag commands (special bbcode: {slide})
+			Numbers: the height of the slide (in px)
+			text: Slide title
+			left or blank: title of the slide will be align to the left
+			center: title of the slide will be align to the center
+			right: title of the slide will be align to the right
+			open: the slide will be opened by default
+
+
+### How to use Text/Image Boxes BBcodes ###
+If you want to display a text box or an image on the right of a text (float right), you have to insert first the Text Box or Image, then the Main Text. 
+
+Example:
+[ENCADRE]Text box on the right[/ENCADRE]Main Content
+
+[bimg=fgauche]image_url[/bimg]Main Content
+
+[bimg=fright]image_url[/bimg]Main Content
+
+
+**********************************
+*           IMPORTANT            *
+**********************************
+1)To make this addon works, you must installed the BBcode Manager and the Stop AutoLinking Patch
+2)If you want to avoid the autolinking bug, please select all [Advanced BBcode Bar] bbcodes inside the "Stop AutoLinking Patch" configuration options. 
+You can select more if needed.
+
+3)If you want the new image bbcode, [BIMG] to align correctly with [ left ], [ center ], [ right ] bbcodes, please select the option "[EXTRA] Activate new Align BbCode?" of the Stop AutoLinking Patch addon.
+
+**********************************
+*         Installation           *
+**********************************
+0) Check if you've installed the BBcode Manager  Url: http://xenforo.com/community/resources/custom-bb-code-manager.173/
+0b) Check if you've installed the Stop AutoLinking Patch  Url: http://xenforo.com/community/resources/stop-autolinking-patch.527/
+1) Upload the files in your forum directory
+2) Import the addon xml file
+3) Import the bbcodes xml files
+
+
+**********************************
+*        Configuration           *
+**********************************
+0) Configure Stop AutoLinking Patch addon (see 'important' section)
+1) Configure addon (usergroups) in ADMIN->OPTIONS->Advanced BBcodes Toolbar
+2) If you want to change the appearance of some BBcodes, go to ADMIN->Appearance->Style Properties->Advanced BBcodes Toolbar
+
+//About the Button Manager//
+If you want to configure manually your buttons with the Button Manager (included in BBcode Manager), go to addon options
+=>ADMIN->OPTIONS->Advanced BBcodes Toolbar->display bar: NO
+
+If you're upgrading this addon, check you installed last bbcodes xml, then go to play with buttons in the Boutton Manager
+Don't hesitate to install the xml of external bbcode addons
+
+**********************************
+*          References            *
+**********************************
+Thanks to King Kovifor for its Custom BBcode Manager
+
+
+**********************************
+*            License             *
+**********************************
+http://creativecommons.org/licenses/by/3.0/
+
