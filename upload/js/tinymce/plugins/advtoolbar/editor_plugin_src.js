@@ -400,7 +400,7 @@
 						replace_id_n++;
 						var builder = '<span id="advhln_'+ (replace_id_n) +'" class="adv_hl adv_hln_'+ (replace_id_n) +'" style="background-color:'+ adv_hl_norm_open +'">'+ tagopen;
 
-						if(tagoptions.length != 0)
+						if(typeof tagoptions !== 'undefined')
 						{
 							var separator;
 							if(tagopen == '[picasa') { separator = /,/gi; } else { separator = /\|/gi; };
