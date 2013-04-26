@@ -2,69 +2,6 @@
 <bbm_bbcodes>
   <BbCode>
     <General>
-      <tag>@highlight_helper</tag>
-      <title><![CDATA[[Advanced BBcode Bar] Highlight Helper]]></title>
-      <description><![CDATA[Highlighting helper]]></description>
-      <example><![CDATA[#]]></example>
-      <active>1</active>
-      <display_help>0</display_help>
-    </General>
-    <Methods>
-      <Replacement>
-        <start_range><![CDATA[#]]></start_range>
-        <end_range><![CDATA[#]]></end_range>
-        <options_number>0</options_number>
-      </Replacement>
-      <Template>
-        <active>0</active>
-        <name></name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
-      </Template>
-      <PhpCallback>
-        <class></class>
-        <method></method>
-      </PhpCallback>
-    </Methods>
-    <ParserOptions>
-      <stopAutoLink>none</stopAutoLink>
-      <parseOptions>0</parseOptions>
-      <regex></regex>
-      <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
-      <plainCallback>0</plainCallback>
-      <plainChildren>0</plainChildren>
-      <stopSmilies>0</stopSmilies>
-      <stopLineBreakConversion>0</stopLineBreakConversion>
-      <wrapping_tag>none</wrapping_tag>
-      <wrapping_option></wrapping_option>
-      <emptyContent_check>0</emptyContent_check>
-    </ParserOptions>
-    <ParserPerms>
-      <parser_has_usr>0</parser_has_usr>
-      <parser_usr>a:0:{}</parser_usr>
-      <parser_return>none</parser_return>
-      <parser_return_delay>0</parser_return_delay>
-    </ParserPerms>
-    <ViewPerms>
-      <view_has_usr>0</view_has_usr>
-      <view_usr>a:0:{}</view_usr>
-      <view_return>none</view_return>
-      <view_return_delay>0</view_return_delay>
-    </ViewPerms>
-    <Button>
-      <hasButton>1</hasButton>
-      <button_has_usr>0</button_has_usr>
-      <button_usr>a:0:{}</button_usr>
-      <killCmd>1</killCmd>
-      <custCmd>adv_highlight</custCmd>
-      <imgMethod>Direct</imgMethod>
-      <buttonDesc><![CDATA[]]></buttonDesc>
-      <tagOptions><![CDATA[]]></tagOptions>
-      <tagContent><![CDATA[]]></tagContent>
-    </Button>
-  </BbCode>
-  <BbCode>
-    <General>
       <tag>accordion</tag>
       <title><![CDATA[[Advanced BBcode Bar] ACCORDION]]></title>
       <description><![CDATA[Accordion BBcode (master tag) - works with slave tags {slide}]]></description>
@@ -87,19 +24,19 @@
         <options_number>0</options_number>
       </Replacement>
       <Template>
-        <active>0</active>
-        <name></name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
+        <active>1</active>
+        <name>sedo_adv_accordion</name>
+        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
+        <callback_method>parseTagAccordion</callback_method>
       </Template>
       <PhpCallback>
-        <class>Sedo_AdvBBcodeBar_BbCode_Formatter_BBcodes</class>
-        <method>parseTagAccordion</method>
+        <class></class>
+        <method></method>
       </PhpCallback>
     </Methods>
     <ParserOptions>
       <stopAutoLink>none</stopAutoLink>
-      <parseOptions>0</parseOptions>
+      <parseOptions>1</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
       <plainCallback>0</plainCallback>
@@ -109,6 +46,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
+      <options_separator></options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -150,19 +88,19 @@
         <options_number>0</options_number>
       </Replacement>
       <Template>
-        <active>0</active>
-        <name></name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
+        <active>1</active>
+        <name>sedo_adv_article</name>
+        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
+        <callback_method>parseTagArticle</callback_method>
       </Template>
       <PhpCallback>
-        <class>Sedo_AdvBBcodeBar_BbCode_Formatter_BBcodes</class>
-        <method>parseTagArticle</method>
+        <class></class>
+        <method></method>
       </PhpCallback>
     </Methods>
     <ParserOptions>
       <stopAutoLink>none</stopAutoLink>
-      <parseOptions>0</parseOptions>
+      <parseOptions>1</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
       <plainCallback>0</plainCallback>
@@ -172,6 +110,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
+      <options_separator>|</options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -214,28 +153,29 @@
         <options_number>0</options_number>
       </Replacement>
       <Template>
-        <active>0</active>
-        <name></name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
+        <active>1</active>
+        <name>sedo_adv_bimg</name>
+        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
+        <callback_method>parseTagBimg</callback_method>
       </Template>
       <PhpCallback>
-        <class>Sedo_AdvBBcodeBar_BbCode_Formatter_BBcodes</class>
-        <method>parseTagBimg</method>
+        <class></class>
+        <method></method>
       </PhpCallback>
     </Methods>
     <ParserOptions>
       <stopAutoLink>all</stopAutoLink>
-      <parseOptions>0</parseOptions>
+      <parseOptions>1</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
       <plainCallback>0</plainCallback>
-      <plainChildren>0</plainChildren>
-      <stopSmilies>0</stopSmilies>
+      <plainChildren>1</plainChildren>
+      <stopSmilies>1</stopSmilies>
       <stopLineBreakConversion>0</stopLineBreakConversion>
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
+      <options_separator></options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -278,19 +218,19 @@
         <options_number>0</options_number>
       </Replacement>
       <Template>
-        <active>0</active>
-        <name></name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
+        <active>1</active>
+        <name>sedo_adv_encadre</name>
+        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
+        <callback_method>parseTagEncadre</callback_method>
       </Template>
       <PhpCallback>
-        <class>Sedo_AdvBBcodeBar_BbCode_Formatter_BBcodes</class>
-        <method>parseTagEncadre</method>
+        <class></class>
+        <method></method>
       </PhpCallback>
     </Methods>
     <ParserOptions>
       <stopAutoLink>none</stopAutoLink>
-      <parseOptions>0</parseOptions>
+      <parseOptions>1</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
       <plainCallback>0</plainCallback>
@@ -300,6 +240,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
+      <options_separator></options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -343,19 +284,19 @@
         <options_number>0</options_number>
       </Replacement>
       <Template>
-        <active>0</active>
-        <name></name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
+        <active>1</active>
+        <name>sedo_adv_fieldset</name>
+        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
+        <callback_method>parseTagFieldset</callback_method>
       </Template>
       <PhpCallback>
-        <class>Sedo_AdvBBcodeBar_BbCode_Formatter_BBcodes</class>
-        <method>parseTagFieldset</method>
+        <class></class>
+        <method></method>
       </PhpCallback>
     </Methods>
     <ParserOptions>
       <stopAutoLink>none</stopAutoLink>
-      <parseOptions>0</parseOptions>
+      <parseOptions>1</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
       <plainCallback>0</plainCallback>
@@ -365,6 +306,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
+      <options_separator>|</options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -406,14 +348,14 @@
         <options_number>0</options_number>
       </Replacement>
       <Template>
-        <active>0</active>
-        <name></name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
+        <active>1</active>
+        <name>sedo_adv_gview</name>
+        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
+        <callback_method>parseTagGview</callback_method>
       </Template>
       <PhpCallback>
-        <class>Sedo_AdvBBcodeBar_BbCode_Formatter_BBcodes</class>
-        <method>parseTagGview</method>
+        <class></class>
+        <method></method>
       </PhpCallback>
     </Methods>
     <ParserOptions>
@@ -428,6 +370,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
+      <options_separator>|</options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -464,8 +407,8 @@
     </General>
     <Methods>
       <Replacement>
-        <start_range><![CDATA[]]></start_range>
-        <end_range><![CDATA[]]></end_range>
+        <start_range><![CDATA[<div style="text-align:justify;margin-right:5px;margin-left:5px;">]]></start_range>
+        <end_range><![CDATA[</div>]]></end_range>
         <options_number>0</options_number>
       </Replacement>
       <Template>
@@ -475,8 +418,8 @@
         <callback_method></callback_method>
       </Template>
       <PhpCallback>
-        <class>Sedo_AdvBBcodeBar_BbCode_Formatter_BBcodes</class>
-        <method>parseTagJustif</method>
+        <class></class>
+        <method></method>
       </PhpCallback>
     </Methods>
     <ParserOptions>
@@ -491,6 +434,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>0</emptyContent_check>
+      <options_separator></options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -532,19 +476,19 @@
         <options_number>0</options_number>
       </Replacement>
       <Template>
-        <active>0</active>
-        <name></name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
+        <active>1</active>
+        <name>sedo_adv_latex</name>
+        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
+        <callback_method>parseTagLatex</callback_method>
       </Template>
       <PhpCallback>
-        <class>Sedo_AdvBBcodeBar_BbCode_Formatter_BBcodes</class>
-        <method>parseTagLatex</method>
+        <class></class>
+        <method></method>
       </PhpCallback>
     </Methods>
     <ParserOptions>
       <stopAutoLink>all</stopAutoLink>
-      <parseOptions>0</parseOptions>
+      <parseOptions>1</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
       <plainCallback>0</plainCallback>
@@ -553,7 +497,8 @@
       <stopLineBreakConversion>0</stopLineBreakConversion>
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
-      <emptyContent_check>0</emptyContent_check>
+      <emptyContent_check>1</emptyContent_check>
+      <options_separator></options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -579,14 +524,16 @@
       <tagContent><![CDATA[]]></tagContent>
     </Button>
   </BbCode>
-   <BbCode>
+  <BbCode>
     <General>
       <tag>picasa</tag>
       <title><![CDATA[[Advanced BBcode Bar] PICASA]]></title>
       <description><![CDATA[Picasa]]></description>
       <example><![CDATA[[picasa]https://picasaweb.google.com/cedric.claerhout/Exemples[/picasa]
 [picasa=300]https://picasaweb.google.com/cedric.claerhout/Exemples[/picasa]
-[picasa=300,200]https://picasaweb.google.com/cedric.claerhout/Exemples[/picasa]]]></example>
+[picasa=300,100]https://picasaweb.google.com/cedric.claerhout/Exemples[/picasa]
+[picasa=300,100,15s]https://picasaweb.google.com/cedric.claerhout/Exemples[/picasa]
+[picasa=100,80]https://picasaweb.google.com/104221919544446242342/Exemples#5498233130192530834[/picasa]]]></example>
       <active>1</active>
       <display_help>1</display_help>
     </General>
@@ -597,28 +544,29 @@
         <options_number>0</options_number>
       </Replacement>
       <Template>
-        <active>0</active>
-        <name/>
-        <callback_class/>
-        <callback_method/>
+        <active>1</active>
+        <name>sedo_adv_picasa</name>
+        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
+        <callback_method>parseTagPicasa</callback_method>
       </Template>
       <PhpCallback>
-        <class>Sedo_Picasa_BbCode_Formatter_Picasa</class>
-        <method>parseTagPicassa</method>
+        <class></class>
+        <method></method>
       </PhpCallback>
     </Methods>
     <ParserOptions>
       <stopAutoLink>all</stopAutoLink>
       <parseOptions>0</parseOptions>
-      <regex/>
+      <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
       <plainCallback>0</plainCallback>
       <plainChildren>0</plainChildren>
       <stopSmilies>0</stopSmilies>
       <stopLineBreakConversion>0</stopLineBreakConversion>
       <wrapping_tag>none</wrapping_tag>
-      <wrapping_option/>
-      <emptyContent_check>0</emptyContent_check>
+      <wrapping_option></wrapping_option>
+      <emptyContent_check>1</emptyContent_check>
+      <options_separator>,</options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -629,7 +577,7 @@
     <ViewPerms>
       <view_has_usr>0</view_has_usr>
       <view_usr>a:0:{}</view_usr>
-      <view_return>none</view_return>
+      <view_return>template</view_return>
       <view_return_delay>0</view_return_delay>
     </ViewPerms>
     <Button>
@@ -671,7 +619,7 @@
       </PhpCallback>
     </Methods>
     <ParserOptions>
-      <stopAutoLink>none</stopAutoLink>
+      <stopAutoLink>0</stopAutoLink>
       <parseOptions>0</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
@@ -682,6 +630,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>0</emptyContent_check>
+      <options_separator></options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -734,7 +683,7 @@
       </PhpCallback>
     </Methods>
     <ParserOptions>
-      <stopAutoLink>none</stopAutoLink>
+      <stopAutoLink>0</stopAutoLink>
       <parseOptions>0</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
@@ -745,6 +694,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>0</emptyContent_check>
+      <options_separator></options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -797,7 +747,7 @@
       </PhpCallback>
     </Methods>
     <ParserOptions>
-      <stopAutoLink>none</stopAutoLink>
+      <stopAutoLink>0</stopAutoLink>
       <parseOptions>0</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
@@ -808,6 +758,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>0</emptyContent_check>
+      <options_separator></options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -860,7 +811,7 @@
       </PhpCallback>
     </Methods>
     <ParserOptions>
-      <stopAutoLink>none</stopAutoLink>
+      <stopAutoLink>0</stopAutoLink>
       <parseOptions>0</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
@@ -871,6 +822,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>0</emptyContent_check>
+      <options_separator></options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -912,19 +864,19 @@
         <options_number>0</options_number>
       </Replacement>
       <Template>
-        <active>0</active>
-        <name></name>
+        <active>1</active>
+        <name>sedo_adv_spoilerbb</name>
         <callback_class></callback_class>
         <callback_method></callback_method>
       </Template>
       <PhpCallback>
-        <class>Sedo_AdvBBcodeBar_BbCode_Formatter_BBcodes</class>
-        <method>parseTagSpoiler</method>
+        <class></class>
+        <method></method>
       </PhpCallback>
     </Methods>
     <ParserOptions>
       <stopAutoLink>none</stopAutoLink>
-      <parseOptions>0</parseOptions>
+      <parseOptions>1</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
       <plainCallback>0</plainCallback>
@@ -933,7 +885,8 @@
       <stopLineBreakConversion>0</stopLineBreakConversion>
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
-      <emptyContent_check>0</emptyContent_check>
+      <emptyContent_check>1</emptyContent_check>
+      <options_separator></options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>

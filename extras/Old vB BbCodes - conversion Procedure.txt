@@ -1,0 +1,34 @@
+Conversion procedure for old vBulletin Advanced Bb Codes
+Tool to use:  http://xenforo.com/community/threads/post-content-find-replace.6548/)
+
+Disclaimer: always check if the replacements seem correct before to proceed
+
+
+1)Bimgx
+Regular expression: #\[bimgx=([^]]+)\](.*?)\[/bimgx\]#ui
+Replacement string: [bimg=$1]$2[/bimg]
+
+2)Encadrex
+Regular expression: #\[encadrex=([^]]+)\](.*?)\[/encadrex\]#sui
+Replacement string: [encadre=$1]$2[/encadre]
+
+3)Idroite
+Regular expression: #\[idroite\](.*?)\[/idroite\]#ui
+Replacement string: [bimg=fright]$1[/bimg]
+
+4)Idroitex
+Regular expression: #\[idroitex=([^]]+)\](.*?)\[/idroitex\]#ui
+Replacement string: [bimg=$1|fright]$2[/bimg]
+
+5)Igauche
+Regular expression: #\[igauche\](.*?)\[/igauche\]#ui
+Replacement string: [bimg=fleft]$1[/bimg]
+
+6)Igauchex
+Regular expression: #\[igauchex=([^]]+)\](.*?)\[/igauchex\]#ui
+Replacement string: [bimg=$1|fleft]$2[/bimg]
+
+7)Wrong
+Regular expression: #\[wrong\](.*?)\[/wrong\]#sui
+Replacement string: [S]$1[/S]
+

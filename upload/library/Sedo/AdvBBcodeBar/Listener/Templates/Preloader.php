@@ -7,10 +7,5 @@ class Sedo_AdvBBcodeBar_Listener_Templates_Preloader
 		{
 			$template->preloadTemplate('style_property_list_atamh_AdvBBcodeBar');
 		}
-
-		if($templateName == 'conversation_view' || $templateName == 'thread_view')
-		{
-			$template->preloadTemplate('AdvBBcodeBar_js');
-		}		
 	}
 }
