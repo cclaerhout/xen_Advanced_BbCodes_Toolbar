@@ -2,8 +2,72 @@
 <bbm_bbcodes>
   <BbCode>
     <General>
+      <tag>@highlight_helper</tag>
+      <title><![CDATA[[BBM] Highlight Helper]]></title>
+      <description><![CDATA[Highlighting helper]]></description>
+      <example><![CDATA[#]]></example>
+      <active>1</active>
+      <display_help>0</display_help>
+    </General>
+    <Methods>
+      <Replacement>
+        <start_range><![CDATA[#]]></start_range>
+        <end_range><![CDATA[#]]></end_range>
+        <options_number>0</options_number>
+      </Replacement>
+      <Template>
+        <active>0</active>
+        <name></name>
+        <callback_class></callback_class>
+        <callback_method></callback_method>
+      </Template>
+      <PhpCallback>
+        <class></class>
+        <method></method>
+      </PhpCallback>
+    </Methods>
+    <ParserOptions>
+      <stopAutoLink>0</stopAutoLink>
+      <parseOptions>0</parseOptions>
+      <regex></regex>
+      <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
+      <plainCallback>0</plainCallback>
+      <plainChildren>0</plainChildren>
+      <stopSmilies>0</stopSmilies>
+      <stopLineBreakConversion>0</stopLineBreakConversion>
+      <wrapping_tag>none</wrapping_tag>
+      <wrapping_option></wrapping_option>
+      <emptyContent_check>0</emptyContent_check>
+      <options_separator></options_separator>
+    </ParserOptions>
+    <ParserPerms>
+      <parser_has_usr>0</parser_has_usr>
+      <parser_usr>a:0:{}</parser_usr>
+      <parser_return>none</parser_return>
+      <parser_return_delay>0</parser_return_delay>
+    </ParserPerms>
+    <ViewPerms>
+      <view_has_usr>0</view_has_usr>
+      <view_usr>a:0:{}</view_usr>
+      <view_return>none</view_return>
+      <view_return_delay>0</view_return_delay>
+    </ViewPerms>
+    <Button>
+      <hasButton>1</hasButton>
+      <button_has_usr>0</button_has_usr>
+      <button_usr>a:0:{}</button_usr>
+      <killCmd>1</killCmd>
+      <custCmd>adv_highlight</custCmd>
+      <imgMethod>Direct</imgMethod>
+      <buttonDesc><![CDATA[]]></buttonDesc>
+      <tagOptions><![CDATA[]]></tagOptions>
+      <tagContent><![CDATA[]]></tagContent>
+    </Button>
+  </BbCode>
+  <BbCode>
+    <General>
       <tag>accordion</tag>
-      <title><![CDATA[[Advanced BBcode Bar] ACCORDION]]></title>
+      <title><![CDATA[[BBM] ACCORDION]]></title>
       <description><![CDATA[Accordion BBcode (master tag) - works with slave tags {slide}]]></description>
       <example><![CDATA[[accordion=center|125]
 {slide=Title|center}Content{/slide}
@@ -46,7 +110,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
-      <options_separator></options_separator>
+      <options_separator>|</options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -75,7 +139,7 @@
   <BbCode>
     <General>
       <tag>article</tag>
-      <title><![CDATA[[Advanced BBcode Bar] ARTICLE]]></title>
+      <title><![CDATA[[BBM] ARTICLE]]></title>
       <description><![CDATA[This BB Code is used to display an article]]></description>
       <example><![CDATA[[article]This is an article[/article]]]></example>
       <active>1</active>
@@ -139,7 +203,7 @@
   <BbCode>
     <General>
       <tag>bimg</tag>
-      <title><![CDATA[[Advanced BBcode Bar] BIMG]]></title>
+      <title><![CDATA[[BBM] BIMG]]></title>
       <description><![CDATA[This BB Code can resize a picture (width customizable in px)]]></description>
       <example><![CDATA[[bimg]http://www.google.com/images/srpr/logo3w.png[/bimg]
 [bimg=100]http://www.google.com/images/srpr/logo3w.png[/bimg]]]></example>
@@ -175,7 +239,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
-      <options_separator></options_separator>
+      <options_separator>|</options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -204,7 +268,7 @@
   <BbCode>
     <General>
       <tag>encadre</tag>
-      <title><![CDATA[[Advanced BBcode Bar] ENCADRE]]></title>
+      <title><![CDATA[[BBM] ENCADRE]]></title>
       <description><![CDATA[This BB Code inserts a text box to the right of a text (absolute position). It has to be inserted just before the content. (width customizable in %)]]></description>
       <example><![CDATA[[encadre]This is a text box with a long text. Can be used with an article for example.[/encadre]Content
 [encadre=30]This is a text box with a long text. Can be used with an article for example.[/encadre]Content]]></example>
@@ -240,7 +304,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
-      <options_separator></options_separator>
+      <options_separator>|</options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -269,7 +333,7 @@
   <BbCode>
     <General>
       <tag>fieldset</tag>
-      <title><![CDATA[[Advanced BBcode Bar] FIELDSET]]></title>
+      <title><![CDATA[[BBM] FIELDSET]]></title>
       <description><![CDATA[This BB Code inserts a fieldset (Title and Width in % customizable ; separator: |)]]></description>
       <example><![CDATA[[fieldset]This is a fieldset[/fieldset]
 [fieldset=Title]This is a fieldset[/fieldset]
@@ -335,7 +399,7 @@
   <BbCode>
     <General>
       <tag>gview</tag>
-      <title><![CDATA[[Advanced BBcode Bar] GVIEW]]></title>
+      <title><![CDATA[[BBM] GVIEW]]></title>
       <description><![CDATA[This BB Code displays documents using the "Google Docs - Viewer" (supports many different file types:pdf,ppt,doc,xls...).]]></description>
       <example><![CDATA[[gview]http://docs.yahoo.com/docs/pr/pdf/1q05pr.pdf[/gview]]]></example>
       <active>1</active>
@@ -399,7 +463,7 @@
   <BbCode>
     <General>
       <tag>justif</tag>
-      <title><![CDATA[[Advanced BBcode Bar] JUSTIF]]></title>
+      <title><![CDATA[[BBM] JUSTIF]]></title>
       <description><![CDATA[This BB Code allows your members to fully justify a text]]></description>
       <example><![CDATA[[justif]Vestibulum hendrerit euismod quam, quis pretium tellus bibendum non. [/justif]]]></example>
       <active>1</active>
@@ -463,7 +527,7 @@
   <BbCode>
     <General>
       <tag>latex</tag>
-      <title><![CDATA[[Advanced BBcode Bar] LATEX]]></title>
+      <title><![CDATA[[BBM] LATEX]]></title>
       <description><![CDATA[This BB Code displays mathematical content or graphics using lateX]]></description>
       <example><![CDATA[[LATEX] c=\sqrt{a^2+b^2} [/LATEX]]]></example>
       <active>1</active>
@@ -498,7 +562,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
-      <options_separator></options_separator>
+      <options_separator>|</options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>
@@ -527,7 +591,7 @@
   <BbCode>
     <General>
       <tag>picasa</tag>
-      <title><![CDATA[[Advanced BBcode Bar] PICASA]]></title>
+      <title><![CDATA[[BBM] PICASA]]></title>
       <description><![CDATA[Picasa]]></description>
       <example><![CDATA[[picasa]https://picasaweb.google.com/cedric.claerhout/Exemples[/picasa]
 [picasa=300]https://picasaweb.google.com/cedric.claerhout/Exemples[/picasa]
@@ -595,7 +659,7 @@
   <BbCode>
     <General>
       <tag>premium</tag>
-      <title><![CDATA[[Advanced BBcode Bar] PREMIUM]]></title>
+      <title><![CDATA[[BBM] PREMIUM]]></title>
       <description><![CDATA[Display Premium Content only for Premium Members]]></description>
       <example><![CDATA[[premium]Premium Content[/premium]]]></example>
       <active>1</active>
@@ -659,7 +723,7 @@
   <BbCode>
     <General>
       <tag>premium2</tag>
-      <title><![CDATA[[Advanced BBcode Bar] PREMIUM (customized)]]></title>
+      <title><![CDATA[[BBM] PREMIUM (customized)]]></title>
       <description><![CDATA[Display Premium Content only for Premium Members]]></description>
       <example><![CDATA[[premium2]Premium Content[/premium2]]]></example>
       <active>1</active>
@@ -722,72 +786,8 @@
   </BbCode>
   <BbCode>
     <General>
-      <tag>private</tag>
-      <title><![CDATA[[Advanced BBcode Bar] PRIVATE]]></title>
-      <description><![CDATA[Display Private Content only for Private Members (invisible for the others)]]></description>
-      <example><![CDATA[[private]Private content[/private]]]></example>
-      <active>1</active>
-      <display_help>0</display_help>
-    </General>
-    <Methods>
-      <Replacement>
-        <start_range><![CDATA[]]></start_range>
-        <end_range><![CDATA[]]></end_range>
-        <options_number>0</options_number>
-      </Replacement>
-      <Template>
-        <active>1</active>
-        <name>bbm_bbcode_protected</name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
-      </Template>
-      <PhpCallback>
-        <class></class>
-        <method></method>
-      </PhpCallback>
-    </Methods>
-    <ParserOptions>
-      <stopAutoLink>0</stopAutoLink>
-      <parseOptions>0</parseOptions>
-      <regex></regex>
-      <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
-      <plainCallback>0</plainCallback>
-      <plainChildren>0</plainChildren>
-      <stopSmilies>0</stopSmilies>
-      <stopLineBreakConversion>0</stopLineBreakConversion>
-      <wrapping_tag>none</wrapping_tag>
-      <wrapping_option></wrapping_option>
-      <emptyContent_check>0</emptyContent_check>
-      <options_separator></options_separator>
-    </ParserOptions>
-    <ParserPerms>
-      <parser_has_usr>0</parser_has_usr>
-      <parser_usr>a:0:{}</parser_usr>
-      <parser_return>none</parser_return>
-      <parser_return_delay>0</parser_return_delay>
-    </ParserPerms>
-    <ViewPerms>
-      <view_has_usr>1</view_has_usr>
-      <view_usr>a:0:{}</view_usr>
-      <view_return>none</view_return>
-      <view_return_delay>0</view_return_delay>
-    </ViewPerms>
-    <Button>
-      <hasButton>1</hasButton>
-      <button_has_usr>0</button_has_usr>
-      <button_usr>a:0:{}</button_usr>
-      <killCmd>1</killCmd>
-      <custCmd>adv_private</custCmd>
-      <imgMethod>Direct</imgMethod>
-      <buttonDesc><![CDATA[]]></buttonDesc>
-      <tagOptions><![CDATA[]]></tagOptions>
-      <tagContent><![CDATA[]]></tagContent>
-    </Button>
-  </BbCode>
-  <BbCode>
-    <General>
       <tag>private2</tag>
-      <title><![CDATA[[Advanced BBcode Bar] PRIVATE (customized)]]></title>
+      <title><![CDATA[[BBM] PRIVATE (customized)]]></title>
       <description><![CDATA[Display Private Content only for Private Members (invisible for the others)]]></description>
       <example><![CDATA[[private2]Private content[/private2]]]></example>
       <active>1</active>
@@ -851,7 +851,7 @@
   <BbCode>
     <General>
       <tag>spoilerbb</tag>
-      <title><![CDATA[[Advanced BBcode Bar] SPOILERBB]]></title>
+      <title><![CDATA[[BBM] SPOILERBB]]></title>
       <description><![CDATA[The original spoiler bbcode!]]></description>
       <example><![CDATA[[spoilerbb]hidden text[/spoilerbb]]]></example>
       <active>1</active>
@@ -886,7 +886,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>1</emptyContent_check>
-      <options_separator></options_separator>
+      <options_separator>|</options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>

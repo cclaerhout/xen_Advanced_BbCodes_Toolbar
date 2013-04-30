@@ -869,7 +869,11 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 
 	protected static function _cleanOption($string)
 	{
-		$string = mb_convert_kana($string, 'a', 'UTF-8');
+		if(XenForo_Application::get('options')->get('AdvBBcodeBar_ZenkakuConv'))
+		{
+			$string = mb_convert_kana($string, 'a', 'UTF-8');
+		}
+		
 		return $string;
 	}
 	

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.3" version_id="18" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.3.1" version_id="19" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -390,6 +390,13 @@ easeOutBounce=easeOutBounce</edit_format_params>
       <sub_options></sub_options>
       <relation group_id="AdvBBcodeBar" display_order="1000"/>
     </option>
+    <option option_id="AdvBBcodeBar_ZenkakuConv" edit_format="radio" data_type="boolean" can_backup="1">
+      <default_value>0</default_value>
+      <edit_format_params>1={xen:phrase AdvBBcodeBar_Options_Yes}
+0={xen:phrase AdvBBcodeBar_Options_No}</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="8020"/>
+    </option>
     <option option_id="sedo_adv_noautoplay" edit_format="onoff" data_type="boolean" can_backup="1">
       <default_value>1</default_value>
       <edit_format_params></edit_format_params>
@@ -613,6 +620,8 @@ Note: All Latex commands will not work here, only Mimextex commands will work.<b
     <phrase title="option_AdvBBcodeBar_spoilerbb_easing_duration_explain" version_id="14" version_string="3.1.5"><![CDATA[Easing effect duration. Default value: <b>400</b> (milliseconds)]]></phrase>
     <phrase title="option_AdvBBcodeBar_spoilerbb_easing_effect" version_id="14" version_string="3.1.5"><![CDATA[[Spoilerbb] Easing effect]]></phrase>
     <phrase title="option_AdvBBcodeBar_spoilerbb_easing_effect_explain" version_id="14" version_string="3.1.5"><![CDATA[Choose which easing effect to use with the slides. Here's a <a href="http://www.easings.net" target="_blank">website</a> which might help you to choose . Default value: <b>easeOutQuad</b>.]]></phrase>
+    <phrase title="option_AdvBBcodeBar_ZenkakuConv" version_id="18" version_string="3.3"><![CDATA[Zenkaku Conversion]]></phrase>
+    <phrase title="option_AdvBBcodeBar_ZenkakuConv_explain" version_id="18" version_string="3.3"><![CDATA[Activate this option to make full-width characters (Chinese/Japanese) compatible with Bb Codes Options Command. Ie: [bimg=<b>１００ｐｘ</b>]url[/bimg] (instead of [bimg=<b>100px</b>]url[/bimg]).]]></phrase>
     <phrase title="option_group_AdvBBcodeBar" version_id="17" version_string="3.2.1"><![CDATA[[Bb Codes & Buttons Manager] Advanced Bb Codes]]></phrase>
     <phrase title="option_group_AdvBBcodeBar_description" version_id="17" version_string="3.2.1"><![CDATA[Options for the Advanced BBcodes Addon]]></phrase>
     <phrase title="option_sedo_adv_noautoplay" version_id="17" version_string="3.2.1"><![CDATA[Autoplay slideshow?]]></phrase>
