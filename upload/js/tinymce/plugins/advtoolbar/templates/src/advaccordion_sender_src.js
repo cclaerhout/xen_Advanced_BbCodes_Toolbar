@@ -6,7 +6,7 @@ var AdvAccordionDialog = {
 	submit: function(inputs, from)
 	{
 		//Init
-      		var t = AdvAccordionDialog, ed, mcePopup = false, title, width, height, widthtype, text, blockalign, MasterOptions = '', content, output, auto;
+      		var t = AdvAccordionDialog, ed, mcePopup = false, title, width, height, widthtype, text, blockalign, MasterOptions = '', content, output, auto, tag;
 
 		if(from != 'isMiu')
 		{		
@@ -42,6 +42,7 @@ var AdvAccordionDialog = {
 		widthtype = $('#ctrl_widthtype').val(); if (widthtype == 'px') { widthtype = false; };
 		width = $('#ctrl_width').val();	if (width == auto){ width = false; } else { if (widthtype !== false){width = width + widthtype;} }		
 		height =  $('#ctrl_height').val(); if ( isNaN(height) ){ height = false; } else { width = width + 'x' + height; }
+		tag = $('#ctrl_mode').val();
 
 		//Bake Master Options		
 		if(blockalign !== false){ bakeMasterOptions(blockalign); }
@@ -50,10 +51,8 @@ var AdvAccordionDialog = {
 		//Bake slides
 		content = AdvAccordionDialog.BakeSlides(height) ;
 
-
-		
 		//Bake ouput & insert it in editor !
-		output = '[accordion'+MasterOptions+']' + content + '[/accordion]';
+		output = '['+tag+MasterOptions+']' + content + '[/'+tag+']';
 
 		if(from != 'isMiu')
 		{

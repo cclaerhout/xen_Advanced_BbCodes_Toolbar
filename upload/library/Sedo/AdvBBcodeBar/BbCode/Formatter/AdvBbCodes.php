@@ -571,7 +571,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				'height' => $height,
 				'content' => $slide_content,
 				'align' => $align,
-				'title' => $title,
+				'title' => ($xenOptions->AdvBBcodeBar_accordion_slides_rawtitles) ? strip_tags($title) : $title,
 				'open' => $open,
 				'class_open' => $class_open
 			);
@@ -583,6 +583,203 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['widthType'] = $widthType;
 		$options['blockAlign'] = $blockAlign;
 		$options['slides'] = $slides;
+	}
+
+	public static function parseTagTabs(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
+	{
+		$xenOptions = XenForo_Application::get('options');
+		$postid = $parentClass->getPostParam('post_id');
+
+		if($postid)
+		{
+			//tagid by post
+  	      		if(!$parentClass->getTagExtra('tagid', $postid))
+	      		{
+	      			$parentClass->addTagExtra('tagid', array($postid => 1));
+	      		}
+	      		else
+	      		{
+	      			$newTagid = $parentClass->getTagExtra('tagid', $postid) + 1;
+	      			$parentClass->addTagExtra('tagid', array($postid => $newTagid));
+	      		}
+      		
+     	 		$tagid = $parentClass->getTagExtra('tagid', $postid);  
+     	 	}
+     	 	else
+     	 	{
+			//tagid by page (not sure if it will be used)
+	      		if(!$parentClass->getTagExtra('tagid'))
+	      		{
+	      			$parentClass->addTagExtra('tagid', 1);
+	      		}
+	      		else
+	      		{
+	      			$newTagid = $parentClass->getTagExtra('tagid') + 1;
+	      			$parentClass->addTagExtra('tagid', $newTagid);
+	      		}
+      		
+     	 		$tagid = $parentClass->getTagExtra('tagid'); 	 		
+     	 	}
+
+		$uniqid = ($postid) ? "adv_tabs_{$postid}_{$tagid}" : uniqid('adv_tabs_');
+
+		/*Default Master Options*/
+		$width = $xenOptions->AdvBBcodeBar_tabs_default_width;
+		$widthType = $xenOptions->AdvBBcodeBar_tabs_defaultwidth_unit;
+		$blockAlign = 'bleft';
+		$globalHeight = $xenOptions->AdvBBcodeBar_tabs_defaultheight;
+		
+		/*Browse Master Options*/
+		foreach($options as $option)
+		{
+			$original = $option;
+			$option = self::_cleanOption($option);
+					
+			if (preg_match('#^\d+(px)?$#', $option))
+			{
+				$width = str_replace(array('px', '%'), '',$option);
+				$widthType = 'px';
+			}
+			elseif (preg_match('#^\d+%$#', $option))
+			{
+				$width = str_replace(array('px', '%'), '',$option);
+				$widthType = '%';				
+			}
+			elseif (preg_match('#^(\d+?(px)?)x(\d+?)$#', $option, $matches))
+			{
+				$width = str_replace(array('px', '%'), '', $matches[1]);
+				$widthType = 'px';
+				$globalHeight = str_replace(array('px', '%'), '',$matches[3]);
+			}
+			elseif (preg_match('#^(\d+?%)x(\d+?)$#', $option, $matches))
+			{
+				$width = str_replace(array('px', '%'), '',$matches[1]);
+				$widthType = '%';	
+				$globalHeight = str_replace(array('px', '%'), '',$matches[2]);
+			}
+			elseif($option == 'bleft')
+			{
+				$blockAlign = 'bleft';
+			}
+			elseif($option == 'bcenter')
+			{
+				$blockAlign= 'bcenter';
+			}
+			elseif($option == 'bright')
+			{
+				$blockAlign = 'bright';
+			}
+			elseif($option == 'fleft')
+			{
+				$blockAlign = 'fleft';
+			}
+			elseif($option == 'fright')
+			{
+				$blockAlign = 'fright';
+			}
+		}
+
+		/* Check Options */
+		if($widthType == '%' && $width > 100)
+		{
+			$width = 100;
+		}
+
+		if( 	(!preg_match('#^\d{2,3}$#', $width)) 
+			|| 
+			($widthType == 'px' && $width > $xenOptions->AdvBBcodeBar_tabs_maxwidth)
+		){
+			$width = $xenOptions->AdvBBcodeBar_tabs_maxwidth;
+			$widthType = 'px';
+		}
+
+		if($globalHeight > $xenOptions->AdvBBcodeBar_tabs_maxheight)
+		{
+			$globalHeight = $xenOptions->AdvBBcodeBar_tabs_maxheight;
+		}
+		
+		/*Get slides from content*/
+		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.+?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
+		$content = ''; //Raz content
+		
+		$tabs = array();
+		$panes = array();
+		$requestUri = self::_getRequestUri();//needed for noscript
+		
+		foreach($wip as $k => $slide)
+		{
+			$id = $k+1;
+
+			$search = '#{tab=(\d{1,2})}(.*?){/tab}#ui';
+			$replace = '<a class="adv_tabs_link" href="#'.$uniqid.'_$1">$2</a>';
+			$replaceNoScript = '<a href="'.$requestUri.'#'.$uniqid.'_$1">$2</a>';			
+
+			$content = preg_replace($search, $replace, $slide[4]);
+			$contentNoScript = preg_replace($search, $replaceNoScript, $slide[4]);
+			
+			$slide_attributes = $slide[2];
+			$title = '';
+			$hasAlreadyBeenOpened = false;
+			
+			if($slide_attributes)
+			{
+				$slideOptions = explode('|', $slide_attributes);
+				
+				/*Default Slave Options*/
+				$align = 'center';
+				$title = '';
+				$open = false;
+
+				/*Browse Slave Options*/
+				foreach($slideOptions as $slideOption)
+				{
+					$original = $slideOption;
+					$slideOption = self::_cleanOption($slideOption);
+					
+					if($slideOption == 'left')
+					{
+						$align = 'left';
+					}
+					elseif($slideOption == 'center')
+					{
+						$align = 'center';
+					}
+					elseif($slideOption == 'right')
+					{
+						$align = 'right';
+					}
+					elseif($slideOption == 'open')
+					{
+						if($hasAlreadyBeenOpened == false)
+						{
+							$hasAlreadyBeenOpened = $open = true;
+						}
+					}					
+					elseif(!empty($slideOption))
+					{
+						$title = $original;
+					}
+				}
+			}
+		
+			$tabs[$id] = array(
+				'title' => ($xenOptions->AdvBBcodeBar_tabs_titles_raw) ? strip_tags($title) : $title,
+				'align' => $align,
+				'open' => $open,
+				'content'=> $contentNoScript
+			);
+			
+			$panes[$id] = array('content' => $content);
+		}
+		
+		/* Confirm Options */
+		$options['uniqid'] = $uniqid;
+		$options['width'] = $width;
+		$options['widthType'] = $widthType;
+		$options['height'] = $globalHeight;
+		$options['blockAlign'] = $blockAlign;
+		$options['tabs'] = $tabs;
+		$options['panes'] = $panes;
 	}
 
 	public static function parseTagPicasa(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
@@ -867,6 +1064,8 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 	}
 
+	/*Mini Tools*/
+
 	protected static function _cleanOption($string)
 	{
 		if(XenForo_Application::get('options')->get('AdvBBcodeBar_ZenkakuConv'))
@@ -911,6 +1110,22 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$output = sprintf("%x", ($rgb['r'] << 16) + ($rgb['g'] << 8) + $rgb['b']);
 		
 	       	return $output;
-	}	
+	}
+	
+	protected static $requestUri = null;
+	
+	protected static function _getRequestUri()
+	{
+		if(self::$requestUri !== null)
+		{
+			return self::$requestUri;
+		}
+		
+		$requestPath = XenForo_Application::get('requestPaths');
+		$requestUri = $requestPath['requestUri'];
+		self::$requestUri = $requestUri ;
+		
+		return $requestUri;
+	}
 }
 //Zend_Debug::dump($abc);

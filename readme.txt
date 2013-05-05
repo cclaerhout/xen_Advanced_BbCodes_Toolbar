@@ -37,19 +37,19 @@ BIMG BB Code: 		Resize a big picture
 		
 			#option commands:
 			>Img block
-			Numbers (with or without (px): The width of image (can't go over the limit set up in options) in pixels
-			Numbers with %: The width of image in percentage
-			fleft: float left ; the image will be float on the left inside a block
-			fright: float right ; the image will be float on the right inside a block
-			bleft: align the block to the left
-			bcenter: align the block to the center
-			bright: align the block to the right
+				Numbers (with or without (px): The width of image (can't go over the limit set up in options) in pixels
+				Numbers with %: The width of image in percentage
+				fleft: float left ; the image will be float on the left inside a block
+				fright: float right ; the image will be float on the right inside a block
+				bleft: align the block to the left
+				bcenter: align the block to the center
+				bright: align the block to the right
 		
 			>Caption
-			Normal Text: The image caption,
-			top|bottom: The position of image caption (above or below image); the default behaviour is bottom,
-			inside: The position of image caption (inside or outside image)
-			left|center|right: The alignement of image caption; the default behaviour is left,
+				Normal Text: The image caption,
+				top|bottom: The position of image caption (above or below image); the default behaviour is bottom,
+				inside: The position of image caption (inside or outside image)
+				left|center|right: The alignement of image caption; the default behaviour is left,
 
 			#replace the following Bb Codes on previous vBulletin version:
 			igauche, igauchex, idroite, idroitex, bimgx
@@ -59,7 +59,7 @@ ARTICLE BB Code: 	Display an article inside a message.
 			Custom CSS system according to the browser (IE or not)
 
 			#option commands:
-			Normal text: article source (will be displayed below the article box)
+				Normal text: article source (will be displayed below the article box)
 			
 
 ENCADRE BB Code:	This BB Code insert a text box to the right of a message. Default width is 20% of window
@@ -67,12 +67,12 @@ ENCADRE BB Code:	This BB Code insert a text box to the right of a message. Defau
 			[SDMWS included]
 
 			#option commands:
-			Normal Text: The text box title
-			Numbers (with or without %): The width of text box (can't go over the limit set up in options) in percentage
-			Numbers with px: The width of text box (can't go over the limit set up in options) in pixels
-			skin2: To use another skin for the encadre bbcode
-			fleft: float left
-			fright or nothing: default float right option
+				Normal Text: The text box title
+				Numbers (with or without %): The width of text box (can't go over the limit set up in options) in percentage
+				Numbers with px: The width of text box (can't go over the limit set up in options) in pixels
+				skin2: To use another skin for the encadre bbcode
+				fleft: float left
+				fright or nothing: default float right option
 
 			#replace the following Bb Codes on previous vBulletin version:
 			encadrex
@@ -83,12 +83,12 @@ FIELDSET BB Code: 	This BB Code inserts a [fieldset] with a custom title
 			[SDMWS included]
 
 			#option commands:
-			Normal Text: The fieldset title
-			Numbers (with or without %): The width of fieldset (can't go over the limit set up in options) in percentage
-			Numbers with px: The width of fieldset (can't go over the limit set up in options) in pixels
-			bleft: align the block to the left
-			bcenter: align the block to the center
-			bright: align the block to the right
+				Normal Text: The fieldset title
+				Numbers (with or without %): The width of fieldset (can't go over the limit set up in options) in percentage
+				Numbers with px: The width of fieldset (can't go over the limit set up in options) in pixels
+				bleft: align the block to the left
+				bcenter: align the block to the center
+				bright: align the block to the right
 
 
 Google DOCS Viewers: 	This BB Code allows to display documents using the "Google Docs - Viewer" (supports many different file types: pdf,ppt,doc,xls...).
@@ -96,7 +96,7 @@ Google DOCS Viewers: 	This BB Code allows to display documents using the "Google
 			Width and height are specified inside Admin options		
 
 			#option commands:
-			Normal Text: The title of document
+				Normal Text: The title of document
 
 
 
@@ -104,43 +104,65 @@ SPOILERBB BB Code: 	This [spoilerbb] code hides the part of a text. Because the 
 			the Advanced Bb Codes Toolbar original spoiler tag name has been modified from [spoiler] to [spoilerbb]. 
 
 			#option commands:
-			Normal Text: The title of spoiler
+				Normal Text: The title of spoiler
 
 JUSTIFY Text BB Code: 	Display full justified text
 
 LATEX BB Code: 		Display mathematical content with mimetex
 
 			#option commands:
-			Normal Text: The Latex box title (default:none)
-			Numbers (with or without px): The width of text box (can't go over the limit set up in options) in pixels
-			Numbers with %: The width of text box (can't go over the limit set up in options) in percentage
-			fleft: block will float left
-			fright: block will float right
-			bleft: align the block to the left
-			bcenter: align the block to the center
-			bright: align the block to the right
+				Normal Text: The Latex box title (default:none)
+				Numbers (with or without px): The width of text box (can't go over the limit set up in options) in pixels
+				Numbers with %: The width of text box (can't go over the limit set up in options) in percentage
+				fleft: block will float left
+				fright: block will float right
+				bleft: align the block to the left
+				bcenter: align the block to the center
+				bright: align the block to the right
 
 ACCORDION BB Code: 	Display an accordion box
 
 			#Master tag commands (tag: accordion)
-
-			Numbers (with or without px): The width of text box (can't go over the limit set up in options) in pixels
-			Numbers with %: The width of text box (can't go over the limit set up in options) in percentage
-			Num1(px/%)xNum2: Set the width of the accordion box and the default height for all slides
-
-			fleft: block will float left
-			fright: block will float right
-			bleft: align the block to the left
-			bcenter: align the block to the center
-			bright: align the block to the right
+				Numbers (with or without px): The width of text box (can't go over the limit set up in options) in pixels
+				Numbers with %: The width of text box (can't go over the limit set up in options) in percentage
+				Num1(px/%)xNum2: Set the width of the accordion box and the default height for all slides
+	
+				fleft: block will float left
+				fright: block will float right
+				bleft: align the block to the left
+				bcenter: align the block to the center
+				bright: align the block to the right
 
 			#Slave tag commands (special bbcode: {slide})
-			Numbers: the height of the slide (in px)
-			text: Slide title
-			left or blank: title of the slide will be align to the left
-			center: title of the slide will be align to the center
-			right: title of the slide will be align to the right
-			open: the slide will be opened by default
+				Numbers: the height of the slide (in px)
+				text: Slide title
+				left or blank: title of the slide will be align to the left
+				center: title of the slide will be align to the center
+				right: title of the slide will be align to the right
+				open: the slide will be opened by default
+
+TABS BB Code: 	Display some tabs
+
+			#Master tag commands (tag: tabs)
+				Numbers (with or without px): The width of text box (can't go over the limit set up in options) in pixels
+				Numbers with %: The width of text box (can't go over the limit set up in options) in percentage
+				Num1(px/%)xNum2: Set the width of the accordion box and the default height for all slides
+	
+				fleft: block will float left
+				fright: block will float right
+				bleft: align the block to the left
+				bcenter: align the block to the center
+				bright: align the block to the right
+
+			#Slave tag commands (special bbcode: {slide})
+				text: Slide title
+				left: title of the slide will be align to the left
+				center or blank: title of the slide will be align to the center
+				right: title of the slide will be align to the right
+				open: the slide will be opened by default
+
+			#Special function command
+				{tab=id}Text{tab}: creates a link to a tab of the current Bb Code - id is numeric: 1 (first tab), 2 (second tab), etc.
 
 
 ### How to use Text/Image Boxes Bb Codes ###

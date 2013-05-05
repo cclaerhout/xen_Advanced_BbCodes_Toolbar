@@ -69,14 +69,14 @@
       <tag>accordion</tag>
       <title><![CDATA[[BBM] ACCORDION]]></title>
       <description><![CDATA[Accordion BBcode (master tag) - works with slave tags {slide}]]></description>
-      <example><![CDATA[[accordion=center|125]
+      <example><![CDATA[[accordion=bcenter|125]
 {slide=Title|center}Content{/slide}
 {slide=Title|center}Content{/slide}
 [/accordion]
 
-[accordion=right|80%]
+[accordion=bright|80%]
 {slide=Title|center}Content{/slide}
-{slide=Title|right}Content{/slide}
+{slide=Title|right|open}Content{/slide}
 [/accordion]]]></example>
       <active>1</active>
       <display_help>1</display_help>
@@ -126,6 +126,80 @@
     </ViewPerms>
     <Button>
       <hasButton>1</hasButton>
+      <button_has_usr>0</button_has_usr>
+      <button_usr>a:0:{}</button_usr>
+      <killCmd>1</killCmd>
+      <custCmd>adv_accordion</custCmd>
+      <imgMethod>Direct</imgMethod>
+      <buttonDesc><![CDATA[]]></buttonDesc>
+      <tagOptions><![CDATA[]]></tagOptions>
+      <tagContent><![CDATA[]]></tagContent>
+    </Button>
+  </BbCode>
+  <BbCode>
+    <General>
+      <tag>tabs</tag>
+      <title><![CDATA[[BBM] TABS]]></title>
+      <description><![CDATA[Tabs BBcode (master tag) - works with slave tags {slide}]]></description>
+      <example><![CDATA[[tabs=bcenter|300x80]
+{slide=Title|center}Content{/slide}
+{slide=Title|center}Content 2{/slide}
+[/tabs]
+
+[tabs=bright|80%]
+{slide=Title|center}Content{/slide}
+{slide=Title|right|open}Content 2
+{tab=1}Slide 1{/tab}
+{/slide}
+[/tabs]]]></example>
+      <active>1</active>
+      <display_help>1</display_help>
+    </General>
+    <Methods>
+      <Replacement>
+        <start_range><![CDATA[]]></start_range>
+        <end_range><![CDATA[]]></end_range>
+        <options_number>0</options_number>
+      </Replacement>
+      <Template>
+        <active>1</active>
+        <name>sedo_adv_tabs</name>
+        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
+        <callback_method>parseTagTabs</callback_method>
+      </Template>
+      <PhpCallback>
+        <class></class>
+        <method></method>
+      </PhpCallback>
+    </Methods>
+    <ParserOptions>
+      <stopAutoLink>none</stopAutoLink>
+      <parseOptions>1</parseOptions>
+      <regex></regex>
+      <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
+      <plainCallback>0</plainCallback>
+      <plainChildren>0</plainChildren>
+      <stopSmilies>0</stopSmilies>
+      <stopLineBreakConversion>0</stopLineBreakConversion>
+      <wrapping_tag>none</wrapping_tag>
+      <wrapping_option></wrapping_option>
+      <emptyContent_check>1</emptyContent_check>
+      <options_separator>|</options_separator>
+    </ParserOptions>
+    <ParserPerms>
+      <parser_has_usr>0</parser_has_usr>
+      <parser_usr>a:0:{}</parser_usr>
+      <parser_return>none</parser_return>
+      <parser_return_delay>0</parser_return_delay>
+    </ParserPerms>
+    <ViewPerms>
+      <view_has_usr>0</view_has_usr>
+      <view_usr>a:0:{}</view_usr>
+      <view_return>none</view_return>
+      <view_return_delay>0</view_return_delay>
+    </ViewPerms>
+    <Button>
+      <hasButton>0</hasButton>
       <button_has_usr>0</button_has_usr>
       <button_usr>a:0:{}</button_usr>
       <killCmd>1</killCmd>

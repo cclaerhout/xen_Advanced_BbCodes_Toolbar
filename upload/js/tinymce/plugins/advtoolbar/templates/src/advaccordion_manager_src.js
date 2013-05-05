@@ -3,14 +3,20 @@
 	XenForo.Adv_Template_Accordion = 
 	{
 		AjaxResponse : false,
+		mode: 'accordion',
+		phrase_fulldisplay: '',
+		heightcmd_width_original: '',
 		init: function($element)
 		{
 			var t = XenForo.Adv_Template_Accordion, content;
 			
 			t.isMiu = false;
+
+			$height = $('#ctrl_height');
+			t.phrase_fulldisplay = $height.val();
+			t.heightcmd_width_original = $height.css('width');
 			
-			if(!$element.hasClass('isMiu'))
-			{
+			if(!$element.hasClass('isMiu'))	{
 				if (typeof tinyMCEPopup !== 'undefined') {
 					t.ed = tinyMCEPopup.editor;
 				}
@@ -19,9 +25,7 @@
 				}
 				
 				content = t.ed.selection.getContent();
-			}
-			else
-			{
+			}else{
 				t.isMiu = true;
 				content = XenForo.MiuFramework.miu.selection;
 			}
@@ -51,37 +55,64 @@
 				var slideid = $('#slides').children().length + 1,
 				newslide = $element.find('#model').html().replace(/replaceid/g, slideid);
 				$(newslide).appendTo('#slides');
-	
+
 				t.bakeBasics($element); //Lazy Refesh JS
 				$('#slide_content_'+slideid).focus();
 			});
+
+			$element.find('#ctrl_mode').change( function() {
+				t.mode = $(this).val();
+				t.bakeBasics($element);
+			});		
+			
 		},
 		bakeBasics : function($element)
 		{
 			var t = XenForo.Adv_Template_Accordion;
-			
-			$ctrl_width = $element.find('#ctrl_width');
-			$widthtype = $element.find('#ctrl_widthtype').hide();
-			$cmd_height = $element.find('.CMD_Height');
-			$element.find('.heightpx').hide();
-			$masterheight = $element.find('#MasterHeight').css('visibility', 'hidden');
-	
-			if(t.isMiu == false)
-			{
+
+			if(t.isMiu == false){
 				var field_title_width_stretched = t.ed.getParam('advtoolbar_template_strechedtitlewidth'),
 				field_title_width_normal = t.ed.getParam('advtoolbar_template_normaltitlewidth'),		
 				auto = t.ed.getParam('advtoolbar_template_phrase_auto');
 			}
-			else
-			{
+			else{
 	      			var field_title_width_stretched = $element.attr('data-streched-width'),
 	      			field_title_width_normal = $element.attr('data-normal-width'),
 	      			auto = $element.attr('data-auto');
 			}
+
+			/*Height Management*/
+			$height = $('#ctrl_height');
+
+			var heightcmd_width = (t.mode == 'accordion') ? t.heightcmd_width_original : '35px';
+			heightPhrase = (t.mode == 'accordion') ? t.phrase_fulldisplay : auto;
+
+			$height.css('width', heightcmd_width);
+			$height.val(heightPhrase);
 			
-			var phrase_fulldisplay = $cmd_height.children('input').val(),
-			heightcmd_width = $cmd_height.children('input').css('width');
-	
+			/*Other variables*/
+			$ctrl_width = $element.find('#ctrl_width');
+			$widthtype = $element.find('#ctrl_widthtype').hide();
+			$cmd_height = $element.find('.CMD_Height');
+			$heightpx = $element.find('.heightpx').hide();
+			$masterHeight = $element.find('#MasterHeight');
+			$slaveHeight = $('#slides').find('.CMD_Height');
+			$openBox = $('#slides').find('.CMD_Open').find('input');
+			$openBoxChk = $('#slides').find('.CMD_Open').find('input:checked');
+		
+			if(t.mode == 'accordion'){
+				$masterHeight.css('visibility', 'hidden');
+				$slaveHeight.show();
+			}else{
+				$masterHeight.css('visibility', 'visible');
+				$slaveHeight.hide();
+			}
+
+			if( !isNaN( $('#ctrl_width').val() ) ){
+				$masterHeight.css('visibility', 'visible');
+				$widthtype.show();
+			}
+
 			/*******
 				MASTER TAG
 			***/		
@@ -89,14 +120,14 @@
 			//Width Management
 			$ctrl_width.one('focus', function () {
 				$(this).val('');
-			}).focus(function () {
+			})
+			.unbind('focus focusout')
+			.bind('focus', function () {
 				$widthtype.show('fast');
-			
 				if( $(this).val() == auto ) 
-				{
 					$(this).val('');
-				}
-			}).focusout(function() {
+			})
+			.bind('focusout', function() {
 				var width_tmp = $(this).val();
 				
 				//For our Chinese & Japanese Friends
@@ -112,22 +143,19 @@
 				{
 					$widthtype.hide('fast');
 					$(this).val(auto);
-					$masterheight.css('visibility', 'hidden').children('input').val(phrase_fulldisplay).css('width', heightcmd_width);
+					if(t.mode == 'accordion')
+						$masterHeight.css('visibility', 'hidden').children('input').val(heightPhrase).css('width', heightcmd_width);
 				}
 				else
 				{
-					$masterheight.css('visibility', 'visible');
+					$masterHeight.css('visibility', 'visible');
 				}
 			});
 			
-			$widthtype.click(function(e)
-			{
-				if( $(this).val() == '%' ) 
-				{
+			$widthtype.unbind('click').bind('click', function(e){
+				if( $(this).val() == '%' ){
 					$(this).val('px');
-				}
-				else
-				{
+				}else{
 					$(this).val('%');			
 				}
 			});
@@ -137,62 +165,59 @@
 			***/	
 	
 			//Height management
-			if( !isNaN( $('#MasterHeight input').val() ) )
-			{
-				$('.CMD_Height').not('#MasterHeight').hide();	
-			}
+			if( !isNaN( $('#MasterHeight input').val() ))
+				$slaveHeight.hide();
 			
-			$cmd_height.children('input').one('focus', function () {
-				$(this).val('');
-			}).focus(function () {
-				$(this).next('.heightpx').show('fast');
-			
-				if( $(this).val() == phrase_fulldisplay ) 
-				{
+			$('.CMD_Height').children('input')
+				.one('focus', function () {
 					$(this).val('');
-				}
-	
-				$(this).animate({width:'30px'}, 
-					function() {
-						//After complete
-					}
-				);
+				})
+				.unbind('focus focusout')
+				.bind('focus', function () {
+					$(this).next('.heightpx').show('fast');
 				
-			}).focusout(function() {
-				var height_tmp = $(this).val();
-				
-				//For our Chinese & Japanese Friends
-				var regex_height = new RegExp("[０-９]+");
-				if (regex_height.test(height_tmp))
-				{
-					height_tmp = t.zen2han(height_tmp);
-					$(this).val(height_tmp);
-				}
-				
-				//Width must be a number !
-				if( $(this).val().length == 0 || isNaN( $(this).val() ) )
-				{
-					$(this).animate({width:heightcmd_width}, 
+					if( $(this).val() == heightPhrase ) 
+						$(this).val('');
+		
+					$(this).animate({width:'30px'}, 
 						function() {
-							$(this).val(phrase_fulldisplay);
+							//After complete
 						}
 					);
-					if( $(this).parent().attr('id') == 'MasterHeight')
+				})
+				.bind('focusout', function () {
+					var height_tmp = $(this).val();
+					
+					//For our Chinese & Japanese Friends
+					var regex_height = new RegExp("[０-９]+");
+					if (regex_height.test(height_tmp))
 					{
-						$('.CMD_Height').not('#MasterHeight').show('slow');
+						height_tmp = t.zen2han(height_tmp);
+						$(this).val(height_tmp);
 					}
-				}
-				else
-				{
-					if( $(this).parent().attr('id') == 'MasterHeight')
+					
+					//Width must be a number !
+					if( $(this).val().length == 0 || isNaN( $(this).val() ) )
 					{
-						$('.CMD_Height').not('#MasterHeight').hide('slow');
-						$('.CMD_Height input').not('#MasterHeight input').val(phrase_fulldisplay).css('width', heightcmd_width);
+						$(this).animate({width:heightcmd_width}, 
+							function() {
+								$(this).val(heightPhrase);
+							}
+						);
+						if( $(this).parent().attr('id') == 'MasterHeight' && t.mode == 'accordion')
+							$slaveHeight.show('slow');
 					}
-				}
-				
-				$(this).next('.heightpx').hide(); 
-			});
+					else
+					{
+						if( $(this).parent().attr('id') == 'MasterHeight' && t.mode == 'accordion')
+						{
+							$slaveHeight.hide('slow');
+							$slaveHeight.children('input').val(heightPhrase).css('width', heightcmd_width);
+						}
+					}
+					
+					$(this).next('.heightpx').hide(); 
+				});
 	
 	
 			/*******
@@ -200,17 +225,21 @@
 			***/
 	
 			//Title Management
-			$element.find('.CMD_Title').children('input').one('focus', function () {
+			$element.find('.CMD_Title').children('input')
+			.one('focus', function () {
 				data_ctrl_title_width = $(this).css('width');
 				$(this).val('');
-			}).focus(function () {
+			})
+			.unbind('focus focusout')
+			.bind('focus', function () {
 				$(this).parent().nextAll('li').hide();
 				$(this).animate({width:'300px'}, 'fast');
-			}).focusout(function() {
+			})
+			.bind('focusout', function() {
 				$fout = $(this);
 				$(this).animate({width:field_title_width_normal}, 
 					function() {
-						if( isNaN( $('#MasterHeight input').val() ) )
+						if( isNaN( $('#MasterHeight input').val() ) && t.mode == 'accordion' )
 						{
 							$fout.parent().nextAll('li').show();	
 						}
@@ -223,14 +252,26 @@
 			});		
 	
 			//Align Management
-			$element.find('.CMD_Align li').click(function(e)
+			$cmdAlign = $element.find('.CMD_Align li');
+			$allAlign = $cmdAlign.parent().children('li').children('div');
+			
+			function razAlign($src)
 			{
+				$src.removeClass('align_select_left align_select_center align_select_right');
+			}
+			
+			if(t.mode == 'tabs'){
+				razAlign($allAlign);
+				$cmdAlign.find('.align_center').addClass('align_select_center');
+			}
+				
+			$cmdAlign.unbind('click').bind('click', function(e){
 				//Init
 				$align_target_button = $(this).children('div');
 				$align_target_form = $(this).parent().next('input');
 				
 				//RAZ
-				$(this).parent().children('li').children('div').removeClass('align_select_left align_select_center align_select_right');
+				razAlign($(this).parent().children('li').children('div'));
 	
 				//GO
 				if( $align_target_button.hasClass('align_left') )
@@ -258,11 +299,28 @@
 			});
 			
 			//Delete slide
-			$element.find('.deleteSlide').bind('click', function(e)
+			$element.find('.deleteSlide').unbind('click').bind('click', function(e)
 			{
 				$(this).parent().parent().remove();
 				t.updateID();
 			});
+			
+			//Open Box
+			$openBox.unbind('change');
+			
+			if(t.mode != 'accordion'){
+				if($openBoxChk.length > 1){
+					$openBox.removeAttr('checked');
+					$openBox.first().attr('checked','checked');
+				} else if($openBoxChk.length == 0){
+					$openBox.first().attr('checked','checked');
+				}
+				
+				$openBox.bind('change', function (e) {
+					$openBox.removeAttr('checked');
+					$(this).attr('checked','checked');
+				});
+			}
 		},
 		updateID : function()
 		{
@@ -329,9 +387,7 @@
 		html2bbcode : function(ajaxdata)
 		{
 			if (XenForo.hasResponseError(ajaxdata))
-			{
 				return;
-			}
 
 			var t = XenForo.Adv_Template_Accordion;
 			
