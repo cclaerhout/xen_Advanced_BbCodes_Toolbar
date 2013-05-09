@@ -501,7 +501,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		/*Get slides from content*/
-		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.+?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
+		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.*?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
 		$content = ''; //Raz content
 		
 		
@@ -699,7 +699,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		/*Get slides from content*/
-		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.+?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
+		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.*?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
 		$content = ''; //Raz content
 		
 		$tabs = array();
@@ -927,7 +927,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		/*Get slides from content*/
-		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.+?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
+		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.*?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
 		$content = ''; //Raz content
 		
 		$slides = array();
