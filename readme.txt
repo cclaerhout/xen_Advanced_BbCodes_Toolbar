@@ -164,6 +164,34 @@ TABS BB Code: 	Display some tabs
 			#Special function command
 				{tab=id}Text{tab}: creates a link to a tab of the current Bb Code - id is numeric: 1 (first tab), 2 (second tab), etc.
 
+SLIDER BB Code: Display a slider
+
+			#Master tag commands (tag: slider)
+				Numbers (with or without px): The width of text box (can't go over the limit set up in options) in pixels
+				Numbers with %: The width of text box (can't go over the limit set up in options) in percentage
+				Num1(px/%)xNum2: Set the width of the accordion box and the default height for all slides
+				Numbers with ms (3000ms): to set an interval between slides
+	
+				fleft: block will float left
+				fright: block will float right
+				bleft: align the block to the left
+				bcenter: align the block to the center
+				bright: align the block to the right
+
+				cmd: to display slider commands (play & pause)
+				autoplay: to start the slider when the page is loaded (this command can be disabled)
+				num: to disable numeric tabs (below the slider) instead of bullet tabs
+				inside: to disable the 'inside' layout which will place all slider commands (previous/next slide, tabs, play/pause) inside slides
+
+			#Slave tag commands (special bbcode: {slide})
+				text: Slide title
+				left: title of the slide will be align to the left
+				center or blank: title of the slide will be align to the center
+				right: title of the slide will be align to the right
+				top: to display the title with an absolute layout on the top
+				bottom: to display the title with an absolute layout on the bottom
+				open: the slide will be opened by default when the page is loaded
+				Number (attachement id): will fetch the attachement by its id (must be an image) and will display it with a new large layout
 
 ### How to use Text/Image Boxes Bb Codes ###
 If you want to display a text box or an image on the right of a text (float right), you have to insert first the Text Box or Image, then the Main Text. 

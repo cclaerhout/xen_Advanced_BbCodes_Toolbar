@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.3.2" version_id="20" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.3.3 - Beta" version_id="21" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -347,6 +347,72 @@ step=10</edit_format_params>
       <sub_options></sub_options>
       <relation group_id="AdvBBcodeBar" display_order="8010"/>
     </option>
+    <option option_id="AdvBBcodeBar_slider_autoplay_authorise" edit_format="onoff" data_type="boolean" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="1245"/>
+    </option>
+    <option option_id="AdvBBcodeBar_slider_defaultheight" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+      <default_value>200</default_value>
+      <edit_format_params>min=5
+step=10</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="1210"/>
+    </option>
+    <option option_id="AdvBBcodeBar_slider_defaultwidth" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+      <default_value>400</default_value>
+      <edit_format_params>min=5
+step=10</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="1200"/>
+    </option>
+    <option option_id="AdvBBcodeBar_slider_defaultwidth_unit" edit_format="radio" data_type="string" can_backup="1">
+      <default_value>px</default_value>
+      <edit_format_params>px={xen:phrase AdvBBcodeBar_Options_Pixel}
+%={xen:phrase AdvBBcodeBar_Options_Percentage}</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="1205"/>
+    </option>
+    <option option_id="AdvBBcodeBar_slider_interval_default" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+      <default_value>3000</default_value>
+      <edit_format_params>step=500</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="1230"/>
+    </option>
+    <option option_id="AdvBBcodeBar_slider_interval_max" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+      <default_value>30000</default_value>
+      <edit_format_params>step=500</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="1240"/>
+    </option>
+    <option option_id="AdvBBcodeBar_slider_interval_min" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+      <default_value>300</default_value>
+      <edit_format_params>step=500</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="1235"/>
+    </option>
+    <option option_id="AdvBBcodeBar_slider_maxheight" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+      <default_value>700</default_value>
+      <edit_format_params>min=5
+step=10</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="1220"/>
+    </option>
+    <option option_id="AdvBBcodeBar_slider_maxwidth" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+      <default_value>860</default_value>
+      <edit_format_params>min=5
+step=10</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="1215"/>
+    </option>
+    <option option_id="AdvBBcodeBar_slider_titles_raw" edit_format="radio" data_type="boolean" can_backup="1">
+      <default_value>0</default_value>
+      <edit_format_params>1={xen:phrase AdvBBcodeBar_Options_Yes}
+0={xen:phrase AdvBBcodeBar_Options_No}</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="1225"/>
+    </option>
     <option option_id="AdvBBcodeBar_spoilerbb_easing_duration" edit_format="spinbox" data_type="positive_integer" can_backup="1">
       <default_value>400</default_value>
       <edit_format_params>min=5
@@ -658,6 +724,26 @@ Note: All Latex commands will not work here, only Mimextex commands will work.<b
 <br />(Default value: 800)]]></phrase>
     <phrase title="option_AdvBBcodeBar_ModifAdmin" version_id="15" version_string="3.2.0"><![CDATA[Modif TinyMCE editors in the admin side too?]]></phrase>
     <phrase title="option_AdvBBcodeBar_ModifAdmin_explain" version_id="15" version_string="3.2.0"><![CDATA[Some addons might use customized version of TinyMCE inside the Admin Control Panel. Select yes to try to load Javascripts, css and any modifications needed.]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_autoplay_authorise" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Authorise autoplay command?]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_autoplay_authorise_explain" version_id="20" version_string="3.3.2"><![CDATA[Uncheck this option if you want to prevent users to automatically start a slideshow.]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_defaultheight" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Default Height]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_defaultheight_explain" version_id="20" version_string="3.3.2"><![CDATA[Default height in pixels for the Slider Bb Code. Default value: <b>200</b>]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_defaultwidth" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Default width]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_defaultwidth_explain" version_id="20" version_string="3.3.2"><![CDATA[Enter default width for Slider Bb Code. Default value is <b>400</b><br /><b>Unit is defined below</b>.]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_defaultwidth_unit" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Default Width Unit]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_defaultwidth_unit_explain" version_id="20" version_string="3.3.2"><![CDATA[Default value: <b>pixel</b>]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_interval_default" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Default interval]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_interval_default_explain" version_id="20" version_string="3.3.2"><![CDATA[Default Slides Interval in milliseconds. Default value: <b>3000</b> (ms).]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_interval_max" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Max interval]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_interval_max_explain" version_id="20" version_string="3.3.2"><![CDATA[Maximum Slides Interval in milliseconds. Default value: <b>30000</b> (ms).]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_interval_min" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Min interval]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_interval_min_explain" version_id="20" version_string="3.3.2"><![CDATA[Minimum Slides Interval in milliseconds. Default value: <b>300</b> (ms).]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_maxheight" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Max Height]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_maxheight_explain" version_id="20" version_string="3.3.2"><![CDATA[Max height in pixels for the Slider Bb Code. Default value: <b>700</b>]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_maxwidth" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Max Width]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_maxwidth_explain" version_id="20" version_string="3.3.2"><![CDATA[Max width in pixels for Slider Bb Code. Default value: <b>860</b>]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_titles_raw" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Raw titles]]></phrase>
+    <phrase title="option_AdvBBcodeBar_slider_titles_raw_explain" version_id="20" version_string="3.3.2"><![CDATA[Strip html from titles. Default: <b>no</b>.]]></phrase>
     <phrase title="option_AdvBBcodeBar_spoilerbb_easing_duration" version_id="14" version_string="3.1.5"><![CDATA[[Spoilerbb] Easing duration]]></phrase>
     <phrase title="option_AdvBBcodeBar_spoilerbb_easing_duration_explain" version_id="14" version_string="3.1.5"><![CDATA[Easing effect duration. Default value: <b>400</b> (milliseconds)]]></phrase>
     <phrase title="option_AdvBBcodeBar_spoilerbb_easing_effect" version_id="14" version_string="3.1.5"><![CDATA[[Spoilerbb] Easing effect]]></phrase>
@@ -838,6 +924,7 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="sedo_adv_grabber_nocurl" version_id="17" version_string="3.2.1"><![CDATA[cURL: [not available]]]></phrase>
     <phrase title="sedo_adv_grabber_nofgc" version_id="17" version_string="3.2.1"><![CDATA[file_get_contents: [not available]]]></phrase>
     <phrase title="sedo_adv_grabber_nofgc_auf" version_id="17" version_string="3.2.1"><![CDATA[file_get_contents: [not available - allow_url_fopen not allowed]]]></phrase>
+    <phrase title="sedo_adv_loading" version_id="20" version_string="3.3.2"><![CDATA[Loading...]]></phrase>
     <phrase title="sedo_adv_picasa_10s" version_id="17" version_string="3.2.1"><![CDATA[10 seconds]]></phrase>
     <phrase title="sedo_adv_picasa_11s" version_id="17" version_string="3.2.1"><![CDATA[11 seconds]]></phrase>
     <phrase title="sedo_adv_picasa_12s" version_id="17" version_string="3.2.1"><![CDATA[12 seconds]]></phrase>
@@ -863,6 +950,7 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="sedo_adv_picasa_error_use_picasa_url" version_id="18" version_string="3.3"><![CDATA[You are supposed to use a Picasa URL with this BB Code and more precisely a RSS Album link.]]></phrase>
     <phrase title="sedo_adv_picasa_logo_text" version_id="18" version_string="3.3"><![CDATA[Picasa link]]></phrase>
     <phrase title="sedo_adv_picasa_noperms" version_id="18" version_string="3.3"><![CDATA[You're not authorised to see the Picasa content]]></phrase>
+    <phrase title="sedo_adv_slider_img_noperms" version_id="20" version_string="3.3.2"><![CDATA[No permission to display the image]]></phrase>
     <phrase title="style_property_advbbcodebar_accordion_content_description_master" version_id="5" version_string="3.1"><![CDATA[]]></phrase>
     <phrase title="style_property_advbbcodebar_accordion_content_master" version_id="5" version_string="3.1"><![CDATA[[ACCORDION] Main Content]]></phrase>
     <phrase title="style_property_advbbcodebar_accordion_title_description_master" version_id="5" version_string="3.1"><![CDATA[]]></phrase>
@@ -907,6 +995,26 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="style_property_advbbcodebar_picasa_container_master" version_id="18" version_string="3.3"><![CDATA[[PICASA] Slideshow Container]]></phrase>
     <phrase title="style_property_advbbcodebar_picasa_image_description_master" version_id="18" version_string="3.3"><![CDATA[]]></phrase>
     <phrase title="style_property_advbbcodebar_picasa_image_master" version_id="18" version_string="3.3"><![CDATA[[PICASA] Image]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_container_description_master" version_id="20" version_string="3.3.2"><![CDATA[P.S: The "inner" layout (when the buttons are all inside the slider) has its own padding]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_container_master" version_id="20" version_string="3.3.2"><![CDATA[[SLIDER] Container]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_nav_buttons_active_description_master" version_id="20" version_string="3.3.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_nav_buttons_active_master" version_id="20" version_string="3.3.2"><![CDATA[[SLIDER] Navig buttons - active]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_nav_buttons_description_master" version_id="20" version_string="3.3.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_nav_buttons_hover_description_master" version_id="20" version_string="3.3.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_nav_buttons_hover_master" version_id="20" version_string="3.3.2"><![CDATA[[SLIDER] Navig buttons - hover]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_nav_buttons_master" version_id="20" version_string="3.3.2"><![CDATA[[SLIDER] Navig buttons]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_slides_description_master" version_id="20" version_string="3.3.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_slides_master" version_id="20" version_string="3.3.2"><![CDATA[[SLIDER] Slides]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_slides_title_abs_description_master" version_id="20" version_string="3.3.2"><![CDATA[This title layout is triggered with the "top" or "bottom" commands ("slide" slave tag)]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_slides_title_abs_master" version_id="20" version_string="3.3.2"><![CDATA[[SLIDER] Slides Title - Absolute]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_slides_title_description_master" version_id="20" version_string="3.3.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_slides_title_master" version_id="20" version_string="3.3.2"><![CDATA[[SLIDER] Slides Title]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_tabs_active_description_master" version_id="20" version_string="3.3.2"><![CDATA[Configure only the font color here, this would avoid to break any layouts.]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_tabs_active_master" version_id="20" version_string="3.3.2"><![CDATA[[SLIDER] Tabs - active]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_tabs_description_master" version_id="20" version_string="3.3.2"><![CDATA[Configure only the font color here, this would avoid to break any layouts.]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_tabs_hover_description_master" version_id="20" version_string="3.3.2"><![CDATA[Configure only the font color here, this would avoid to break any layouts.]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_tabs_hover_master" version_id="20" version_string="3.3.2"><![CDATA[[SLIDER] Tabs - hover]]></phrase>
+    <phrase title="style_property_advbbcodebar_slider_tabs_master" version_id="20" version_string="3.3.2"><![CDATA[[SLIDER] Tabs (below the slider)]]></phrase>
     <phrase title="style_property_advbbcodebar_tabs_container_description_master" version_id="19" version_string="3.3.1"><![CDATA[]]></phrase>
     <phrase title="style_property_advbbcodebar_tabs_container_master" version_id="19" version_string="3.3.1"><![CDATA[[TABS] Container]]></phrase>
     <phrase title="style_property_advbbcodebar_tabs_content_description_master" version_id="19" version_string="3.3.1"><![CDATA[]]></phrase>
@@ -1011,8 +1119,18 @@ Default value: 35px.]]></phrase>
     <property property_name="advbbcodebar_picasa_image" property_type="css" definition="1" group_name="AdvBBcodeBar_Style" title="[PICASA] Image" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="210" sub_group=""><![CDATA[[]]]></property>
     <property property_name="advbbcodebar_tabs_container" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Container" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="250" sub_group=""><![CDATA[[]]]></property>
     <property property_name="advbbcodebar_tabs_title" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Title" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="260" sub_group=""><![CDATA[{"background-color":"@primaryLightish","background-image":"@imagePath\/xenforo\/gradients\/category-23px-light.png","background-position":"top","background-repeat":"repeat-x","border-bottom-left-radius":"0","border-bottom-right-radius":"0","border-bottom-style":"none","border-color":"@primaryMedium","border-style":"solid","border-top-left-radius":"5px","border-top-right-radius":"5px","border-width":"1pt","color":"@contentText","extra":"display: block;\nmin-width: 100px;\nline-height: 30px;\ntext-align: center;\nposition: relative;\ntop: 1px;","font-size":"11px","height":"30px","margin-all":"0px","padding-bottom":"0px","padding-left":"6px","padding-right":"6px","padding-top":"0px","text-decoration":{"none":"none"}}]]></property>
-    <property property_name="advbbcodebar_tabs_content" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Content" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="270" sub_group=""><![CDATA[{"background-color":"@primaryLighterStill","border-bottom-left-radius":"5px","border-bottom-right-radius":"5px","border-color":"#999","border-style":"solid","border-top-color":"@contentText","border-top-style":"none","border-top-width":"0","border-width":"1px","extra":"display: none;\noverflow: auto;","font-size":"14px","padding-bottom":"15px","padding-left":"10px","padding-right":"10px","padding-top":"15px"}]]></property>
+    <property property_name="advbbcodebar_tabs_content" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Content" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="270" sub_group=""><![CDATA[{"background-color":"@primaryLighterStill","border-bottom-left-radius":"5px","border-bottom-right-radius":"5px","border-color":"#999","border-style":"solid","border-top-color":"@contentText","border-top-style":"none","border-top-width":"0","border-width":"1px","font-size":"14px","padding-bottom":"15px","padding-left":"10px","padding-right":"10px","padding-top":"15px"}]]></property>
     <property property_name="advbbcodebar_tabs_title_hoveractive" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Title (hover/active)" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="265" sub_group=""><![CDATA[{"background-color":"@primaryLighterStill","background-image":"@imagePath\/xenforo\/gradients\/category-23px-light.png","background-position":"top","background-repeat":"repeat-x","extra":"cursor: default !important;","font-weight":"bold"}]]></property>
+    <property property_name="advbbcodebar_slider_nav_buttons" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Navig buttons" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="310" sub_group=""><![CDATA[{"background-color":"@primaryMedium","background-image":"@imagePath\/xenforo\/gradients\/form-button-white-25px.png","background-position":"top","background-repeat":"repeat-x","border-bottom-color":"@primaryMedium","border-color":"@primaryLightish","border-radius":"5px","border-style":"solid","border-width":"1px","color":"@textCtrlBackground","extra":"display: block;\ntext-align: center;\nbox-shadow: 0px 1px 2px 0px rgb(79,79,89);\ntext-shadow: 0px -1px 2px white;\noutline: none;\nline-height: 23px;\nbox-sizing: border-box;\ncursor: pointer;\nz-index: 30;","font-family":"Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif","font-size":"20px","height":"26px","padding-bottom":"0","padding-left":"6px","padding-right":"6px","padding-top":"0"}]]></property>
+    <property property_name="advbbcodebar_slider_nav_buttons_hover" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Navig buttons - hover" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="315" sub_group=""><![CDATA[{"background-color":"@primaryLightish","border-bottom-color":"@primaryLightish","border-color":"@primaryLight","extra":"box-shadow: 0px 1px 2px 0px rgb(79,79,89);"}]]></property>
+    <property property_name="advbbcodebar_slider_nav_buttons_active" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Navig buttons - active" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="320" sub_group=""><![CDATA[{"background-color":"@secondaryLight","border-color":"@secondaryLighter","border-top-color":"@secondaryLightest","extra":"box-shadow: 0px 1px 2px 0px rgb(242, 242, 242);\noutline: 0;"}]]></property>
+    <property property_name="advbbcodebar_slider_slides" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Slides" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="325" sub_group=""><![CDATA[{"background-color":"@primaryLighterStill","border-color":"@primaryMedium","border-radius":"5px","border-style":"double","border-width":"2px","extra":"position: relative;\ncursor: pointer;","margin-left":"auto","margin-right":"auto"}]]></property>
+    <property property_name="advbbcodebar_slider_container" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Container" description="P.S: The &quot;inner&quot; layout (when the buttons are all inside the slider) has its own padding" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="300" sub_group=""><![CDATA[{"padding-bottom":"32px","padding-left":"5px","padding-right":"5px","padding-top":"5px"}]]></property>
+    <property property_name="advbbcodebar_slider_tabs" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Tabs (below the slider)" description="Configure only the font color here, this would avoid to break any layouts." css_components="text" scalar_type="" scalar_parameters="" display_order="330" sub_group=""><![CDATA[{"color":"@primaryMedium","font-family":"Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif"}]]></property>
+    <property property_name="advbbcodebar_slider_tabs_hover" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Tabs - hover" description="Configure only the font color here, this would avoid to break any layouts." css_components="text" scalar_type="" scalar_parameters="" display_order="340" sub_group=""><![CDATA[{"color":"@primaryLightish"}]]></property>
+    <property property_name="advbbcodebar_slider_tabs_active" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Tabs - active" description="Configure only the font color here, this would avoid to break any layouts." css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="335" sub_group=""><![CDATA[{"color":"rgb(238, 0, 24)"}]]></property>
+    <property property_name="advbbcodebar_slider_slides_title" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Slides Title" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="350" sub_group=""><![CDATA[{"color":"@primaryDarker","font-size":"22px","font-weight":"bold","margin-bottom":"5px","margin-left":"0","margin-right":"0","margin-top":"0"}]]></property>
+    <property property_name="advbbcodebar_slider_slides_title_abs" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Slides Title - Absolute" description="This title layout is triggered with the &quot;top&quot; or &quot;bottom&quot; commands (&quot;slide&quot; slave tag)" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="360" sub_group=""><![CDATA[{"background-color":"rgba(93, 99, 100, 0.7)","color":"rgb(245, 244, 244)","extra":"position: absolute;\nleft: 0;\nz-index: 25;","font-size":"18px","font-weight":"bold","width":"100%"}]]></property>
     <group group_name="AdvBBcodeBar_Style" display_order="13211">
       <title>[Bb Codes &amp; Buttons Manager] Advanced Bb Codes (1/2)</title>
       <description>Advanced BBcodes Toolbar Visual Options</description>
@@ -3784,6 +3902,352 @@ p.info span
 .picasa_image{
 	{xen:property advbbcodebar_picasa_image}
 }]]></template>
+    <template title="sedo_adv_slider" version_id="20" version_string="3.3.2"><![CDATA[<xen:require css="sedo_adv_slider.css" />
+<xen:require js="js/sedo/advtoolbar/jqt_slider.js" />
+
+<xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
+	<xen:require js="js/sedo/advtoolbar/src/advbar_allinone.src.js" />	
+<xen:else />
+	<xen:require js="js/sedo/advtoolbar/advbar_allinone.js" />
+</xen:if>
+
+<div 	id="{$options.uniqid}"
+	class="JsOnly adv_slider_wrapper {xen:if '{$options.layout} == "inside"', 'inner'} {$options.blockAlign}"
+	style="width:{$options.width}{$options.widthType};height:{$options.height}px"
+	data-autodiff="{$options.autodiff}"
+	{xen:if '{$options.autoplay}', 'data-autoplay="{$options.autoplay}"'}
+	{xen:if '{$options.interval}', 'data-interval="{$options.interval}"'}
+>
+	<a class="adv_backward adv_slider_navig" style="margin-top:{xen:calc '{$options.height}/2-10'}px">«</a>
+	<a class="adv_forward adv_slider_navig" style="margin-top:{xen:calc '{$options.height}/2-10'}px">»</a>
+
+	<div class="advslides {$options.autowidth}" style="width:{$options.innerwidth};height:100%;position:relative">
+		<xen:foreach loop="$options.slides" value="$slide" i="$i" count="$total">
+			<div id="{$options.uniqid}_{$i}"
+			     class="{xen:if '{$options.layout} == "inside"', 'inner', 'outside'} {xen:if '{$slide.image}', 'imageMode'}" 
+			     style="height:{xen:if '{$slide.image}', '{$options.height}', '{xen:calc '{$options.height}-50'}'}px"
+			>
+				<xen:if is="{$slide.title}">				
+					<div class="adv_slides_title{xen:if '{$slide.absoluteTitle}', '_abs'} {$slide.absoluteTitle}{xen:if '{$options.num} AND {$slide.absoluteTitle}', '_num'}" {xen:if '{$slide.align} != "left"', 'style="text-align:{$slide.align}"'}>
+						<span>{xen:raw $slide.title}</span>
+					</div>
+				</xen:if>	
+				<xen:if is="{$slide.image}">
+					<div class="adv_slide_mask" style="width:{xen:if '{$options.widthType} == "%"','100%', '{$options.width}px'}"><span>{xen:if '{$slide.canViewImage}', '{xen:phrase sedo_adv_loading}', '{xen:phrase sedo_adv_slider_img_noperms}'}</span></div>
+					<div class="adv_slide_image">{xen:if '{$slide.canViewImage}', '<img class="advSliverImage" style="width:100%" src="{xen:raw $slide.content}" alt="" />'}</div>
+				<xen:else />
+					<div class="adv_slide_content">{xen:raw $slide.content}</div>
+				</xen:if>
+			</div>
+		</xen:foreach>
+	</div>
+
+	<div class="advslidestabs {xen:if '{$options.layout} == "inside"', 'inner_', 'outside_'}{xen:if '{$options.num}', 'num', 'bullet'}">
+		<xen:foreach loop="$options.slides" value="$slide" i="$i" count="$total">
+			<xen:if is="{$options.num}">
+				<a class="num {xen:if '{$slide.open}', 'open'}"  href="#">{$i}</a>
+			<xen:else />
+				<a class="bullet {xen:if '{$slide.open}', 'open'}" href="#">•</a>
+			</xen:if>
+		</xen:foreach>
+		<xen:if is="{$options.cmd}">
+			<span class="cmd play button">►</span>
+			<span class="cmd pause button">▌▌</span>
+		</xen:if>
+	</div>
+</div>
+
+<noscript>
+	<div id="{$options.uniqid}_noscript" class="adv_slider_wrapper noscript {$options.blockAlign}"	style="width:{$options.width}{$options.widthType};height:{$options.height}px">
+		<xen:foreach loop="$options.slides" value="$slide" i="$i" count="$total">
+			<div id="{$options.uniqid}_{$i}" class="adv_slides_noscript">
+				<div class="adv_slider_noscript_title" style="text-align:{$slide.align}">{xen:if '{$slide.title}', '{xen:raw $slide.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_tab}{$i}'}</div>
+
+				<xen:if is="{$slide.image}">
+					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:if '{$slide.canViewImage}', '<img class="advSliverImage" style="width:100%" src="{xen:raw $slide.content}" alt="" />', '{xen:phrase sedo_adv_slider_img_noperms}'}</div>
+				<xen:else />
+					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:raw $slide.content}</div>
+				</xen:if>
+			</div>
+		</xen:foreach>
+	</div>
+</noscript>]]></template>
+    <template title="sedo_adv_slider.css" version_id="20" version_string="3.3.2"><![CDATA[<xen:comment>
+	WRAPPER
+</xen:comment>
+
+.adv_slider_wrapper {
+	{xen:property advbbcodebar_slider_container}
+}
+
+.adv_slider_wrapper.inner {
+	padding: 5px;
+}
+
+.adv_slider_wrapper.bleft {
+	margin-left :0 !important;
+	margin-right: auto !important;
+}
+
+.adv_slider_wrapper.bcenter {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.adv_slider_wrapper.bright {
+	margin-left:auto !important;
+	margin-right:0 !important;
+}
+
+.adv_slider_wrapper.fleft {
+	float: left;
+	margin: 1px 10px 0 0 !important;
+}
+
+.adv_slider_wrapper.fright {
+	float: right;
+	margin: 1px 0 0 10px !important;
+}
+
+<xen:comment>
+	SLIDES
+</xen:comment>
+
+.advslides {
+	{xen:property advbbcodebar_slider_slides}
+}
+
+.advslides > div {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 7px;
+	padding: 15px;
+	overflow: auto;
+}
+
+.advslides > div.active {
+	position: relative !important;
+}
+
+.advslides > div.inner {
+	padding: 10px 40px;
+}
+
+.advslides > div.imageMode {
+	position:absolute !important;
+	padding: 0;
+	margin: 0;
+	overflow:hidden;
+}
+
+.advslides .adv_slide_mask {
+	display:block;
+	position:relative;
+	width:100%;
+	height:100%;
+	background-color:black;
+	z-index:40;
+}
+
+.advslides .adv_slide_mask span {
+	display:block;
+	padding:20px;
+	color:white;
+}
+
+<xen:comment>
+	SLIDE TITLE
+</xen:comment>
+.advslides .adv_slides_title {
+	{xen:property advbbcodebar_slider_slides_title}
+}
+
+.advslides .adv_slides_title_abs {
+	{xen:property advbbcodebar_slider_slides_title_abs}
+}
+
+.advslides .adv_slides_title_abs.bottom{
+	bottom:0;
+}
+
+.inner .advslides .adv_slides_title_abs.bottom{
+	bottom:36px !important;
+}
+
+.inner .advslides .adv_slides_title_abs.bottom_num{
+	bottom:20px !important;
+}
+
+.advslides .adv_slides_title_abs span {
+	display: block;
+	padding: 10px 15px;
+}
+<xen:comment>
+	TABS
+</xen:comment>
+
+.advslidestabs {
+	text-align:center;
+	position: relative;
+}
+
+.advslidestabs.inner_bullet {
+	bottom: 38px;
+}
+
+.advslidestabs.outside_bullet {
+	bottom: 5px;
+}
+
+.advslidestabs.inner_num {
+	bottom: 22px;
+}
+
+.advslidestabs.outside_num {
+	bottom: 0;
+}
+
+.advslidestabs.inner_bullet.imageMenu,
+.advslidestabs.inner_num.imageMenu {
+	background-color: rgba(0,0,0,0.7);
+
+	margin-right: -3px;
+}
+
+.advslidestabs a:active, .advslidestabs a:hover, .advslidestabs a:focus {
+	box-shadow:none !important;
+	outline:none !important;
+	background:none !important;
+}
+
+.advslidestabs a {
+	display:inline;
+	{xen:property advbbcodebar_slider_tabs}
+}
+
+.advslidestabs a.num {
+	font-size: 12pt;
+}
+
+.advslidestabs a.bullet {
+	font-size: 20pt !important;
+}
+
+.advslidestabs a:hover {
+	{xen:property advbbcodebar_slider_tabs_hover}
+}
+
+.advslidestabs a:active,
+.advslidestabs a.current {
+	{xen:helper cssImportant, {xen:property advbbcodebar_slider_tabs_active}}
+}
+
+.advslidestabs a:visited {
+	{xen:property advbbcodebar_slider_tabs}
+}
+
+<xen:comment>
+	TABS COMMANDS (PLAY-PAUSE)
+</xen:comment>
+.advslidestabs .cmd{
+	display: inline-block;
+	position: relative;
+	height: 14px;
+	line-height: 11px;
+	vertical-align: middle;
+	cursor :pointer;
+	color:#888888;
+}
+
+.advslidestabs .cmd:hover{
+	color:#696969;
+}
+
+.advslidestabs.inner_bullet .cmd,
+.advslidestabs.outside_bullet .cmd{
+	top: -4px;
+}
+
+.advslidestabs.inner_num .cmd,
+.advslidestabs.outside_num .cmd{
+	top: -1px;
+}
+
+.advslidestabs .play{
+	font-size: 7pt;
+	margin-left: 10px;
+}
+
+.advslidestabs .pause{
+	font-size: 5pt;
+}
+
+<xen:comment>
+	NAVIG BUTTONS
+</xen:comment>
+
+.adv_slider_navig{
+	position: relative;
+	{xen:helper cssImportant, {xen:property advbbcodebar_slider_nav_buttons}}
+}
+
+.adv_slider_navig:hover{
+	{xen:helper cssImportant, {xen:property advbbcodebar_slider_nav_buttons_hover}}
+}
+
+.adv_slider_navig:active{
+	{xen:helper cssImportant, {xen:property advbbcodebar_slider_nav_buttons_active}}
+}
+
+.adv_backward{
+	float: left;
+	left: 8px;
+}
+
+.adv_forward{
+	float: right;
+	right: 8px;
+	clear: right;
+}
+
+<xen:comment>
+	NOT USED BUT KEPT FOR REFERENCE
+	Disabled navigational button. Is not needed when tabs are
+	configured with rotate: true
+</xen:comment>
+
+.disabled {
+	visibility:hidden !important;
+}
+
+<xen:comment>
+	NO SCRIPT
+</xen:comment>
+
+.adv_slider_wrapper.noscript{
+	overflow:auto;
+	border: 2px solid {xen:property primaryMedium};
+}
+
+.adv_slider_noscript {
+	border: 1px solid {xen:property primaryMedium};
+}
+
+.adv_slider_noscript_title {
+	font-size: 12px;
+	font-weight:bold;
+	color: {xen:property contentText};
+	line-height: 30px;
+	height: 30px;
+	background: {xen:property primaryLightish} url('{xen:property imagePath}/xenforo/gradients/category-23px-light.png') repeat-x top;
+}
+
+.adv_slider_noscript_content {
+	padding:5px;
+	overflow: auto;
+}]]></template>
     <template title="sedo_adv_spoilerbb" version_id="17" version_string="3.2.1"><![CDATA[<xen:require css="sedo_adv_spoilerbb.css" />
 
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
@@ -3852,36 +4316,40 @@ p.info span
 	color:{xen:property contentText} !important;
 	background-color:{xen:property contentBackground} !important;
 }]]></template>
-    <template title="sedo_adv_tabs" version_id="19" version_string="3.3.1"><![CDATA[<xen:require css="sedo_adv_tabs.css" />
+    <template title="sedo_adv_tabs" version_id="20" version_string="3.3.2"><![CDATA[<xen:require css="sedo_adv_tabs.css" />
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
 	<xen:require js="js/sedo/advtoolbar/src/advbar_allinone.src.js" />	
 <xen:else />
 	<xen:require js="js/sedo/advtoolbar/advbar_allinone.js" />
 </xen:if>
 
-<div id="{$options.uniqid}" class="adv_tabs_wrapper {$options.blockAlign}" style="width:{$options.width}{$options.widthType};">
-	<ul class="advtabs JsOnly">
+<xen:set var="$panesHeight">{xen:calc '{$options.height}-({xen:property advbbcodebar_tabs_title.height}+{xen:property advbbcodebar_tabs_content.padding-top} + {xen:property advbbcodebar_tabs_content.padding-bottom})'}</xen:set>
+
+<div id="{$options.uniqid}" class="adv_tabs_wrapper {$options.blockAlign} JsOnly" style="width:{$options.width}{$options.widthType};height:{$options.height}px">
+	<ul class="advtabs">
 		<xen:foreach loop="$options.tabs" value="$tab" i="$i" count="$total">
 			<li><a class="{xen:if '{$tab.open}', 'openMe'}" href="#{$options.uniqid}_{$i}" style="text-align:{$tab.align}">{xen:if '{$tab.title}', '{xen:raw $tab.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_tab}{$i}'}</a></li>
 		</xen:foreach>
 	</ul>
 
-	<div class="advpanes JsOnly">
+	<div class="advpanes">
 		<xen:foreach loop="$options.panes" value="$pane" i="$i" count="$total">
-			<div style="{xen:if '{$options.height}', 'height:{$options.height}px;'}">{xen:raw $pane.content}</div>
+			<div style="height:{$panesHeight}px">{xen:raw $pane.content}</div>
 		</xen:foreach>
 	</div>
+</div>
 
-	<noscript>
+<noscript>
+	<div id="{$options.uniqid}_noscript" class="adv_tabs_wrapper {$options.blockAlign} noscript" style="width:{$options.width}{$options.widthType};height:{$options.height}px">
 		<xen:foreach loop="$options.tabs" value="$tab" i="$i" count="$total">
 			<div id="{$options.uniqid}_{$i}" class="adv_tabs_noscript">
 				<div class="adv_tabs_noscript_title" style="text-align:{$tab.align}">{xen:if '{$tab.title}', '{xen:raw $tab.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_tab}{$i}'}</div>
 				<div class="adv_tabs_noscript_content" style="{xen:if '{$options.height}', 'height:{$options.height}px;'}">{xen:raw $tab.content}</div>
 			</div>
 		</xen:foreach>
-	</noscript>
-</div>]]></template>
-    <template title="sedo_adv_tabs.css" version_id="19" version_string="3.3.1"><![CDATA[.adv_tabs_wrapper{
+	</div>
+</noscript>]]></template>
+    <template title="sedo_adv_tabs.css" version_id="20" version_string="3.3.2"><![CDATA[.adv_tabs_wrapper{
 	{xen:property advbbcodebar_tabs_container}
 }
 
@@ -3951,10 +4419,19 @@ ul.advtabs a:hover,  ul.advtabs a:focus{
 {xen:property advbbcodebar_tabs_title_hoveractive}
 } 
 
-.adv_tabs_wrapper .advpanes div {
+.adv_tabs_wrapper .advpanes{
 {xen:property advbbcodebar_tabs_content}
 }
 
+.adv_tabs_wrapper .advpanes > div {
+	display: none;
+	overflow: auto;
+}
+
+.adv_tabs_wrapper.noscript{
+	overflow:auto;
+	border: 2px solid {xen:property primaryMedium};
+}
 
 .adv_tabs_noscript {
 	border: 1pt solid {xen:property primaryMedium};

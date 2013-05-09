@@ -80,13 +80,109 @@
 			$tabs.tabs($panes);
 			$tabs.find('.openMe').trigger('click');
 			$e.find('.adv_tabs_link').click(function(){ return false; });
+		},
+		Slider: function($e)
+		{
+			var t = XenForo.AdvBbcodes, toAutoplay = new Array(), imgToLoad = new Array();
+			
+			$e.each(function(i){
+				$slider_tabs = $(this).children('.advslidestabs');	
+				$slides = $(this).children('.advslides').children('div');
+
+				var autoplay = (parseInt($e.attr('data-autoplay')) == 1 ? 1 : 0);
+				var interval = parseInt($e.attr('data-interval'));
+				interval = (isNaN(interval)) ? 3000 : interval;
+
+				$images = $slides.find('.advSliverImage');
+				
+				/*Image Mode - Resize & Loader*/
+				if($images.length > 0){
+					$images.bind('load',function(){
+						$slide = $(this).parents('.advslides');
+						$(this).parent().siblings('.adv_slide_mask').hide();//hide mask
+						var h = this.height, w = this.width, sh = $slide.height(), sw = $slide.width(), ratio = sw / w;
+						$(this).css('height', h * ratio);
+					})	
+				}
+
+				/*Slider*/
+				$slider_tabs.tabs($slides, {
+					effect: 'fade',
+					fadeOutSpeed: "fast",
+					rotate: true,
+					onBeforeClick: function(ev,i) {
+						/*	Add an active class to the pane being processed
+							A css with a relative position will be applied
+							The relative position allows to get the parent block width 
+							where as the absolution position avoid any glitches during transitions
+						*/
+						this.getCurrentPane().hide(); //to avoid extra glitches - P.S the current pane is in fact the futur previous pane
+						this.getPanes().removeClass('active').eq(i).addClass('active');
+						$z = this.getPanes().eq(i);
+						$w = this.getTabs().parent();
+
+						if($z.hasClass('imageMode'))
+							$w.addClass('imageMenu');
+						else
+							$w.removeClass('imageMenu');						
+					}
+				}).slideshow({
+					prev:'.adv_backward',
+					next:'.adv_forward',
+					interval: interval,
+					clickable: true
+				});
+				
+				 /* Open another slide than the first one */
+				$slider_tabs.children('.open').trigger('click');
+
+				 /* Autoplay loader (autoplay direct jqt cmd needs the page to be fully loaded) */
+				if(autoplay === 1) toAutoplay[i] = $slider_tabs.get(0);
+			});
+				
+			/* Autowidth function (for % sliders) */
+			t.SliderAutoWidth();
+	
+			$(window).resize(function() {
+				 t.SliderAutoWidth();
+			});
+
+			/* Autoplay loader starts (once page has been loaded) */
+			$(window).load(function() {
+				if(toAutoplay.length != 0) 
+					$(toAutoplay).data('slideshow').play();
+			});
+
+			/* Play & stop functions */
+			$slider_tabs = $e.children('.advslidestabs');
+			
+			$slider_tabs.children('.play').click(function(e){
+				$(this).parent().data('slideshow').play();
+			});
+			$slider_tabs.children('.pause').click(function(e){
+				$(this).parent().data('slideshow').stop();
+			});
+		},
+		SliderAutoWidth:function($e)
+		{
+      			$sl = $('.adv_slider_wrapper');
+			var diff = $sl.attr('data-autodiff');
+
+			$sl.each(function() {
+				$t = $(this);
+		      		if(!$t.hasClass('inner')){
+					var width = $t.width()-diff;
+					$t.find('.advAutoWidth, .imageMode').width(width);
+				}
+	      		});
 		}
-	}
-	 XenForo.register('.AdvFieldsetTrigger', 'XenForo.AdvBbcodes.FieldsetFix');
-	 XenForo.register('.adv_accordion', 'XenForo.AdvBbcodes.Accordion');
-	 XenForo.register('.AdvSpoilerbbCommand', 'XenForo.AdvBbcodes.Spoilerbb');
-	 XenForo.register('.adv_tabs_wrapper', 'XenForo.AdvBbcodes.Tabs');
-	 
-	 
+	};
+	
+	XenForo.register('.AdvFieldsetTrigger', 'XenForo.AdvBbcodes.FieldsetFix');
+	XenForo.register('.adv_accordion', 'XenForo.AdvBbcodes.Accordion');
+	XenForo.register('.AdvSpoilerbbCommand', 'XenForo.AdvBbcodes.Spoilerbb');
+	XenForo.register('.adv_tabs_wrapper', 'XenForo.AdvBbcodes.Tabs');
+	XenForo.register('.adv_slider_wrapper', 'XenForo.AdvBbcodes.Slider');
+	$(document).bind("AutoValidationComplete", XenForo.AdvBbcodes.SliderAutoWidth);
 }
 (jQuery, this, document);

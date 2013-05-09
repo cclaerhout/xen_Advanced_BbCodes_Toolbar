@@ -704,7 +704,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		
 		$tabs = array();
 		$panes = array();
-		$requestUri = self::_getRequestUri();//needed for noscript
+		$requestUri = self::_getRequestPath();//needed for noscript
 		
 		foreach($wip as $k => $slide)
 		{
@@ -720,16 +720,13 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$slide_attributes = $slide[2];
 			$title = '';
 			$hasAlreadyBeenOpened = false;
+			$align = 'center';
+			$open = false;			
 			
 			if($slide_attributes)
 			{
 				$slideOptions = explode('|', $slide_attributes);
 				
-				/*Default Slave Options*/
-				$align = 'center';
-				$title = '';
-				$open = false;
-
 				/*Browse Slave Options*/
 				foreach($slideOptions as $slideOption)
 				{
@@ -780,6 +777,259 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['blockAlign'] = $blockAlign;
 		$options['tabs'] = $tabs;
 		$options['panes'] = $panes;
+	}
+
+	public static function parseTagSlider(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
+	{
+		$xenOptions = XenForo_Application::get('options');
+		$visitor = XenForo_Visitor::getInstance();
+		$postid = $parentClass->getPostParam('post_id');
+
+		if($postid)
+		{
+			//tagid by post
+  	      		if(!$parentClass->getTagExtra('tagid', $postid))
+	      		{
+	      			$parentClass->addTagExtra('tagid', array($postid => 1));
+	      		}
+	      		else
+	      		{
+	      			$newTagid = $parentClass->getTagExtra('tagid', $postid) + 1;
+	      			$parentClass->addTagExtra('tagid', array($postid => $newTagid));
+	      		}
+      		
+     	 		$tagid = $parentClass->getTagExtra('tagid', $postid);  
+     	 	}
+     	 	else
+     	 	{
+			//tagid by page (not sure if it will be used)
+	      		if(!$parentClass->getTagExtra('tagid'))
+	      		{
+	      			$parentClass->addTagExtra('tagid', 1);
+	      		}
+	      		else
+	      		{
+	      			$newTagid = $parentClass->getTagExtra('tagid') + 1;
+	      			$parentClass->addTagExtra('tagid', $newTagid);
+	      		}
+      		
+     	 		$tagid = $parentClass->getTagExtra('tagid'); 	 		
+     	 	}
+
+		$uniqid = ($postid) ? "adv_slider_{$postid}_{$tagid}" : uniqid('adv_slider_');
+
+		/*Default Master Options*/
+		$width = $xenOptions->AdvBBcodeBar_slider_defaultwidth;
+		$widthType = $xenOptions->AdvBBcodeBar_slider_defaultwidth_unit;
+		$blockAlign = 'bleft';
+		$globalHeight = $xenOptions->AdvBBcodeBar_slider_defaultheight;
+		$layout = '';
+		$cmd = false;
+		$autoplay = false;
+		$interval = ($xenOptions->AdvBBcodeBar_slider_interval_default == 3000) ? false : $xenOptions->AdvBBcodeBar_slider_interval_default;
+		$num = false;
+		
+		/*Browse Master Options*/
+		foreach($options as $option)
+		{
+			$original = $option;
+			$option = self::_cleanOption($option);
+					
+			if (preg_match('#^\d+(px)?$#', $option))
+			{
+				$width = str_replace(array('px', '%'), '',$option);
+				$widthType = 'px';
+			}
+			elseif (preg_match('#^\d+%$#', $option))
+			{
+				$width = str_replace(array('px', '%'), '',$option);
+				$widthType = '%';				
+			}
+			elseif (preg_match('#^(\d+?(px)?)x(\d+?)$#', $option, $matches))
+			{
+				$width = str_replace(array('px', '%'), '', $matches[1]);
+				$widthType = 'px';
+				$globalHeight = str_replace(array('px', '%'), '',$matches[3]);
+			}
+			elseif (preg_match('#^(\d+?%)x(\d+?)$#', $option, $matches))
+			{
+				$width = str_replace(array('px', '%'), '',$matches[1]);
+				$widthType = '%';	
+				$globalHeight = str_replace(array('px', '%'), '',$matches[2]);
+			}
+			elseif($option == 'bleft')
+			{
+				$blockAlign = 'bleft';
+			}
+			elseif($option == 'bcenter')
+			{
+				$blockAlign= 'bcenter';
+			}
+			elseif($option == 'bright')
+			{
+				$blockAlign = 'bright';
+			}
+			elseif($option == 'fleft')
+			{
+				$blockAlign = 'fleft';
+			}
+			elseif($option == 'fright')
+			{
+				$blockAlign = 'fright';
+			}
+			elseif($option == 'inside')
+			{
+				$layout = 'inside';
+			}
+			elseif($option == 'cmd')
+			{
+				$cmd = true;
+			}
+			elseif($option == 'num')
+			{
+				$num = true;
+			}			
+			elseif($option == 'autoplay' && $xenOptions->AdvBBcodeBar_slider_autoplay_authorise)
+			{
+				$autoplay = true;
+			}
+			elseif(preg_match('#^\d+ms$#', $option))
+			{			
+				$interval = str_replace('ms', '', $option);
+			}		
+		}
+
+		/* Check Options */
+		if($widthType == '%' && $width > 100)
+		{
+			$width = 100;
+		}
+
+		if( 	(!preg_match('#^\d{2,3}$#', $width)) 
+			|| 
+			($widthType == 'px' && $width > $xenOptions->AdvBBcodeBar_slider_maxwidth)
+		){
+			$width = $xenOptions->AdvBBcodeBar_slider_maxwidth;
+			$widthType = 'px';
+		}
+
+		if($globalHeight > $xenOptions->AdvBBcodeBar_slider_maxheight)
+		{
+			$globalHeight = $xenOptions->AdvBBcodeBar_slider_maxheight;
+		}
+
+		$layout = (!self::_isBadIE(8)) ? $layout : ''; //Prevent IE6&IE7 to use the inside layout
+		
+		if($interval && ($interval > $xenOptions->AdvBBcodeBar_slider_interval_max || $interval < $xenOptions->AdvBBcodeBar_slider_interval_min))
+		{
+			$interval = $xenOptions->AdvBBcodeBar_slider_interval_default;
+			$interval = ($interval == 3000) ? false : $interval;
+		}
+		
+		/*Get slides from content*/
+		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.+?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
+		$content = ''; //Raz content
+		
+		$slides = array();
+		$requestUri = self::_getRequestPath();//needed for noscript
+		
+		foreach($wip as $k => $slide)
+		{
+			$id = $k+1;
+			$content = $slide[4];
+			$slide_attributes = $slide[2];
+			$title = '';
+			$hasAlreadyBeenOpened = false;
+			$open = false;
+			$image = false;
+			$align = 'left';
+			$canViewImage = false;
+			$absoluteTitle = false;
+			
+			if($slide_attributes)
+			{
+				$slideOptions = explode('|', $slide_attributes);
+				
+				/*Browse Slave Options*/
+				foreach($slideOptions as $slideOption)
+				{
+					$original = $slideOption;
+					$slideOption = self::_cleanOption($slideOption);
+					
+					if($slideOption == 'left')
+					{
+						$align = 'left';
+					}
+					elseif($slideOption == 'center')
+					{
+						$align = 'center';
+					}
+					elseif($slideOption == 'right')
+					{
+						$align = 'right';
+					}
+					elseif($slideOption == 'bottom')
+					{
+						$absoluteTitle = 'bottom';
+					}
+					elseif($slideOption == 'top')
+					{
+						$absoluteTitle = 'top';
+					}
+					elseif($slideOption == 'open')
+					{
+						if($hasAlreadyBeenOpened == false)
+						{
+							$hasAlreadyBeenOpened = $open = true;
+						}
+					}
+					elseif(preg_match('#^\d+$#i', $slideOption))
+					{
+						$prefix = self::_getRequestPath('fullBasePath');
+						$content = $prefix.XenForo_Link::buildPublicLink('attachments', array('attachment_id' => $slideOption) );
+						$image = true;
+
+						if ( 	isset($visitor['permissions']['forum']['viewAttachment']) 
+							&& $visitor['permissions']['forum']['viewAttachment'] === true 
+						){
+							$canViewImage = true;
+						}
+						
+					}					
+					elseif(!empty($slideOption))
+					{
+						$title = $original;
+					}
+				}
+			}
+		
+			$slides[$id] = array(
+				'title' => ($xenOptions->AdvBBcodeBar_slider_titles_raw) ? strip_tags($title) : $title,
+				'absoluteTitle' => $absoluteTitle,
+				'align' => $align,
+				'open' => $open,
+				'image' => $image,
+				'content'=> $content,
+				'canViewImage' => $canViewImage
+			);
+		}
+		
+		/* Confirm Options */
+		$autodiff = 100;
+		$options['uniqid'] = $uniqid;
+		$options['width'] = $width;
+		$options['widthType'] = $widthType;
+		$options['height'] = $globalHeight;
+		$options['blockAlign'] = $blockAlign;
+		$options['layout'] = $layout;
+		$options['slides'] = $slides;
+		$options['autodiff'] = $autodiff;
+		$options['autowidth'] = ($widthType == '%') ? 'advAutoWidth' : '';
+		$options['innerwidth'] = ($widthType == 'px' && $layout != 'inside') ? $width-$autodiff . 'px' : '100%';
+		$options['cmd'] = $cmd;
+		$options['num'] = $num;
+		$options['autoplay'] = $autoplay;
+		$options['interval'] = $interval;
 	}
 
 	public static function parseTagPicasa(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
@@ -1076,13 +1326,15 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		return $string;
 	}
 	
-	protected static function _isBadIE()
+	protected static function _isBadIE($isBelow = 9)
 	{
+		$goTo = $isBelow-1;
+
 		$visitor = XenForo_Visitor::getInstance();
 		if(isset($visitor->getBrowser['IEis']))
 		{
 			//Browser Detection (Mobile/MSIE) Addon
-			if($visitor->getBrowser['isIE'] && $visitor->getBrowser['IEis'] < 9)
+			if($visitor->getBrowser['isIE'] && $visitor->getBrowser['IEis'] < $isBelow)
 			{
 				return true;
 			}
@@ -1090,7 +1342,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		else
 		{
 			//Manual helper
-			if(Sedo_AdvBBcodeBar_Helper_Sedo::isBadIE('target', '6-8'))
+			if(Sedo_AdvBBcodeBar_Helper_Sedo::isBadIE('target', "6-$goTo"))
 			{
 				return true;
 			}
@@ -1113,19 +1365,30 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 	}
 	
 	protected static $requestUri = null;
-	
-	protected static function _getRequestUri()
+	protected static $fullBasePath = null;
+	protected static $fullUri = null;	
+
+	protected static function _getRequestPath($mode = 'requestUri')
 	{
-		if(self::$requestUri !== null)
+		if(self::$requestUri === null)
 		{
-			return self::$requestUri;
+			$requestPath = XenForo_Application::get('requestPaths');
+			self::$requestUri = $requestPath['requestUri'];
+			self::$fullBasePath = $requestPath['fullBasePath'];
+			self::$fullUri = $requestPath['fullUri'];			
 		}
 		
-		$requestPath = XenForo_Application::get('requestPaths');
-		$requestUri = $requestPath['requestUri'];
-		self::$requestUri = $requestUri ;
-		
-		return $requestUri;
+		switch ($mode) {
+			case 'requestUri':
+				return self::$requestUri;
+			break;
+			case 'fullBasePath':
+				return self::$fullBasePath;
+			break;
+			case 'fullUri':
+				return self::$fullUri;
+			break;		
+		}
 	}
 }
 //Zend_Debug::dump($abc);
