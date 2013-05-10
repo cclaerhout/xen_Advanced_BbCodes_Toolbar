@@ -126,7 +126,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 
 				$attachmentParams = $parentClass->getAttachmentParams(self::_cleanOption($content), $validExtensions, $permsFallback);
 
-				if($attachmentParams['canView'])
+				if($attachmentParams['canView'] || $attachmentParams['validAttachment'])
 				{
 					$content = $attachmentParams['url'];
 				}

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.3.3 - Beta 2" version_id="22" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.3.3 - Beta 3" version_id="23" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -3911,7 +3911,7 @@ p.info span
 .picasa_image{
 	{xen:property advbbcodebar_picasa_image}
 }]]></template>
-    <template title="sedo_adv_slider" version_id="21" version_string="3.3.3 - Beta"><![CDATA[<xen:require css="sedo_adv_slider.css" />
+    <template title="sedo_adv_slider" version_id="22" version_string="3.3.3 - Beta 2"><![CDATA[<xen:require css="sedo_adv_slider.css" />
 <xen:require js="js/sedo/advtoolbar/jqt_slider.js" />
 
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
@@ -3919,8 +3919,6 @@ p.info span
 <xen:else />
 	<xen:require js="js/sedo/advtoolbar/advbar_allinone.js" />
 </xen:if>
-
-
 
 <div 	id="{$options.uniqid}"
 	class="JsOnly adv_slider_wrapper {xen:if '{$options.layout} == "inside"', 'inner'} {$options.blockAlign}"
@@ -3945,11 +3943,11 @@ p.info span
 				</xen:if>
 				<xen:if is="{$slide.image}">
 					<div class="adv_slide_mask" style="width:{xen:if '{$options.widthType} == "%"','100%', '{$options.width}px'}">
-						<span>{xen:if '{$slide.attachParams.canView}', '{xen:phrase sedo_adv_loading}', '{xen:phrase sedo_adv_slider_img_noperms}'}</span>
+						<span>{xen:if '{$slide.attachParams.canView}  OR {$slide.attachParams.validAttachment}', '{xen:phrase sedo_adv_loading}', '{xen:phrase sedo_adv_slider_img_noperms}'}</span>
 					</div>
 
 					<div class="adv_slide_image">
-						<xen:if is="{$slide.attachParams.canView}">
+						<xen:if is="{$slide.attachParams.canView} OR {$slide.attachParams.validAttachment}">
 							<img class="advSliderImage {$slide.fullClass}" style="width:100%" src="{xen:raw $slide.attachParams.url}" alt="" />
 						<xen:else />
 							{xen:phrase sedo_adv_slider_img_noperms}
@@ -3984,7 +3982,7 @@ p.info span
 				<div class="adv_slider_noscript_title" style="text-align:{$slide.align}">{xen:if '{$slide.title}', '{xen:raw $slide.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_tab}{$i}'}</div>
 
 				<xen:if is="{$slide.image}">
-					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:if '{$slide.canViewImage}', '<img style="width:100%" src="{xen:raw $slide.content}" alt="" />', '{xen:phrase sedo_adv_slider_img_noperms}'}</div>
+					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:if '{$slide.attachParams.canView} OR {$slide.attachParams.validAttachment}', '<img style="width:100%" src="{xen:raw $slide.content}" alt="" />', '{xen:phrase sedo_adv_slider_img_noperms}'}</div>
 				<xen:else />
 					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:raw $slide.content}</div>
 				</xen:if>
