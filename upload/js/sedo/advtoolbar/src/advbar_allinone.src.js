@@ -86,23 +86,47 @@
 			var t = XenForo.AdvBbcodes, toAutoplay = new Array(), imgToLoad = new Array();
 			
 			$e.each(function(i){
-				$slider_tabs = $(this).children('.advslidestabs');	
+				$slider_tabs = $(this).children('.advslidestabs');
 				$slides = $(this).children('.advslides').children('div');
+
+				if($slides.length == 0)
+					return false; //Important => prevent infinite loops when no slide
 
 				var autoplay = (parseInt($e.attr('data-autoplay')) == 1 ? 1 : 0);
 				var interval = parseInt($e.attr('data-interval'));
 				interval = (isNaN(interval)) ? 3000 : interval;
 
-				$images = $slides.find('.advSliverImage');
+				$images = $slides.find('.advSliderImage');
 				
 				/*Image Mode - Resize & Loader*/
 				if($images.length > 0){
+
 					$images.bind('load',function(){
-						$slide = $(this).parents('.advslides');
+						if($(this).parents('.imageMode').hasClass('outside'))
+							$slide = $(this).parents('.advslides');
+						else
+							$slide = $(this).parents('.adv_slider_wrapper');
+
+						var imageRef = new Image();
+						imageRef.src = $(this).attr("src");
+
 						$(this).parent().siblings('.adv_slide_mask').hide();//hide mask
-						var h = this.height, w = this.width, sh = $slide.height(), sw = $slide.width(), ratio = sw / w;
-						$(this).css('height', h * ratio);
-					})	
+						var h = imageRef.height, w = imageRef.width, sh = $slide.height(), sw = $slide.width(), ratio, fh, fw;
+
+						//@Src: http://gabrieleromanato.name/jquery-resize-images-proportionally
+						if (w > sw) {
+						        ratio = sw / w;
+						        fw = sw;
+						        fh = h * ratio;
+					        }
+						if (h > sh) {
+							ratio = sh / h;
+							fh = sh;
+							if(!$(this).hasClass('full'))
+								fw = w * ratio;
+						}
+						$(this).css({'width': fw, 'height': fh})
+					})
 				}
 
 				/*Slider*/

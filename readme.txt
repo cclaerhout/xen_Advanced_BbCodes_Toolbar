@@ -192,6 +192,7 @@ SLIDER BB Code: Display a slider
 				bottom: to display the title with an absolute layout on the bottom
 				open: the slide will be opened by default when the page is loaded
 				Number (attachement id): will fetch the attachement by its id (must be an image) and will display it with a new large layout
+					=> in this layout another command exists: 'full'. It will stretch the image to the container but without respected the ratio
 
 ### How to use Text/Image Boxes Bb Codes ###
 If you want to display a text box or an image on the right of a text (float right), you have to insert first the Text Box or Image, then the Main Text. 

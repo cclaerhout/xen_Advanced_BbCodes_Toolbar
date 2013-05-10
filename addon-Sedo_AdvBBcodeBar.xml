@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.3.3 - Beta" version_id="21" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.3.3 - Beta 2" version_id="22" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -219,6 +219,13 @@ step=5</edit_format_params>
 step=10</edit_format_params>
       <sub_options></sub_options>
       <relation group_id="AdvBBcodeBar" display_order="510"/>
+    </option>
+    <option option_id="AdvBBcodeBar_fallbackperms" edit_format="radio" data_type="boolean" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params>1={xen:phrase AdvBBcodeBar_Options_Yes}
+0={xen:phrase AdvBBcodeBar_Options_No}</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="8030"/>
     </option>
     <option option_id="AdvBBcodeBar_fieldsetdefault" edit_format="spinbox" data_type="positive_integer" can_backup="1">
       <default_value>90</default_value>
@@ -673,6 +680,8 @@ With the default XenForo configuration, if a visitor or a member in a forum can'
     <phrase title="option_AdvBBcodeBar_encmax_px" version_id="5" version_string="3.1"><![CDATA[[Text Box BBcode] Max Width Attribute (px)]]></phrase>
     <phrase title="option_AdvBBcodeBar_encmax_px_explain" version_id="6" version_string="3.2"><![CDATA[Enter max width for text box bbcode. Unit is <b>pixel</b>. Do not enter "px" !
 <br />(Default value: 750)]]></phrase>
+    <phrase title="option_AdvBBcodeBar_fallbackperms" version_id="21" version_string="3.3.3 - Beta"><![CDATA[[Debug] Try to get attachments outside the viewing post?]]></phrase>
+    <phrase title="option_AdvBBcodeBar_fallbackperms_explain" version_id="21" version_string="3.3.3 - Beta"><![CDATA[]]></phrase>
     <phrase title="option_AdvBBcodeBar_fieldsetdefault" version_id="6" version_string="3.2"><![CDATA[[Fieldset BBcode] Default Width Attribute]]></phrase>
     <phrase title="option_AdvBBcodeBar_fieldsetdefault_explain" version_id="5" version_string="3.1"><![CDATA[Enter the default width that should be used with fieldset bbcode if user doesn't specify any option or if the given option is above the max width.  Unit is <b>defined below</b>. <br />(Default value: 90)]]></phrase>
     <phrase title="option_AdvBBcodeBar_fieldsetdefault_width_unit" version_id="5" version_string="3.1"><![CDATA[[Fieldset] Default Width Unit]]></phrase>
@@ -1128,7 +1137,7 @@ Default value: 35px.]]></phrase>
     <property property_name="advbbcodebar_slider_container" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Container" description="P.S: The &quot;inner&quot; layout (when the buttons are all inside the slider) has its own padding" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="300" sub_group=""><![CDATA[{"padding-bottom":"32px","padding-left":"5px","padding-right":"5px","padding-top":"5px"}]]></property>
     <property property_name="advbbcodebar_slider_tabs" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Tabs (below the slider)" description="Configure only the font color here, this would avoid to break any layouts." css_components="text" scalar_type="" scalar_parameters="" display_order="330" sub_group=""><![CDATA[{"color":"@primaryMedium","font-family":"Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif"}]]></property>
     <property property_name="advbbcodebar_slider_tabs_hover" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Tabs - hover" description="Configure only the font color here, this would avoid to break any layouts." css_components="text" scalar_type="" scalar_parameters="" display_order="340" sub_group=""><![CDATA[{"color":"@primaryLightish"}]]></property>
-    <property property_name="advbbcodebar_slider_tabs_active" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Tabs - active" description="Configure only the font color here, this would avoid to break any layouts." css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="335" sub_group=""><![CDATA[{"color":"rgb(238, 0, 24)"}]]></property>
+    <property property_name="advbbcodebar_slider_tabs_active" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Tabs - active" description="Configure only the font color here, this would avoid to break any layouts." css_components="text" scalar_type="" scalar_parameters="" display_order="335" sub_group=""><![CDATA[{"color":"rgb(238, 0, 24)"}]]></property>
     <property property_name="advbbcodebar_slider_slides_title" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Slides Title" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="350" sub_group=""><![CDATA[{"color":"@primaryDarker","font-size":"22px","font-weight":"bold","margin-bottom":"5px","margin-left":"0","margin-right":"0","margin-top":"0"}]]></property>
     <property property_name="advbbcodebar_slider_slides_title_abs" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Slides Title - Absolute" description="This title layout is triggered with the &quot;top&quot; or &quot;bottom&quot; commands (&quot;slide&quot; slave tag)" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="360" sub_group=""><![CDATA[{"background-color":"rgba(93, 99, 100, 0.7)","color":"rgb(245, 244, 244)","extra":"position: absolute;\nleft: 0;\nz-index: 25;","font-size":"18px","font-weight":"bold","width":"100%"}]]></property>
     <group group_name="AdvBBcodeBar_Style" display_order="13211">
@@ -3902,7 +3911,7 @@ p.info span
 .picasa_image{
 	{xen:property advbbcodebar_picasa_image}
 }]]></template>
-    <template title="sedo_adv_slider" version_id="20" version_string="3.3.2"><![CDATA[<xen:require css="sedo_adv_slider.css" />
+    <template title="sedo_adv_slider" version_id="21" version_string="3.3.3 - Beta"><![CDATA[<xen:require css="sedo_adv_slider.css" />
 <xen:require js="js/sedo/advtoolbar/jqt_slider.js" />
 
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
@@ -3910,6 +3919,8 @@ p.info span
 <xen:else />
 	<xen:require js="js/sedo/advtoolbar/advbar_allinone.js" />
 </xen:if>
+
+
 
 <div 	id="{$options.uniqid}"
 	class="JsOnly adv_slider_wrapper {xen:if '{$options.layout} == "inside"', 'inner'} {$options.blockAlign}"
@@ -3925,16 +3936,25 @@ p.info span
 		<xen:foreach loop="$options.slides" value="$slide" i="$i" count="$total">
 			<div id="{$options.uniqid}_{$i}"
 			     class="{xen:if '{$options.layout} == "inside"', 'inner', 'outside'} {xen:if '{$slide.image}', 'imageMode'}" 
-			     style="height:{xen:if '{$slide.image}', '{$options.height}', '{xen:calc '{$options.height}-50'}'}px"
+			     style="height:{xen:if '{$slide.image}', '{$options.height}', '{xen:calc '{$options.height}-50'}'}px;"
 			>
 				<xen:if is="{$slide.title}">				
 					<div class="adv_slides_title{xen:if '{$slide.absoluteTitle}', '_abs'} {$slide.absoluteTitle}{xen:if '{$options.num} AND {$slide.absoluteTitle}', '_num'}" {xen:if '{$slide.align} != "left"', 'style="text-align:{$slide.align}"'}>
 						<span>{xen:raw $slide.title}</span>
 					</div>
-				</xen:if>	
+				</xen:if>
 				<xen:if is="{$slide.image}">
-					<div class="adv_slide_mask" style="width:{xen:if '{$options.widthType} == "%"','100%', '{$options.width}px'}"><span>{xen:if '{$slide.canViewImage}', '{xen:phrase sedo_adv_loading}', '{xen:phrase sedo_adv_slider_img_noperms}'}</span></div>
-					<div class="adv_slide_image">{xen:if '{$slide.canViewImage}', '<img class="advSliverImage" style="width:100%" src="{xen:raw $slide.content}" alt="" />'}</div>
+					<div class="adv_slide_mask" style="width:{xen:if '{$options.widthType} == "%"','100%', '{$options.width}px'}">
+						<span>{xen:if '{$slide.attachParams.canView}', '{xen:phrase sedo_adv_loading}', '{xen:phrase sedo_adv_slider_img_noperms}'}</span>
+					</div>
+
+					<div class="adv_slide_image">
+						<xen:if is="{$slide.attachParams.canView}">
+							<img class="advSliderImage {$slide.fullClass}" style="width:100%" src="{xen:raw $slide.attachParams.url}" alt="" />
+						<xen:else />
+							{xen:phrase sedo_adv_slider_img_noperms}
+						</xen:if>
+					</div>
 				<xen:else />
 					<div class="adv_slide_content">{xen:raw $slide.content}</div>
 				</xen:if>
@@ -3947,7 +3967,7 @@ p.info span
 			<xen:if is="{$options.num}">
 				<a class="num {xen:if '{$slide.open}', 'open'}"  href="#">{$i}</a>
 			<xen:else />
-				<a class="bullet {xen:if '{$slide.open}', 'open'}" href="#">•</a>
+				<a class="bullet {xen:if '{$slide.open}', 'open'}" href="#">•</a>
 			</xen:if>
 		</xen:foreach>
 		<xen:if is="{$options.cmd}">
@@ -3964,7 +3984,7 @@ p.info span
 				<div class="adv_slider_noscript_title" style="text-align:{$slide.align}">{xen:if '{$slide.title}', '{xen:raw $slide.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_tab}{$i}'}</div>
 
 				<xen:if is="{$slide.image}">
-					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:if '{$slide.canViewImage}', '<img class="advSliverImage" style="width:100%" src="{xen:raw $slide.content}" alt="" />', '{xen:phrase sedo_adv_slider_img_noperms}'}</div>
+					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:if '{$slide.canViewImage}', '<img style="width:100%" src="{xen:raw $slide.content}" alt="" />', '{xen:phrase sedo_adv_slider_img_noperms}'}</div>
 				<xen:else />
 					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:raw $slide.content}</div>
 				</xen:if>
@@ -3972,7 +3992,7 @@ p.info span
 		</xen:foreach>
 	</div>
 </noscript>]]></template>
-    <template title="sedo_adv_slider.css" version_id="20" version_string="3.3.2"><![CDATA[<xen:comment>
+    <template title="sedo_adv_slider.css" version_id="21" version_string="3.3.3 - Beta"><![CDATA[<xen:comment>
 	WRAPPER
 </xen:comment>
 
@@ -4040,6 +4060,7 @@ p.info span
 	padding: 0;
 	margin: 0;
 	overflow:hidden;
+	width:100%;
 }
 
 .advslides .adv_slide_mask {
@@ -4055,6 +4076,15 @@ p.info span
 	display:block;
 	padding:20px;
 	color:white;
+}
+
+.adv_slide_image {
+	text-align:center;
+	background-color:black;
+}
+
+.adv_slide_image {
+	position:relative;
 }
 
 <xen:comment>
@@ -4073,7 +4103,7 @@ p.info span
 }
 
 .inner .advslides .adv_slides_title_abs.bottom{
-	bottom:36px !important;
+	bottom:35px !important;
 }
 
 .inner .advslides .adv_slides_title_abs.bottom_num{
@@ -4091,10 +4121,12 @@ p.info span
 .advslidestabs {
 	text-align:center;
 	position: relative;
+	border-bottom-left-radius: {xen:property advbbcodebar_slider_slides.border-bottom-radius};
+	border-bottom-right-radius: {xen:property advbbcodebar_slider_slides.border-left-radius};
 }
 
 .advslidestabs.inner_bullet {
-	bottom: 38px;
+	bottom: 37px;
 }
 
 .advslidestabs.outside_bullet {

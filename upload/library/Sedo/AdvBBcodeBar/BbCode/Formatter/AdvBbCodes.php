@@ -120,19 +120,25 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			/*** XenForo Attachement ***/
 			if(preg_match($regex_attach_direct_id, $content))
 			{
-				$content = XenForo_Link::buildPublicLink('attachments', array('attachment_id' => self::_cleanOption($content)) );
+				$validExtensions = array('gif', 'png', 'jpg', 'jpeg');
+				$permsFallback[] = ($xenOptions->AdvBBcodeBar_fallbackperms) ? array('group' => 'forum', 'permission' => 'viewAttachment') : null;
+
+
+				$attachmentParams = $parentClass->getAttachmentParams(self::_cleanOption($content), $validExtensions, $permsFallback);
+
+				if($attachmentParams['canView'])
+				{
+					$content = $attachmentParams['url'];
+				}
+				else
+				{
+					/*** Yellow picture trick ***/
+					$content = $xenOptions->boardUrl . '/styles/sedo/adv_bimg/bimg_visitors.png';
+				}
 			}
 			elseif(preg_match($regex_attach_parsedimg, $content, $src))
 			{
 				$content = $src[1];
-			}
-
-			/*** Yellow picture trick ***/
-			if ( 	isset($visitor['permissions']['forum']['viewAttachment']) 
-				&& ($visitor['permissions']['forum']['viewAttachment'] === false
-				&& $xenOptions->AdvBBcodeBar_bimg_yellowpic) 
-			){
-				$content = $xenOptions->boardUrl . '/styles/sedo/adv_bimg/bimg_visitors.png';		
 			}
 	}
 
@@ -932,7 +938,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		
 		$slides = array();
 		$requestUri = self::_getRequestPath();//needed for noscript
-		
+	
 		foreach($wip as $k => $slide)
 		{
 			$id = $k+1;
@@ -943,8 +949,9 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$open = false;
 			$image = false;
 			$align = 'left';
-			$canViewImage = false;
+			$attachmentParams = false;
 			$absoluteTitle = false;
+			$fullClass = '';
 			
 			if($slide_attributes)
 			{
@@ -985,17 +992,16 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 					}
 					elseif(preg_match('#^\d+$#i', $slideOption))
 					{
-						$prefix = self::_getRequestPath('fullBasePath');
-						$content = $prefix.XenForo_Link::buildPublicLink('attachments', array('attachment_id' => $slideOption) );
-						$image = true;
+						$validExtensions = array('gif', 'png', 'jpg', 'jpeg');
+						$permsFallback[] = ($xenOptions->AdvBBcodeBar_fallbackperms) ? array('group' => 'forum', 'permission' => 'viewAttachment') : null;
 
-						if ( 	isset($visitor['permissions']['forum']['viewAttachment']) 
-							&& $visitor['permissions']['forum']['viewAttachment'] === true 
-						){
-							$canViewImage = true;
-						}
-						
-					}					
+						$attachmentParams = $parentClass->getAttachmentParams($slideOption, $validExtensions, $permsFallback);
+						$image = true;
+					}
+					elseif($slideOption == 'full')
+					{
+						$fullClass = 'full';
+					}										
 					elseif(!empty($slideOption))
 					{
 						$title = $original;
@@ -1008,12 +1014,13 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				'absoluteTitle' => $absoluteTitle,
 				'align' => $align,
 				'open' => $open,
+				'fullClass' => $fullClass,
 				'image' => $image,
 				'content'=> $content,
-				'canViewImage' => $canViewImage
+				'attachParams' => $attachmentParams
 			);
 		}
-		
+
 		/* Confirm Options */
 		$autodiff = 100;
 		$options['uniqid'] = $uniqid;
