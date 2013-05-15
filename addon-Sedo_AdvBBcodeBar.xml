@@ -3514,7 +3514,7 @@ p.info span
 <div class="advbbcodebar_article">
 	<fieldset>
 		<legend>{xen:phrase Sedo_AdvBBcodeBar_text_article}</legend>
-		{$content}
+		{xen:raw $content}
 	</fieldset>
 	<xen:if is="{$options.hasSource}">
 		<xen:if is="{$options.url}">
@@ -4240,16 +4240,6 @@ p.info span
 	float: right;
 	right: 8px;
 	clear: right;
-}
-
-<xen:comment>
-	NOT USED BUT KEPT FOR REFERENCE
-	Disabled navigational button. Is not needed when tabs are
-	configured with rotate: true
-</xen:comment>
-
-.disabled {
-	visibility:hidden !important;
 }
 
 <xen:comment>
