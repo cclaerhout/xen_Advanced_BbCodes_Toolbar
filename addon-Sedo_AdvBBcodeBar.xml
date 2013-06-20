@@ -3699,7 +3699,7 @@ p.info span
 	<xen:require css="sedo_adv_fieldset.css" />
 </xen:if>
 
-<xen:if is="{$options.broswser} == 'ie67'">
+<xen:if is="{$options.browser} == 'ie67'">
 	<xen:comment>For Internet Explorer 6&7</xen:comment>
 
 	<div class="advbbcodebar_fieldset {$options.blockAlign}" style="width:{$options.width}{$options.widthType};">

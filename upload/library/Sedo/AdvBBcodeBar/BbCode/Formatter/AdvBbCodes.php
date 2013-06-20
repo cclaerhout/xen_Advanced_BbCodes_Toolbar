@@ -319,7 +319,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['width'] = $width;
 		$options['widthType'] = $widthType;
 		$options['blockAlign'] = $blockAlign;
-		$options['broswser'] =  $broswser;
+		$options['browser'] =  $browser;
 		$options['title'] =  $title;
 		$options['cssIE'] = self::_isBadIE();
 	}
@@ -359,10 +359,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$content = rawurlencode($content);
 		
 		/*Default Options*/
-		$width = $options->AdvBBcodeBar_latex_defaultwidth;
-		$widthType = $options->AdvBBcodeBar_latex_defaultwidthunit;
+		$width = $xenOptions->AdvBBcodeBar_latex_defaultwidth;
+		$widthType = $xenOptions->AdvBBcodeBar_latex_defaultwidthunit;
 		$height = '100%';
-		$blockalign = 'bleft';
+		$blockAlign = 'bleft';
 		$title = '';
 		
 		/* Browse Options */
@@ -517,16 +517,16 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$slide_content = $slide[4];
 			$slide_attributes = $slide[2];
 			$height = $globalHeight;
-			
+
+			/*Default Slave Options*/
+			$align = $xenOptions->AdvBBcodeBar_accordion_slides_titles_defaultalign;
+			$title = '';
+			$open = '';
+			$class_open = '';
+
 			if($slide_attributes)
 			{
 				$slideOptions = explode('|', $slide_attributes);
-				
-				/*Default Slave Options*/
-				$align = $xenOptions->AdvBBcodeBar_accordion_slides_titles_defaultalign;
-				$title = '';
-				$open = '';
-				$class_open = '';
 
 				/*Browse Slave Options*/
 				foreach($slideOptions as $slideOption)
@@ -1290,7 +1290,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			{
 				$extra .= "&amp;noautoplay=1";
 			}
-			if (!$options->sedo_adv_picasa_captions)
+			if (!$xenOptions->sedo_adv_picasa_captions)
 			{
 				$extra .= "&amp;captions=1";
 			}
@@ -1300,7 +1300,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				Available data: backgroundColor
 			**/
 			$backgroundColor = XenForo_Template_Helper_Core::styleProperty('advbbcodebar_picasa_background');
-			$backgroundColor = (preg_match('#rgba#i', $background)) ? XenForo_Helper_Color::unRgba($background) : $backgroundColor;
+			$backgroundColor = (preg_match('#rgba#i', $backgroundColor)) ? XenForo_Helper_Color::unRgba($backgroundColor) : $backgroundColor;
 			$backgroundColor = self::_rgb2hex($backgroundColor);
 	
 			/*Prepare options*/
