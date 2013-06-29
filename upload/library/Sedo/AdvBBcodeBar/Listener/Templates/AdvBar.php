@@ -42,6 +42,11 @@ class Sedo_AdvBBcodeBar_Listener_Templates_AdvBar
 					break;
 				}
 
+				if(XenForo_Application::get('options')->get('currentVersionId') >= 1020031)
+				{
+					break;
+				}
+
       				//Bake Parameters
       				$params = self::initParams();
 				$contents = preg_replace('#xenforo_smilies:#', $params . '$0', $contents);
@@ -54,6 +59,11 @@ class Sedo_AdvBBcodeBar_Listener_Templates_AdvBar
 				if ( 	($template instanceof XenForo_Template_Admin && !$xenOptions->AdvBBcodeBar_ModifAdmin)
 					|| !$xenOptions->AdvBBcodeBar_activate_bar
 				)
+				{
+					break;
+				}
+
+				if(XenForo_Application::get('options')->get('currentVersionId') >= 1020031)
 				{
 					break;
 				}

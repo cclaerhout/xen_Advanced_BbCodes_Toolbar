@@ -96,7 +96,7 @@ var AdvAccordionDialog = {
 			//Get datas
 			title = $(this).find('.CMD_Title input').val(); if (title.length == 0){ title = false; }
 			align = $(this).find('.CMD_Align input').val();	if (align == 'left'){ align = false; }		
-			height = $(this).find('.CMD_Height input').val(); if (globalheight === false || isNaN(height) ) { height = false; }
+			height = $(this).find('.CMD_Height input').val(); if (globalheight !== false || isNaN(height) ) { height = false; }
 			if ( $(this).find('.CMD_Open input').attr('checked') )	{ open = 'open'; } else { open = false }
 
 			text = $(this).find('.CMD_Content textarea').val();
