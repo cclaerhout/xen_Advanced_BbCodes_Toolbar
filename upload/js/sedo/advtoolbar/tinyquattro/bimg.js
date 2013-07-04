@@ -2,25 +2,30 @@ xenMCE.Templates.Bbm_adv_bimg = {
 	onafterload: function($ovl, data, ed, parentClass)
 	{
 			var selection = parentClass.getSelection(), content = selection.text,
-			phrases = xenMCE.Phrases, auto = phrases.adv_auto, adv_bimg_id = phrases.bimg_id,
+			phrases = xenMCE.Phrases, auto = phrases.adv_auto, adv_bimg_id = phrases.adv_bimg_id,
 			match_id = content.match(/(?:alt="attach(?:Thumb|Full)(\d+?)"|\[ATTACH(?:=.+?)?\](\d+?)\[\/ATTACH\]|(\d+))/i);
+			
+			
+			$urlPhrase = $ovl.find('#adv_bimg_url_phrase');
+			$bimgSrc = $ovl.find('#adv_bimg_src');
 			
 			//URL OPTIONS
 				/*Xen Attachements*/
 				if(match_id){
 					content = match_id[0];
-					$ovl.find('#adv_bimg_url_phrase').text(bimg_id);
+					$urlPhrase.text(adv_bimg_id);
 				}
 	
 				/*UnescapeHtml and insert inside the field*/
 				if(content.length != 0)
-					$ovl.find('#adv_bimg_src').val(parentClass.unescapeHtml(content).replace(/\<[^\>]*\>/gi, ''));
+					$bimgSrc.val(parentClass.unescapeHtml(content).replace(/\<[^\>]*\>/gi, ''));
 			
 			//FLOAT OPTIONS
 			$info = $ovl.find('.info').hide();
+			$floatOptions = $ovl.find('#adv_bimg_float_select li');
 			
-			$ovl.find('#adv_bimg_float_select li').click(function(e)
-			{
+			$floatOptions.click(function(e){
+			
 				$target = $ovl.find('#adv_bimg_float_input');
 				$active = $ovl.find('#adv_bimg_float_select li.active');
 	
@@ -63,8 +68,10 @@ xenMCE.Templates.Bbm_adv_bimg = {
 			});
 	
 			//CAPTION OPTIONS
-			$ovl.find('#adv_bimg_caption_select li').click(function(e)
-			{
+			$optionsCaption = $ovl.find('#adv_bimg_caption_select li')
+			
+			$optionsCaption.click(function(e){
+			
 				$target = $ovl.find('#adv_bimg_caption_position_input');
 				$active = $ovl.find('#adv_bimg_caption_select li.active');
 	
@@ -77,9 +84,10 @@ xenMCE.Templates.Bbm_adv_bimg = {
 			});
 	
 			//Width Management
+			$width = $ovl.find('#adv_bimg_width');
 			$widthtype = $ovl.find('#adv_bimg_width_type').hide();
 			
-			$ovl.find('#adv_bimg_width').one('focus', function () {
+			$width.one('focus', function () {
 				$(this).val('');
 			}).focus(function () {
 				$widthtype.show('fast');
@@ -91,26 +99,33 @@ xenMCE.Templates.Bbm_adv_bimg = {
 				
 				//For our Chinese & Japanese Friends
 				var regex_width = new RegExp("[０-９]+");
-				if (regex_width.test(width_tmp))
-				{
+				if (regex_width.test(width_tmp)){
 					width_tmp = parentClass.zen2han(width_tmp);
 					$(this).val(width_tmp);
 				}
 				
 				//Width must be a number !
-				if( $(this).val().length == 0 || isNaN( $(this).val() ) )
-				{
+				if( $(this).val().length == 0 || isNaN( $(this).val() ) ){
 					$(this).val(auto);
 					$widthtype.hide('fast');
 				}
 			});
 				
-			$widthtype.click(function(e)
-			{
+			$widthtype.click(function(e){
 				if( $(this).val() == '%' ) 
 					$(this).val('px');
 				else
 					$(this).val('%');
+			});
+			
+			/*Attachments options*/
+			$attachIMG = $ovl.find('#xenpane_bimg_attach img');
+			
+			$attachIMG.click(function(){
+				var id = $(this).data('attachid');
+				$bimgSrc.val(id);
+				$ovl.find('#xentabs_bimg_general').trigger('click');
+				$urlPhrase.text(adv_bimg_id);
 			});
 	},
 	submit: function(e, $ovl, ed, parentClass)

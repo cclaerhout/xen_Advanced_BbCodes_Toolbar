@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.4.0" version_id="25" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.4.1" version_id="26" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -933,6 +933,8 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="Sedo_AdvBBcodeBar_template_latex_title" version_id="6" version_string="3.2"><![CDATA[Title:]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_latex_typeyourlatexcode" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Type your latex code here]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_latex_width" version_id="6" version_string="3.2"><![CDATA[Width:]]></phrase>
+    <phrase title="Sedo_AdvBBcodeBar_template_no_attachment" version_id="25" version_string="3.4.0"><![CDATA[No attachment has been found]]></phrase>
+    <phrase title="Sedo_AdvBBcodeBar_template_no_image_attachment" version_id="25" version_string="3.4.0"><![CDATA[No image attachment has been found]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_picasa_height" version_id="6" version_string="3.2"><![CDATA[Height:]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_picasa_interval" version_id="6" version_string="3.2"><![CDATA[Interval:]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_picasa_panel" version_id="6" version_string="3.2"><![CDATA[Picasa Sideshow Insertion Panel]]></phrase>
@@ -941,7 +943,7 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="Sedo_AdvBBcodeBar_template_picasa_width" version_id="6" version_string="3.2"><![CDATA[Width:]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_sliders_autoplay" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Autoplay]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_sliders_cmd" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Player]]></phrase>
-    <phrase title="Sedo_AdvBBcodeBar_template_sliders_id_mode" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Picture ID]]></phrase>
+    <phrase title="Sedo_AdvBBcodeBar_template_sliders_id_mode" version_id="25" version_string="3.4.0"><![CDATA[ID]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_sliders_interval" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Interval]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_sliders_layout" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Layout]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_sliders_layout_inside" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Inside]]></phrase>
@@ -968,6 +970,7 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="Sedo_AdvBBcodeBar_text_source" global_cache="1" version_id="0" version_string="3.0"><![CDATA[Source:]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_text_spoiler" global_cache="1" version_id="0" version_string=""><![CDATA[Spoiler]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_text_tab" version_id="19" version_string="3.3.1"><![CDATA[Tab ]]></phrase>
+    <phrase title="sedo_advbb_bimg_attach" version_id="25" version_string="3.4.0"><![CDATA[Attachments]]></phrase>
     <phrase title="sedo_advbb_bimg_caption" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Caption options]]></phrase>
     <phrase title="sedo_advbb_bimg_general" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Image options]]></phrase>
     <phrase title="sedo_advbb_latex_general" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Latex input]]></phrase>
@@ -1197,6 +1200,9 @@ Default value: 35px.]]></phrase>
     </group>
   </style_properties>
   <templates>
+    <template title="adv_tiny_quattro_params" version_id="25" version_string="3.4.0"><![CDATA[		adv_hl_norm: {open: "{xen:property adv_highlight_normal_tags_open}", options: "{xen:property adv_highlight_normal_tags_options}", close: "{xen:property adv_highlight_normal_tags_close}"},
+		adv_hl_spe: {open: "{xen:property adv_highlight_special_tags_open}", options: "@adv_highlight_special_tags_options", close: "{xen:property adv_highlight_special_tags_close}"},
+		adv_hl_tag_separator: "{xen:property adv_highlight_tag_options_separator}",]]></template>
     <template title="adv_tiny_quattro_phrases" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[		adv_bimg_id: "{xen:jsescape {xen:phrase Sedo_AdvBBcodeBar_button_bimg_new_id}}",
 		adv_auto: "{xen:jsescape {xen:phrase Sedo_AdvBBcodeBar_template_auto}}",]]></template>
     <template title="editor_dialog_advaccordion" version_id="19" version_string="3.3.1"><![CDATA[<!DOCTYPE html>
@@ -3530,7 +3536,7 @@ p.info span
 	width:95%;
 	height:160px <xen:comment>change to 100px if mce4 fixes the bug #6018</xen:comment>
 }]]></template>
-    <template title="quattro_dialog_bbm_adv_bimg" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_bimg" version_id="25" version_string="3.4.0"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_bimg.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/bimg.js" />
 
@@ -3539,6 +3545,9 @@ p.info span
 <div class="mceTabs">
 	<div id="xentabs_bimg_general">{xen:phrase sedo_advbb_bimg_general}</div>
 	<div id="xentabs_bimg_caption">{xen:phrase sedo_advbb_bimg_caption}</div>
+	<xen:if is="{$imgAttachments}">
+		<div id="xentabs_bimg_attach">{xen:phrase sedo_advbb_bimg_attach}</div>
+	</xen:if>
 </div>
 
 <div class="mcePanes" style="width:500px">
@@ -3639,9 +3648,19 @@ p.info span
 			<input id="adv_bimg_caption_position_input" name="captionPosition" type="hidden" value="bottom_out"/>
 		</div>
 	</div>
+
+	<xen:if is="{$imgAttachments}">
+		<div id="xenpane_bimg_attach">
+			<div class="quattro_bimg_attach_wrapper">
+				 <xen:foreach loop="$imgAttachments" value="$attachment">
+				 	<div class="quattro_bimg_attach"><img src="{$attachment.thumbnailUrl}" data-attachid="{$attachment.attachment_id}" alt="{$attachment.attachment_id}" /></div>			 	
+				 </xen:foreach>
+			</div>
+		</div>
+	</xen:if>
 </div>
 ]]></template>
-    <template title="quattro_dialog_bbm_adv_bimg.css" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:comment>WIDTH OPTIONS</xen:comment>
+    <template title="quattro_dialog_bbm_adv_bimg.css" version_id="25" version_string="3.4.0"><![CDATA[<xen:comment>WIDTH OPTIONS</xen:comment>
 .mce-xen-body #xenpane_bimg_general dl.xenmce_inline > dt{
 	margin-right:10px;
 }
@@ -3847,6 +3866,26 @@ p.info span
 
 .mce-xen-body .caption_align{
 	float:right;
+}
+
+.mce-xen-body .quattro_bimg_attach_wrapper{
+	overflow:auto;
+	border: 1px dotted black;
+	padding:5px;
+	height: 175px;
+}
+
+
+.mce-xen-body .quattro_bimg_attach > img {
+	float: left;
+	border: 1pt solid grey;
+	margin: 2px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.mce-xen-body .quattro_bimg_attach > img:hover {
+	border-color: red;
 }]]></template>
     <template title="quattro_dialog_bbm_adv_encadre" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_encadre.css" />
@@ -4601,7 +4640,7 @@ p.info span
 .mce-xen-body .adv_picasa #ctrl_interval_type{
 	text-align:center;
 }]]></template>
-    <template title="quattro_dialog_bbm_adv_slides" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_slides" version_id="25" version_string="3.4.0"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_slides.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/slides.js" />
 
@@ -4803,7 +4842,10 @@ p.info span
 				  		</dd>
 				  	</dl>
 				
-				  	<dl class="xenmce_inline advOnlySlider">
+				  	<dl class="xenmce_inline advOnlySlider advSlideHide">
+						<dt class="advSlidesIdTrigger">Picture Mode</dt>
+				  		<dd></dd>
+				  		
 						<dt>{xen:phrase Sedo_AdvBBcodeBar_template_sliders_id_mode}:</dt>
 				  		<dd><input 	name="slaveSliderId"
 				  				type="text"
@@ -4845,11 +4887,29 @@ p.info span
 			</div>
 		</div>
 	</div>
+	<div id="quattro_slider_patterns">
+		<div class="quattro_slides_attach">
+			<xen:if is="{$attachments}">
+				 <xen:foreach loop="$attachments" value="$attachment" i="$i">
+				 	<xen:if is="{$attachment.thumbnailUrl}">
+				 		 <xen:set var="$imgAttach">{$i}</xen:set>
+					 	<div class="quattro_slide_attach"><img src="{$attachment.thumbnailUrl}" data-attachid="{$attachment.attachment_id}" alt="{$attachment.attachment_id}" /></div>			 	
+				 	</xen:if>
+				 </xen:foreach>
+			 	<xen:if is="!{$imgAttach}">
+			 		<p>{xen:phrase Sedo_AdvBBcodeBar_template_no_image_attachment}</p>
+			 	</xen:if>
+			<xen:else />
+				<p>{xen:phrase Sedo_AdvBBcodeBar_template_no_attachment}</p>
+			</xen:if>
+		</div>
+	</div>
+	
 	<input type="hidden" name="adv_tag_accordion" value="{$xenOptions.AdvBBcodeBar_accordion_tag}" />
 	<input type="hidden" name="adv_tag_tabs" value="{$xenOptions.AdvBBcodeBar_tabs_tag}" />
 	<input type="hidden" name="adv_tag_slider" value="{$xenOptions.AdvBBcodeBar_slider_tag}" />
 </div>]]></template>
-    <template title="quattro_dialog_bbm_adv_slides.css" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[.mce-xen-body .advSlidesTabs {
+    <template title="quattro_dialog_bbm_adv_slides.css" version_id="25" version_string="3.4.0"><![CDATA[.mce-xen-body .advSlidesTabs {
 	padding-top: 2px;
 	padding-bottom: 5px;
 	overflow-x:auto;
@@ -4902,6 +4962,26 @@ p.info span
 
 .mce-xen-body .advOnlySlider, .mce-xen-body .advOnlyTabs{
 	display:none;
+}
+
+.mce-xen-body .advSlideHide > *{
+	display:none;	
+}
+
+.mce-xen-body .advSlidesIdTrigger{
+	display:inline-block !important;
+	background: none repeat scroll 0 0 {xen:property primaryLightest};
+	border: 1px solid #C5C5C5;
+	border-radius: 3px 3px 3px 3px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;
+	color:  {xen:property primaryDark};
+	height: 28px;
+	padding: 0 4px !important;
+}
+
+.mce-xen-body .advSlidesIdTrigger.active{
+	background-color: {xen:property primaryDark};
+	color: {xen:property primaryLightest};
 }
 
 /*MODE OPTIONS*/
@@ -4957,6 +5037,34 @@ p.info span
 	.mce-xen-body #adv_slides_mode li.adv_slider div.img	{
 		background: url("styles/sedo/adv/adv_sliders_btn.png") -192px 0 no-repeat;
 	}
+
+.mce-xen-body .quattro_slides_attach{
+	display:none;
+	overflow:auto;
+	border: 1px dotted black;
+	padding:5px;
+}
+
+
+.mce-xen-body .quattro_slide_attach > img {
+	float: left;
+	border: 1pt solid grey;
+	margin: 2px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.mce-xen-body .quattro_slide_attach > img:hover {
+	border-color: red;
+}
+
+.mce-xen-body .quattro_slides_attach p{
+	text-align:center;
+}
+
+.mce-xen-body .advSlidesIdTrigger{
+	cursor:pointer;
+}
 
 <xen:comment>Width & Master Height</xen:comment>
 	.mce-xen-body #adv_sliders_width_type{
@@ -5076,7 +5184,9 @@ p.info span
 #xenpane_slides_builder .slave_height, 
 #xenpane_slides_builder .slave_height_type{
 	text-align:center;
-}]]></template>
+}
+
+]]></template>
     <template title="sedo_adv_accordion" version_id="17" version_string="3.2.1"><![CDATA[<xen:require css="sedo_adv_accordion.css" />
 
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">

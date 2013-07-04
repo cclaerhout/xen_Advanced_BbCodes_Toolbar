@@ -236,6 +236,11 @@ xenMCE.Templates.Bbm_adv_slides = {
 				$slaveHeightGroup.hide();
 			}
 		}
+		
+		if(mode != 'accordion'){
+			//RAZ checked Open slave option
+			$slaveOpen = $ovl.find('.slave_open').removeClass('mce-checked').find('input').val(0);
+		}
 	},
 	initTabs: function(index)
 	{
@@ -329,6 +334,11 @@ xenMCE.Templates.Bbm_adv_slides = {
 	getPaneByIndex: function(index)
 	{
 		 return this.$ovl.find('.advSlidesPanes').children().eq(index);
+	},
+	getMode: function()
+	{
+		//To use with binded functions
+		return this.$ovl.find('#adv_slides_mode_input').val();
 	},	
 	resetSlidesOrder: function()
 	{
@@ -445,34 +455,73 @@ xenMCE.Templates.Bbm_adv_slides = {
 			});
 
 		//Slider IMG ID full mode
-			$sliderImgId = $builder.find('.slave_slider_id').unbind('focus focusout');
-			$sliderIdOptions = $sliderImgId.parent().nextAll().hide();
-		
-			$sliderImgId.one('focus', function () {
-				$(this).val('');
-			}).focus(function () {
-				$sliderIdOptions.show(wh_speed);
-				
-				if( $(this).val() == self.auto ) 
-					$(this).val('');
-			}).focusout(function() {
-				var id_tmp = $(this).val();
-					
-				//For our Chinese & Japanese Friends
-				var regex_height = new RegExp("[０-９]+");
-				if (regex_height.test(id_tmp))
-				{
-					id_tmp = parentClass.zen2han(id_tmp);
-					$(this).val(id_tmp);
-				}
+			$IDHelper = $builder.find('.advSlidesIdTrigger').unbind('click').show();
 
-				//Width must be a number !
-				if( $(this).val().length == 0 || isNaN( $(this).val() ) )
-				{
-					$sliderIdOptions.hide(wh_speed);
+			$ovl.find('.advSlideHide').children().hide();
+			
+			$IDHelper.bind('click', function(){
+				$parentSlide =  $(this).parents('.slidePane');
+				$slaveContent = $parentSlide.find('.slave_content');
+				$slaveIdMode = $parentSlide.find('.quattro_slides_attach');
+				$elAfter = $(this).nextAll();
+
+				if($(this).attr('active')){
+					$(this).parent().addClass('advSlideHide');
+					$(this).removeAttr('active').removeClass('active');
+					$slaveIdMode.remove();
+					$slaveContent.show();
+					$elAfter.hide();
+					$parentSlide.find('.slave_slider_id').val('');
+					return false;
 				}
+			
+				$(this).parent().removeClass('advSlideHide');
+				$(this).attr('active', true).addClass('active');
+				$elAfter.show();
+				$slaveContent.hide();
+				$attachDialog = $ovl.find('#quattro_slider_patterns > .quattro_slides_attach').clone();
+				
+				$attachDialog
+					.insertAfter($slaveContent)
+					.height($slaveContent.height())
+					.show();
+					
+				$attachIMG = $attachDialog.find('img').unbind('click');
+				
+				$attachIMG.bind('click', function(){
+					var id = $(this).data('attachid');
+					$parentSlide =  $(this).parents('.slidePane');
+					$parentSlide.find('.slave_slider_id').val(id);
+				});
 			});
 			
+		//Slave Open configuration (accordion can have several open slides, others modes can't)
+			$slaveOpen = $builder.find('.slave_open > i').unbind('click');
+			
+			$slaveOpen.bind('click', function(e){
+				var mceChecked = 'mce-checked', mode = self.getMode();
+				
+				$openParent = $slaveOpen.parent();
+				$openInput = $openParent.find('input');
+				$thisParent = $(this).parent();
+				$thisInput = $thisParent.find('input');
+
+				if($thisParent.hasClass(mceChecked)){
+					$thisParent.removeClass(mceChecked);
+					$thisInput.val(0);
+					return false;
+				}
+
+				if(mode != 'accordion'){
+					$openParent.removeClass(mceChecked);
+					$openInput.val(0);
+				}
+				
+				$thisParent.addClass(mceChecked);
+				$thisInput.val(1);
+				
+				return false;
+			});
 	},
 	submit: function(e, $ovl, ed, parentClass)
 	{
