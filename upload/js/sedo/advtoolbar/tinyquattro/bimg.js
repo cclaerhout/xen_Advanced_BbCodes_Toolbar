@@ -132,7 +132,7 @@ xenMCE.Templates.Bbm_adv_bimg = {
 	{
 		var tag = parentClass.bbm_tag, separator = parentClass.bbm_separator,
 		data = e.data, content = data.content, options = data.options
-		phrases = xenMCE.Phrases, auto = phrases.auto;
+		phrases = xenMCE.Phrases, auto = phrases.adv_auto;
 
 		var src = parentClass.escapeHtml(data.src),
 		widthType = (data.widthType == 'px') ? '' : '%', //px is default

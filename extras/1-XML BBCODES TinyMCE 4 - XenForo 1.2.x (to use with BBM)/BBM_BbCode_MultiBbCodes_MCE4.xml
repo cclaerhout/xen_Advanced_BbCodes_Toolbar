@@ -240,7 +240,7 @@
       </PhpCallback>
     </Methods>
     <ParserOptions>
-      <stopAutoLink>none</stopAutoLink>
+      <stopAutoLink>all</stopAutoLink>
       <parseOptions>1</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
