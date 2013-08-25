@@ -2,29 +2,24 @@
 <bbm_bbcodes>
   <BbCode>
     <General>
-      <tag>slider</tag>
-      <title><![CDATA[[BBM] SLIDER]]></title>
-      <description><![CDATA[Slider BB Code (master tag) - works with slave tags {slide}]]></description>
-      <example><![CDATA[[slider]
-{slide=Title 1|center}Content 1{/slide}
-{slide}Content 2{/slide}
-{slide}Content 3{/slide}
-{slide=open}Content 4{/slide}
-[/slider]]]></example>
+      <tag>@highlight_helper</tag>
+      <title><![CDATA[[BBM] Highlight Helper]]></title>
+      <description><![CDATA[Highlighting helper]]></description>
+      <example><![CDATA[#]]></example>
       <active>1</active>
-      <display_help>1</display_help>
+      <display_help>0</display_help>
     </General>
     <Methods>
       <Replacement>
-        <start_range><![CDATA[]]></start_range>
-        <end_range><![CDATA[]]></end_range>
+        <start_range><![CDATA[#]]></start_range>
+        <end_range><![CDATA[#]]></end_range>
         <options_number>0</options_number>
       </Replacement>
       <Template>
-        <active>1</active>
-        <name>sedo_adv_slider</name>
-        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
-        <callback_method>parseTagSlider</callback_method>
+        <active>0</active>
+        <name></name>
+        <callback_class></callback_class>
+        <callback_method></callback_method>
       </Template>
       <PhpCallback>
         <class></class>
@@ -58,13 +53,17 @@
       <view_return_delay>0</view_return_delay>
     </ViewPerms>
     <Button>
-      <hasButton>0</hasButton>
+      <hasButton>1</hasButton>
       <button_has_usr>0</button_has_usr>
       <button_usr>a:0:{}</button_usr>
-      <killCmd>0</killCmd>
-      <custCmd></custCmd>
-      <imgMethod>Direct</imgMethod>
-      <buttonDesc><![CDATA[]]></buttonDesc>
+      <killCmd>1</killCmd>
+      <custCmd>tags_highlighter</custCmd>
+      <quattro_button_type>icons_xen</quattro_button_type>
+      <quattro_button_type_opt><![CDATA[e027]]></quattro_button_type_opt>
+      <quattro_button_return>direct</quattro_button_return>
+      <quattro_button_return_opt><![CDATA[]]></quattro_button_return_opt>
+      <imgMethod></imgMethod>
+      <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_highlight}]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
     </Button>

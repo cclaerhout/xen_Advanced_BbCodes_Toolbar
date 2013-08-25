@@ -1200,8 +1200,8 @@ Default value: 35px.]]></phrase>
     </group>
   </style_properties>
   <templates>
-    <template title="adv_tiny_quattro_params" version_id="25" version_string="3.4.0"><![CDATA[		adv_hl_norm: {open: "{xen:property adv_highlight_normal_tags_open}", options: "{xen:property adv_highlight_normal_tags_options}", close: "{xen:property adv_highlight_normal_tags_close}"},
-		adv_hl_spe: {open: "{xen:property adv_highlight_special_tags_open}", options: "@adv_highlight_special_tags_options", close: "{xen:property adv_highlight_special_tags_close}"},
+    <template title="adv_tiny_quattro_params" version_id="26" version_string="3.4.1"><![CDATA[		adv_hl_norm: {open: "{xen:property adv_highlight_normal_tags_open}", options: "{xen:property adv_highlight_normal_tags_options}", close: "{xen:property adv_highlight_normal_tags_close}"},
+		adv_hl_spe: {open: "{xen:property adv_highlight_special_tags_open}", options: "@adv_highlight_special_tags_options", close: "{xen:property adv_highlight_special_tags_close}", content: "{xen:property adv_highlight_special_tags_content}"},
 		adv_hl_tag_separator: "{xen:property adv_highlight_tag_options_separator}",]]></template>
     <template title="adv_tiny_quattro_phrases" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[		adv_bimg_id: "{xen:jsescape {xen:phrase Sedo_AdvBBcodeBar_button_bimg_new_id}}",
 		adv_auto: "{xen:jsescape {xen:phrase Sedo_AdvBBcodeBar_template_auto}}",]]></template>
@@ -4909,7 +4909,7 @@ p.info span
 	<input type="hidden" name="adv_tag_tabs" value="{$xenOptions.AdvBBcodeBar_tabs_tag}" />
 	<input type="hidden" name="adv_tag_slider" value="{$xenOptions.AdvBBcodeBar_slider_tag}" />
 </div>]]></template>
-    <template title="quattro_dialog_bbm_adv_slides.css" version_id="25" version_string="3.4.0"><![CDATA[.mce-xen-body .advSlidesTabs {
+    <template title="quattro_dialog_bbm_adv_slides.css" version_id="26" version_string="3.4.1"><![CDATA[.mce-xen-body .advSlidesTabs {
 	padding-top: 2px;
 	padding-bottom: 5px;
 	overflow-x:auto;
@@ -5027,15 +5027,15 @@ p.info span
 }
 
 	.mce-xen-body #adv_slides_mode li.adv_accordion div.img	{
-		background: url("styles/sedo/adv/adv_sliders_btn.png") 4px 0 no-repeat;
+		background: url("styles/sedo/adv/sliders_btn.png") 4px 0 no-repeat;
 	}
 
 	.mce-xen-body #adv_slides_mode li.adv_tabs div.img	{
-		background: url("styles/sedo/adv/adv_sliders_btn.png") -96px 0 no-repeat;
+		background: url("styles/sedo/adv/sliders_btn.png") -96px 0 no-repeat;
 	}
 
 	.mce-xen-body #adv_slides_mode li.adv_slider div.img	{
-		background: url("styles/sedo/adv/adv_sliders_btn.png") -192px 0 no-repeat;
+		background: url("styles/sedo/adv/sliders_btn.png") -192px 0 no-repeat;
 	}
 
 .mce-xen-body .quattro_slides_attach{
@@ -6303,6 +6303,10 @@ $0]]></replace>
       <find><![CDATA[#(\t+)?<xen:comment>autotranslation</xen:comment>#]]></find>
       <replace><![CDATA[$1<xen:include template="adv_tiny_quattro_phrases" />
 $0]]></replace>
+    </modification>
+    <modification template="tiny_quattro_js_setup" modification_key="sedo_adv_taghl" description="Add Tags Highlighter Plugin" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[plugins: []]></find>
+      <replace><![CDATA[plugins: [ "xenadvhl",]]></replace>
     </modification>
   </public_template_modifications>
   <bb_code_media_sites/>
