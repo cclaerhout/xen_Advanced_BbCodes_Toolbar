@@ -1,7 +1,7 @@
 <?php
 class Sedo_AdvBBcodeBar_Listener_Controller
 {
-	public static function listenController($class, array &$extend)
+	public static function editorController($class, array &$extend)
 	{
 		if ($class == 'XenForo_ControllerPublic_Editor')
 		{
