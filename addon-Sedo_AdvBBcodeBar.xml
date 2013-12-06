@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.4.2" version_id="27" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.5.0 - step1" version_id="28" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -78,7 +78,7 @@ span.mce_adv_spoilerbb {
   <admin_template_modifications/>
   <code_events/>
   <code_event_listeners>
-    <listener event_id="load_class_controller" execute_order="10" callback_class="Sedo_AdvBBcodeBar_Listener_Controller" callback_method="listenController" active="1" hint="" description="Controller Listener"/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="Sedo_AdvBBcodeBar_Listener_Controller" callback_method="editorController" active="1" hint="XenForo_ControllerPublic_Editor" description="Controller Listener"/>
     <listener event_id="template_create" execute_order="10" callback_class="Sedo_AdvBBcodeBar_Listener_Templates_Preloader" callback_method="CacheTemplates" active="1" hint="" description="Templates Preloader"/>
     <listener event_id="template_hook" execute_order="100" callback_class="Sedo_AdvBBcodeBar_Listener_Templates_AdvBar" callback_method="ManageBar" active="1" hint="" description="Templates Listener: Bar Elements and Position Management"/>
     <listener event_id="template_post_render" execute_order="10" callback_class="Sedo_AdvBBcodeBar_Listener_Templates_AdvBar" callback_method="postrender" active="1" hint="" description="Templates Post Render Mods"/>
@@ -3519,8 +3519,8 @@ p.info span
 	<input id="adv_article_src_phrase" name="source_phrase" type="hidden" value="{xen:phrase Sedo_AdvBBcodeBar_template_article_src}" />
 </div>
 ]]></template>
-    <template title="quattro_dialog_bbm_adv_article.css" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[.mce-xen-body #adv_article {
-	width:500px;
+    <template title="quattro_dialog_bbm_adv_article.css" version_id="27" version_string="3.4.2"><![CDATA[.mce-xen-body #adv_article {
+	max-width:500px;
 	padding:5px;
 }
 
@@ -3536,11 +3536,11 @@ p.info span
 	width:95%;
 	height:160px <xen:comment>change to 100px if mce4 fixes the bug #6018</xen:comment>
 }]]></template>
-    <template title="quattro_dialog_bbm_adv_bimg" version_id="25" version_string="3.4.0"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_bimg" version_id="27" version_string="3.4.2"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_bimg.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/bimg.js" />
 
-<div class="mceTitle">{xen:phrase Sedo_AdvBBcodeBar_template_bimg_panel}</div>
+<div class="mceTitle" data-width="500">{xen:phrase Sedo_AdvBBcodeBar_template_bimg_panel}</div>
 
 <div class="mceTabs">
 	<div id="xentabs_bimg_general">{xen:phrase sedo_advbb_bimg_general}</div>
@@ -3550,7 +3550,7 @@ p.info span
 	</xen:if>
 </div>
 
-<div class="mcePanes" style="width:500px">
+<div class="mcePanes">
 	<div id="xenpane_bimg_general">
 		<dl class="xenmce_inline">
 			<dt id="adv_bimg_url_phrase">{xen:phrase Sedo_AdvBBcodeBar_template_bimg_url}</dt>
@@ -3660,7 +3660,7 @@ p.info span
 	</xen:if>
 </div>
 ]]></template>
-    <template title="quattro_dialog_bbm_adv_bimg.css" version_id="25" version_string="3.4.0"><![CDATA[<xen:comment>WIDTH OPTIONS</xen:comment>
+    <template title="quattro_dialog_bbm_adv_bimg.css" version_id="27" version_string="3.4.2"><![CDATA[<xen:comment>WIDTH OPTIONS</xen:comment>
 .mce-xen-body #xenpane_bimg_general dl.xenmce_inline > dt{
 	margin-right:10px;
 }
@@ -3786,7 +3786,7 @@ p.info span
 /*CAPTIONS OPTIONS*/
 
 .mce-xen-body #adv_bimg_caption_textarea{
-	width:350px;
+	max-width:350px;
 	height:40px;
 }
 
@@ -3957,14 +3957,15 @@ p.info span
 		</dd>
 	</dl>
 </div>]]></template>
-    <template title="quattro_dialog_bbm_adv_encadre.css" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:comment>GLOBAL OPTIONS</xen:comment>
+    <template title="quattro_dialog_bbm_adv_encadre.css" version_id="27" version_string="3.4.2"><![CDATA[<xen:comment>GLOBAL OPTIONS</xen:comment>
 .mce-xen-body #adv_encadre_textarea{
-	width:470px;
+	max-width:470px;
+	width:95%;
 	height:105px;
 }
 
 .mce-xen-body #adv_encadre { 
-	width:500px;
+	max-width:500px;
 	padding:5px; 
 }
 
@@ -4007,7 +4008,7 @@ p.info span
 
 .mce-xen-body #adv_encadre_selectlist
 {
-	width:485px;
+	max-width:485px;
 	text-align:center;
 }
 
@@ -4198,16 +4199,17 @@ p.info span
 		</dd>
 	</dl>
 </div>]]></template>
-    <template title="quattro_dialog_bbm_adv_fieldset.css" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:comment>GLOBAL OPTIONS</xen:comment>
+    <template title="quattro_dialog_bbm_adv_fieldset.css" version_id="27" version_string="3.4.2"><![CDATA[<xen:comment>GLOBAL OPTIONS</xen:comment>
 .mce-xen-body #adv_fieldset_text
 {
-	width:470px;
+	max-width:470px;
 	height:115px;
+	width:95%;
 }
 
 .mce-xen-body #adv_fieldset
 { 
-	width:500px;
+	max-width:500px;
 	padding:5px; 
 }
 
@@ -4297,11 +4299,11 @@ p.info span
 	vertical-align:middle;
 }
 ]]></template>
-    <template title="quattro_dialog_bbm_adv_latex" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_latex" version_id="27" version_string="3.4.2"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_latex.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/latex.js" />
 
-<div class="mceTitle">{xen:phrase Sedo_AdvBBcodeBar_template_latex_panel}</div>
+<div class="mceTitle" data-width="550" data-height="250">{xen:phrase Sedo_AdvBBcodeBar_template_latex_panel}</div>
 
 <div id="adv_latex">
 	<dl id="adv_latex_align" class="xenmce_inline">
@@ -4322,7 +4324,7 @@ p.info span
 		<div id="xentabs_bimg_caption">{xen:phrase sedo_advbb_latex_help}</div>
 	</div>
 
-	<div class="mcePanes" style="width:500px">
+	<div class="mcePanes">
 		<div id="xenpane_latex_general">
 			<dl class="xenmce_inline">
 				<dt>{xen:phrase Sedo_AdvBBcodeBar_template_latex_title}</dt>
@@ -4456,17 +4458,18 @@ p.info span
 			<div id="latex_link"><a href="http://www.forkosh.com/mimetexmanual.html?reference" target="_blank">{xen:phrase Sedo_AdvBBcodeBar_template_latex_help_mimetexmanual}</a> - <a href="http://www.ultrametrik.de/wbb/symbols.htm" target="_blank">{xen:phrase Sedo_AdvBBcodeBar_template_latex_help_mimetexsymbols}</a></div>
 		</div>
 </div>]]></template>
-    <template title="quattro_dialog_bbm_adv_latex.css" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:comment>GLOBAL OPTIONS</xen:comment>
+    <template title="quattro_dialog_bbm_adv_latex.css" version_id="27" version_string="3.4.2"><![CDATA[<xen:comment>GLOBAL OPTIONS</xen:comment>
 .mce-xen-body #adv_latex
 { 
-	width:550px;
+	max-width:550px;
 	padding:5px; 
 }
 
 .mce-xen-body #adv_latex_align {
 	float: right;
 	position: relative;
-	top: -4px;
+	top: -5px;
+	height: 18px;
 }
 
 .mce-xen-body dl.xenmce_inline > dt{
@@ -4474,22 +4477,24 @@ p.info span
 }
 
 .mce-xen-body #adv_latex_text {
-	width: 510px;
+	max-width: 510px;
 	height: 120px;
+	width: 95%;	
 }
 
 <xen:comment>HELP OPTIONS</xen:comment>
-#xenpane_latex_help
+.mce-xen-body #xenpane_latex_help
 {
-	width: 510px;
+	max-width: 515px;
 	height: 185px;
-	overflow-y: scroll;
+	overflow: auto;
 	position: relative;
+	width:100%;	
 }
 
 .mce-xen-body .latex_helper
 {
-	width:100%;
+	width:98%;
 	border-collapse: collapse;
 	border-spacing: 5px;
 	text-align:center;
@@ -4549,7 +4554,7 @@ p.info span
 }
 
 ]]></template>
-    <template title="quattro_dialog_bbm_adv_picasa" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_picasa" version_id="27" version_string="3.4.2"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_picasa.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/picasa.js" />
 
@@ -4561,7 +4566,6 @@ p.info span
 		<dd><input 	id="adv_picasa_source"
 				name="source"
 				type="text"
-				size="65"
 				class="mce-textbox mceFocus"
 				value="{$selection.text}"
 			/>
@@ -4629,8 +4633,17 @@ p.info span
 		</dd>
 	</dl>
 </div>]]></template>
-    <template title="quattro_dialog_bbm_adv_picasa.css" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[.mce-xen-body .adv_picasa{
+    <template title="quattro_dialog_bbm_adv_picasa.css" version_id="27" version_string="3.4.2"><![CDATA[.mce-xen-body .adv_picasa{
 	text-align:center;
+}
+
+.mce-xen-body .adv_picasa #adv_picasa_source{
+	width: 380px;
+}
+
+.mce-xen-body.responsive .adv_picasa #adv_picasa_source{
+	max-width: 220px;
+	width: 100%;
 }
 
 .mce-xen-body dl.xenmce_inline > dt{
@@ -4640,7 +4653,7 @@ p.info span
 .mce-xen-body .adv_picasa #ctrl_interval_type{
 	text-align:center;
 }]]></template>
-    <template title="quattro_dialog_bbm_adv_slides" version_id="25" version_string="3.4.0"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_slides" version_id="27" version_string="3.4.2"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_slides.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/slides.js" />
 
@@ -4654,7 +4667,7 @@ p.info span
 		<div id="xentabs_adv_slides_builder">{xen:phrase sedo_advbb_slides_builder}</div>
 	</div>
 
-	<div class="mcePanes" style="width:500px">
+	<div class="mcePanes">
 		<div id="xenpane_adv_slides_configuration">
 			<ul id="adv_slides_mode">
 				<li class="adv_accordion active" data-mode="accordion">
@@ -4909,10 +4922,14 @@ p.info span
 	<input type="hidden" name="adv_tag_tabs" value="{$xenOptions.AdvBBcodeBar_tabs_tag}" />
 	<input type="hidden" name="adv_tag_slider" value="{$xenOptions.AdvBBcodeBar_slider_tag}" />
 </div>]]></template>
-    <template title="quattro_dialog_bbm_adv_slides.css" version_id="26" version_string="3.4.1"><![CDATA[.mce-xen-body .advSlidesTabs {
+    <template title="quattro_dialog_bbm_adv_slides.css" version_id="27" version_string="3.4.2"><![CDATA[.mce-xen-body .advSlidesTabs {
 	padding-top: 2px;
 	padding-bottom: 5px;
 	overflow-x:auto;
+}
+
+.mce-xen-body #adv_slides_wrapper .mcePanes{
+	max-width: 500px;
 }
 
 .mce-xen-body .advSlidesTabs > div {
