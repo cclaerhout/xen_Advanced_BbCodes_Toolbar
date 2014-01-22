@@ -1,12 +1,5 @@
 !function($, window, document, _undefined)
 {    
-	$(function() {
-		$('.AdvSpoilerbbCommand').find('img, iframe').each(function(){
-			var $this = $(this);
-			$this.data('spoilerSrc', $this.attr('src')).attr('src', XenForo._baseUrl+'styles/default/xenforo/clear.png');
-		});
-	});
-
 	XenForo.AdvBbcodes = 
 	{
 		Spoilerbb: function($e)

@@ -787,8 +787,8 @@
       <Template>
         <active>1</active>
         <name>sedo_adv_spoilerbb</name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
+        <callback_class>Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes</callback_class>
+        <callback_method>parseTagSpoilerbb</callback_method>
       </Template>
       <PhpCallback>
         <class></class>

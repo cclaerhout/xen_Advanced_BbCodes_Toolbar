@@ -2,6 +2,46 @@
 
 class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 {
+	public static function parseTagSpoilerbb(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
+	{
+		$xenOptions = XenForo_Application::get('options');
+		$visitor = XenForo_Visitor::getInstance();
+
+		$content = preg_replace_callback(
+			'#<(img|iframe)[^>]+?>#ui', 
+			array('Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes', '_filterSpoilerBb'),
+			$content
+		);
+	}
+	
+	protected static function _filterSpoilerBb($match)
+	{
+		$tag = $match[1];
+		$line = $match[0];
+		$noscript = "<noscript>{$line}</noscript>"; 
+		
+		if(preg_match('#class="(.*?)"#', $line, $getClass))
+		{
+			$classes = explode(' ', $getClass[1]);
+			if(!in_array('JsOnly', $classes))
+			{
+				$line = str_replace('class="', 'class="JsOnly ', $line);
+			}
+		}
+		else
+		{
+			$line = str_replace('<'.$tag, '<'.$tag.' class="JsOnly"', $line);
+		}
+		
+		$search = '#src="(.*?)"#ui';
+		$replace = 'src="styles/default/xenforo/clear.png" data-spoiler-src="$1"';
+
+		$line = preg_replace($search, $replace, $line);
+		$line .= $noscript;
+
+		return $line;
+	}
+	
 	public static function parseTagBimg(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
 	{
 		$xenOptions = XenForo_Application::get('options');
