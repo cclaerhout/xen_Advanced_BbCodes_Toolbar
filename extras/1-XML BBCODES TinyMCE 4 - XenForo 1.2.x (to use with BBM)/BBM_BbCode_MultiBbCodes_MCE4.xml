@@ -739,7 +739,7 @@
       <wrapping_tag>none</wrapping_tag>
       <wrapping_option></wrapping_option>
       <emptyContent_check>0</emptyContent_check>
-      <options_separator></options_separator>
+      <options_separator>|</options_separator>
     </ParserOptions>
     <ParserPerms>
       <parser_has_usr>0</parser_has_usr>

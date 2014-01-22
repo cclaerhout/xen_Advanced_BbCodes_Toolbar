@@ -564,13 +564,13 @@ xenMCE.Templates.Bbm_adv_slides = {
 
 			sliderPlayer = (data.sliderPlayer == 'yes') ? 'cmd' : false,
 			sliderAutoplay = (parseInt(data.sliderAutoplay)) ? 'autoplay' : false,
+			sliderNoclick = (parseInt(data.sliderAutoclick)) ? false : 'noclick',
 			sliderInterval = (data.sliderInterval == auto) ? false : data.sliderInterval+'ms',
 			sliderLayout = (data.sliderLayout  == 'outside') ? false : 'inside',
 			sliderTabsStyle = (data.sliderTabsStyle == 'bullet') ? false : 'num';
 		
-			console.log('width:'+globalWidth+' , widthType:'+globalWidthType+' ,height:'+globalHeight);
-			console.log('player:'+sliderPlayer+' , autoplay:'+sliderAutoplay+' ,interval:'+sliderInterval+' ,sliderLayout:'+sliderLayout+' ,sliderTabsStyle:'+sliderTabsStyle);
-
+			//console.log('width:'+globalWidth+' , widthType:'+globalWidthType+' ,height:'+globalHeight);
+			//console.log('player:'+sliderPlayer+' , autoplay:'+sliderAutoplay+' ,interval:'+sliderInterval+' ,sliderLayout:'+sliderLayout+' ,sliderTabsStyle:'+sliderTabsStyle);
 		
 		var masterOptions = '';
 		
@@ -591,6 +591,7 @@ xenMCE.Templates.Bbm_adv_slides = {
 			if(sliderTabsStyle !== false){ manageMasterOptions(sliderTabsStyle); }
 			if(sliderPlayer !== false){ manageMasterOptions(sliderPlayer); }
 			if(sliderAutoplay !== false){ manageMasterOptions(sliderAutoplay); }
+			if(sliderNoclick !== false){ manageMasterOptions(sliderNoclick); }
 			if(sliderInterval !== false){ manageMasterOptions(sliderInterval); }		
 		}
 		

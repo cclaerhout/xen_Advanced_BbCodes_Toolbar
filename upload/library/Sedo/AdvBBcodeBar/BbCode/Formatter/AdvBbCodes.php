@@ -24,7 +24,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		foreach($options as $option)
 		{
 			$original = $option;
-			$option = self::_cleanOption($option);
+			$option = BBM_Helper_BbCodes::cleanOption($option);
 			
 			if (preg_match('#^\d+(px)?$#i', $option))
 			{
@@ -103,15 +103,15 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$widthType = 'px';
 			$widthImg = $width . 'px';
 		}
-		
+
 		/* Confirm Options */
 		$options['width'] = $width;
 		$options['widthType'] = $widthType;
-		$options['widthImg'] = $widthImg;		
+		$options['widthImg'] = $widthImg;
 		$options['blockAlign'] = $blockAlign;
 		$options['hasCaption'] = $hasCaption;
 		$options['caption'] = $caption;
-		$options['isBadIE'] = self::_isBadIE();
+		$options['isBadIE'] = BBM_Helper_BbCodes::isBadIE();
 
 		/* Content Management */
 		$regex_attach_direct_id = '#^\d+$#';
@@ -123,12 +123,16 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				$validExtensions = array('gif', 'png', 'jpg', 'jpeg');
 				$permsFallback[] = ($xenOptions->AdvBBcodeBar_fallbackperms) ? array('group' => 'forum', 'permission' => 'viewAttachment') : null;
 
+				$attachmentParams = $parentClass->getAttachmentParams(BBM_Helper_BbCodes::cleanOption($content), $validExtensions, $permsFallback);
 
-				$attachmentParams = $parentClass->getAttachmentParams(self::_cleanOption($content), $validExtensions, $permsFallback);
-
-				if($attachmentParams['canView'] || $attachmentParams['validAttachment'])
+				if($attachmentParams['canView'] || self::AioInstalled())
 				{
 					$content = $attachmentParams['url'];
+				}
+				elseif($attachmentParams['validAttachment'] && !empty($attachmentParams['attachment']['thumbnailUrl']))
+				{
+					$content = $attachmentParams['attachment']['thumbnailUrl'];
+					$options['width'] = $attachmentParams['attachment']['thumbnail_width'];
 				}
 				else
 				{
@@ -140,6 +144,18 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			{
 				$content = $src[1];
 			}
+
+		/* Responsive Management */
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		$options['responsiveMode'] = $useResponsiveMode;
+		
+		if($useResponsiveMode)
+		{
+			$options['width'] = '100';
+			$options['widthType'] = '%';
+			$options['widthImg'] = '100%';
+			$options['blockAlign'] = $xenOptions->sedo_adv_responsive_blockalign;
+		}
 	}
 
 	public static function parseTagEncadre(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
@@ -157,7 +173,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		foreach($options as $option)
 		{
 			$original = $option;
-			$option = self::_cleanOption($option);
+			$option = BBM_Helper_BbCodes::cleanOption($option);
 			
 			if (preg_match('#^\d+(%)?$#', $option))
 			{
@@ -197,13 +213,29 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$width = $xenOptions->AdvBBcodeBar_encdefault;
 			$widthType = $xenOptions->AdvBBcodeBar_encdefault_defaultwidth_unit;
 		}
-		
+
+		if($widthType == '%' && $width > 98)
+		{
+			$width = '98';
+		}
+
 		/* Confirm Options */
 		$options['width'] = $width;
 		$options['widthType'] = $widthType;
 		$options['floatClass'] = $floatClass;
 		$options['skin2'] = $skin2;
 		$options['title'] = $title;
+
+		/* Responsive Management */
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		$options['responsiveMode'] = $useResponsiveMode;
+		
+		if($useResponsiveMode)
+		{
+			$options['width'] = '98';
+			$options['widthType'] = '%';
+			$options['floatClass'] = $xenOptions->sedo_adv_responsive_blockalign;
+		}
 	}
 
 	public static function parseTagArticle(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
@@ -222,9 +254,9 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$hasSource = true;
 			$source = $source_data;
 			
-			$source_data = self::_cleanOption($source_data);
+			$source_data = BBM_Helper_BbCodes::cleanOption($source_data);
 
-			if (preg_match(self::$regexUrl, $source_data))
+			if (preg_match(BBM_Helper_BbCodes::$regexUrl, $source_data))
 			{
 				$sourceText = true;
 				$url = $source_data;
@@ -240,7 +272,16 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['sourceText'] = $sourceText;
 		$options['source'] = $source;
 		$options['url'] = $url;
-		$options['badIE'] = self::_isBadIE();
+		$options['badIE'] = BBM_Helper_BbCodes::isBadIE();
+
+		/* Responsive Management */
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		$options['responsiveMode'] = $useResponsiveMode;
+		
+		if($useResponsiveMode)
+		{
+			//do nothing
+		}
 	}
 
 	public static function parseTagFieldset(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
@@ -264,9 +305,9 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		else
 		{
 			//Manual helper
-			if( Sedo_AdvBBcodeBar_Helper_Sedo::isBadIE('all') )
+			if(BBM_Helper_BbCodes::isIE('all') )
 			{
-				$browser = ( Sedo_AdvBBcodeBar_Helper_Sedo::isBadIE('target', '6-7') ) ? 'ie67' : 'ie';
+				$browser = ( BBM_Helper_BbCodes::isIE('target', '6-7') ) ? 'ie67' : 'ie';
 			}
 		}
 		
@@ -274,7 +315,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		foreach($options as $option)
 		{
 			$original = $option;
-			$option = self::_cleanOption($option);
+			$option = BBM_Helper_BbCodes::cleanOption($option);
 			
 			if (preg_match('#^\d+(%)?$#', $option))
 			{
@@ -321,13 +362,25 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['blockAlign'] = $blockAlign;
 		$options['browser'] =  $browser;
 		$options['title'] =  $title;
-		$options['cssIE'] = self::_isBadIE();
+		$options['cssIE'] = BBM_Helper_BbCodes::isBadIE();
+
+		/* Responsive Management */
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		$options['responsiveMode'] = $useResponsiveMode;
+		
+		if($useResponsiveMode)
+		{
+			//Make it almost full width, no reason to limit the width for the readers here
+			$options['width'] = '90';
+			$options['widthType'] = '%';
+			$options['blockAlign'] = $xenOptions->sedo_adv_responsive_blockalign;
+		}
 	}
 
 	public static function parseTagGview(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
 	{
 		$xenOptions = XenForo_Application::get('options');
-		
+
 		/*Manage & confirm options*/
 		$width = $xenOptions->AdvBBcodeBar_gview_width;
 		$options['width'] = ($xenOptions->AdvBBcodeBar_gview_width_unit == 'fixed') ? $width : $width . '%';
@@ -349,6 +402,14 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$caption = ( isset($options[1]) ) ? $options[1] : new XenForo_Phrase('Sedo_AdvBBcodeBar_text_gview');			
 			$parentClass->addWrapper('spoiler', $caption); 
 		}		
+		/* Responsive Management */
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		$options['responsiveMode'] = $useResponsiveMode;
+		
+		if($useResponsiveMode)
+		{
+			$options['width'] = '100%';
+		}
 	}	
 	
 	public static function parseTagLatex(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
@@ -369,7 +430,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		foreach($options as $option)
 		{
 			$original = $option;
-			$option = self::_cleanOption($option);
+			$option = BBM_Helper_BbCodes::cleanOption($option);
 
 			if (preg_match('#^\d+(px)?$#', $option))
 			{
@@ -425,6 +486,18 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['height'] = $height;
 		$options['blockAlign'] = $blockAlign;
 		$options['title'] = $title;
+
+		/* Responsive Management */
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		$options['responsiveMode'] = $useResponsiveMode;
+		
+		if($useResponsiveMode)
+		{
+			//Make it almost full width, no reason to limit the width for the readers here
+			$options['width'] = '90';
+			$options['widthType'] = '%';
+			$options['blockAlign'] = $xenOptions->sedo_adv_responsive_blockalign;
+		}		
 	}
 
 	public static function parseTagAccordion(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
@@ -441,7 +514,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		foreach($options as $option)
 		{
 			$original = $option;
-			$option = self::_cleanOption($option);
+			$option = BBM_Helper_BbCodes::cleanOption($option);
 					
 			if (preg_match('#^\d+(px)?$#', $option))
 			{
@@ -510,7 +583,6 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.*?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
 		$content = ''; //Raz content
 		
-		
 		$slides = array();
 		foreach($wip as $slide)
 		{
@@ -532,7 +604,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				foreach($slideOptions as $slideOption)
 				{
 					$original = $slideOption;
-					$slideOption = self::_cleanOption($slideOption);
+					$slideOption = BBM_Helper_BbCodes::cleanOption($slideOption);
 					
 					if (preg_match('#^\d+$#', $slideOption))
 					{
@@ -589,6 +661,18 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['widthType'] = $widthType;
 		$options['blockAlign'] = $blockAlign;
 		$options['slides'] = $slides;
+
+		/* Responsive Management */
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		$options['responsiveMode'] = $useResponsiveMode;
+		
+		if($useResponsiveMode)
+		{
+			//Make it almost full width, no reason to limit the width for the readers here
+			$options['width'] = '90';
+			$options['widthType'] = '%';
+			$options['blockAlign'] = $xenOptions->sedo_adv_responsive_blockalign;
+		}		
 	}
 
 	public static function parseTagTabs(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
@@ -639,7 +723,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		foreach($options as $option)
 		{
 			$original = $option;
-			$option = self::_cleanOption($option);
+			$option = BBM_Helper_BbCodes::cleanOption($option);
 					
 			if (preg_match('#^\d+(px)?$#', $option))
 			{
@@ -710,7 +794,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		
 		$tabs = array();
 		$panes = array();
-		$requestUri = self::_getRequestPath();//needed for noscript
+		$requestUri = $parentClass->getRequestPath();//needed for noscript
 		
 		foreach($wip as $k => $slide)
 		{
@@ -737,7 +821,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				foreach($slideOptions as $slideOption)
 				{
 					$original = $slideOption;
-					$slideOption = self::_cleanOption($slideOption);
+					$slideOption = BBM_Helper_BbCodes::cleanOption($slideOption);
 					
 					if($slideOption == 'left')
 					{
@@ -783,6 +867,18 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['blockAlign'] = $blockAlign;
 		$options['tabs'] = $tabs;
 		$options['panes'] = $panes;
+
+		/* Responsive Management */
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		$options['responsiveMode'] = $useResponsiveMode;
+		
+		if($useResponsiveMode)
+		{
+			//Make it almost full width, no reason to limit the width for the readers here
+			$options['width'] = '90';
+			$options['widthType'] = '%';
+			$options['blockAlign'] = $xenOptions->sedo_adv_responsive_blockalign;
+		}		
 	}
 
 	public static function parseTagSlider(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
@@ -834,12 +930,13 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$autoplay = false;
 		$interval = ($xenOptions->AdvBBcodeBar_slider_interval_default == 3000) ? false : $xenOptions->AdvBBcodeBar_slider_interval_default;
 		$num = false;
+		$noclick = false;
 		
 		/*Browse Master Options*/
 		foreach($options as $option)
 		{
 			$original = $option;
-			$option = self::_cleanOption($option);
+			$option = BBM_Helper_BbCodes::cleanOption($option);
 					
 			if (preg_match('#^\d+(px)?$#', $option))
 			{
@@ -902,6 +999,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			elseif(preg_match('#^\d+ms$#', $option))
 			{			
 				$interval = str_replace('ms', '', $option);
+			}
+			elseif($option == 'noclick')
+			{
+				$noclick = true;
 			}		
 		}
 
@@ -924,7 +1025,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$globalHeight = $xenOptions->AdvBBcodeBar_slider_maxheight;
 		}
 
-		$layout = (!self::_isBadIE(8)) ? $layout : ''; //Prevent IE6&IE7 to use the inside layout
+		$layout = (!BBM_Helper_BbCodes::isBadIE(8)) ? $layout : ''; //Prevent IE6&IE7 to use the inside layout
 		
 		if($interval && ($interval > $xenOptions->AdvBBcodeBar_slider_interval_max || $interval < $xenOptions->AdvBBcodeBar_slider_interval_min))
 		{
@@ -937,7 +1038,9 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$content = ''; //Raz content
 		
 		$slides = array();
-		$requestUri = self::_getRequestPath();//needed for noscript
+		$requestUri = $parentClass->getRequestPath();//needed for noscript
+		
+		$hasImage = false;
 	
 		foreach($wip as $k => $slide)
 		{
@@ -961,7 +1064,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				foreach($slideOptions as $slideOption)
 				{
 					$original = $slideOption;
-					$slideOption = self::_cleanOption($slideOption);
+					$slideOption = BBM_Helper_BbCodes::cleanOption($slideOption);
 					
 					if($slideOption == 'left')
 					{
@@ -997,6 +1100,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 
 						$attachmentParams = $parentClass->getAttachmentParams($slideOption, $validExtensions, $permsFallback);
 						$image = true;
+						$hasImage = true;
 					}
 					elseif($slideOption == 'full')
 					{
@@ -1008,7 +1112,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 					}
 				}
 			}
-		
+
 			$slides[$id] = array(
 				'title' => ($xenOptions->AdvBBcodeBar_slider_titles_raw) ? strip_tags($title) : $title,
 				'absoluteTitle' => $absoluteTitle,
@@ -1037,6 +1141,39 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['num'] = $num;
 		$options['autoplay'] = $autoplay;
 		$options['interval'] = $interval;
+		$options['noclick'] = $noclick;
+
+		/* Responsive Management */
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		$options['responsiveMode'] = $useResponsiveMode;
+		
+		if($useResponsiveMode)
+		{
+			//Make it almost full width, no reason to limit the width for the readers here
+			if($widthType == 'px' && $hasImage)
+			{
+				$options['width'] =  $xenOptions->sedo_adv_responsive_maxwidth;
+				$coeffDelta = ($xenOptions->sedo_adv_responsive_maxwidth > $width) ? 
+						$width/$xenOptions->sedo_adv_responsive_maxwidth
+						: 
+						$xenOptions->sedo_adv_responsive_maxwidth/$width;
+						
+				$options['height'] = $globalHeight * $coeffDelta;
+			}
+			else
+			{
+				$options['width'] = '90';
+				$options['widthType'] = '%';			
+
+				$options['autowidth'] ='advAutoWidth';
+				$options['innerwidth'] = '100%';
+			}
+
+			$options['blockAlign'] = $xenOptions->sedo_adv_responsive_blockalign;
+
+			$options['autowidth'] = ($options['widthType'] == '%') ? 'advAutoWidth' : '';
+			$options['innerwidth'] = ($options['widthType'] == 'px' && $layout != 'inside') ? $options['width']-$autodiff . 'px' : '100%';
+		}		
 	}
 
 	public static function parseTagPicasa(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
@@ -1048,7 +1185,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		**/
       		if(!isset($rendererStates['canViewBbCode']) || !$rendererStates['canViewBbCode'])
       		{
-     			$options['contentIsUrl'] = (preg_match(self::$regexUrl, htmlspecialchars_decode($content))) ? true : false;
+     			$options['contentIsUrl'] = (preg_match(BBM_Helper_BbCodes::$regexUrl, htmlspecialchars_decode($content))) ? true : false;
      			return false;
       		}
 
@@ -1065,7 +1202,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		foreach($options as $k => $option)
 		{
 			$original = $option;
-			$option = self::_cleanOption($option);
+			$option = BBM_Helper_BbCodes::cleanOption($option);
 					
 			if (preg_match('#\d{1,2}s#', $option))
 			{
@@ -1082,6 +1219,15 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 					$height = $option;
 				}
 			}
+		}
+
+		/* Responsive Management */
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		$options['responsiveMode'] = $useResponsiveMode;
+		
+		if($useResponsiveMode)
+		{
+			$width =  $xenOptions->sedo_adv_responsive_maxwidth;
 		}
 
 		if($interval && $interval > $xenOptions->sedo_adv_picasa_max_interval)
@@ -1322,44 +1468,6 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 	}
 
 	/*Mini Tools*/
-
-	protected static function _cleanOption($string)
-	{
-		if(XenForo_Application::get('options')->get('AdvBBcodeBar_ZenkakuConv'))
-		{
-			$string = mb_convert_kana($string, 'a', 'UTF-8');
-		}
-		
-		return $string;
-	}
-	
-	protected static function _isBadIE($isBelow = 9)
-	{
-		$goTo = $isBelow-1;
-
-		$visitor = XenForo_Visitor::getInstance();
-		if(isset($visitor->getBrowser['IEis']))
-		{
-			//Browser Detection (Mobile/MSIE) Addon
-			if($visitor->getBrowser['isIE'] && $visitor->getBrowser['IEis'] < $isBelow)
-			{
-				return true;
-			}
-		}
-		else
-		{
-			//Manual helper
-			if(Sedo_AdvBBcodeBar_Helper_Sedo::isBadIE('target', "6-$goTo"))
-			{
-				return true;
-			}
-		}
-		
-		return false;
-	}
-
-	public static $regexUrl = '#^(?:(?:https?|ftp|file)://|www\.|ftp\.)[-\p{L}0-9+&@\#/%=~_|$?!:,.]*[-\p{L}0-9+&@\#/%=~_|$]$#ui';
-
 	protected static function _rgb2hex($color)
 	{
 		//Match R, G, B values
@@ -1370,32 +1478,22 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		
 	       	return $output;
 	}
-	
-	protected static $requestUri = null;
-	protected static $fullBasePath = null;
-	protected static $fullUri = null;	
 
-	protected static function _getRequestPath($mode = 'requestUri')
+	public static function AioInstalled()
 	{
-		if(self::$requestUri === null)
+		$isInstalled = false;
+		
+		if(XenForo_Application::get('options')->get('currentVersionId') >= 1020031)
 		{
-			$requestPath = XenForo_Application::get('requestPaths');
-			self::$requestUri = $requestPath['requestUri'];
-			self::$fullBasePath = $requestPath['fullBasePath'];
-			self::$fullUri = $requestPath['fullUri'];			
+			$addons = XenForo_Application::get('addOns');
+
+			if(isset($addons['Tinhte_AIO']))
+			{
+				$isInstalled = true;
+			}
 		}
 		
-		switch ($mode) {
-			case 'requestUri':
-				return self::$requestUri;
-			break;
-			case 'fullBasePath':
-				return self::$fullBasePath;
-			break;
-			case 'fullUri':
-				return self::$fullUri;
-			break;		
-		}
+		return $isInstalled;
 	}
 }
 //Zend_Debug::dump($abc);

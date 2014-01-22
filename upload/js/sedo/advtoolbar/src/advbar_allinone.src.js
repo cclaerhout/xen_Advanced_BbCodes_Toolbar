@@ -1,116 +1,138 @@
 !function($, window, document, _undefined)
 {    
+	$(function() {
+		$('.AdvSpoilerbbCommand').find('img, iframe').each(function(){
+			var $this = $(this);
+			$this.data('spoilerSrc', $this.attr('src')).attr('src', XenForo._baseUrl+'styles/default/xenforo/clear.png');
+		});
+	});
+
 	XenForo.AdvBbcodes = 
 	{
 		Spoilerbb: function($e)
 		{
 			var m = $e.attr('data-easing'), 
-			d = $e.attr('data-duration');
+				d = $e.attr('data-duration'),
+				noscriptClass = 'adv_spoilerbb_content_noscript',
+				$boxdisplay = $e.children('.adv_spoilerbb_title').children('input.adv_spoiler_display').show().addClass('active');
+				$boxhidden = $e.children('.adv_spoilerbb_title').children('input.adv_spoiler_hidden').hide();
 
-			$e.children('.adv_spoilerbb_content_box').children('div.adv_spoilerbb_content_noscript').hide().removeClass('adv_spoilerbb_content_noscript');
-			$boxdisplay = $e.children('.adv_spoilerbb_title').children('input.adv_spoiler_display').show().addClass('active');
-			$boxhidden = $e.children('.adv_spoilerbb_title').children('input.adv_spoiler_hidden').hide();		
-	
+			$e.children('.adv_spoilerbb_content_box').children('div.'+noscriptClass).hide().removeClass(noscriptClass);
+
 			$boxdisplay.click(function() {
-				if($(this).hasClass('active'))
-				{
-					$(this).hide().removeClass('active');
-					$(this).next().show().addClass('active');
-					$(this).parent().next().children('div').show(d, m);
+				var $this = $(this);
+				if($this.hasClass('active')) {
+					$e.find('img, iframe').each(function(){
+						var $img = $(this);
+						if($img.data('spoilerSrc')){
+							$img.attr('src', $img.data('spoilerSrc'))
+							$img.data('spoilerSrc', '')
+						}
+					});
+			
+					$this.hide().removeClass('active');
+					$this.next().show().addClass('active');
+					$this.parent().next().children('div').show(d, m);
 				}
 			});		
 	
 			$boxhidden.click(function() {
-				if($(this).hasClass('active'))
-				{
-					$(this).hide().removeClass('active');
-					$(this).prev().show().addClass('active');
-					$(this).parent().next().children('div').hide(d, m);
+				var $this = $(this);
+				if($this.hasClass('active')) {
+					$this.hide().removeClass('active');
+					$this.prev().show().addClass('active');
+					$this.parent().next().children('div').hide(d, m);
 				}
 			});
 		},
 		Accordion: function($e)
 		{
 			var m = $e.attr('data-easing'), 
-			d = $e.attr('data-duration');
+				d = $e.attr('data-duration');
 
 			$e.children('dd:not(.AdvSlideOpen)').hide();
 			$e.children('dt').click(function(e)
 			{
 				//e.preventDefault(); // If Slide Menu Title has an URL, it will prevent a new page to be opened.
-				var src = $(this).parent().attr('id');
-				$target = $(this).next();
+				var $this = $(this),
+					src = $this.parent().attr('id'),
+					$target = $this.next(),
+					activeClass = 'AdvSlideActive';
 	
-				if(!$target.hasClass('AdvSlideActive'))
-				{
-					$('#' + src + '.adv_accordion > dt').removeClass('AdvSlideActive');         
-					$(this).addClass('AdvSlideActive');
+				if(!$target.hasClass(activeClass)) {
+					$('#' + src + '.adv_accordion > dt').removeClass(activeClass);         
+					$this.addClass(activeClass);
 	
-					$('#' + src + '.adv_accordion > dd').removeClass('AdvSlideActive').slideUp(d, m);
-					$target.addClass('AdvSlideActive').slideDown(d, m);
-				}
-				else if($target.hasClass('AdvSlideActive'))
-				{
-					$(this).removeClass('AdvSlideActive');
-					$target.removeClass('AdvSlideActive').slideUp(d, m);
+					$('#' + src + '.adv_accordion > dd').removeClass(activeClass).slideUp(d, m);
+					$target.addClass(activeClass).slideDown(d, m);
+				} else if($target.hasClass(activeClass)) {
+					$this.removeClass(activeClass);
+					$target.removeClass(activeClass).slideUp(d, m);
 				}
 			});
 		},
 		FieldsetFix: function($e)
 		{
-			/*
-				Simple FIX for IE 
-				Doesn't work with IE 6 => must use CSS fix
-			*/
-			$fieldset = $e.children('fieldset');
-			$legend = $fieldset.children('legend');
-			
-			var width_fieldset = $fieldset.width(),
-			width_legend = $legend.width();
+			/***
+			 * Simple FIX for IE 
+			 * Doesn't work with IE 6 => must use CSS fix
+			 **/
+			var $fieldset = $e.children('fieldset'),
+				$legend = $fieldset.children('legend'),
+				width_fieldset = $fieldset.width(),
+				width_legend = $legend.width();
 	
-			if(width_legend > width_fieldset)
-			{
+			if(width_legend > width_fieldset){
 				$legend.width(width_fieldset);
 			}
 		},
 		Tabs: function($e)
 		{
-			$tabs = $e.children('.advtabs');
-			$panes = $e.children('.advpanes').children('div');
+			var $tabs = $e.children('.advtabs'),
+				$panes = $e.children('.advpanes').children('div');
+
 			$tabs.tabs($panes);
 			$tabs.find('.openMe').trigger('click');
 			$e.find('.adv_tabs_link').click(function(){ return false; });
 		},
 		Slider: function($e)
 		{
-			var t = XenForo.AdvBbcodes, toAutoplay = new Array(), imgToLoad = new Array();
+			var self = XenForo.AdvBbcodes, 
+				toAutoplay = [], 
+				imgToLoad = [];
 			
 			$e.each(function(i){
-				$slider_tabs = $(this).children('.advslidestabs');
-				$slides = $(this).children('.advslides').children('div');
+				var $this = $(this),
+					$slider_tabs = $this.children('.advslidestabs'),
+					$slides = $this.children('.advslides').children('div'),
+					$images = $slides.find('.advSliderImage'),
+					autoclick = !($this.data('noclick'));
 
 				if($slides.length == 0)
 					return false; //Important => prevent infinite loops when no slide
 
-				var autoplay = (parseInt($e.attr('data-autoplay')) == 1 ? 1 : 0);
-				var interval = parseInt($e.attr('data-interval'));
-				interval = (isNaN(interval)) ? 3000 : interval;
+				var autoplay = (parseInt($e.attr('data-autoplay')) == 1 ? 1 : 0),
+					interval = parseInt($e.attr('data-interval'));
 
-				$images = $slides.find('.advSliderImage');
-				
+				interval = (isNaN(interval)) ? 3000 : interval;
+			
 				/*Image Mode - Resize & Loader*/
 				if($images.length > 0){
 
-					$images.bind('load',function(){
-						if($(this).parents('.imageMode').hasClass('outside'))
-							$slide = $(this).parents('.advslides');
-						else
-							$slide = $(this).parents('.adv_slider_wrapper');
+					$images.load(function(){
+						var $that = $(this), $slide;
+						
+						if($that.parents('.imageMode').hasClass('outside')){
+							$slide = $that.parents('.advslides');
+						}else{
+							$slide = $that.parents('.adv_slider_wrapper');
+						}
 
 						var imageRef = new Image();
-						imageRef.src = $(this).attr("src");
+						imageRef.src = $that.attr("src");
 
-						$(this).parent().siblings('.adv_slide_mask').hide();//hide mask
+						$that.parent().siblings('.adv_slide_mask').hide();//hide mask
+						
 						var h = imageRef.height, w = imageRef.width, sh = $slide.height(), sw = $slide.width(), ratio, fh, fw;
 
 						//@Src: http://gabrieleromanato.name/jquery-resize-images-proportionally
@@ -122,11 +144,17 @@
 						if (h > sh) {
 							ratio = sh / h;
 							fh = sh;
-							if(!$(this).hasClass('full'))
+							if(!$that.hasClass('full'))
 								fw = w * ratio;
 						}
-						$(this).css({'width': fw, 'height': fh})
+						
+						$that.css({'width': fw, 'height': fh})
 					})
+					.error(function(e){
+						$this = $(this);
+						//$this.parent().siblings('.adv_slide_mask').hide();
+						//console.debug("Slider error: ", this, e);
+					});
 				}
 
 				/*Slider*/
@@ -142,8 +170,9 @@
 						*/
 						this.getCurrentPane().hide(); //to avoid extra glitches - P.S the current pane is in fact the futur previous pane
 						this.getPanes().removeClass('active').eq(i).addClass('active');
-						$z = this.getPanes().eq(i);
-						$w = this.getTabs().parent();
+						
+						var $z = this.getPanes().eq(i);
+							$w = this.getTabs().parent();
 
 						if($z.hasClass('imageMode'))
 							$w.addClass('imageMenu');
@@ -154,31 +183,34 @@
 					prev:'.adv_backward',
 					next:'.adv_forward',
 					interval: interval,
-					clickable: true
+					clickable: autoclick
 				});
 				
 				 /* Open another slide than the first one */
 				$slider_tabs.children('.open').trigger('click');
 
 				 /* Autoplay loader (autoplay direct jqt cmd needs the page to be fully loaded) */
-				if(autoplay === 1) toAutoplay[i] = $slider_tabs.get(0);
+				if(autoplay === 1){
+					toAutoplay[i] = $slider_tabs.get(0);
+				}
 			});
 				
 			/* Autowidth function (for % sliders) */
-			t.SliderAutoWidth();
+			self.SliderAutoWidth();
 	
 			$(window).resize(function() {
-				 t.SliderAutoWidth();
+				 self.SliderAutoWidth();
 			});
 
 			/* Autoplay loader starts (once page has been loaded) */
 			$(window).load(function() {
-				if(toAutoplay.length != 0) 
+				if(toAutoplay.length != 0) {
 					$(toAutoplay).data('slideshow').play();
+				}
 			});
 
 			/* Play & stop functions */
-			$slider_tabs = $e.children('.advslidestabs');
+			var $slider_tabs = $e.children('.advslidestabs');
 			
 			$slider_tabs.children('.play').click(function(e){
 				$(this).parent().data('slideshow').play();
@@ -189,24 +221,28 @@
 		},
 		SliderAutoWidth:function($e)
 		{
-      			$sl = $('.adv_slider_wrapper');
-			var diff = $sl.attr('data-autodiff');
+			var $sl = $('.adv_slider_wrapper'), diff = $sl.attr('data-autodiff');
 
 			$sl.each(function() {
-				$t = $(this);
-		      		if(!$t.hasClass('inner')){
-					var width = $t.width()-diff;
-					$t.find('.advAutoWidth, .imageMode').width(width);
+				var $this = $(this);
+		      		if(!$this.hasClass('inner')){
+					var width = $this.width()-diff;
+					$this.find('.advAutoWidth, .imageMode').width(width);
 				}
 	      		});
 		}
 	};
 	
-	XenForo.register('.AdvFieldsetTrigger', 'XenForo.AdvBbcodes.FieldsetFix');
-	XenForo.register('.adv_accordion', 'XenForo.AdvBbcodes.Accordion');
-	XenForo.register('.AdvSpoilerbbCommand', 'XenForo.AdvBbcodes.Spoilerbb');
-	XenForo.register('.adv_tabs_wrapper', 'XenForo.AdvBbcodes.Tabs');
-	XenForo.register('.adv_slider_wrapper', 'XenForo.AdvBbcodes.Slider');
-	$(document).bind("AutoValidationComplete", XenForo.AdvBbcodes.SliderAutoWidth);
+	var xenRegister = function(el, advBbCodesFct){
+		XenForo.register(el, 'XenForo.AdvBbcodes.'+advBbCodesFct);
+	}
+	
+	xenRegister('.AdvFieldsetTrigger', 'FieldsetFix');
+	xenRegister('.adv_accordion', 'Accordion');
+	xenRegister('.AdvSpoilerbbCommand', 'Spoilerbb');
+	xenRegister('.adv_tabs_wrapper', 'Tabs');
+	xenRegister('.adv_slider_wrapper', 'Slider');
+
+	$(document).bind('AutoValidationComplete', XenForo.AdvBbcodes.SliderAutoWidth);
 }
 (jQuery, this, document);

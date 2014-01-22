@@ -1,87 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.5.0 - step1" version_id="28" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.5.0" version_id="29" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
     <property property_name="advbbcodebar_accordion_title" property_type="css"><![CDATA[{"background-color":"@primaryLighter","background-image":"@imagePath\/xenforo\/gradients\/category-23px-light.png","background-position":"top","background-repeat":"repeat-x","border-bottom-color":"@primaryLightest","border-bottom-style":"double","border-bottom-width":"1px","border-left-color":"@primaryLightish","border-left-style":"solid","border-left-width":"1px","border-right-color":"@primaryLightish","border-right-style":"solid","border-right-width":"1px","color":"rgb(0, 0, 0)","extra":"cursor: pointer;\nposition: relative;\n*zoom: 1;\n\/*IE6*\/","font-size":"13px","font-variant":"small-caps","font-weight":"bold","padding-all":"6px"}]]></property>
     <property property_name="advbbcodebar_accordion_content" property_type="css"><![CDATA[{"background-color":"@primaryContent.background-color","border-left-color":"@primaryLightish","border-left-style":"solid","border-left-width":"1px","border-right-color":"@primaryLightish","border-right-style":"solid","border-right-width":"1px","extra":"position: relative;\n\/*IE7*\/","margin-left":"0 !important","padding-all":"6px"}]]></property>
   </admin_style_properties>
-  <admin_templates>
-    <template title="sedo_adv_xenhook"><![CDATA[<xen:require css="sedo_adv_xenhook_tinymce.css" />]]></template>
-    <template title="sedo_adv_xenhook_tinymce.css"><![CDATA[span.mce_adv_spoiler, span.mce_adv_spoilerbb {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat 0 0 !important;
-}
-
-span.mce_adv_accordion {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -20px 0 !important;
-}
-
-span.mce_adv_highlight {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -40px 0 !important;
-}
-
-span.mce_adv_article {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -60px 0 !important;
-}
-
-span.mce_adv_encadre {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -80px 0 !important;
-}
-
-span.mce_adv_fieldset {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -100px 0 !important;
-}
-
-span.mce_adv_gview {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -120px 0 !important;
-}
-
-span.mce_adv_bimg {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -140px 0 !important;
-}
-
-span.mce_adv_justif {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -160px 0 !important;
-}
-
-span.mce_adv_latex {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -180px 0 !important;
-}
-
-span.mce_adv_picasa {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -200px 0 !important;
-}
-
-
-span.mce_adv_private {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -220px 0 !important;
-}
-
-span.mce_adv_private2 {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -240px 0 !important;
-}
-
-span.mce_adv_premium2 {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -260px 0 !important;
-}
-
-span.mce_adv_premium {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -280px 0 !important;
-}
-
-span.mce_adv_spoilerbb {
-	background:url(styles/sedo/editor/adv_sprites.png) no-repeat -300px 0 !important;
-}]]></template>
-    <template title="style_property_list_atamh_AdvBBcodeBar"><![CDATA[<xen:require js="js/sedo/advtoolbar/atamh/atamh_mini.js" />
-]]></template>
-  </admin_templates>
+  <admin_templates/>
   <admin_template_modifications/>
   <code_events/>
   <code_event_listeners>
-    <listener event_id="load_class_controller" execute_order="10" callback_class="Sedo_AdvBBcodeBar_Listener_Controller" callback_method="editorController" active="1" hint="XenForo_ControllerPublic_Editor" description="Controller Listener"/>
-    <listener event_id="template_create" execute_order="10" callback_class="Sedo_AdvBBcodeBar_Listener_Templates_Preloader" callback_method="CacheTemplates" active="1" hint="" description="Templates Preloader"/>
-    <listener event_id="template_hook" execute_order="100" callback_class="Sedo_AdvBBcodeBar_Listener_Templates_AdvBar" callback_method="ManageBar" active="1" hint="" description="Templates Listener: Bar Elements and Position Management"/>
-    <listener event_id="template_post_render" execute_order="10" callback_class="Sedo_AdvBBcodeBar_Listener_Templates_AdvBar" callback_method="postrender" active="1" hint="" description="Templates Post Render Mods"/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="Sedo_AdvBBcodeBar_Listener_AllInOne" callback_method="editorController" active="1" hint="XenForo_ControllerPublic_Editor" description="Controller Listener"/>
+    <listener event_id="tinyquattro_setup" execute_order="10" callback_class="Sedo_AdvBBcodeBar_Listener_AllInOne" callback_method="MceIntegration" active="1" hint="" description="TinyMCE Quattro"/>
   </code_event_listeners>
   <cron/>
   <email_templates/>
@@ -94,20 +24,6 @@ span.mce_adv_spoilerbb {
 0={xen:phrase AdvBBcodeBar_Options_No}</edit_format_params>
       <sub_options></sub_options>
       <relation group_id="AdvBBcodeBar" display_order="8000"/>
-    </option>
-    <option option_id="AdvBBcodeBar_ModifAdmin" edit_format="radio" data_type="boolean" can_backup="1">
-      <default_value>0</default_value>
-      <edit_format_params>1={xen:phrase AdvBBcodeBar_Options_Yes}
-0={xen:phrase AdvBBcodeBar_Options_No}</edit_format_params>
-      <sub_options></sub_options>
-      <relation group_id="AdvBBcodeBar" display_order="8010"/>
-    </option>
-    <option option_id="AdvBBcodeBar_ZenkakuConv" edit_format="radio" data_type="boolean" can_backup="1">
-      <default_value>0</default_value>
-      <edit_format_params>1={xen:phrase AdvBBcodeBar_Options_Yes}
-0={xen:phrase AdvBBcodeBar_Options_No}</edit_format_params>
-      <sub_options></sub_options>
-      <relation group_id="AdvBBcodeBar" display_order="8020"/>
     </option>
     <option option_id="AdvBBcodeBar_accordion_defaultwidth" edit_format="spinbox" data_type="positive_integer" can_backup="1">
       <default_value>650</default_value>
@@ -201,16 +117,9 @@ right={xen:phrase AdvBBcodeBar_Options_Right}</edit_format_params>
       <sub_options></sub_options>
       <relation group_id="AdvBBcodeBar" display_order="900"/>
     </option>
-    <option option_id="AdvBBcodeBar_activate_bar" edit_format="onoff" data_type="boolean" can_backup="1">
-      <default_value>1</default_value>
-      <edit_format_params></edit_format_params>
-      <sub_options></sub_options>
-      <relation group_id="AdvBBcodeBar" display_order="1"/>
-    </option>
     <option option_id="AdvBBcodeBar_bimg_yellowpic" edit_format="radio" data_type="boolean" can_backup="1">
       <default_value>1</default_value>
-      <edit_format_params>1={xen:phrase AdvBBcodeBar_Options_Yes}
-0={xen:phrase AdvBBcodeBar_Options_No}</edit_format_params>
+      <edit_format_params>1={xen:phrase AdvBBcodeBar_Options_Yes}</edit_format_params>
       <sub_options></sub_options>
       <relation group_id="AdvBBcodeBar" display_order="420"/>
     </option>
@@ -632,6 +541,21 @@ step=50</edit_format_params>
       <sub_options></sub_options>
       <relation group_id="AdvBBcodeBar" display_order="2050"/>
     </option>
+    <option option_id="sedo_adv_responsive_blockalign" edit_format="select" data_type="string" can_backup="1">
+      <default_value>bcenter</default_value>
+      <edit_format_params>bleft={xen:phrase left}
+bcenter={xen:phrase center}
+bright={xen:phrase right}</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="3010"/>
+    </option>
+    <option option_id="sedo_adv_responsive_maxwidth" edit_format="spinbox" data_type="positive_integer" can_backup="1">
+      <default_value>300</default_value>
+      <edit_format_params>min=0
+step=25</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="3000"/>
+    </option>
   </optiongroups>
   <permissions>
     <permission_groups/>
@@ -682,14 +606,12 @@ If the above option is set on 'no', the title of slide 1 will be displayed with 
     <phrase title="option_AdvBBcodeBar_accordion_slides_titles_defaultalign_explain" version_id="5" version_string="3.1"><![CDATA[Default Align for Slides Menu Titles. This setting can be overridden by user in Slide 'slave tag' options. Example : {slide=Title|<b>right</b>}Content{/slide}.]]></phrase>
     <phrase title="option_AdvBBcodeBar_accordion_tag" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[[Accordion BBcode] Tag]]></phrase>
     <phrase title="option_AdvBBcodeBar_accordion_tag_explain" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[With TinyMCE Quattro the accordion, tabs and slider Bb Codes are using a same orphan button. If you have modified the tags of these Bb Codes you also need to modify the tags here. Default: <b>accordion</b>.]]></phrase>
-    <phrase title="option_AdvBBcodeBar_activate_bar" version_id="11" version_string="3.1.2"><![CDATA[Activate  this addon?]]></phrase>
-    <phrase title="option_AdvBBcodeBar_activate_bar_explain" version_id="11" version_string="3.1.2"><![CDATA[]]></phrase>
     <phrase title="option_AdvBBcodeBar_bimg_yellowpic" version_id="9" version_string="3.1 Final"><![CDATA[[Images BBcode] Do you want to use the Yellow Picture?]]></phrase>
-    <phrase title="option_AdvBBcodeBar_bimg_yellowpic_explain" version_id="15" version_string="3.2.0"><![CDATA[<span style="color:orange;font-weight:bolder">Important</span><br />
+    <phrase title="option_AdvBBcodeBar_bimg_yellowpic_explain" version_id="28" version_string="3.5.0 - step1"><![CDATA[<span style="color:orange;font-weight:bolder">Important</span><br />
 With the default XenForo configuration, if a visitor or a member in a forum can't download the forum attachments, it won't be able to see a picture uploaded in that forum. It's logical but this will break your message layout generating an html error because the image is not found.<br /><br /><b> You've got three solutions to fix that:</b> <br />
 1) Give access visitors and members to the attachments. I don't like this.<br />
 2) Use the "Yellow picture option", which will display a yellow picture with a legend warning the user he doesn't have access to the image.<br />
-3) Use this following addon: <a href="http://xenforo.com/community/resources/tinhte-image-attachment-optimization-cdn-support.909/" target="_blank"><b>"Image Attachment Optimization & CDN Support"</b></a> (author: Tinhte). No matter his attachment permission, the user will be able to see the picture. This is the <span style="color:orange;font-weight:bolder">best solution</span> in my opinion. If you select that option, <span style="text-decoration:underline"> don't use the 'Yellow Picture'</span>.]]></phrase>
+3) Use this following addon: <a href="http://xenforo.com/community/resources/tinhte-image-attachment-optimization-cdn-support.909/" target="_blank"><b>"Image Attachment Optimization & CDN Support"</b></a> (author: Tinhte). No matter his attachment permission, the user will be able to see the picture. This is the <span style="color:orange;font-weight:bolder">best solution</span> in my opinion.]]></phrase>
     <phrase title="option_AdvBBcodeBar_debug_devmode" version_id="14" version_string="3.1.5"><![CDATA[[Debug] Developer Mode]]></phrase>
     <phrase title="option_AdvBBcodeBar_debug_devmode_explain" version_id="14" version_string="3.1.5"><![CDATA[The developer Mode will use the source of the Javascript (unminified).]]></phrase>
     <phrase title="option_AdvBBcodeBar_encdefault" version_id="6" version_string="3.2"><![CDATA[[Text Box BBcode] Default Width Attribute]]></phrase>
@@ -702,7 +624,7 @@ With the default XenForo configuration, if a visitor or a member in a forum can'
     <phrase title="option_AdvBBcodeBar_encmax_px" version_id="5" version_string="3.1"><![CDATA[[Text Box BBcode] Max Width Attribute (px)]]></phrase>
     <phrase title="option_AdvBBcodeBar_encmax_px_explain" version_id="6" version_string="3.2"><![CDATA[Enter max width for text box bbcode. Unit is <b>pixel</b>. Do not enter "px" !
 <br />(Default value: 750)]]></phrase>
-    <phrase title="option_AdvBBcodeBar_fallbackperms" version_id="21" version_string="3.3.3 - Beta"><![CDATA[[Debug] Try to get attachments outside the viewing post?]]></phrase>
+    <phrase title="option_AdvBBcodeBar_fallbackperms" version_id="28" version_string="3.5.0 - step1"><![CDATA[Try to get attachments outside the viewing post?]]></phrase>
     <phrase title="option_AdvBBcodeBar_fallbackperms_explain" version_id="21" version_string="3.3.3 - Beta"><![CDATA[]]></phrase>
     <phrase title="option_AdvBBcodeBar_fieldsetdefault" version_id="6" version_string="3.2"><![CDATA[[Fieldset BBcode] Default Width Attribute]]></phrase>
     <phrase title="option_AdvBBcodeBar_fieldsetdefault_explain" version_id="5" version_string="3.1"><![CDATA[Enter the default width that should be used with fieldset bbcode if user doesn't specify any option or if the given option is above the max width.  Unit is <b>defined below</b>. <br />(Default value: 90)]]></phrase>
@@ -753,8 +675,6 @@ Note: All Latex commands will not work here, only Mimextex commands will work.<b
     <phrase title="option_AdvBBcodeBar_latex_maxwidth_px" version_id="6" version_string="3.2"><![CDATA[[LATEX BBcode] Max Width Attribute (px)]]></phrase>
     <phrase title="option_AdvBBcodeBar_latex_maxwidth_px_explain" version_id="6" version_string="3.2"><![CDATA[Enter max width for the latex bbcode. Unit is <b>pixel</b>. Do not precise "px" !
 <br />(Default value: 800)]]></phrase>
-    <phrase title="option_AdvBBcodeBar_ModifAdmin" version_id="15" version_string="3.2.0"><![CDATA[Modif TinyMCE editors in the admin side too?]]></phrase>
-    <phrase title="option_AdvBBcodeBar_ModifAdmin_explain" version_id="15" version_string="3.2.0"><![CDATA[Some addons might use customized version of TinyMCE inside the Admin Control Panel. Select yes to try to load Javascripts, css and any modifications needed.]]></phrase>
     <phrase title="option_AdvBBcodeBar_slider_autoplay_authorise" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Authorise autoplay command?]]></phrase>
     <phrase title="option_AdvBBcodeBar_slider_autoplay_authorise_explain" version_id="20" version_string="3.3.2"><![CDATA[Uncheck this option if you want to prevent users to automatically start a slideshow.]]></phrase>
     <phrase title="option_AdvBBcodeBar_slider_defaultheight" version_id="20" version_string="3.3.2"><![CDATA[[Slider] Default Height]]></phrase>
@@ -795,8 +715,6 @@ Note: All Latex commands will not work here, only Mimextex commands will work.<b
     <phrase title="option_AdvBBcodeBar_tabs_tag_explain" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[With TinyMCE Quattro the accordion, tabs and slider Bb Codes are using a same orphan button. If you have modified the tags of these Bb Codes you also need to modify the tags here. Default: <b>tabs</b>.]]></phrase>
     <phrase title="option_AdvBBcodeBar_tabs_titles_raw" version_id="19" version_string="3.3.1"><![CDATA[[Tabs BBcode] Raw titles]]></phrase>
     <phrase title="option_AdvBBcodeBar_tabs_titles_raw_explain" version_id="19" version_string="3.3.1"><![CDATA[Strip html from titles. Default: <b>no</b>.]]></phrase>
-    <phrase title="option_AdvBBcodeBar_ZenkakuConv" version_id="18" version_string="3.3"><![CDATA[Zenkaku Conversion]]></phrase>
-    <phrase title="option_AdvBBcodeBar_ZenkakuConv_explain" version_id="18" version_string="3.3"><![CDATA[Activate this option to make full-width characters (Chinese/Japanese) compatible with Bb Codes Options Command. Ie: [bimg=<b>１００ｐｘ</b>]url[/bimg] (instead of [bimg=<b>100px</b>]url[/bimg]).]]></phrase>
     <phrase title="option_group_AdvBBcodeBar" version_id="17" version_string="3.2.1"><![CDATA[[Bb Codes & Buttons Manager] Advanced Bb Codes]]></phrase>
     <phrase title="option_group_AdvBBcodeBar_description" version_id="17" version_string="3.2.1"><![CDATA[Options for the Advanced BBcodes Addon]]></phrase>
     <phrase title="option_sedo_adv_noautoplay" version_id="17" version_string="3.2.1"><![CDATA[Autoplay slideshow?]]></phrase>
@@ -825,6 +743,10 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="option_sedo_adv_picasa_max_width_explain" version_id="17" version_string="3.2.1"><![CDATA[Max width of the Slideshow or Picasa image. If users specify the width/height in the tag options, which should be the Max width not to go over? If the specified width is above this limit, the default width will be apply. <b>Default value: 800</b>]]></phrase>
     <phrase title="option_sedo_adv_picasa_noperms_icon" version_id="18" version_string="3.3"><![CDATA[Returns picasa icon if no view permission?]]></phrase>
     <phrase title="option_sedo_adv_picasa_noperms_icon_explain" version_id="18" version_string="3.3"><![CDATA[If users have no Bb Code view permissions, instead of returning a standard message you can choose to return a small Picasa icon. This icon will be linked to the url entered between the picasa tags (providing it's an url).]]></phrase>
+    <phrase title="option_sedo_adv_responsive_blockalign" version_id="28" version_string="3.5.0 - step1"><![CDATA[Responsive mode - block align]]></phrase>
+    <phrase title="option_sedo_adv_responsive_blockalign_explain" version_id="28" version_string="3.5.0 - step1"><![CDATA[Default value: center.]]></phrase>
+    <phrase title="option_sedo_adv_responsive_maxwidth" version_id="28" version_string="3.5.0 - step1"><![CDATA[Responsive mode - max width]]></phrase>
+    <phrase title="option_sedo_adv_responsive_maxwidth_explain" version_id="28" version_string="3.5.0 - step1"><![CDATA[This setting will not work with all Bb Codes. Some just need to have a width in % without any limit. Default is: 250px (this value shoud work with most of screens).]]></phrase>
     <phrase title="sedoAdbBB_Content" version_id="3" version_string="3.03"><![CDATA[Tag content (Optional, should normally be empty)]]></phrase>
     <phrase title="sedoAdbBB_Option" version_id="3" version_string="3.03"><![CDATA[Tag option (Optional)]]></phrase>
     <phrase title="sedoAdbBB_Order" version_id="3" version_string="3.03"><![CDATA[Num.]]></phrase>
@@ -941,6 +863,7 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="Sedo_AdvBBcodeBar_template_picasa_seconds" version_id="6" version_string="3.2"><![CDATA[second(s)]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_picasa_url" version_id="6" version_string="3.2"><![CDATA[Picasa url:]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_picasa_width" version_id="6" version_string="3.2"><![CDATA[Width:]]></phrase>
+    <phrase title="Sedo_AdvBBcodeBar_template_sliders_autoclick" version_id="28" version_string="3.5.0 - step1"><![CDATA[Auto-click]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_sliders_autoplay" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Autoplay]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_sliders_cmd" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Player]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_sliders_id_mode" version_id="25" version_string="3.4.0"><![CDATA[ID]]></phrase>
@@ -984,6 +907,7 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="sedo_adv_grabber_nofgc" version_id="17" version_string="3.2.1"><![CDATA[file_get_contents: [not available]]]></phrase>
     <phrase title="sedo_adv_grabber_nofgc_auf" version_id="17" version_string="3.2.1"><![CDATA[file_get_contents: [not available - allow_url_fopen not allowed]]]></phrase>
     <phrase title="sedo_adv_loading" version_id="20" version_string="3.3.2"><![CDATA[Loading...]]></phrase>
+    <phrase title="sedo_adv_not_valid" version_id="28" version_string="3.5.0 - step1"><![CDATA[Attachment not valid]]></phrase>
     <phrase title="sedo_adv_picasa_10s" version_id="17" version_string="3.2.1"><![CDATA[10 seconds]]></phrase>
     <phrase title="sedo_adv_picasa_11s" version_id="17" version_string="3.2.1"><![CDATA[11 seconds]]></phrase>
     <phrase title="sedo_adv_picasa_12s" version_id="17" version_string="3.2.1"><![CDATA[12 seconds]]></phrase>
@@ -1131,6 +1055,8 @@ Default value: 35px.]]></phrase>
     <phrase title="style_property_group_AdvBBcodeBar_Style_2_master_desc" version_id="19" version_string="3.3.1"><![CDATA[Advanced BBcodes Toolbar Visual Options]]></phrase>
     <phrase title="style_property_group_AdvBBcodeBar_Style_master" version_id="19" version_string="3.3.1"><![CDATA[[Bb Codes & Buttons Manager] Advanced Bb Codes (1/2)]]></phrase>
     <phrase title="style_property_group_AdvBBcodeBar_Style_master_desc" version_id="0" version_string="3.0"><![CDATA[Advanced BBcodes Toolbar Visual Options]]></phrase>
+    <phrase title="style_property_sedo_bbm_btn_modf_col1_description_master" version_id="28" version_string="3.5.0 - step1"><![CDATA[]]></phrase>
+    <phrase title="style_property_sedo_bbm_btn_modf_col1_master" version_id="28" version_string="3.5.0 - step1"><![CDATA[Modele F - Gradient color (1)]]></phrase>
   </phrases>
   <route_prefixes/>
   <style_properties>
@@ -1176,7 +1102,7 @@ Default value: 35px.]]></phrase>
     <property property_name="advbbcodebar_picasa_background" property_type="scalar" definition="1" group_name="AdvBBcodeBar_Style" title="[Picasa] Slideshow Background" description="" css_components="" scalar_type="color" scalar_parameters="" display_order="500" sub_group=""><![CDATA[rgb(0, 0, 0)]]></property>
     <property property_name="advbbcodebar_picasa_container" property_type="css" definition="1" group_name="AdvBBcodeBar_Style" title="[PICASA] Slideshow Container" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="200" sub_group=""><![CDATA[[]]]></property>
     <property property_name="advbbcodebar_picasa_image" property_type="css" definition="1" group_name="AdvBBcodeBar_Style" title="[PICASA] Image" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="210" sub_group=""><![CDATA[[]]]></property>
-    <property property_name="advbbcodebar_tabs_container" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Container" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="250" sub_group=""><![CDATA[[]]]></property>
+    <property property_name="advbbcodebar_tabs_container" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Container" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="250" sub_group=""><![CDATA[{"margin-bottom":"5px"}]]></property>
     <property property_name="advbbcodebar_tabs_title" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Title" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="260" sub_group=""><![CDATA[{"background-color":"@primaryLightish","background-image":"@imagePath\/xenforo\/gradients\/category-23px-light.png","background-position":"top","background-repeat":"repeat-x","border-bottom-left-radius":"0","border-bottom-right-radius":"0","border-bottom-style":"none","border-color":"@primaryMedium","border-style":"solid","border-top-left-radius":"5px","border-top-right-radius":"5px","border-width":"1pt","color":"@contentText","extra":"display: block;\nmin-width: 100px;\nline-height: 30px;\ntext-align: center;\nposition: relative;\ntop: 1px;","font-size":"11px","height":"30px","margin-all":"0px","padding-bottom":"0px","padding-left":"6px","padding-right":"6px","padding-top":"0px","text-decoration":{"none":"none"}}]]></property>
     <property property_name="advbbcodebar_tabs_content" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Content" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="270" sub_group=""><![CDATA[{"background-color":"@primaryLighterStill","border-bottom-left-radius":"5px","border-bottom-right-radius":"5px","border-color":"#999","border-style":"solid","border-top-color":"@contentText","border-top-style":"none","border-top-width":"0","border-width":"1px","font-size":"14px","padding-bottom":"15px","padding-left":"10px","padding-right":"10px","padding-top":"15px"}]]></property>
     <property property_name="advbbcodebar_tabs_title_hoveractive" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Title (hover/active)" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="265" sub_group=""><![CDATA[{"background-color":"@primaryLighterStill","background-image":"@imagePath\/xenforo\/gradients\/category-23px-light.png","background-position":"top","background-repeat":"repeat-x","extra":"cursor: default !important;","font-weight":"bold"}]]></property>
@@ -1190,6 +1116,7 @@ Default value: 35px.]]></phrase>
     <property property_name="advbbcodebar_slider_tabs_active" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Tabs - active" description="Configure only the font color here, this would avoid to break any layouts." css_components="text" scalar_type="" scalar_parameters="" display_order="335" sub_group=""><![CDATA[{"color":"rgb(238, 0, 24)"}]]></property>
     <property property_name="advbbcodebar_slider_slides_title" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Slides Title" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="350" sub_group=""><![CDATA[{"color":"@primaryDarker","font-size":"22px","font-weight":"bold","margin-bottom":"5px","margin-left":"0","margin-right":"0","margin-top":"0"}]]></property>
     <property property_name="advbbcodebar_slider_slides_title_abs" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Slides Title - Absolute" description="This title layout is triggered with the &quot;top&quot; or &quot;bottom&quot; commands (&quot;slide&quot; slave tag)" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="360" sub_group=""><![CDATA[{"background-color":"rgba(93, 99, 100, 0.7)","color":"rgb(245, 244, 244)","extra":"position: absolute;\nleft: 0;\nz-index: 25;","font-size":"18px","font-weight":"bold","width":"100%"}]]></property>
+    <property property_name="sedo_bbm_btn_modf_col1" property_type="scalar" definition="1" group_name="sedo_bbm_btn" title="Modele F - Gradient color (1)" description="" css_components="text,background,border,layout,extra" scalar_type="color" scalar_parameters="" display_order="110" sub_group="model_f"><![CDATA[#ededed]]></property>
     <group group_name="AdvBBcodeBar_Style" display_order="13211">
       <title>[Bb Codes &amp; Buttons Manager] Advanced Bb Codes (1/2)</title>
       <description>Advanced BBcodes Toolbar Visual Options</description>
@@ -1200,9 +1127,6 @@ Default value: 35px.]]></phrase>
     </group>
   </style_properties>
   <templates>
-    <template title="adv_tiny_quattro_params" version_id="26" version_string="3.4.1"><![CDATA[		adv_hl_norm: {open: "{xen:property adv_highlight_normal_tags_open}", options: "{xen:property adv_highlight_normal_tags_options}", close: "{xen:property adv_highlight_normal_tags_close}"},
-		adv_hl_spe: {open: "{xen:property adv_highlight_special_tags_open}", options: "@adv_highlight_special_tags_options", close: "{xen:property adv_highlight_special_tags_close}", content: "{xen:property adv_highlight_special_tags_content}"},
-		adv_hl_tag_separator: "{xen:property adv_highlight_tag_options_separator}",]]></template>
     <template title="adv_tiny_quattro_phrases" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[		adv_bimg_id: "{xen:jsescape {xen:phrase Sedo_AdvBBcodeBar_button_bimg_new_id}}",
 		adv_auto: "{xen:jsescape {xen:phrase Sedo_AdvBBcodeBar_template_auto}}",]]></template>
     <template title="editor_dialog_advaccordion" version_id="19" version_string="3.3.1"><![CDATA[<!DOCTYPE html>
@@ -3486,7 +3410,7 @@ p.info span
 		data-auto="{xen:phrase Sedo_AdvBBcodeBar_template_auto}"
 	</xen:set>
 </xen:include>]]></template>
-    <template title="quattro_dialog_bbm_adv_article" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_article" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_article.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/article.js" />
 
@@ -3499,7 +3423,7 @@ p.info span
 				name="text"
 				type="text"
 				data-message="{xen:phrase Sedo_AdvBBcodeBar_template_article_typeyourtext}"
-				class="mce-textbox mceFocus"
+				class="mce-textbox mceFocus MceEditor"
 			>{xen:if '{$selection.bbCode}', '{$selection.bbCode}', '{xen:phrase Sedo_AdvBBcodeBar_template_article_typeyourtext}'}</textarea>
 		</dd>
 	</dl>
@@ -4653,7 +4577,7 @@ p.info span
 .mce-xen-body .adv_picasa #ctrl_interval_type{
 	text-align:center;
 }]]></template>
-    <template title="quattro_dialog_bbm_adv_slides" version_id="27" version_string="3.4.2"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_slides" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_slides.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/slides.js" />
 
@@ -4758,6 +4682,15 @@ p.info span
 						<option value="numeric">{xen:phrase Sedo_AdvBBcodeBar_template_sliders_tabs_numeric}</option>
 					</select>
 				</dd>
+				
+				<dt></dt>
+				<dd>
+		  			<div 	class="xenCheckBox slider_autoclick" 
+			  			data-phrase="{xen:phrase Sedo_AdvBBcodeBar_template_sliders_autoclick}"
+			  			data-inputname="sliderAutoclick"
+			  			data-checked="checked">
+			  		</div>
+			  	</dd>
 			</dl>
 
 			<dl class="xenmce_inline advOnlySlider">
@@ -5204,7 +5137,7 @@ p.info span
 }
 
 ]]></template>
-    <template title="sedo_adv_accordion" version_id="17" version_string="3.2.1"><![CDATA[<xen:require css="sedo_adv_accordion.css" />
+    <template title="sedo_adv_accordion" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_accordion.css" />
 
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
 	<xen:require js="js/sedo/advtoolbar/src/advbar_allinone.src.js" />	
@@ -5214,7 +5147,7 @@ p.info span
 
 <xen:if is="{$options.slides}">
 	<dl id="{$options.uniqid}" 
-		class="adv_accordion {$options.blockAlign}"
+		class="adv_accordion {$options.blockAlign} {xen:if '{$options.responsiveMode}', 'responsive'}"
 		data-easing="{$xenOptions.AdvBBcodeBar_accordion_slides_easing_effect}"
 		data-duration="{$xenOptions.AdvBBcodeBar_accordion_slides_easing_duration}"
 		style="display:block;width:{$options.width}{$options.widthType};"
@@ -5278,13 +5211,13 @@ p.info span
 	margin:1px 0 0 10px !important;
 }
 ]]></template>
-    <template title="sedo_adv_article" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:if is="{$options.badIE}">
+    <template title="sedo_adv_article" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:if is="{$options.badIE}">
 	<xen:require css="sedo_adv_article_ie.css" />
 <xen:else />
 	<xen:require css="sedo_adv_article.css" />
 </xen:if>
 
-<div class="advbbcodebar_article">
+<div class="advbbcodebar_article {xen:if '{$options.responsiveMode}', 'responsive'}">
 	<fieldset>
 		<legend>{xen:phrase Sedo_AdvBBcodeBar_text_article}</legend>
 		{xen:raw $content}
@@ -5330,9 +5263,9 @@ p.info span
 .advbbcodebar_article div.adv_source{
 	{xen:property advbbcodebar_article_source}
 }]]></template>
-    <template title="sedo_adv_bimg" version_id="17" version_string="3.2.1"><![CDATA[<xen:require css="sedo_adv_bimg.css" />
+    <template title="sedo_adv_bimg" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_bimg.css" />
 
-<div class="adv_bimg_block">
+<div class="adv_bimg_block {xen:if '{$options.responsiveMode}', 'responsive'}">
 	<div class="adv_bimg {$options.blockAlign} {xen:if '!{$options.hasCaption}', 'text_center'}" style="width:{$options.width}{$options.widthType};">
 		<xen:if is="{$options.hasCaption} AND {$options.caption.position} == 'top'">
 			<xen:if is="{$options.caption.type} == 'inside'">
@@ -5355,13 +5288,29 @@ p.info span
 			</xen:if>
 		</xen:if>
 		<xen:if is="!{$options.hasCaption}">
-			<span><a href="{xen:raw $content}" target="_blank" class="LbTrigger" data-href="index.php?misc/lightbox"><img style="width:{$options.widthImg};display:none;" class="bbCodeImage LbImage" src="{xen:raw $content}" data-src="{xen:raw $content}" />{xen:if '!{$visitor.permissions.forum.viewAttachment} AND {$xenOptions.AdvBBcodeBar_bimg_yellowpic}', '{xen:phrase Sedo_AdvBBcodeBar_text_notmember}', '{xen:phrase Sedo_AdvBBcodeBar_text_clicktoexpand}'}</a></span>
+			<span><a 
+				href="{xen:raw $content}" 
+				target="_blank"
+				class="LbTrigger" 
+				data-href="index.php?misc/lightbox"><img 
+					style="width:{$options.widthImg};display:none;"
+					class="bbCodeImage LbImage" 
+					src="{xen:raw $content}"
+					data-src="{xen:raw $content}" 
+				/>{xen:if 
+					'!{$visitor.permissions.forum.viewAttachment} AND !{$xenAddOns.Tinhte_AIO}',
+					'{xen:phrase Sedo_AdvBBcodeBar_text_notmember}',
+					'{xen:phrase Sedo_AdvBBcodeBar_text_clicktoexpand}'}</a></span>
 		</xen:if>
 	</div>
 </div>]]></template>
-    <template title="sedo_adv_bimg.css" version_id="17" version_string="3.2.1"><![CDATA[.adv_bimg_block {
+    <template title="sedo_adv_bimg.css" version_id="28" version_string="3.5.0 - step1"><![CDATA[.adv_bimg_block {
 	display:block;
 	z-index:1;
+}
+
+.adv_bimg_block.responsive .adv_bimg {
+	max-width: {$xenOptions.sedo_adv_responsive_maxwidth}px;
 }
 
 .adv_bimg {
@@ -5412,24 +5361,45 @@ p.info span
 	padding: 1px 5px 0 5px; 
 	color:{xen:property adv_bimg_caption_text};
 }]]></template>
-    <template title="sedo_adv_encadre" version_id="17" version_string="3.2.1"><![CDATA[<xen:require css="sedo_adv_encadre.css" />
+    <template title="sedo_adv_encadre" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_encadre.css" />
 
 <xen:if is="{$options.skin2}">
-	<div class="advbbcodebar_encadre_skin2 {$options.floatClass}" style="width:{$options.width}{$options.widthType};">
+	<div class="advbbcodebar_encadre_skin2 {$options.floatClass} {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};">
 		<div class="adv_enc_fieldset">
 			<div class="adv_enc_title">{xen:if '{$options.title}', '{xen:raw $options.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_encadre}'}</div>
 			<div class="adv_enc_content">{xen:raw $content}</div>
 		</div>
 	</div>
 <xen:else/>
-	<div class="advbbcodebar_encadre {$options.floatClass}" style="width:{$options.width}{$options.widthType};">
+	<div class="advbbcodebar_encadre {$options.floatClass} {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};">
 		<div class="adv_enc_abovefieldset">{xen:if '{$options.title}', '{xen:raw $options.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_encadre}'}</div>
 		<div class="adv_enc_fieldset">
 			<div class="adv_enc_content">{xen:raw $content}</div>
 		</div>
 	</div>
 </xen:if>]]></template>
-    <template title="sedo_adv_encadre.css" version_id="17" version_string="3.2.1"><![CDATA[.advbbcodebar_encadre.fright,
+    <template title="sedo_adv_encadre.css" version_id="28" version_string="3.5.0 - step1"><![CDATA[.advbbcodebar_encadre.responsive,
+.advbbcodebar_encadre_skin2.responsive {
+	max-width: {$xenOptions.sedo_adv_responsive_maxwidth}px;
+	margin-bottom: 10px;
+}
+
+.advbbcodebar_encadre.bleft,
+.advbbcodebar_encadre_skin2.bleft {
+	margin-right:auto;
+}
+.advbbcodebar_encadre.bcenter,
+.advbbcodebar_encadre_skin2.bcenter {
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.advbbcodebar_encadre.bright,
+.advbbcodebar_encadre_skin2.bright {
+	margin-left:auto;
+}
+
+.advbbcodebar_encadre.fright,
 .advbbcodebar_encadre_skin2.fright{
 	float:right;
 }
@@ -5466,7 +5436,7 @@ p.info span
 .advbbcodebar_encadre_skin2 .adv_enc_title{
 	{xen:property advbbcodebar_encadre_title_skin2}
 }]]></template>
-    <template title="sedo_adv_fieldset" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:if is="{$options.cssIE}">
+    <template title="sedo_adv_fieldset" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:if is="{$options.cssIE}">
 	<xen:require css="sedo_adv_fieldset_ie.css" />
 <xen:else />
 	<xen:require css="sedo_adv_fieldset.css" />
@@ -5475,7 +5445,7 @@ p.info span
 <xen:if is="{$options.browser} == 'ie67'">
 	<xen:comment>For Internet Explorer 6&7</xen:comment>
 
-	<div class="advbbcodebar_fieldset {$options.blockAlign}" style="width:{$options.width}{$options.widthType};">
+	<div class="advbbcodebar_fieldset {$options.blockAlign} {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};">
 		<fieldset>
 			<legend><span class="advbbcodebar_fieldsetfix">{xen:if '{$options.title}', '{xen:raw $options.title}', '{xen:phrase Sedo_AdvBBcodeBar_fieldset_title}'}</span></legend>
 			{xen:raw $content}
@@ -5494,7 +5464,7 @@ p.info span
       		  The Jquery fix just get the real width of the block [.width()] and apply it to the legend (only if legend width is bigger than block width)
 	</xen:comment>
 
-	<div class="advbbcodebar_fieldset {$options.blockAlign} AdvFieldsetTrigger" style="width:{$options.width}{$options.widthType};">
+	<div class="advbbcodebar_fieldset {$options.blockAlign} AdvFieldsetTrigger {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};">
 		<fieldset>
 			<legend style="white-space:normal;"><div style="white-space:normal;width:{xen:if '{$options.widthType} == "px"', '{$options.width}{$options.widthType}', '100%'}">{xen:if '{$options.title}', '{xen:raw $options.title}', '{xen:phrase Sedo_AdvBBcodeBar_fieldset_title}'}</div></legend>
 			{xen:raw $content}
@@ -5503,14 +5473,14 @@ p.info span
 <xen:else />
 	<xen:comment>"Normal" browsers</xen:comment>
 
-	<div class="advbbcodebar_fieldset {$options.blockAlign}" style="width:{$options.width}{$options.widthType};">
+	<div class="advbbcodebar_fieldset {$options.blockAlign} {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};">
 		<fieldset>
 			<legend>{xen:if '{$options.title}', '{xen:raw $options.title}', '{xen:phrase Sedo_AdvBBcodeBar_fieldset_title}'}</legend>
 			{xen:raw $content}
 		</fieldset>
 	</div>
 </xen:if>]]></template>
-    <template title="sedo_adv_fieldset.css" version_id="17" version_string="3.2.1"><![CDATA[.advbbcodebar_fieldset{
+    <template title="sedo_adv_fieldset.css" version_id="28" version_string="3.5.0 - step1"><![CDATA[.advbbcodebar_fieldset{
 	{xen:property advbbcodebar_fieldset_wrapper}
 }
 .advbbcodebar_fieldset fieldset{
@@ -5580,14 +5550,14 @@ p.info span
 .advbbcodebar_fieldset.bright {
 	margin-left:auto;
 }]]></template>
-    <template title="sedo_adv_gview" version_id="17" version_string="3.2.1"><![CDATA[<xen:require css="sedo_adv_gview.css" />
-<iframe class="adv_gview" src="https://docs.google.com/viewer?{xen:raw $content}" width="{$options.width}" height="{$options.height}"></iframe>]]></template>
+    <template title="sedo_adv_gview" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_gview.css" />
+<iframe class="adv_gview {xen:if '{$options.responsiveMode}', 'responsive'}" src="https://docs.google.com/viewer?{xen:raw $content}" width="{$options.width}" height="{$options.height}"></iframe>]]></template>
     <template title="sedo_adv_gview.css" version_id="17" version_string="3.2.1"><![CDATA[.adv_gview{
 	border: none;
 }]]></template>
-    <template title="sedo_adv_latex" version_id="17" version_string="3.2.1"><![CDATA[<xen:require css="sedo_adv_latex.css" />
+    <template title="sedo_adv_latex" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_latex.css" />
 
-<div class="adv_latex_container {$options.blockAlign}" style="width:{$options.width}{$options.widthType};">
+<div class="adv_latex_container {$options.blockAlign} {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};">
 	<xen:if is="{$options.title}">
 		<span class="adv_latex_title">{xen:raw $options.title}</span>
 	</xen:if>
@@ -5631,11 +5601,11 @@ p.info span
 	color:{xen:property advbbcodebar_latex_container.border-all-color};
 	margin-left:{xen:property advbbcodebar_latex_container.margin-left};
 }]]></template>
-    <template title="sedo_adv_picasa" version_id="18" version_string="3.3"><![CDATA[<xen:require css="sedo_adv_picasa.css" />
+    <template title="sedo_adv_picasa" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_picasa.css" />
 
 <xen:if is="{$rendererStates.canViewBbCode}">
 	<xen:if is="{$options.type} == 'album'">	
-		<div id="{$options.id}" class="bbcode_picassa">
+		<div id="{$options.id}" class="bbcode_picassa {xen:if '{$options.responsiveMode}', 'responsive'}">
 			<embed 	type="application/x-shockwave-flash"
 				wmode="transparent" 
 				src="https://picasaweb.google.com/s/c/bin/slideshow.swf"
@@ -5645,7 +5615,7 @@ p.info span
 			</embed>
 		</div>
 	<xen:elseif is="{$options.type} == 'photo'" />
-		<div id="{$options.id}" class="bbcode_picassa">
+		<div id="{$options.id}" class="bbcode_picassa {xen:if '{$options.responsiveMode}', 'responsive'}">
 			<a href="{$options.img_urlLink}" target="_blank">
 				<img class="picasa_image" width="{$options.width}" height="{$options.height}" src="{$options.img_urlImg}" alt="" />
 			</a>
@@ -5677,14 +5647,28 @@ p.info span
 <xen:else />
 	{xen:phrase sedo_adv_picasa_noperms}
 </xen:if>]]></template>
-    <template title="sedo_adv_picasa.css" version_id="18" version_string="3.3"><![CDATA[.bbcode_picassa{
+    <template title="sedo_adv_picasa.css" version_id="28" version_string="3.5.0 - step1"><![CDATA[.bbcode_picassa{
 	{xen:property advbbcodebar_picasa_container}
 }
 
 .picasa_image{
 	{xen:property advbbcodebar_picasa_image}
-}]]></template>
-    <template title="sedo_adv_slider" version_id="22" version_string="3.3.3 - Beta 2"><![CDATA[<xen:require css="sedo_adv_slider.css" />
+}
+
+<xen:if is="{$xenOptions.sedo_adv_responsive_blockalign} == 'bleft'">
+	<xen:set var="$picasaAlign">left</xen:set>
+<xen:elseif is="{$xenOptions.sedo_adv_responsive_blockalign} == 'bcenter'" />
+	<xen:set var="$picasaAlign">center</xen:set>
+<xen:else />
+	<xen:set var="$picasaAlign">right</xen:set>
+</xen:if>
+
+.bbcode_picassa.responsive,
+.picasa_image.responsive{
+	text-align: {$picasaAlign};
+}
+]]></template>
+    <template title="sedo_adv_slider" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_slider.css" />
 <xen:require js="js/sedo/advtoolbar/jqt_slider.js" />
 
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
@@ -5694,9 +5678,10 @@ p.info span
 </xen:if>
 
 <div 	id="{$options.uniqid}"
-	class="JsOnly adv_slider_wrapper {xen:if '{$options.layout} == "inside"', 'inner'} {$options.blockAlign}"
+	class="JsOnly adv_slider_wrapper {xen:if '{$options.layout} == "inside"', 'inner'} {$options.blockAlign} {xen:if '{$options.responsiveMode}', 'responsive'}"
 	style="width:{$options.width}{$options.widthType};height:{$options.height}px"
 	data-autodiff="{$options.autodiff}"
+	data-noclick="{$options.noclick}"
 	{xen:if '{$options.autoplay}', 'data-autoplay="{$options.autoplay}"'}
 	{xen:if '{$options.interval}', 'data-interval="{$options.interval}"'}
 >
@@ -5716,12 +5701,22 @@ p.info span
 				</xen:if>
 				<xen:if is="{$slide.image}">
 					<div class="adv_slide_mask" style="width:{xen:if '{$options.widthType} == "%"','100%', '{$options.width}px'}">
-						<span>{xen:if '{$slide.attachParams.canView}  OR {$slide.attachParams.validAttachment}', '{xen:phrase sedo_adv_loading}', '{xen:phrase sedo_adv_slider_img_noperms}'}</span>
+						<xen:if is="({$slide.attachParams.canView} OR {$xenAddOns.Tinhte_AIO}) AND {$slide.attachParams.validAttachment}">
+							<span>{xen:phrase sedo_adv_loading}</span>
+						<xen:elseif is="!{$slide.attachParams.validAttachment} AND {$xenOptions.AdvBBcodeBar_fallbackperms}" />
+							<span>{xen:phrase sedo_adv_not_valid}</span>
+						<xen:elseif is="!{$slide.attachParams.canView}" />						
+							<span>{xen:phrase sedo_adv_slider_img_noperms}</span>
+						<xen:else />
+							<span>{xen:phrase sedo_adv_not_valid}</span>						
+						</xen:if>
 					</div>
 
 					<div class="adv_slide_image">
-						<xen:if is="{$slide.attachParams.canView} OR {$slide.attachParams.validAttachment}">
+						<xen:if is="{$slide.attachParams.canView} OR {$xenAddOns.Tinhte_AIO}">
 							<img class="advSliderImage {$slide.fullClass}" style="width:100%" src="{xen:raw $slide.attachParams.url}" alt="" />
+						<xen:elseif is="{$slide.attachParams.attachment.thumbnailUrl}" />
+							<img class="advSliderImage {$slide.fullClass}" style="width:100%" src="{xen:raw $slide.attachParams.attachment.thumbnailUrl}" alt="" />
 						<xen:else />
 							{xen:phrase sedo_adv_slider_img_noperms}
 						</xen:if>
@@ -5763,7 +5758,7 @@ p.info span
 		</xen:foreach>
 	</div>
 </noscript>]]></template>
-    <template title="sedo_adv_slider.css" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:comment>
+    <template title="sedo_adv_slider.css" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:comment>
 	WRAPPER
 </xen:comment>
 
@@ -5840,7 +5835,7 @@ p.info span
 	width:100%;
 	height:100%;
 	background-color:black;
-	z-index:40;
+	z-index:0; /*40*/
 }
 
 .advslides .adv_slide_mask span {
@@ -5928,6 +5923,11 @@ p.info span
 .advslidestabs a {
 	display:inline;
 	{xen:property advbbcodebar_slider_tabs}
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;	
 }
 
 .advslidestabs a.num {
@@ -5962,6 +5962,12 @@ p.info span
 	vertical-align: middle;
 	cursor :pointer;
 	color:#888888;
+	
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .advslidestabs .cmd:hover{
@@ -5994,6 +6000,11 @@ p.info span
 .adv_slider_navig{
 	position: relative;
 	{xen:helper cssImportant, {xen:property advbbcodebar_slider_nav_buttons}}
+ 	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 .adv_slider_navig:hover{
@@ -6109,7 +6120,7 @@ p.info span
 	color:{xen:property contentText} !important;
 	background-color:{xen:property contentBackground} !important;
 }]]></template>
-    <template title="sedo_adv_tabs" version_id="20" version_string="3.3.2"><![CDATA[<xen:require css="sedo_adv_tabs.css" />
+    <template title="sedo_adv_tabs" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_tabs.css" />
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
 	<xen:require js="js/sedo/advtoolbar/src/advbar_allinone.src.js" />	
 <xen:else />
@@ -6118,7 +6129,7 @@ p.info span
 
 <xen:set var="$panesHeight">{xen:calc '{$options.height}-({xen:property advbbcodebar_tabs_title.height}+{xen:property advbbcodebar_tabs_content.padding-top} + {xen:property advbbcodebar_tabs_content.padding-bottom})'}</xen:set>
 
-<div id="{$options.uniqid}" class="adv_tabs_wrapper {$options.blockAlign} JsOnly" style="width:{$options.width}{$options.widthType};height:{$options.height}px">
+<div id="{$options.uniqid}" class="adv_tabs_wrapper {$options.blockAlign} JsOnly {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};height:{$options.height}px">
 	<ul class="advtabs">
 		<xen:foreach loop="$options.tabs" value="$tab" i="$i" count="$total">
 			<li><a class="{xen:if '{$tab.open}', 'openMe'}" href="#{$options.uniqid}_{$i}" style="text-align:{$tab.align}">{xen:if '{$tab.title}', '{xen:raw $tab.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_tab}{$i}'}</a></li>
@@ -6133,7 +6144,7 @@ p.info span
 </div>
 
 <noscript>
-	<div id="{$options.uniqid}_noscript" class="adv_tabs_wrapper {$options.blockAlign} noscript" style="width:{$options.width}{$options.widthType};height:{$options.height}px">
+	<div id="{$options.uniqid}_noscript" class="adv_tabs_wrapper {$options.blockAlign} noscript {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};height:{$options.height}px">
 		<xen:foreach loop="$options.tabs" value="$tab" i="$i" count="$total">
 			<div id="{$options.uniqid}_{$i}" class="adv_tabs_noscript">
 				<div class="adv_tabs_noscript_title" style="text-align:{$tab.align}">{xen:if '{$tab.title}', '{xen:raw $tab.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_tab}{$i}'}</div>
@@ -6142,7 +6153,7 @@ p.info span
 		</xen:foreach>
 	</div>
 </noscript>]]></template>
-    <template title="sedo_adv_tabs.css" version_id="20" version_string="3.3.2"><![CDATA[.adv_tabs_wrapper{
+    <template title="sedo_adv_tabs.css" version_id="28" version_string="3.5.0 - step1"><![CDATA[.adv_tabs_wrapper{
 	{xen:property advbbcodebar_tabs_container}
 }
 
@@ -6163,12 +6174,12 @@ p.info span
 
 .adv_tabs_wrapper.fleft {
 	float:left;
-	margin:1px 10px 0 0 !important;
+	margin:1px 10px 5px 0 !important;
 }
 
 .adv_tabs_wrapper.fright {
 	float:right;
-	margin:1px 0 0 10px !important;
+	margin:1px 0 5px 10px !important;
 }
 
 
@@ -6311,32 +6322,16 @@ span.mce_adv_spoilerbb {
 }]]></template>
   </templates>
   <public_template_modifications>
-    <modification template="tiny_quattro_params" modification_key="adv_quattro_params_integration" description="Extend the tiny quattro addon params" execution_order="10" enabled="1" action="preg_replace">
-      <find><![CDATA[#(\t+)?<xen:comment>extend</xen:comment>#]]></find>
-      <replace><![CDATA[$1<xen:include template="adv_tiny_quattro_params" />
-$0]]></replace>
-    </modification>
     <modification template="tiny_quattro_phrases" modification_key="adv_quattro_phrases_integration" description="Extend the tiny quattro addon phrases" execution_order="10" enabled="1" action="preg_replace">
       <find><![CDATA[#(\t+)?<xen:comment>autotranslation</xen:comment>#]]></find>
       <replace><![CDATA[$1<xen:include template="adv_tiny_quattro_phrases" />
 $0]]></replace>
     </modification>
-    <modification template="tiny_quattro_js_setup" modification_key="sedo_adv_taghl" description="Add Tags Highlighter Plugin" execution_order="10" enabled="1" action="str_replace">
-      <find><![CDATA[plugins: []]></find>
-      <replace><![CDATA[plugins: [ "xenadvhl",]]></replace>
+    <modification template="MarkitUpIntegrator" modification_key="bbm_adv_miu_integration" description="BBM Advanced Bb Codes for Miu" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[<xen:require css="MarkitUpIntegrator.css" />]]></find>
+      <replace><![CDATA[<xen:if is="{$xenOptions.AdvBBcodeBar_JsMiu}"><xen:require js="js/sedo/advtoolbar/src/markitup.advbb.set.src.js" /><xen:else /><xen:require js="js/sedo/advtoolbar/markitup.advbb.set.js" /></xen:if>
+	$0]]></replace>
     </modification>
   </public_template_modifications>
   <bb_code_media_sites/>
-  <template_modifications>
-    <modification title="adv_quattro_params_integration" template_title="tiny_quattro_params" execute_order="10" modification_type="preg_replace" callback_class="" callback_method="" description="Extend the tiny quattro addon params" version_id="25" version_string="3.4.0" active="1">
-      <search_value><![CDATA[#(\t+)?<xen:comment>extend</xen:comment>#]]></search_value>
-      <replace_value><![CDATA[$1<xen:include template="adv_tiny_quattro_params" />
-$0]]></replace_value>
-    </modification>
-    <modification title="adv_quattro_phrases_integration" template_title="tiny_quattro_phrases" execute_order="10" modification_type="preg_replace" callback_class="" callback_method="" description="Extend the tiny quattro addon phrases" version_id="25" version_string="3.4.0" active="1">
-      <search_value><![CDATA[#(\t+)?<xen:comment>autotranslation</xen:comment>#]]></search_value>
-      <replace_value><![CDATA[$1<xen:include template="adv_tiny_quattro_phrases" />
-$0]]></replace_value>
-    </modification>
-  </template_modifications>
 </addon>
