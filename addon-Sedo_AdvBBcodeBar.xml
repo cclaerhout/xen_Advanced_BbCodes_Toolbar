@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.5.0.1" version_id="30" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.5.1" version_id="31" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -556,6 +556,13 @@ step=25</edit_format_params>
       <sub_options></sub_options>
       <relation group_id="AdvBBcodeBar" display_order="3000"/>
     </option>
+    <option option_id="sedo_bbm_adv_tinyquattro_menu_integration" edit_format="radio" data_type="boolean" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params>1={xen:phrase yes}
+0={xen:phrase no}</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="4000"/>
+    </option>
   </optiongroups>
   <permissions>
     <permission_groups/>
@@ -747,6 +754,8 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="option_sedo_adv_responsive_blockalign_explain" version_id="28" version_string="3.5.0 - step1"><![CDATA[Default value: center.]]></phrase>
     <phrase title="option_sedo_adv_responsive_maxwidth" version_id="28" version_string="3.5.0 - step1"><![CDATA[Responsive mode - max width]]></phrase>
     <phrase title="option_sedo_adv_responsive_maxwidth_explain" version_id="28" version_string="3.5.0 - step1"><![CDATA[This setting will not work with all Bb Codes. Some just need to have a width in % without any limit. Default is: 250px (this value shoud work with most of screens).]]></phrase>
+    <phrase title="option_sedo_bbm_adv_tinyquattro_menu_integration" version_id="30" version_string="3.5.0.1"><![CDATA[TinyMCE Quattro Menu Integration]]></phrase>
+    <phrase title="option_sedo_bbm_adv_tinyquattro_menu_integration_explain" version_id="30" version_string="3.5.0.1"><![CDATA[If you use the TinyMCE Quattro Menu feature, enable this option will create a new menu "Advanced insert".]]></phrase>
     <phrase title="sedoAdbBB_Content" version_id="3" version_string="3.03"><![CDATA[Tag content (Optional, should normally be empty)]]></phrase>
     <phrase title="sedoAdbBB_Option" version_id="3" version_string="3.03"><![CDATA[Tag option (Optional)]]></phrase>
     <phrase title="sedoAdbBB_Order" version_id="3" version_string="3.03"><![CDATA[Num.]]></phrase>
@@ -934,6 +943,8 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="sedo_adv_picasa_logo_text" version_id="18" version_string="3.3"><![CDATA[Picasa link]]></phrase>
     <phrase title="sedo_adv_picasa_noperms" version_id="18" version_string="3.3"><![CDATA[You're not authorised to see the Picasa content]]></phrase>
     <phrase title="sedo_adv_slider_img_noperms" version_id="20" version_string="3.3.2"><![CDATA[No permission to display the image]]></phrase>
+    <phrase title="sedo_bbm_adv_advanced_insert" version_id="30" version_string="3.5.0.1"><![CDATA[Advanced insert]]></phrase>
+    <phrase title="sedo_bbm_adv_tags_helper" version_id="30" version_string="3.5.0.1"><![CDATA[Tags helper]]></phrase>
     <phrase title="style_property_advbbcodebar_accordion_content_description_master" version_id="5" version_string="3.1"><![CDATA[]]></phrase>
     <phrase title="style_property_advbbcodebar_accordion_content_master" version_id="5" version_string="3.1"><![CDATA[[ACCORDION] Main Content]]></phrase>
     <phrase title="style_property_advbbcodebar_accordion_title_description_master" version_id="5" version_string="3.1"><![CDATA[]]></phrase>
@@ -3410,11 +3421,11 @@ p.info span
 		data-auto="{xen:phrase Sedo_AdvBBcodeBar_template_auto}"
 	</xen:set>
 </xen:include>]]></template>
-    <template title="quattro_dialog_bbm_adv_article" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_article" version_id="30" version_string="3.5.0.1"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_article.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/article.js" />
 
-<div class="mceTitle">{xen:phrase Sedo_AdvBBcodeBar_template_article_panel}</div>
+<div class="mceTitle FastReload">{xen:phrase Sedo_AdvBBcodeBar_template_article_panel}</div>
 
 <div id="adv_article">
 	<dl id="adv_article_text">
@@ -3423,7 +3434,7 @@ p.info span
 				name="text"
 				type="text"
 				data-message="{xen:phrase Sedo_AdvBBcodeBar_template_article_typeyourtext}"
-				class="mce-textbox mceFocus MceEditor"
+				class="mce-textbox MceReset MceSelec mceFocus MceEditor"
 			>{xen:if '{$selection.bbCode}', '{$selection.bbCode}', '{xen:phrase Sedo_AdvBBcodeBar_template_article_typeyourtext}'}</textarea>
 		</dd>
 	</dl>
@@ -3811,11 +3822,11 @@ p.info span
 .mce-xen-body .quattro_bimg_attach > img:hover {
 	border-color: red;
 }]]></template>
-    <template title="quattro_dialog_bbm_adv_encadre" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_encadre" version_id="30" version_string="3.5.0.1"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_encadre.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/encadre.js" />
 
-<div class="mceTitle">{xen:phrase Sedo_AdvBBcodeBar_template_enc_panel}</div>
+<div class="mceTitle FastReload">{xen:phrase Sedo_AdvBBcodeBar_template_enc_panel}</div>
 
 <div id="adv_encadre">
 	<dl class="xenmce_inline">
@@ -3874,7 +3885,7 @@ p.info span
 				name="text"
 				type="text"
 				data-message="{xen:phrase Sedo_AdvBBcodeBar_template_enc_typeyourtext}"	
-				class="mce-textbox mceFocus"
+				class="mce-textbox MceReset MceSelec mceFocus"
 			>{xen:if '{$selection.bbCode}', '{$selection.bbCode}', '{xen:phrase Sedo_AdvBBcodeBar_template_enc_typeyourtext}'}</textarea>
 
 			<p class="info">{xen:phrase Sedo_AdvBBcodeBar_template_enc_information} <span>{xen:phrase Sedo_AdvBBcodeBar_template_enc_info}</span></p>
@@ -4065,11 +4076,11 @@ p.info span
 {
 	width:100px;
 }]]></template>
-    <template title="quattro_dialog_bbm_adv_fieldset" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_fieldset" version_id="30" version_string="3.5.0.1"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_fieldset.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/fieldset.js" />
 
-<div class="mceTitle">{xen:phrase Sedo_AdvBBcodeBar_template_fieldset_panel}</div>
+<div class="mceTitle FastReload">{xen:phrase Sedo_AdvBBcodeBar_template_fieldset_panel}</div>
 
 <div id="adv_fieldset">
 	<dl class="xenmce_inline">
@@ -4118,7 +4129,7 @@ p.info span
 				name="text"
 				type="text"
 				data-message="{xen:phrase Sedo_AdvBBcodeBar_template_fieldset_typeyourtext}"	
-				class="mce-textbox mceFocus"
+				class="mce-textbox MceReset MceSelec mceFocus"
 			>{xen:if '{$selection.bbCode}', '{$selection.bbCode}', '{xen:phrase Sedo_AdvBBcodeBar_template_fieldset_typeyourtext}'}</textarea>
 		</dd>
 	</dl>
@@ -4223,11 +4234,11 @@ p.info span
 	vertical-align:middle;
 }
 ]]></template>
-    <template title="quattro_dialog_bbm_adv_latex" version_id="27" version_string="3.4.2"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_latex" version_id="30" version_string="3.5.0.1"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_latex.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/latex.js" />
 
-<div class="mceTitle" data-width="550" data-height="250">{xen:phrase Sedo_AdvBBcodeBar_template_latex_panel}</div>
+<div class="mceTitle FastReload" data-width="550" data-height="250">{xen:phrase Sedo_AdvBBcodeBar_template_latex_panel}</div>
 
 <div id="adv_latex">
 	<dl id="adv_latex_align" class="xenmce_inline">
@@ -4310,7 +4321,7 @@ p.info span
 						name="text"
 						type="text"
 						data-message="{xen:phrase Sedo_AdvBBcodeBar_template_latex_typeyourlatexcode}"	
-						class="mce-textbox mceFocus"
+						class="mce-textbox MceReset MceSelec mceFocus"
 					>{xen:if '{$selection.bbCode}', '{$selection.bbCode}', '{xen:phrase Sedo_AdvBBcodeBar_template_latex_typeyourlatexcode}'}</textarea>
 				</dd>
 			</dl>
@@ -4478,11 +4489,11 @@ p.info span
 }
 
 ]]></template>
-    <template title="quattro_dialog_bbm_adv_picasa" version_id="27" version_string="3.4.2"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_picasa" version_id="30" version_string="3.5.0.1"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_picasa.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/picasa.js" />
 
-<div class="mceTitle" data-height="100">{xen:phrase Sedo_AdvBBcodeBar_template_picasa_panel}</div>
+<div class="mceTitle FastReload" data-height="100">{xen:phrase Sedo_AdvBBcodeBar_template_picasa_panel}</div>
 
 <div id="adv_picasa">
 	<dl class="xenmce_inline adv_picasa">
@@ -4490,7 +4501,7 @@ p.info span
 		<dd><input 	id="adv_picasa_source"
 				name="source"
 				type="text"
-				class="mce-textbox mceFocus"
+				class="mce-textbox MceReset MceLink mceFocus"
 				value="{$selection.text}"
 			/>
 		</dd>	
@@ -6326,6 +6337,12 @@ span.mce_adv_spoilerbb {
       <find><![CDATA[#(\t+)?<xen:comment>autotranslation</xen:comment>#]]></find>
       <replace><![CDATA[$1<xen:include template="adv_tiny_quattro_phrases" />
 $0]]></replace>
+    </modification>
+    <modification template="tiny_quattro_phrases" modification_key="adv_quattro_phrases_integration_2" description="Extend the tiny quattro  i18n phrases" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[<xen:comment>extend_i18n</xen:comment>]]></find>
+      <replace><![CDATA[$0
+		"Advanced Insert": "{xen:jsescape {xen:phrase sedo_bbm_adv_advanced_insert}}",
+		"Tags Helper": "{xen:jsescape {xen:phrase sedo_bbm_adv_tags_helper}}",]]></replace>
     </modification>
     <modification template="MarkitUpIntegrator" modification_key="bbm_adv_miu_integration" description="BBM Advanced Bb Codes for Miu" execution_order="10" enabled="1" action="str_replace">
       <find><![CDATA[<xen:require css="MarkitUpIntegrator.css" />]]></find>
