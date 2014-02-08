@@ -5679,7 +5679,7 @@ p.info span
 	text-align: {$picasaAlign};
 }
 ]]></template>
-    <template title="sedo_adv_slider" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_slider.css" />
+    <template title="sedo_adv_slider" version_id="31" version_string="3.5.1"><![CDATA[<xen:require css="sedo_adv_slider.css" />
 <xen:require js="js/sedo/advtoolbar/jqt_slider.js" />
 
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
@@ -5763,7 +5763,7 @@ p.info span
 				<xen:if is="{$slide.image}">
 					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:if '{$slide.attachParams.canView} OR {$slide.attachParams.validAttachment}', '<img style="width:100%" src="{xen:raw $slide.content}" alt="" />', '{xen:phrase sedo_adv_slider_img_noperms}'}</div>
 				<xen:else />
-					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:raw $slide.content}</div>
+					<div class="adv_slider_noscript_content" style="height:{$options.height}px;">{xen:helper bbm_strip_noscript, {xen:raw $slide.content}}</div>
 				</xen:if>
 			</div>
 		</xen:foreach>
@@ -6063,7 +6063,7 @@ p.info span
 	padding:5px;
 	overflow: auto;
 }]]></template>
-    <template title="sedo_adv_spoilerbb" version_id="17" version_string="3.2.1"><![CDATA[<xen:require css="sedo_adv_spoilerbb.css" />
+    <template title="sedo_adv_spoilerbb" version_id="31" version_string="3.5.1"><![CDATA[<xen:require css="sedo_adv_spoilerbb.css" />
 
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
 	<xen:require js="js/sedo/advtoolbar/src/advbar_allinone.src.js" />	
@@ -6131,7 +6131,7 @@ p.info span
 	color:{xen:property contentText} !important;
 	background-color:{xen:property contentBackground} !important;
 }]]></template>
-    <template title="sedo_adv_tabs" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_tabs.css" />
+    <template title="sedo_adv_tabs" version_id="31" version_string="3.5.1"><![CDATA[<xen:require css="sedo_adv_tabs.css" />
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
 	<xen:require js="js/sedo/advtoolbar/src/advbar_allinone.src.js" />	
 <xen:else />
@@ -6159,7 +6159,7 @@ p.info span
 		<xen:foreach loop="$options.tabs" value="$tab" i="$i" count="$total">
 			<div id="{$options.uniqid}_{$i}" class="adv_tabs_noscript">
 				<div class="adv_tabs_noscript_title" style="text-align:{$tab.align}">{xen:if '{$tab.title}', '{xen:raw $tab.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_tab}{$i}'}</div>
-				<div class="adv_tabs_noscript_content" style="{xen:if '{$options.height}', 'height:{$options.height}px;'}">{xen:raw $tab.content}</div>
+				<div class="adv_tabs_noscript_content" style="{xen:if '{$options.height}', 'height:{$options.height}px;'}">{xen:helper bbm_strip_noscript, {xen:raw $tab.content}}</div>
 			</div>
 		</xen:foreach>
 	</div>
@@ -6351,4 +6351,5 @@ $0]]></replace>
     </modification>
   </public_template_modifications>
   <bb_code_media_sites/>
+  <bb_codes/>
 </addon>

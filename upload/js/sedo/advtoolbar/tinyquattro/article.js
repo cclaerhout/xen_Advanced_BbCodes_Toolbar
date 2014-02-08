@@ -6,24 +6,25 @@ xenMCE.Templates.Bbm_adv_article = {
 
 		/**
 			//Can't use it yet - cf bug #6018 => http://www.tinymce.com/develop/bugtracker_view.php?id=6018
-			var contentcss = tinymce.settings.content_css;
-	
-			function addEditor()
-			{
-				tinyMCE.init({
-					selector: ".mce-xen-body #adv_article_ctrl_text",
-					statusbar: false,
-					menubar:false,
-					skin: false,
-					content_css: contentcss,
-					toolbar_items_size: 'small',
-					plugins: [
-						"xenforo advlist autolink lists textcolor"
-					],
-					toolbar: "removeformat undo redo | forecolor bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent"
-				});
-			}
-			addEditor();
+			var loadNestedEditors = function($popup){
+				var $nestedEditors = $popup.find('.MceEditor').css('visibility', 'visible'),
+					nestedEditorsConfig = {
+						toolbar_items_size: 'small',
+						toolbar: "undo redo | bold italic underline",
+						plugins: [
+							"xenforo"
+						],
+						menubar: false,
+						statusbar: false,
+						skin: false
+				};
+
+				var abc = $.extend({}, ed.settings, nestedEditorsConfig);
+				delete abc['selector'];
+				
+				$nestedEditors.tinymce(abc);
+			};
+			loadNestedEditors($ovl);
 		*/
 
 		//Textarea Management

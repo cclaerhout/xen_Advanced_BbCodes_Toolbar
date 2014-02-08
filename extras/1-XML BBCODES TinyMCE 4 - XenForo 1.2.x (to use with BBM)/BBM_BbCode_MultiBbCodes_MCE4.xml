@@ -8,6 +8,8 @@
       <example><![CDATA[#]]></example>
       <active>1</active>
       <display_help>0</display_help>
+      <bbcode_id>sedo_slides</bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -66,6 +68,86 @@
       <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_acc_tabs_slider}]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
+    </Button>
+  </BbCode>
+  <BbCode>
+    <General>
+      <tag>@highlight_helper</tag>
+      <title><![CDATA[[BBM] Highlight Helper]]></title>
+      <description><![CDATA[Highlighting helper]]></description>
+      <example><![CDATA[#]]></example>
+      <active>1</active>
+      <display_help>0</display_help>
+      <bbcode_id></bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
+    </General>
+    <Methods>
+      <Replacement>
+        <start_range><![CDATA[#]]></start_range>
+        <end_range><![CDATA[#]]></end_range>
+        <options_number>0</options_number>
+      </Replacement>
+      <Template>
+        <active>0</active>
+        <name></name>
+        <callback_class></callback_class>
+        <callback_method></callback_method>
+      </Template>
+      <PhpCallback>
+        <class></class>
+        <method></method>
+      </PhpCallback>
+    </Methods>
+    <ParserOptions>
+      <stopAutoLink>none</stopAutoLink>
+      <parseOptions>0</parseOptions>
+      <regex></regex>
+      <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
+      <plainCallback>0</plainCallback>
+      <plainChildren>0</plainChildren>
+      <stopSmilies>0</stopSmilies>
+      <stopLineBreakConversion>0</stopLineBreakConversion>
+      <wrapping_tag>none</wrapping_tag>
+      <wrapping_option></wrapping_option>
+      <emptyContent_check>0</emptyContent_check>
+      <options_separator></options_separator>
+    </ParserOptions>
+    <ParserPerms>
+      <parser_has_usr>0</parser_has_usr>
+      <parser_usr>a:0:{}</parser_usr>
+      <parser_return>none</parser_return>
+      <parser_return_delay>0</parser_return_delay>
+    </ParserPerms>
+    <ViewPerms>
+      <view_has_usr>0</view_has_usr>
+      <view_usr>a:0:{}</view_usr>
+      <view_return>none</view_return>
+      <view_return_delay>0</view_return_delay>
+    </ViewPerms>
+    <Button>
+      <hasButton>1</hasButton>
+      <button_has_usr>0</button_has_usr>
+      <button_usr>a:0:{}</button_usr>
+      <killCmd>1</killCmd>
+      <custCmd>tags_highlighter</custCmd>
+      <quattro_button_type>icons_xen</quattro_button_type>
+      <quattro_button_type_opt><![CDATA[e027]]></quattro_button_type_opt>
+      <quattro_button_return>direct</quattro_button_return>
+      <quattro_button_return_opt><![CDATA[]]></quattro_button_return_opt>
+      <imgMethod></imgMethod>
+      <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_highlight}]]></buttonDesc>
+      <tagOptions><![CDATA[]]></tagOptions>
+      <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>1</redactor_has_icon>
+      <redactor_sprite_mode>1</redactor_sprite_mode>
+      <redactor_sprite_params_x>2</redactor_sprite_params_x>
+      <redactor_sprite_params_y>-125</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[styles/default/xenforo/editor/icons.png]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -84,6 +166,8 @@
 [/accordion]]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id></bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -142,6 +226,11 @@
       <buttonDesc><![CDATA[]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -152,6 +241,8 @@
       <example><![CDATA[[article]This is an article[/article]]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id>sedo_article</bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -210,6 +301,11 @@
       <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_article}]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -221,6 +317,8 @@
 [bimg=100]http://www.google.com/images/srpr/logo3w.png[/bimg]]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id>sedo_bimg</bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -279,6 +377,11 @@
       <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_bimg_new}]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -290,6 +393,8 @@
 [encadre=30]This is a text box with a long text. Can be used with an article for example.[/encadre]Content]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id>sedo_encadre</bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -348,6 +453,11 @@
       <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_encadre}]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -360,6 +470,8 @@
 [fieldset=Title|80]This is a fieldset[/fieldset]]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id>sedo_fieldset</bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -418,6 +530,11 @@
       <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_fieldset}]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -428,6 +545,8 @@
       <example><![CDATA[[gview]http://docs.yahoo.com/docs/pr/pdf/1q05pr.pdf[/gview]]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id>sedo_gview</bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -486,74 +605,11 @@
       <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_gview}]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
-    </Button>
-  </BbCode>
-  <BbCode>
-    <General>
-      <tag>justif</tag>
-      <title><![CDATA[[BBM] JUSTIF]]></title>
-      <description><![CDATA[This BB Code allows your members to fully justify a text]]></description>
-      <example><![CDATA[[justif]Vestibulum hendrerit euismod quam, quis pretium tellus bibendum non. [/justif]]]></example>
-      <active>1</active>
-      <display_help>1</display_help>
-    </General>
-    <Methods>
-      <Replacement>
-        <start_range><![CDATA[<div style="text-align:justify;margin-right:5px;margin-left:5px;">]]></start_range>
-        <end_range><![CDATA[</div>]]></end_range>
-        <options_number>0</options_number>
-      </Replacement>
-      <Template>
-        <active>0</active>
-        <name></name>
-        <callback_class></callback_class>
-        <callback_method></callback_method>
-      </Template>
-      <PhpCallback>
-        <class></class>
-        <method></method>
-      </PhpCallback>
-    </Methods>
-    <ParserOptions>
-      <stopAutoLink>none</stopAutoLink>
-      <parseOptions>0</parseOptions>
-      <regex></regex>
-      <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
-      <plainCallback>0</plainCallback>
-      <plainChildren>0</plainChildren>
-      <stopSmilies>0</stopSmilies>
-      <stopLineBreakConversion>0</stopLineBreakConversion>
-      <wrapping_tag>none</wrapping_tag>
-      <wrapping_option></wrapping_option>
-      <emptyContent_check>0</emptyContent_check>
-      <options_separator></options_separator>
-    </ParserOptions>
-    <ParserPerms>
-      <parser_has_usr>0</parser_has_usr>
-      <parser_usr>a:0:{}</parser_usr>
-      <parser_return>none</parser_return>
-      <parser_return_delay>0</parser_return_delay>
-    </ParserPerms>
-    <ViewPerms>
-      <view_has_usr>0</view_has_usr>
-      <view_usr>a:0:{}</view_usr>
-      <view_return>none</view_return>
-      <view_return_delay>0</view_return_delay>
-    </ViewPerms>
-    <Button>
-      <hasButton>1</hasButton>
-      <button_has_usr>0</button_has_usr>
-      <button_usr>a:0:{}</button_usr>
-      <killCmd>0</killCmd>
-      <custCmd></custCmd>
-      <quattro_button_type>icons_mce</quattro_button_type>
-      <quattro_button_type_opt><![CDATA[e006]]></quattro_button_type_opt>
-      <quattro_button_return>direct</quattro_button_return>
-      <quattro_button_return_opt><![CDATA[]]></quattro_button_return_opt>
-      <imgMethod></imgMethod>
-      <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_justif}]]></buttonDesc>
-      <tagOptions><![CDATA[]]></tagOptions>
-      <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -564,6 +620,8 @@
       <example><![CDATA[[LATEX] c=\sqrt{a^2+b^2} [/LATEX]]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id>sedo_latex</bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -622,6 +680,11 @@
       <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_latex}]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -636,6 +699,8 @@
 [picasa=100,80]https://picasaweb.google.com/104221919544446242342/Exemples#5498233130192530834[/picasa]]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id>sedo_picasa</bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -694,6 +759,11 @@
       <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_picasa}]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -709,6 +779,8 @@
 [/slider]]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id></bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -759,14 +831,19 @@
       <button_usr>a:0:{}</button_usr>
       <killCmd>0</killCmd>
       <custCmd></custCmd>
-      <quattro_button_type></quattro_button_type>
+      <quattro_button_type>manual</quattro_button_type>
       <quattro_button_type_opt><![CDATA[]]></quattro_button_type_opt>
-      <quattro_button_return></quattro_button_return>
+      <quattro_button_return>direct</quattro_button_return>
       <quattro_button_return_opt><![CDATA[]]></quattro_button_return_opt>
-      <imgMethod>Direct</imgMethod>
+      <imgMethod></imgMethod>
       <buttonDesc><![CDATA[]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -777,6 +854,8 @@
       <example><![CDATA[[spoilerbb]hidden text[/spoilerbb]]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id>sedo_spoilerbb</bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -835,6 +914,11 @@
       <buttonDesc><![CDATA[{phrase:Sedo_AdvBBcodeBar_button_spoiler}]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
   <BbCode>
@@ -855,6 +939,8 @@
 [/tabs]]]></example>
       <active>1</active>
       <display_help>1</display_help>
+      <bbcode_id></bbcode_id>
+      <bbcode_addon>Sedo_AdvBBcodeBar</bbcode_addon>
     </General>
     <Methods>
       <Replacement>
@@ -874,7 +960,7 @@
       </PhpCallback>
     </Methods>
     <ParserOptions>
-      <stopAutoLink>0</stopAutoLink>
+      <stopAutoLink>none</stopAutoLink>
       <parseOptions>1</parseOptions>
       <regex></regex>
       <trimLeadingLinesAfter>0</trimLeadingLinesAfter>
@@ -905,14 +991,19 @@
       <button_usr>a:0:{}</button_usr>
       <killCmd>1</killCmd>
       <custCmd>adv_accordion</custCmd>
-      <quattro_button_type></quattro_button_type>
+      <quattro_button_type>manual</quattro_button_type>
       <quattro_button_type_opt><![CDATA[]]></quattro_button_type_opt>
-      <quattro_button_return></quattro_button_return>
+      <quattro_button_return>direct</quattro_button_return>
       <quattro_button_return_opt><![CDATA[]]></quattro_button_return_opt>
-      <imgMethod>Direct</imgMethod>
+      <imgMethod></imgMethod>
       <buttonDesc><![CDATA[]]></buttonDesc>
       <tagOptions><![CDATA[]]></tagOptions>
       <tagContent><![CDATA[]]></tagContent>
+      <redactor_has_icon>0</redactor_has_icon>
+      <redactor_sprite_mode>0</redactor_sprite_mode>
+      <redactor_sprite_params_x>0</redactor_sprite_params_x>
+      <redactor_sprite_params_y>0</redactor_sprite_params_y>
+      <redactor_image_url><![CDATA[]]></redactor_image_url>
     </Button>
   </BbCode>
 </bbm_bbcodes>

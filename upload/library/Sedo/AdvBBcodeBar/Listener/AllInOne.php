@@ -47,9 +47,9 @@ class Sedo_AdvBBcodeBar_Listener_AllInOne
 		if($xenOptions->sedo_bbm_adv_tinyquattro_menu_integration)
 		{
 			$menuItems = array(
-				'bbm_bimg', 'bbm_at_bbm_slides', '@adv_insert_1', '|',
-				 'bbm_article', 'bbm_fieldset', 'bbm_encadre', 'bbm_spoilerbb', '@adv_insert_2', '|', 
-				 'bbm_latex', 'bbm_gview', 'bbm_picasa', '@adv_insert_3');
+				'bbm_sedo_bimg', 'bbm_sedo_slides', '|',
+				'bbm_sedo_article', 'bbm_sedo_fieldset', 'bbm_sedo_encadre', 'bbm_sedo_spoilerbb', '|', 
+				'bbm_sedo_latex', 'bbm_sedo_gview', 'bbm_sedo_picasa');
 				 
 			$mceConfigObj->addMenu('adv_insert', 'insert',  'Advanced Insert', $menuItems);
 			
