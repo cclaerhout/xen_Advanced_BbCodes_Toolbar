@@ -44,7 +44,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		 * Thanks to ZeZeene
 		 * Former: $imgSrc = 'styles/default/xenforo/clear.png';
 		 **/
-		$imgSrc = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEHAAEALAAAAAABAAEAAAICTAEAOw==';
+		$imgSrc = BBM_Helper_BbCodes::getEmptyImageSource();
 		$search = '#src="(.*?)"#ui';
 		$replace = 'src="'.$imgSrc.'" data-spoiler-src="$1"';
 
@@ -636,14 +636,14 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		/*Get slides from content*/
-		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.*?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
+		$wip = BBM_Helper_BbCodes::getSpecialTags($content);
 		$content = ''; //Raz content
 		
 		$slides = array();
 		foreach($wip as $slide)
 		{
-			$slide_content = $slide[4];
-			$slide_attributes = $slide[2];
+			$slide_content = $slide['content'];
+			$slide_attributes = $slide['option'];
 			$height = $globalHeight;
 
 			/*Default Slave Options*/
@@ -845,7 +845,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		/*Get slides from content*/
-		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.*?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
+		$wip = BBM_Helper_BbCodes::getSpecialTags($content);
 		$content = ''; //Raz content
 		
 		$tabs = array();
@@ -860,10 +860,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$replace = '<a class="adv_tabs_link" href="#'.$uniqid.'_$1">$2</a>';
 			$replaceNoScript = '<a href="'.$requestUri.'#'.$uniqid.'_$1">$2</a>';			
 
-			$content = preg_replace($search, $replace, $slide[4]);
-			$contentNoScript = preg_replace($search, $replaceNoScript, $slide[4]);
+			$content = preg_replace($search, $replace, $slide['content']);
+			$contentNoScript = preg_replace($search, $replaceNoScript, $slide['content']);
 			
-			$slide_attributes = $slide[2];
+			$slide_attributes = $slide['option'];
 			$title = '';
 			$hasAlreadyBeenOpened = false;
 			$align = 'center';
@@ -1090,7 +1090,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		/*Get slides from content*/
-		preg_match_all('#{slide(=(\[([\w\d]+)(?:=.+?)?\].+?\[/\3\]|[^{}]+)+?)?}(.*?){/slide}(?!(?:\W+)?{/slide})#is', $content, $wip, PREG_SET_ORDER);
+		$wip = BBM_Helper_BbCodes::getSpecialTags($content);
 		$content = ''; //Raz content
 		
 		$slides = array();
@@ -1101,8 +1101,8 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		foreach($wip as $k => $slide)
 		{
 			$id = $k+1;
-			$content = $slide[4];
-			$slide_attributes = $slide[2];
+			$content = $slide['content'];
+			$slide_attributes = $slide['option'];
 			$title = '';
 			$hasAlreadyBeenOpened = false;
 			$open = false;
@@ -1501,10 +1501,12 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				Get Background Color
 				Available data: backgroundColor
 			**/
-			$backgroundColor = XenForo_Template_Helper_Core::styleProperty('advbbcodebar_picasa_background');
-			$backgroundColor = (preg_match('#rgba#i', $backgroundColor)) ? XenForo_Helper_Color::unRgba($backgroundColor) : $backgroundColor;
-			$backgroundColor = self::_rgb2hex($backgroundColor);
-	
+			$backgroundColor = BBM_Helper_BbCodes::getHexaColor(
+				XenForo_Template_Helper_Core::styleProperty('advbbcodebar_picasa_background'),
+				'000000',
+				''
+			);
+
 			/*Prepare options*/
 			$options['extra'] = $extra;
 			$options['hexaColor'] = $backgroundColor;
@@ -1523,33 +1525,9 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 	}
 
-	/*Mini Tools*/
-	protected static function _rgb2hex($color)
-	{
-		//Match R, G, B values
-		preg_match('#^rgb\((?P<r>\d{1,3}).+?(?P<g>\d{1,3}).+?(?P<b>\d{1,3})\)$#i', $color, $rgb);
-		//Convert them in hexa
-		//Code source: http://forum.codecall.net/php-tutorials/22589-rgb-hex-colors-hex-colors-rgb-php.html				
-		$output = sprintf("%x", ($rgb['r'] << 16) + ($rgb['g'] << 8) + $rgb['b']);
-		
-	       	return $output;
-	}
-
 	public static function AioInstalled()
 	{
-		$isInstalled = false;
-		
-		if(XenForo_Application::get('options')->get('currentVersionId') >= 1020031)
-		{
-			$addons = XenForo_Application::get('addOns');
-
-			if(isset($addons['Tinhte_AIO']))
-			{
-				$isInstalled = true;
-			}
-		}
-		
-		return $isInstalled;
+		return BBM_Helper_BbCodes::installedAddon('Tinhte_AIO');
 	}
 }
 //Zend_Debug::dump($abc);
