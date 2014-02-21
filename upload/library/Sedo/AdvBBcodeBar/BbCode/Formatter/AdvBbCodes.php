@@ -40,8 +40,13 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		$search = '#src="(.*?)"#ui';
+
+		/**
+		 * http://css-tricks.com/snippets/html/base64-encode-of-1x1px-transparent-gif/
+		 * Thanks to ZeZeene
+		 **/
+		$replace = 'src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEHAAEALAAAAAABAAEAAAICTAEAOw==" data-spoiler-src="$1"';
 		//$replace = 'src="styles/default/xenforo/clear.png" data-spoiler-src="$1"';
-		$replace = 'src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEHAAEALAAAAAABAAEAAAICTAEAOw==" data-spoiler-src="$1"'; //Thanks to ZeZeene
 
 		$line = preg_replace($search, $replace, $line);
 		$line .= $noscript;
