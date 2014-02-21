@@ -7,6 +7,12 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$xenOptions = XenForo_Application::get('options');
 		$visitor = XenForo_Visitor::getInstance();
 
+		if(!empty($rendererStates['wrapMeIndenticalParent']))
+		{
+			//The source has already been modified, don't do it twice (otherwise the ref src will be the blank img)
+			return $content;
+		}
+
 		$content = preg_replace_callback(
 			'#<(img|iframe)[^>]+?>#ui', 
 			array('Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes', '_filterSpoilerBb'),
@@ -34,7 +40,8 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		$search = '#src="(.*?)"#ui';
-		$replace = 'src="styles/default/xenforo/clear.png" data-spoiler-src="$1"';
+		//$replace = 'src="styles/default/xenforo/clear.png" data-spoiler-src="$1"';
+		$replace = 'src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEHAAEALAAAAAABAAEAAAICTAEAOw==" data-spoiler-src="$1"'; //Thanks to ZeZeene
 
 		$line = preg_replace($search, $replace, $line);
 		$line .= $noscript;
