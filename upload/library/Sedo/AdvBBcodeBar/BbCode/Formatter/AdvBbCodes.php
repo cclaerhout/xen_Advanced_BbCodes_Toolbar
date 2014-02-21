@@ -39,17 +39,21 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$line = str_replace('<'.$tag, '<'.$tag.' class="JsOnly"', $line);
 		}
 		
-		$search = '#src="(.*?)"#ui';
-
 		/**
 		 * http://css-tricks.com/snippets/html/base64-encode-of-1x1px-transparent-gif/
 		 * Thanks to ZeZeene
+		 * Former: $imgSrc = 'styles/default/xenforo/clear.png';
 		 **/
-		$replace = 'src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEHAAEALAAAAAABAAEAAAICTAEAOw==" data-spoiler-src="$1"';
-		//$replace = 'src="styles/default/xenforo/clear.png" data-spoiler-src="$1"';
+		$imgSrc = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEHAAEALAAAAAABAAEAAAICTAEAOw==';
+		$search = '#src="(.*?)"#ui';
+		$replace = 'src="'.$imgSrc.'" data-spoiler-src="$1"';
 
-		$line = preg_replace($search, $replace, $line);
-		$line .= $noscript;
+		//Check if the replacement has not already been done before (manual nested tag)
+		if(preg_match($search, $line, $match) && $match[1] != $imgSrc)
+		{
+			$line = preg_replace($search, $replace, $line);
+			$line .= $noscript;
+		}
 
 		return $line;
 	}
