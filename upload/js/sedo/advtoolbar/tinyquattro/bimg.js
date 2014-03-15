@@ -1,13 +1,16 @@
 xenMCE.Templates.Bbm_adv_bimg = {
 	onafterload: function($ovl, data, ed, parentClass)
 	{
-			var selection = parentClass.getSelection(), content = selection.text,
-			phrases = xenMCE.Phrases, auto = phrases.adv_auto, adv_bimg_id = phrases.adv_bimg_id,
-			match_id = content.match(/(?:alt="attach(?:Thumb|Full)(\d+?)"|\[ATTACH(?:=.+?)?\](\d+?)\[\/ATTACH\]|(\d+))/i);
+			var selection = parentClass.getSelection(), 
+				content = selection.text,
+				phrases = xenMCE.Phrases, 
+				auto = phrases.adv_auto, 
+				adv_bimg_id = phrases.adv_bimg_id,
+				match_id = content.match(/(?:alt="attach(?:Thumb|Full)(\d+?)"|\[ATTACH(?:=.+?)?\](\d+?)\[\/ATTACH\]|(\d+))/i);
 			
 			
-			$urlPhrase = $ovl.find('#adv_bimg_url_phrase');
-			$bimgSrc = $ovl.find('#adv_bimg_src');
+			var $urlPhrase = $ovl.find('#adv_bimg_url_phrase'),
+				$bimgSrc = $ovl.find('#adv_bimg_src');
 			
 			//URL OPTIONS
 				/*Xen Attachements*/
@@ -21,71 +24,71 @@ xenMCE.Templates.Bbm_adv_bimg = {
 					$bimgSrc.val(parentClass.unescapeHtml(content).replace(/\<[^\>]*\>/gi, ''));
 			
 			//FLOAT OPTIONS
-			$info = $ovl.find('.info').hide();
-			$floatOptions = $ovl.find('#adv_bimg_float_select li');
+			var $info = $ovl.find('.info').hide(),
+				$floatOptions = $ovl.find('#adv_bimg_float_select li');
 			
 			$floatOptions.click(function(e){
-			
-				$target = $ovl.find('#adv_bimg_float_input');
-				$active = $ovl.find('#adv_bimg_float_select li.active');
+				var $this = $(this),
+					$target = $ovl.find('#adv_bimg_float_input'),
+					$active = $ovl.find('#adv_bimg_float_select li.active');
 	
-				if(!$(this).hasClass('active'))
+				if(!$this.hasClass('active'))
 				{
-					var target = $(this).attr('class');
+					var target = $this.attr('class');
 					$active.removeClass('active');
-					$(this).addClass('active');
+					$this.addClass('active');
 					$target.val(target);
 	
-					if($(this).hasClass('normal'))
+					if($this.hasClass('normal'))
 						$info.slideUp();
 					else
 						$info.slideDown();
 				}
-				else if ($(this).hasClass('active') && ($(this).attr('id') == 'adv_bimg_normal_select'))
+				else if($this.hasClass('active') && ($this.attr('id') == 'adv_bimg_normal_select'))
 				{
-					if($(this).hasClass('normal'))
+					if($this.hasClass('normal'))
 					{
-						$(this).removeClass('normal').addClass('normal_center');
+						$this.removeClass('normal').addClass('normal_center');
 						$target.val('normal_center');
-						$(this).children('#adv_bimg_normalText').addClass('hidden');
-						$(this).children('#adv_bimg_centerText').removeClass('hidden');
+						$this.children('#adv_bimg_normalText').addClass('hidden');
+						$this.children('#adv_bimg_centerText').removeClass('hidden');
 					}
 					else if($(this).hasClass('normal_center'))
 					{
-						$(this).removeClass('normal_center').addClass('normal_right');
+						$this.removeClass('normal_center').addClass('normal_right');
 						$target.val('normal_right');
-						$(this).children('#adv_bimg_centerText').addClass('hidden');
-						$(this).children('#adv_bimg_rightText').removeClass('hidden');
+						$this.children('#adv_bimg_centerText').addClass('hidden');
+						$this.children('#adv_bimg_rightText').removeClass('hidden');
 					}
 					else
 					{
-						$(this).removeClass('normal_right').addClass('normal');
+						$this.removeClass('normal_right').addClass('normal');
 						$target.val('normal');
-						$(this).children('#adv_bimg_rightText').addClass('hidden');
-						$(this).children('#adv_bimg_normalText').removeClass('hidden');
+						$this.children('#adv_bimg_rightText').addClass('hidden');
+						$this.children('#adv_bimg_normalText').removeClass('hidden');
 					}
 				}
 			});
 	
 			//CAPTION OPTIONS
-			$optionsCaption = $ovl.find('#adv_bimg_caption_select li')
+			var $optionsCaption = $ovl.find('#adv_bimg_caption_select li')
 			
 			$optionsCaption.click(function(e){
-			
-				$target = $ovl.find('#adv_bimg_caption_position_input');
-				$active = $ovl.find('#adv_bimg_caption_select li.active');
+				var $this = $(this),
+					$target = $ovl.find('#adv_bimg_caption_position_input'),
+					$active = $ovl.find('#adv_bimg_caption_select li.active');
 	
-				if(!$(this).hasClass('active'))	{
-					var target = $(this).attr('class');
+				if(!$this.hasClass('active'))	{
+					var target =$this.attr('class');
 					$active.removeClass('active');
-					$(this).addClass('active');
+					$this.addClass('active');
 					$target.val(target);
 				}
 			});
 	
 			//Width Management
-			$width = $ovl.find('#adv_bimg_width');
-			$widthtype = $ovl.find('#adv_bimg_width_type').hide();
+			var $width = $ovl.find('#adv_bimg_width'),
+				$widthtype = $ovl.find('#adv_bimg_width_type').hide();
 			
 			$width.one('focus', function () {
 				$(this).val('');
@@ -119,7 +122,7 @@ xenMCE.Templates.Bbm_adv_bimg = {
 			});
 			
 			/*Attachments options*/
-			$attachIMG = $ovl.find('#xenpane_bimg_attach img');
+			var $attachIMG = $ovl.find('#xenpane_bimg_attach img');
 			
 			$attachIMG.click(function(){
 				var id = $(this).data('attachid');
@@ -130,15 +133,19 @@ xenMCE.Templates.Bbm_adv_bimg = {
 	},
 	submit: function(e, $ovl, ed, parentClass)
 	{
-		var tag = parentClass.bbm_tag, separator = parentClass.bbm_separator,
-		data = e.data, content = data.content, options = data.options
-		phrases = xenMCE.Phrases, auto = phrases.adv_auto;
+		var tag = parentClass.bbm_tag, 
+			separator = parentClass.bbm_separator,
+			data = e.data,
+			content = data.content,
+			options = data.options
+			phrases = xenMCE.Phrases,
+			auto = phrases.adv_auto;
 
 		var src = parentClass.escapeHtml(data.src),
-		widthType = (data.widthType == 'px') ? '' : '%', //px is default
-		width = (data.width == auto) ? false : data.width+widthType,
-		caption = (data.caption.length == 0) ? false : parentClass.escapeHtml(data.caption),
-		captionAlign = (data.captionAlign == 'left') ? false : data.captionAlign;
+			widthType = (data.widthType == 'px') ? '' : '%', //px is default
+			width = (data.width == auto) ? false : data.width+widthType,
+			caption = (data.caption.length == 0) ? false : parentClass.escapeHtml(data.caption),
+			captionAlign = (data.captionAlign == 'left') ? false : data.captionAlign;
 
 		var blockalign = false, _float = false;
 		switch (data.float){
@@ -157,6 +164,7 @@ xenMCE.Templates.Bbm_adv_bimg = {
 		}
 		
 		var captionPosition = false, captionInside = false;
+		
 		switch (data.captionPosition){
 			case 'bottom_out': break;
 			case 'top_out': 

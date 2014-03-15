@@ -69,11 +69,15 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$widthType = 'px';
 		$blockAlign = 'bleft';
 		$hasCaption = false;
+		$noLightbox = false;
+		$parentUrl = false;
+		$diffVertical = false;
+		$diffPos = false;		
 		$caption = array(
-				'text' => '',
-				'position' => 'bottom',
-				'type' => 'outside',
-				'align' => 'left'
+			'text' => '',
+			'position' => 'bottom',
+			'type' => 'outside',
+			'align' => 'left'
 		);
 
 		/* Browse Options */
@@ -138,6 +142,28 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			{
 				$blockAlign = 'fright';
 			}
+			elseif($option == 'no-lightbox')
+			{
+				 $noLightbox = true;
+			}
+			elseif($option == 'diff-v' || $option == 'diff-vertical')
+			{
+				$diffVertical = true;
+			}
+			elseif(strpos($option, 'diff-pos:') === 0)
+			{
+				$diffPosVal = floatval(substr($option, 9));
+				
+				if($diffPosVal >= 0 && $diffPosVal <= 1)
+				{
+					$diffPos = $diffPosVal;
+				}
+			}
+			elseif(preg_match(BBM_Helper_BbCodes::$regexUrl, $option))
+			{
+				$noLightbox = true;
+		 		$parentUrl = $option;
+			}
 			elseif(!empty($option))
 			{
 				$hasCaption = true;
@@ -160,6 +186,38 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$widthImg = $width . 'px';
 		}
 
+		/* Content Management */
+		$regex_attach_direct_id = '#^\d+$#';
+		$regex_attach_parsedimg = '#<img.+?src="(.+?)"#ui';
+		$directUrl = false;
+		$diffModeData = array();
+		$diffWidestWidth = false;
+		
+		$imgContent = explode('|', $content);
+			
+		if(isset($imgContent[1]) && 
+			(preg_match('#^\d+$#', $imgContent[1]) || preg_match(BBM_Helper_BbCodes::$regexUrl, $imgContent[1])) 
+		)
+		{
+			list($img1_url, $img1_width, $img1_directUrl) = self::_attachManager($imgContent[0], $width, $parentClass);
+			list($img2_url, $img2_width, $img2_directUrl) = self::_attachManager($imgContent[1], $width, $parentClass, true);
+
+			$noLightbox = true;
+			$diffMode = true;
+			$diffModeData = array(
+				'img_1' => array('url' => $img1_url, 'width' => $img1_width, 'directUrl' => $img1_directUrl),
+				'img_2' => array('url' => $img2_url, 'width' => $img2_width, 'directUrl' => $img2_directUrl)
+			);
+			
+			$diffWidestWidth = (intval($img1_width) > intval($img2_width)) ?  $img1_width : $img2_width;
+		}
+		else
+		{
+			$diffMode = false;
+			$diffVertical = false;
+			list($content, $width, $directUrl) = self::_attachManager($content, $width, $parentClass);
+		}
+
 		/* Confirm Options */
 		$options['width'] = $width;
 		$options['widthType'] = $widthType;
@@ -168,38 +226,14 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['hasCaption'] = $hasCaption;
 		$options['caption'] = $caption;
 		$options['isBadIE'] = BBM_Helper_BbCodes::isBadIE();
-
-		/* Content Management */
-		$regex_attach_direct_id = '#^\d+$#';
-		$regex_attach_parsedimg = '#<img.+?src="(.+?)"#ui';
-
-			/*** XenForo Attachement ***/
-			if(preg_match($regex_attach_direct_id, $content))
-			{
-				$validExtensions = array('gif', 'png', 'jpg', 'jpeg');
-				$permsFallback[] = ($xenOptions->AdvBBcodeBar_fallbackperms) ? array('group' => 'forum', 'permission' => 'viewAttachment') : null;
-
-				$attachmentParams = $parentClass->getAttachmentParams(BBM_Helper_BbCodes::cleanOption($content), $validExtensions, $permsFallback);
-
-				if($attachmentParams['canView'] || self::AioInstalled())
-				{
-					$content = $attachmentParams['url'];
-				}
-				elseif($attachmentParams['validAttachment'] && !empty($attachmentParams['attachment']['thumbnailUrl']))
-				{
-					$content = $attachmentParams['attachment']['thumbnailUrl'];
-					$options['width'] = $attachmentParams['attachment']['thumbnail_width'];
-				}
-				else
-				{
-					/*** Yellow picture trick ***/
-					$content = $xenOptions->boardUrl . '/styles/sedo/adv_bimg/bimg_visitors.png';
-				}
-			}
-			elseif(preg_match($regex_attach_parsedimg, $content, $src))
-			{
-				$content = $src[1];
-			}
+		$options['noLightbox'] = $noLightbox;
+		$options['parentUrl'] = $parentUrl;
+		$options['directUrl'] = $directUrl;
+		$options['diffMode'] = $diffMode;
+		$options['diffModeData'] = $diffModeData;
+		$options['diffPos'] = $diffPos;
+		$options['diffVertical'] = $diffVertical;
+		$options['diffWidestWidth'] = $diffWidestWidth;
 
 		/* Responsive Management */
 		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
@@ -212,6 +246,49 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$options['widthImg'] = '100%';
 			$options['blockAlign'] = $xenOptions->sedo_adv_responsive_blockalign;
 		}
+	}
+
+      	protected static function _attachManager($img, $width, $parentClass, $secondImg = false)
+      	{
+		$xenOptions =  XenForo_Application::get('options');
+      		$directUrl = false;
+		$regex_attach_direct_id = '#^\d+$#';
+		$regex_attach_parsedimg = '#<img.+?src="(.+?)"#ui';
+		$img = trim($img);
+      		
+      		if(preg_match($regex_attach_direct_id, $img))
+      		{
+      			$validExtensions = array('gif', 'png', 'jpg', 'jpeg');
+      			$permsFallback[] = ($xenOptions->AdvBBcodeBar_fallbackperms) ? array('group' => 'forum', 'permission' => 'viewAttachment') : null;
+
+      			$attachmentParams = $parentClass->getAttachmentParams(BBM_Helper_BbCodes::cleanOption($img), $validExtensions, $permsFallback);
+
+      			if($attachmentParams['canView'] || self::AioInstalled())
+      			{
+      				$img = $attachmentParams['url'];
+      			}
+      			elseif($attachmentParams['validAttachment'] && !empty($attachmentParams['attachment']['thumbnailUrl']))
+      			{
+      				$img = $attachmentParams['attachment']['thumbnailUrl'];
+      				$width = $attachmentParams['attachment']['thumbnail_width'];
+      			}
+      			else
+      			{
+      				/*** Yellow picture trick ***/
+      				$img = $xenOptions->boardUrl . '/styles/sedo/adv_bimg/bimg_visitors.png';
+      			}
+      		}
+      		elseif(preg_match($regex_attach_parsedimg, $img, $src))
+      		{
+      			$directUrl = true;
+      			$img = $src[1];
+      		}
+      		else
+      		{
+      			$directUrl = true;
+      		}
+      		
+      		return array($img, $width, $directUrl);
 	}
 
 	public static function parseTagEncadre(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)

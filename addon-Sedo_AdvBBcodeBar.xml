@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.5.2" version_id="32" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.6.0" version_id="33" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -121,7 +121,7 @@ right={xen:phrase AdvBBcodeBar_Options_Right}</edit_format_params>
       <default_value>1</default_value>
       <edit_format_params>1={xen:phrase AdvBBcodeBar_Options_Yes}</edit_format_params>
       <sub_options></sub_options>
-      <relation group_id="AdvBBcodeBar" display_order="420"/>
+      <relation group_id="AdvBBcodeBar" display_order="490"/>
     </option>
     <option option_id="AdvBBcodeBar_debug_devmode" edit_format="radio" data_type="boolean" can_backup="1">
       <default_value>0</default_value>
@@ -909,6 +909,8 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="sedo_advbb_latex_help" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Latex help]]></phrase>
     <phrase title="sedo_advbb_slides_builder" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Slides]]></phrase>
     <phrase title="sedo_advbb_slides_configuration" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Configuration]]></phrase>
+    <phrase title="sedo_adv_bimg_after" version_id="32" version_string="3.5.2"><![CDATA[After]]></phrase>
+    <phrase title="sedo_adv_bimg_before" version_id="32" version_string="3.5.2"><![CDATA[Before]]></phrase>
     <phrase title="sedo_adv_grabber_curl" version_id="17" version_string="3.2.1"><![CDATA[cURL: [available]]]></phrase>
     <phrase title="sedo_adv_grabber_fgc" version_id="17" version_string="3.2.1"><![CDATA[file_get_contents: [available]]]></phrase>
     <phrase title="sedo_adv_grabber_manual_rss" version_id="17" version_string="3.2.1"><![CDATA[Manual RSS Linking]]></phrase>
@@ -1023,6 +1025,8 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="style_property_adv_bimg_caption_background_master" version_id="0" version_string="3.0"><![CDATA[[BIMG]  Caption (inside picture) background color]]></phrase>
     <phrase title="style_property_adv_bimg_caption_text_description_master" version_id="0" version_string="3.0"><![CDATA[]]></phrase>
     <phrase title="style_property_adv_bimg_caption_text_master" version_id="0" version_string="3.0"><![CDATA[[BIMG] Caption (inside picture) text color]]></phrase>
+    <phrase title="style_property_adv_bimg_diff_cursor_color_description_master" version_id="32" version_string="3.5.2"><![CDATA[]]></phrase>
+    <phrase title="style_property_adv_bimg_diff_cursor_color_master" version_id="32" version_string="3.5.2"><![CDATA[[BIMG] Diff mode - cursor color]]></phrase>
     <phrase title="style_property_adv_highlight_normal_tags_close_description_master" version_id="0" version_string="3.0"><![CDATA[Highlight all normal tags [tag]...[/tag]. Example: [article]content[/article] or [article=option1]content[/article]]]></phrase>
     <phrase title="style_property_adv_highlight_normal_tags_close_master" version_id="0" version_string="3.0"><![CDATA[Normal Tags Highlighting [CLOSE]]]></phrase>
     <phrase title="style_property_adv_highlight_normal_tags_open_description_master" version_id="0" version_string="3.0"><![CDATA[Highlight all normal tags [tag]...[/tag]. Example: [article]content[/article] or [article=option1]content[/article]]]></phrase>
@@ -1080,8 +1084,8 @@ Default value: 35px.]]></phrase>
     <property property_name="advbbcodebar_article_wrapper" property_type="css" definition="1" group_name="AdvBBcodeBar_Style" title="[ARTICLE] Container" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="10" sub_group=""><![CDATA[{"extra":"display: block;","margin-bottom":"0","margin-left":"0","margin-right":"1em","margin-top":"1em"}]]></property>
     <property property_name="advbbcodebar_fieldset_wrapper" property_type="css" definition="1" group_name="AdvBBcodeBar_Style" title="[FIELDSET] Container" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="40" sub_group=""><![CDATA[{"extra":"\/*Avoid the .xenForm fieldset 20px margin during preview*\/"}]]></property>
     <property property_name="advbbcodebar_encadre_wrapper" property_type="css" definition="1" group_name="AdvBBcodeBar_Style" title="[ENCADRE] Container" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="70" sub_group=""><![CDATA[{"extra":"\/*When a float left will be used, the margin right and left will be reversed*\/","margin-bottom":"0","margin-left":"10px","margin-right":"5px","margin-top":"0"}]]></property>
-    <property property_name="adv_bimg_caption_background" property_type="scalar" definition="1" group_name="AdvBBcodeBar_Style" title="[BIMG]  Caption (inside picture) background color" description="" css_components="" scalar_type="color" scalar_parameters="" display_order="10" sub_group="bimg_caption"><![CDATA[rgba(0, 0, 0, 0.7)]]></property>
-    <property property_name="adv_bimg_caption_text" property_type="scalar" definition="1" group_name="AdvBBcodeBar_Style" title="[BIMG] Caption (inside picture) text color" description="" css_components="" scalar_type="color" scalar_parameters="" display_order="11" sub_group="bimg_caption"><![CDATA[rgb(255, 255, 255)]]></property>
+    <property property_name="adv_bimg_caption_background" property_type="scalar" definition="1" group_name="AdvBBcodeBar_Style" title="[BIMG]  Caption (inside picture) background color" description="" css_components="" scalar_type="color" scalar_parameters="" display_order="10" sub_group="bimg"><![CDATA[rgba(0, 0, 0, 0.7)]]></property>
+    <property property_name="adv_bimg_caption_text" property_type="scalar" definition="1" group_name="AdvBBcodeBar_Style" title="[BIMG] Caption (inside picture) text color" description="" css_components="" scalar_type="color" scalar_parameters="" display_order="11" sub_group="bimg"><![CDATA[rgb(255, 255, 255)]]></property>
     <property property_name="advbbcodebar_encadre_wrapper_skin2" property_type="css" definition="1" group_name="AdvBBcodeBar_Style" title="[ENCADRE] Container (skin2)" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="120" sub_group=""><![CDATA[{"extra":"\/*When a float left will be used, the margin right and left will be reversed*\/","margin-bottom":"0","margin-left":"10px","margin-right":"5px","margin-top":"0"}]]></property>
     <property property_name="advbbcodebar_encadre_skin2" property_type="css" definition="1" group_name="AdvBBcodeBar_Style" title="[ENCADRE] Main Content (skin2)" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="130" sub_group=""><![CDATA[{"background-color":"@primaryLighterStill","border-color":"@primaryDark","border-style":"solid","border-width":"1px","color":"black","font-size":"12px","padding-bottom":".75em","padding-left":".50em","padding-right":".50em","padding-top":".50em"}]]></property>
     <property property_name="advbbcodebar_encadre_title_skin2" property_type="css" definition="1" group_name="AdvBBcodeBar_Style" title="[ENCADRE] Title (skin2)" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="140" sub_group=""><![CDATA[{"border-style":"none","color":"black","font-size":"13px","font-variant":"small-caps","font-weight":"bold","padding-bottom":"5px","padding-left":"0","padding-right":"0","padding-top":"0"}]]></property>
@@ -1127,7 +1131,7 @@ Default value: 35px.]]></phrase>
     <property property_name="advbbcodebar_slider_tabs_active" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Tabs - active" description="Configure only the font color here, this would avoid to break any layouts." css_components="text" scalar_type="" scalar_parameters="" display_order="335" sub_group=""><![CDATA[{"color":"rgb(238, 0, 24)"}]]></property>
     <property property_name="advbbcodebar_slider_slides_title" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Slides Title" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="350" sub_group=""><![CDATA[{"color":"@primaryDarker","font-size":"22px","font-weight":"bold","margin-bottom":"5px","margin-left":"0","margin-right":"0","margin-top":"0"}]]></property>
     <property property_name="advbbcodebar_slider_slides_title_abs" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Slides Title - Absolute" description="This title layout is triggered with the &quot;top&quot; or &quot;bottom&quot; commands (&quot;slide&quot; slave tag)" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="360" sub_group=""><![CDATA[{"background-color":"rgba(93, 99, 100, 0.7)","color":"rgb(245, 244, 244)","extra":"position: absolute;\nleft: 0;\nz-index: 25;","font-size":"18px","font-weight":"bold","width":"100%"}]]></property>
-    <property property_name="sedo_bbm_btn_modf_col1" property_type="scalar" definition="1" group_name="sedo_bbm_btn" title="Modele F - Gradient color (1)" description="" css_components="text,background,border,layout,extra" scalar_type="color" scalar_parameters="" display_order="110" sub_group="model_f"><![CDATA[#ededed]]></property>
+    <property property_name="adv_bimg_diff_cursor_color" property_type="scalar" definition="1" group_name="AdvBBcodeBar_Style" title="[BIMG] Diff mode - cursor color" description="" css_components="" scalar_type="color" scalar_parameters="" display_order="15" sub_group="bimg"><![CDATA[@secondaryMedium]]></property>
     <group group_name="AdvBBcodeBar_Style" display_order="13211">
       <title>[Bb Codes &amp; Buttons Manager] Advanced Bb Codes (1/2)</title>
       <description>Advanced BBcodes Toolbar Visual Options</description>
@@ -5274,7 +5278,12 @@ p.info span
 .advbbcodebar_article div.adv_source{
 	{xen:property advbbcodebar_article_source}
 }]]></template>
-    <template title="sedo_adv_bimg" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_bimg.css" />
+    <template title="sedo_adv_bimg" version_id="32" version_string="3.5.2"><![CDATA[<xen:if is="{$options.diffMode}">
+	<xen:require js="js/sedo/advtoolbar/twentytwenty/xen.twenty.min.js" />
+	<xen:require css="sedo_adv_bimg_twenty.css" />
+</xen:if>
+
+<xen:require css="sedo_adv_bimg.css" />
 
 <div class="adv_bimg_block {xen:if '{$options.responsiveMode}', 'responsive'}">
 	<div class="adv_bimg {$options.blockAlign} {xen:if '!{$options.hasCaption}', 'text_center'}" style="width:{$options.width}{$options.widthType};">
@@ -5287,7 +5296,49 @@ p.info span
 				<div class="caption_txt" style="text-align:{$options.caption.align};">{xen:raw $options.caption.text}</div>
 			</xen:if>
 		</xen:if>
-		<a href="{xen:raw $content}" target="_blank" class="LbTrigger" data-href="index.php?misc/lightbox"><img class="bbCodeImage LbImage" src="{xen:raw $content}" style="width:{$options.widthImg}" data-src="{xen:raw $content}" /></a>
+		<xen:if is="{$options.noLightbox}">
+			<xen:if is="{$options.parentUrl}">
+				<a class="externalLink adv_bimg_nolb" target="_blank" href="{$options.parentUrl}">
+					<xen:if is="{$options.diffMode}">
+						<div class="AdvBimgDiff {xen:if '{$options.diffVertical}', 'DiffV'} twentytwenty-container" 
+							style="width:{$options.widthImg}"
+							{xen:if '{$options.diffPos}', 'data-diff-pos="{$options.diffPos}"'}
+							data-width="{$options.diffWidestWidth}"
+						>
+							<img src="{xen:raw $options.diffModeData.img_1.url}" 
+								data-width="{$options.diffModeData.img_1.width}" 
+							/>
+							<img src="{xen:raw $options.diffModeData.img_2.url}" 
+								data-width="{$options.diffModeData.img_2.width}" 
+							/>
+						</div>
+					<xen:else />
+						<img class="bbCodeImage" src="{xen:raw $content}" style="width:{$options.widthImg}" />
+					</xen:if>
+				</a>
+			<xen:else />
+      				<xen:if is="{$options.diffMode}">
+					<div class="AdvBimgDiff {xen:if '{$options.diffVertical}', 'DiffV'} twentytwenty-container" 
+							style="width:{$options.widthImg}"
+							data-width="{$options.diffWidestWidth}"
+							{xen:if '{$options.diffPos}', 'data-diff-pos="{$options.diffPos}"'}
+						>
+      						<img src="{xen:raw $options.diffModeData.img_1.url}" 
+      							data-width="{$options.diffModeData.img_1.width}" 
+      						/>
+      						<img src="{xen:raw $options.diffModeData.img_2.url}" 
+      							data-width="{$options.diffModeData.img_2.width}" 
+      						/>
+      					</div>
+      				<xen:else />
+      					<img class="bbCodeImage" src="{xen:raw $content}" style="width:{$options.widthImg}" />
+      				</xen:if>
+			</xen:if>
+		<xen:else />
+			<a href="{xen:raw $content}" target="_blank" class="LbTrigger" data-href="index.php?misc/lightbox">
+				<img class="bbCodeImage LbImage" src="{xen:raw $content}" style="width:{$options.widthImg}" data-src="{xen:raw $content}" />
+			</a>
+		</xen:if>
 		<br />
 		<xen:if is="{$options.hasCaption} AND {$options.caption.position} == 'bottom'">
 			<xen:if is="{$options.caption.type} == 'inside'">
@@ -5298,7 +5349,7 @@ p.info span
 				<div class="caption_txt" style="text-align:{$options.caption.align};">{xen:raw $options.caption.text}</div>
 			</xen:if>
 		</xen:if>
-		<xen:if is="!{$options.hasCaption}">
+		<xen:if is="!{$options.hasCaption} AND !{$options.noLightbox}">
 			<span><a 
 				href="{xen:raw $content}" 
 				target="_blank"
@@ -5309,13 +5360,13 @@ p.info span
 					src="{xen:raw $content}"
 					data-src="{xen:raw $content}" 
 				/>{xen:if 
-					'!{$visitor.permissions.forum.viewAttachment} AND !{$xenAddOns.Tinhte_AIO}',
+					'!{$visitor.permissions.forum.viewAttachment} AND !{$xenAddOns.Tinhte_AIO} AND !{$options.directUrl}',
 					'{xen:phrase Sedo_AdvBBcodeBar_text_notmember}',
 					'{xen:phrase Sedo_AdvBBcodeBar_text_clicktoexpand}'}</a></span>
 		</xen:if>
 	</div>
 </div>]]></template>
-    <template title="sedo_adv_bimg.css" version_id="28" version_string="3.5.0 - step1"><![CDATA[.adv_bimg_block {
+    <template title="sedo_adv_bimg.css" version_id="32" version_string="3.5.2"><![CDATA[.adv_bimg_block {
 	display:block;
 	z-index:1;
 }
@@ -5371,7 +5422,262 @@ p.info span
 .adv_bimg .caption_txt_inside {
 	padding: 1px 5px 0 5px; 
 	color:{xen:property adv_bimg_caption_text};
-}]]></template>
+}
+
+.adv_bimg a.adv_bimg_nolb{
+	display:block;
+}
+
+.adv_bimg a.adv_bimg_nolb:hover,
+.adv_bimg a.adv_bimg_nolb:focus{
+	background: none;
+}
+]]></template>
+    <template title="sedo_adv_bimg_twenty.css" version_id="32" version_string="3.5.2"><![CDATA[.twentytwenty-horizontal .twentytwenty-handle:before, .twentytwenty-horizontal .twentytwenty-handle:after, .twentytwenty-vertical .twentytwenty-handle:before, .twentytwenty-vertical .twentytwenty-handle:after {
+	content: " ";
+	display: block;
+	background: {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}};
+	position: absolute;
+	z-index: 30;
+	-webkit-box-shadow: 0px 0px 12px rgba(51, 51, 51, 0.5);
+	-moz-box-shadow: 0px 0px 12px rgba(51, 51, 51, 0.5);
+	box-shadow: 0px 0px 12px rgba(51, 51, 51, 0.5);
+}
+
+.twentytwenty-horizontal .twentytwenty-handle:before, .twentytwenty-horizontal .twentytwenty-handle:after {
+	width: 3px;
+	height: 9999px;
+	left: 50%;
+	margin-left: -1.5px;
+}
+
+.twentytwenty-vertical .twentytwenty-handle:before, .twentytwenty-vertical .twentytwenty-handle:after {
+	width: 9999px;
+	height: 3px;
+	top: 50%;
+	margin-top: -1.5px;
+}
+
+.twentytwenty-before-label, .twentytwenty-after-label, .twentytwenty-overlay {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.twentytwenty-before-label, .twentytwenty-after-label, .twentytwenty-overlay {
+	-webkit-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
+	transition-duration: 0.5s;
+}
+
+.twentytwenty-before-label, .twentytwenty-after-label {
+	-webkit-transition-property: opacity;
+	-moz-transition-property: opacity;
+	transition-property: opacity;
+}
+
+.twentytwenty-before-label:before, .twentytwenty-after-label:before {
+	color: white;
+	font-size: 13px;
+	letter-spacing: 0.1em;
+}
+
+.twentytwenty-before-label:before, .twentytwenty-after-label:before {
+	position: absolute;
+	background: rgba(255, 255, 255, 0.2);
+	line-height: 38px;
+	padding: 0 20px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+.twentytwenty-horizontal .twentytwenty-before-label:before, .twentytwenty-horizontal .twentytwenty-after-label:before {
+	top: 50%;
+	margin-top: -19px;
+}
+
+.twentytwenty-vertical .twentytwenty-before-label:before, .twentytwenty-vertical .twentytwenty-after-label:before {
+	left: 50%;
+	margin-left: -45px;
+	text-align: center;
+	width: 90px;
+}
+
+.twentytwenty-left-arrow, .twentytwenty-right-arrow, .twentytwenty-up-arrow, .twentytwenty-down-arrow {
+	width: 0;
+	height: 0;
+	border: 6px inset transparent;
+	position: absolute;
+}
+
+.twentytwenty-left-arrow, .twentytwenty-right-arrow {
+	top: 50%;
+	margin-top: -6px;
+}
+
+.twentytwenty-up-arrow, .twentytwenty-down-arrow {
+	left: 50%;
+	margin-left: -6px;
+}
+
+.twentytwenty-container {
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	overflow: hidden;
+	position: relative;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+	.twentytwenty-container img {
+		position: absolute;
+		top: 0;
+		display: block;
+	}
+	.twentytwenty-container.active .twentytwenty-overlay, .twentytwenty-container.active :hover.twentytwenty-overlay {
+		background: rgba(0, 0, 0, 0);
+	}
+		.twentytwenty-container.active .twentytwenty-overlay .twentytwenty-before-label,
+		.twentytwenty-container.active .twentytwenty-overlay .twentytwenty-after-label, .twentytwenty-container.active :hover.twentytwenty-overlay .twentytwenty-before-label,
+		.twentytwenty-container.active :hover.twentytwenty-overlay .twentytwenty-after-label {
+			opacity: 0;
+		}
+	.twentytwenty-container * {
+		-webkit-box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		box-sizing: content-box;
+	}
+
+.twentytwenty-before-label {
+	opacity: 0;
+}
+	.twentytwenty-before-label:before {
+		content: "{xen:phrase sedo_adv_bimg_before}";
+	}
+
+.twentytwenty-after-label {
+	opacity: 0;
+}
+	.twentytwenty-after-label:before {
+		content: "{xen:phrase sedo_adv_bimg_after}";
+	}
+
+.twentytwenty-horizontal .twentytwenty-before-label:before {
+	left: 10px;
+}
+
+.twentytwenty-horizontal .twentytwenty-after-label:before {
+	right: 10px;
+}
+
+.twentytwenty-vertical .twentytwenty-before-label:before {
+	top: 10px;
+}
+
+.twentytwenty-vertical .twentytwenty-after-label:before {
+	bottom: 10px;
+}
+
+.twentytwenty-overlay {
+	-webkit-transition-property: background;
+	-moz-transition-property: background;
+	transition-property: background;
+	background: rgba(0, 0, 0, 0);
+	z-index: 25;
+}
+	.twentytwenty-overlay:hover {
+		background: rgba(0, 0, 0, 0.5);
+	}
+		.twentytwenty-overlay:hover .twentytwenty-after-label {
+			opacity: 1;
+		}
+		.twentytwenty-overlay:hover .twentytwenty-before-label {
+			opacity: 1;
+		}
+
+.twentytwenty-before {
+	z-index: 20;
+}
+
+.twentytwenty-after {
+	z-index: 10;
+}
+
+.twentytwenty-handle {
+	height: 38px;
+	width: 38px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -22px;
+	margin-top: -22px;
+	border: 3px solid {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}};
+	-webkit-border-radius: 1000px;
+	-moz-border-radius: 1000px;
+	border-radius: 1000px;
+	-webkit-box-shadow: 0px 0px 12px rgba(51, 51, 51, 0.5);
+	-moz-box-shadow: 0px 0px 12px rgba(51, 51, 51, 0.5);
+	box-shadow: 0px 0px 12px rgba(51, 51, 51, 0.5);
+	z-index: 40;
+	cursor: pointer;
+}
+
+.twentytwenty-horizontal .twentytwenty-handle:before {
+	bottom: 50%;
+	margin-bottom: 22px;
+	-webkit-box-shadow: 0 3px 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+	-moz-box-shadow: 0 3px 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+	box-shadow: 0 3px 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+}
+.twentytwenty-horizontal .twentytwenty-handle:after {
+	top: 50%;
+	margin-top: 22px;
+	-webkit-box-shadow: 0 -3px 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+	-moz-box-shadow: 0 -3px 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+	box-shadow: 0 -3px 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+}
+
+.twentytwenty-vertical .twentytwenty-handle:before {
+	left: 50%;
+	margin-left: 22px;
+	-webkit-box-shadow: 3px 0 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+	-moz-box-shadow: 3px 0 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+	box-shadow: 3px 0 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+}
+.twentytwenty-vertical .twentytwenty-handle:after {
+	right: 50%;
+	margin-right: 22px;
+	-webkit-box-shadow: -3px 0 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+	-moz-box-shadow: -3px 0 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+	box-shadow: -3px 0 0 {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}}, 0px 0px 12px rgba(51, 51, 51, 0.5);
+}
+
+.twentytwenty-left-arrow {
+	border-right: 6px solid {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}};
+	left: 50%;
+	margin-left: -17px;
+}
+
+.twentytwenty-right-arrow {
+	border-left: 6px solid {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}};
+	right: 50%;
+	margin-right: -17px;
+}
+
+.twentytwenty-up-arrow {
+	border-bottom: 6px solid {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}};
+	top: 50%;
+	margin-top: -17px;
+}
+
+.twentytwenty-down-arrow {
+	border-top: 6px solid {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}};
+	bottom: 50%;
+	margin-bottom: -17px;
+}
+]]></template>
     <template title="sedo_adv_encadre" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_encadre.css" />
 
 <xen:if is="{$options.skin2}">

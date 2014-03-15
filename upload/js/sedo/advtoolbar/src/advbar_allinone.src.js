@@ -1,6 +1,7 @@
+if(typeof Sedo == 'undefined') Sedo = {};
 !function($, window, document, _undefined)
 {    
-	XenForo.AdvBbcodes = 
+	Sedo.AdvBbcodes = 
 	{
 		Spoilerbb: function($e)
 		{
@@ -90,7 +91,7 @@
 		},
 		Slider: function($e)
 		{
-			var self = XenForo.AdvBbcodes, 
+			var self = Sedo.AdvBbcodes, 
 				toAutoplay = [], 
 				imgToLoad = [];
 			
@@ -227,7 +228,7 @@
 	};
 	
 	var xenRegister = function(el, advBbCodesFct){
-		XenForo.register(el, 'XenForo.AdvBbcodes.'+advBbCodesFct);
+		XenForo.register(el, 'Sedo.AdvBbcodes.'+advBbCodesFct);
 	}
 	
 	xenRegister('.AdvFieldsetTrigger', 'FieldsetFix');
@@ -236,6 +237,6 @@
 	xenRegister('.adv_tabs_wrapper', 'Tabs');
 	xenRegister('.adv_slider_wrapper', 'Slider');
 
-	$(document).bind('AutoValidationComplete', XenForo.AdvBbcodes.SliderAutoWidth);
+	$(document).bind('AutoValidationComplete', Sedo.AdvBbcodes.SliderAutoWidth);
 }
 (jQuery, this, document);
