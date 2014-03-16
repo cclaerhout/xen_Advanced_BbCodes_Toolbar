@@ -137,7 +137,7 @@ xenMCE.Templates.Bbm_adv_bimg = {
 			separator = parentClass.bbm_separator,
 			data = e.data,
 			content = data.content,
-			options = data.options
+			options = data.options,
 			phrases = xenMCE.Phrases,
 			auto = phrases.adv_auto;
 
@@ -145,10 +145,21 @@ xenMCE.Templates.Bbm_adv_bimg = {
 			widthType = (data.widthType == 'px') ? '' : '%', //px is default
 			width = (data.width == auto) ? false : data.width+widthType,
 			caption = (data.caption.length == 0) ? false : parentClass.escapeHtml(data.caption),
-			captionAlign = (data.captionAlign == 'left') ? false : data.captionAlign;
+			captionAlign = (data.captionAlign == 'left') ? false : data.captionAlign,
+			noLightbox = (data.nolightbox) ? 'no-lightbox' : false,
+			wrappingUrl = (data.blink.length == 0) ? false : data.blink,
+			diffV = (parseInt(data.diff_v)) ? 'diff-v' : false,
+			diffPos = (data.diff_pos == '0.5') ? false : 'diff-pos:'+data.diff_pos;
+			
+		var diffUrl = (data.bsrc.length == 0) ? false : parentClass.escapeHtml(data.bsrc);
+		
+		if(src && diffUrl){
+			src += '|'+diffUrl;
+		}
 
 		var blockalign = false, _float = false;
-		switch (data.float){
+		
+		switch (data._float){
 			case 'normal_center': 
 				blockalign = 'bcenter';
 				break;
@@ -189,6 +200,10 @@ xenMCE.Templates.Bbm_adv_bimg = {
 		if(captionInside !== false){ bakeOptions(captionInside); }
 		if(captionAlign !== false){ bakeOptions(captionAlign); }		
 		if(caption !== false){ bakeOptions(caption); }
+		if(noLightbox  !== false && wrappingUrl === false && diffUrl === false){ bakeOptions(noLightbox); }
+		if(wrappingUrl !== false){ bakeOptions(wrappingUrl); }
+		if(diffUrl && diffPos !== false){ bakeOptions(diffPos); }		
+		if(diffUrl && diffV !== false){ bakeOptions(diffV); }
 				
 		function bakeOptions(option){
 			if (options.length == 0)

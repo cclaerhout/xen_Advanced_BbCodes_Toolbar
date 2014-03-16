@@ -150,6 +150,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			{
 				$diffVertical = true;
 			}
+			elseif($option == 'diff-h' || $option == 'diff-horizontal')
+			{
+				$diffVertical = false;
+			}			
 			elseif(strpos($option, 'diff-pos:') === 0)
 			{
 				$diffPosVal = floatval(substr($option, 9));

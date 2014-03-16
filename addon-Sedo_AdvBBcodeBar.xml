@@ -807,6 +807,12 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="Sedo_AdvBBcodeBar_template_bimg_caption_topout" version_id="5" version_string="3.1"><![CDATA[Top out]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_bimg_caption_trigger" version_id="5" version_string="3.1"><![CDATA[To use a caption, click here]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_bimg_caption_type" version_id="5" version_string="3.1"><![CDATA[Type your caption here:]]></phrase>
+    <phrase title="Sedo_AdvBBcodeBar_template_bimg_diff_horizontal" version_id="33" version_string="3.6.0"><![CDATA[Horizontal]]></phrase>
+    <phrase title="Sedo_AdvBBcodeBar_template_bimg_diff_pos" version_id="33" version_string="3.6.0"><![CDATA[Cursor position]]></phrase>
+    <phrase title="Sedo_AdvBBcodeBar_template_bimg_diff_vertical" version_id="33" version_string="3.6.0"><![CDATA[Vertical]]></phrase>
+    <phrase title="Sedo_AdvBBcodeBar_template_bimg_extra_disable_lightbox" version_id="33" version_string="3.6.0"><![CDATA[No lightbox]]></phrase>
+    <phrase title="Sedo_AdvBBcodeBar_template_bimg_extra_link" version_id="33" version_string="3.6.0"><![CDATA[External link]]></phrase>
+    <phrase title="Sedo_AdvBBcodeBar_template_bimg_extra_url" version_id="33" version_string="3.6.0"><![CDATA[Compared image url (or attachment id)]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_bimg_floatinfo" version_id="5" version_string="3.1"><![CDATA[When using a float block, this block element (bbcode) must be inserted before the text block.]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_bimg_float_left" version_id="5" version_string="3.1"><![CDATA[Float Left]]></phrase>
     <phrase title="Sedo_AdvBBcodeBar_template_bimg_float_normal" version_id="5" version_string="3.1"><![CDATA[Normal left]]></phrase>
@@ -904,6 +910,7 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="Sedo_AdvBBcodeBar_text_tab" version_id="19" version_string="3.3.1"><![CDATA[Tab ]]></phrase>
     <phrase title="sedo_advbb_bimg_attach" version_id="25" version_string="3.4.0"><![CDATA[Attachments]]></phrase>
     <phrase title="sedo_advbb_bimg_caption" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Caption options]]></phrase>
+    <phrase title="sedo_advbb_bimg_extra" version_id="33" version_string="3.6.0"><![CDATA[ + ]]></phrase>
     <phrase title="sedo_advbb_bimg_general" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Image options]]></phrase>
     <phrase title="sedo_advbb_latex_general" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Latex input]]></phrase>
     <phrase title="sedo_advbb_latex_help" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Latex help]]></phrase>
@@ -3475,7 +3482,7 @@ p.info span
 	width:95%;
 	height:160px <xen:comment>change to 100px if mce4 fixes the bug #6018</xen:comment>
 }]]></template>
-    <template title="quattro_dialog_bbm_adv_bimg" version_id="27" version_string="3.4.2"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_bimg" version_id="33" version_string="3.6.0"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_bimg.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/bimg.js" />
 
@@ -3484,6 +3491,7 @@ p.info span
 <div class="mceTabs">
 	<div id="xentabs_bimg_general">{xen:phrase sedo_advbb_bimg_general}</div>
 	<div id="xentabs_bimg_caption">{xen:phrase sedo_advbb_bimg_caption}</div>
+	<div id="xentabs_bimg_extra">{xen:phrase sedo_advbb_bimg_extra}</div>
 	<xen:if is="{$imgAttachments}">
 		<div id="xentabs_bimg_attach">{xen:phrase sedo_advbb_bimg_attach}</div>
 	</xen:if>
@@ -3540,7 +3548,7 @@ p.info span
 				</li>
 			</ul>
 			<p class="info mce-xen-content">{xen:phrase Sedo_AdvBBcodeBar_template_bimg_information} <span>{xen:phrase Sedo_AdvBBcodeBar_template_bimg_floatinfo}</span></p>
-			<input id="adv_bimg_float_input" name="float" type="hidden" value="normal"/>
+			<input id="adv_bimg_float_input" name="_float" type="hidden" value="normal"/>
 		</div>		
 	</div>
 
@@ -3588,6 +3596,54 @@ p.info span
 		</div>
 	</div>
 
+	<div id="xenpane_bimg_extra">
+		<dl class="xenmce_inline">
+			<dt>{xen:phrase Sedo_AdvBBcodeBar_template_bimg_extra_link}</dt>
+			<dd><input 	id="adv_bimg_extra_link"
+					name="blink"
+					type="text"
+					size="25"
+					class="mce-textbox"
+					value=""
+				/>
+			</dd> -	
+			<dt>{xen:phrase Sedo_AdvBBcodeBar_template_bimg_extra_disable_lightbox}</dt>
+			<dd>
+	  			<div 	class="xenCheckBox nolightbox" 
+		  			data-inputname="nolightbox"
+				></div>
+		  	</dd>
+		</dl>
+		<hr>
+		<dl>
+			<dt>{xen:phrase Sedo_AdvBBcodeBar_template_bimg_extra_url}</dt>
+			<dd class="dd_inline"><input id="adv_bimg_extra_src"
+					name="bsrc"
+					type="text"
+					size="25"
+					class="mce-textbox"
+					value=""
+				/>{xen:phrase Sedo_AdvBBcodeBar_template_bimg_diff_vertical} <div class="xenCheckBox diff_vertical" 
+		  			data-inputname="diff_v"
+				></div> 
+
+				{xen:phrase Sedo_AdvBBcodeBar_template_bimg_diff_pos}
+				<select id="adv_bimg_diff_pos" name="diff_pos" class="mce-textbox" size="4">
+					<option value="0.1">0.1</option>
+					<option value="0.2">0.2</option>
+					<option value="0.3">0.3</option>
+					<option value="0.4">0.4</option>
+					<option value="0.5" selected="selected">0.5</option>
+					<option value="0.6">0.6</option>
+					<option value="0.7">0.6</option>
+					<option value="0.8">0.8</option>
+					<option value="0.9">0.9</option>
+					<option value="1">1</option>
+				</select>
+			</dd>
+		</dl>
+	</div>
+
 	<xen:if is="{$imgAttachments}">
 		<div id="xenpane_bimg_attach">
 			<div class="quattro_bimg_attach_wrapper">
@@ -3597,9 +3653,8 @@ p.info span
 			</div>
 		</div>
 	</xen:if>
-</div>
-]]></template>
-    <template title="quattro_dialog_bbm_adv_bimg.css" version_id="27" version_string="3.4.2"><![CDATA[<xen:comment>WIDTH OPTIONS</xen:comment>
+</div>]]></template>
+    <template title="quattro_dialog_bbm_adv_bimg.css" version_id="33" version_string="3.6.0"><![CDATA[<xen:comment>WIDTH OPTIONS</xen:comment>
 .mce-xen-body #xenpane_bimg_general dl.xenmce_inline > dt{
 	margin-right:10px;
 }
@@ -3825,6 +3880,20 @@ p.info span
 
 .mce-xen-body .quattro_bimg_attach > img:hover {
 	border-color: red;
+}
+
+
+.mce-xen-body dd.dd_inline > * {
+	display: inline-block;
+	margin: 5px;
+}
+
+.mce-xen-body select#adv_bimg_diff_pos{
+	height:45px;
+}
+
+.mce-xen-body select#adv_bimg_diff_pos option{
+	padding: 1px;
 }]]></template>
     <template title="quattro_dialog_bbm_adv_encadre" version_id="30" version_string="3.5.0.1"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_encadre.css" />
@@ -5278,7 +5347,7 @@ p.info span
 .advbbcodebar_article div.adv_source{
 	{xen:property advbbcodebar_article_source}
 }]]></template>
-    <template title="sedo_adv_bimg" version_id="32" version_string="3.5.2"><![CDATA[<xen:if is="{$options.diffMode}">
+    <template title="sedo_adv_bimg" version_id="33" version_string="3.6.0"><![CDATA[<xen:if is="{$options.diffMode}">
 	<xen:require js="js/sedo/advtoolbar/twentytwenty/xen.twenty.min.js" />
 	<xen:require css="sedo_adv_bimg_twenty.css" />
 </xen:if>
