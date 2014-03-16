@@ -586,7 +586,6 @@
 });
 
 /*Twentytwenty + XenForo Integration*/
-/*Twentytwenty + XenForo Integration*/
 if(typeof Sedo == 'undefined') Sedo = {};
 !function($, window, document, _undefined)
 {    

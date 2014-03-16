@@ -1,4 +1,3 @@
-/*Twentytwenty + XenForo Integration*/
 if(typeof Sedo == 'undefined') Sedo = {};
 !function($, window, document, _undefined)
 {    
@@ -15,14 +14,16 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					imgWidth2 = parseInt(img2.data('width')),
 					parentWidth = container.parents('.adv_bimg_block').width();
 
-				if(imgWidth1 > parentWidth){
-					imgWidth1 = parentWidth;
-					img1.attr('data-width', imgWidth1);
-				}
+				if(parentWidth != 0){
+					if(imgWidth1 > parentWidth){
+						imgWidth1 = parentWidth;
+						img1.attr('data-width', imgWidth1);
+					}
 
-				if(imgWidth2 > parentWidth){
-					imgWidth2 = parentWidth;				
-					img2.attr('data-width', imgWidth2);
+					if(imgWidth2 > parentWidth){
+						imgWidth2 = parentWidth;
+						img2.attr('data-width', imgWidth2);
+					}
 				}
 
 				img1.width(imgWidth1);
