@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.6.0" version_id="33" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.6.1" version_id="34" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -117,11 +117,25 @@ right={xen:phrase AdvBBcodeBar_Options_Right}</edit_format_params>
       <sub_options></sub_options>
       <relation group_id="AdvBBcodeBar" display_order="900"/>
     </option>
+    <option option_id="AdvBBcodeBar_bimg_caption_fallback" edit_format="onoff" data_type="boolean" can_backup="1">
+      <default_value>1</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="420"/>
+    </option>
+    <option option_id="AdvBBcodeBar_bimg_moveev_load" edit_format="select" data_type="integer" can_backup="1">
+      <default_value>2</default_value>
+      <edit_format_params>0={xen:phrase sedo_bbm_adv_bimg_move_js_do_not_load}
+1={xen:phrase sedo_bbm_adv_bimg_move_js_header_load}
+2={xen:phrase sedo_bbm_adv_bimg_move_js_bbcode_load}</edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="450"/>
+    </option>
     <option option_id="AdvBBcodeBar_bimg_yellowpic" edit_format="radio" data_type="boolean" can_backup="1">
       <default_value>1</default_value>
       <edit_format_params>1={xen:phrase AdvBBcodeBar_Options_Yes}</edit_format_params>
       <sub_options></sub_options>
-      <relation group_id="AdvBBcodeBar" display_order="490"/>
+      <relation group_id="AdvBBcodeBar" display_order="460"/>
     </option>
     <option option_id="AdvBBcodeBar_debug_devmode" edit_format="radio" data_type="boolean" can_backup="1">
       <default_value>0</default_value>
@@ -613,7 +627,11 @@ If the above option is set on 'no', the title of slide 1 will be displayed with 
     <phrase title="option_AdvBBcodeBar_accordion_slides_titles_defaultalign_explain" version_id="5" version_string="3.1"><![CDATA[Default Align for Slides Menu Titles. This setting can be overridden by user in Slide 'slave tag' options. Example : {slide=Title|<b>right</b>}Content{/slide}.]]></phrase>
     <phrase title="option_AdvBBcodeBar_accordion_tag" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[[Accordion BBcode] Tag]]></phrase>
     <phrase title="option_AdvBBcodeBar_accordion_tag_explain" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[With TinyMCE Quattro the accordion, tabs and slider Bb Codes are using a same orphan button. If you have modified the tags of these Bb Codes you also need to modify the tags here. Default: <b>accordion</b>.]]></phrase>
-    <phrase title="option_AdvBBcodeBar_bimg_yellowpic" version_id="9" version_string="3.1 Final"><![CDATA[[Images BBcode] Do you want to use the Yellow Picture?]]></phrase>
+    <phrase title="option_AdvBBcodeBar_bimg_caption_fallback" version_id="33" version_string="3.6.0"><![CDATA[[Bimg] Caption fallback?]]></phrase>
+    <phrase title="option_AdvBBcodeBar_bimg_caption_fallback_explain" version_id="33" version_string="3.6.0"><![CDATA[If no caption is there, this option will display a fallback caption inviting the reader to click on the picture to display it with its full dimension? P.S: the caption fallback is not available with some settings.]]></phrase>
+    <phrase title="option_AdvBBcodeBar_bimg_moveev_load" version_id="33" version_string="3.6.0"><![CDATA[[Bimg] Comparaison tool - Move event load]]></phrase>
+    <phrase title="option_AdvBBcodeBar_bimg_moveev_load_explain" version_id="33" version_string="3.6.0"><![CDATA[This option lets you configure how to load (or not to load) the <a  href="https://github.com/stephband/jquery.event.move" target="_blank">"Move event" script</a> required for the Image comparaison tool provided by the script <a href="http://zurb.com/playground/twentytwenty" target="_blank">Twenty twenty</a>. If you have already integrated it your header, don't load it again.]]></phrase>
+    <phrase title="option_AdvBBcodeBar_bimg_yellowpic" version_id="33" version_string="3.6.0"><![CDATA[[Bimg] Do you want to use the Yellow Picture?]]></phrase>
     <phrase title="option_AdvBBcodeBar_bimg_yellowpic_explain" version_id="28" version_string="3.5.0 - step1"><![CDATA[<span style="color:orange;font-weight:bolder">Important</span><br />
 With the default XenForo configuration, if a visitor or a member in a forum can't download the forum attachments, it won't be able to see a picture uploaded in that forum. It's logical but this will break your message layout generating an html error because the image is not found.<br /><br /><b> You've got three solutions to fix that:</b> <br />
 1) Give access visitors and members to the attachments. I don't like this.<br />
@@ -652,10 +670,10 @@ If you select this option, the width of the [gview] bbcode MUST be in pixels.]]>
 <br /> (Default value: 600)]]></phrase>
     <phrase title="option_AdvBBcodeBar_gview_width_unit" version_id="0" version_string="3.0"><![CDATA[[Gview BBcode] Width Unit]]></phrase>
     <phrase title="option_AdvBBcodeBar_gview_width_unit_explain" version_id="0" version_string="3.0"><![CDATA[]]></phrase>
-    <phrase title="option_AdvBBcodeBar_imgdefault" version_id="0" version_string=""><![CDATA[[Images BBcode] Default Width Attribute]]></phrase>
+    <phrase title="option_AdvBBcodeBar_imgdefault" version_id="33" version_string="3.6.0"><![CDATA[[Bimg] Default Width]]></phrase>
     <phrase title="option_AdvBBcodeBar_imgdefault_explain" version_id="6" version_string="3.2"><![CDATA[Enter the default width that should be used with image bbcodes if user doesn't specify any option or if the given option is above the max width. Unit is <b>pixel</b>. Do not precise "px" !
 <br />(Default value: 180)]]></phrase>
-    <phrase title="option_AdvBBcodeBar_imgmax" version_id="0" version_string=""><![CDATA[[Images BBcode] Max Width Attribute]]></phrase>
+    <phrase title="option_AdvBBcodeBar_imgmax" version_id="33" version_string="3.6.0"><![CDATA[[Bimg] Max Width]]></phrase>
     <phrase title="option_AdvBBcodeBar_imgmax_explain" version_id="6" version_string="3.2"><![CDATA[Enter max width for images bbcodes. Unit is <b>pixel</b>. Do not enter "px" !
 <br />(Default value: 750)]]></phrase>
     <phrase title="option_AdvBBcodeBar_JsMiu" version_id="15" version_string="3.2.0"><![CDATA[Load MarkItUp Javascript files?]]></phrase>
@@ -953,6 +971,9 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="sedo_adv_picasa_noperms" version_id="18" version_string="3.3"><![CDATA[You're not authorised to see the Picasa content]]></phrase>
     <phrase title="sedo_adv_slider_img_noperms" version_id="20" version_string="3.3.2"><![CDATA[No permission to display the image]]></phrase>
     <phrase title="sedo_bbm_adv_advanced_insert" version_id="30" version_string="3.5.0.1"><![CDATA[Advanced insert]]></phrase>
+    <phrase title="sedo_bbm_adv_bimg_move_js_bbcode_load" version_id="33" version_string="3.6.0"><![CDATA[Load with the Bb Code (default)]]></phrase>
+    <phrase title="sedo_bbm_adv_bimg_move_js_do_not_load" version_id="33" version_string="3.6.0"><![CDATA[Do not load the script]]></phrase>
+    <phrase title="sedo_bbm_adv_bimg_move_js_header_load" version_id="33" version_string="3.6.0"><![CDATA[Load in the header]]></phrase>
     <phrase title="sedo_bbm_adv_tags_helper" version_id="30" version_string="3.5.0.1"><![CDATA[Tags helper]]></phrase>
     <phrase title="style_property_advbbcodebar_accordion_content_description_master" version_id="5" version_string="3.1"><![CDATA[]]></phrase>
     <phrase title="style_property_advbbcodebar_accordion_content_master" version_id="5" version_string="3.1"><![CDATA[[ACCORDION] Main Content]]></phrase>
@@ -1151,6 +1172,13 @@ Default value: 35px.]]></phrase>
   <templates>
     <template title="adv_tiny_quattro_phrases" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[		adv_bimg_id: "{xen:jsescape {xen:phrase Sedo_AdvBBcodeBar_button_bimg_new_id}}",
 		adv_auto: "{xen:jsescape {xen:phrase Sedo_AdvBBcodeBar_template_auto}}",]]></template>
+    <template title="bbm_adv_page_container_js_head" version_id="33" version_string="3.6.0"><![CDATA[<xen:if is="{$xenOptions.AdvBBcodeBar_bimg_moveev_load} == 1">
+	<xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
+		<script src="{xen:helper javaScriptUrl, '{$javaScriptSource}/sedo/advtoolbar/twentytwenty/src/jquery.event.move.js?_v={$xenOptions.jsVersion}'}"></script>
+	<xen:else />
+		<script src="{xen:helper javaScriptUrl, '{$javaScriptSource}/sedo/advtoolbar/twentytwenty/jquery.event.move.js?_v={$xenOptions.jsVersion}'}"></script>
+	</xen:if>
+</xen:if>]]></template>
     <template title="editor_dialog_advaccordion" version_id="19" version_string="3.3.1"><![CDATA[<!DOCTYPE html>
 <html class="editorPopup">
 <head>
@@ -5365,7 +5393,21 @@ p.info span
 	{xen:property advbbcodebar_article_source}
 }]]></template>
     <template title="sedo_adv_bimg" version_id="33" version_string="3.6.0"><![CDATA[<xen:if is="{$options.diffMode}">
-	<xen:require js="js/sedo/advtoolbar/twentytwenty/xen.twenty.min.js" />
+	<xen:if is="{$xenOptions.AdvBBcodeBar_bimg_moveev_load} != 2">
+		<xen:comment>Load this if move script disable or if only in the header</xen:comment>
+		<xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
+			<xen:require js="js/sedo/advtoolbar/twentytwenty/src/xen.twenty.single.js" />
+		<xen:else />
+			<xen:require js="js/sedo/advtoolbar/twentytwenty/xen.twenty.single.js" />
+		</xen:if>
+	<xen:else />	
+		<xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
+			<xen:require js="js/sedo/advtoolbar/twentytwenty/src/xen.twenty.full.js" />
+		<xen:else />
+			<xen:require js="js/sedo/advtoolbar/twentytwenty/xen.twenty.full.js" />
+		</xen:if>
+	</xen:if>
+
 	<xen:require css="sedo_adv_bimg_twenty.css" />
 </xen:if>
 
@@ -5392,10 +5434,10 @@ p.info span
 							data-width="{$options.diffWidestWidth}"
 						>
 							<img src="{xen:raw $options.diffModeData.img_1.url}" 
-								data-width="{$options.diffModeData.img_1.width}" 
+								data-width="{$options.diffWidestWidth}" 
 							/>
 							<img src="{xen:raw $options.diffModeData.img_2.url}" 
-								data-width="{$options.diffModeData.img_2.width}" 
+								data-width="{$options.diffWidestWidth}" 
 							/>
 						</div>
 					<xen:else />
@@ -5435,7 +5477,7 @@ p.info span
 				<div class="caption_txt" style="text-align:{$options.caption.align};">{xen:raw $options.caption.text}</div>
 			</xen:if>
 		</xen:if>
-		<xen:if is="!{$options.hasCaption} AND !{$options.noLightbox}">
+		<xen:if is="!{$options.hasCaption} AND !{$options.noLightbox} AND {$xenOptions.AdvBBcodeBar_bimg_caption_fallback}">
 			<span><a 
 				href="{xen:raw $content}" 
 				target="_blank"
@@ -6735,6 +6777,11 @@ $0]]></replace>
       <replace><![CDATA[$0
 		"Advanced Insert": "{xen:jsescape {xen:phrase sedo_bbm_adv_advanced_insert}}",
 		"Tags Helper": "{xen:jsescape {xen:phrase sedo_bbm_adv_tags_helper}}",]]></replace>
+    </modification>
+    <modification template="page_container_js_head" modification_key="bbm_adv_js_head" description="Extend js header for bbm adv js" execution_order="10" enabled="1" action="str_replace">
+      <find><![CDATA[<!--XenForo_Require:JS-->]]></find>
+      <replace><![CDATA[$0
+<xen:include template="bbm_adv_page_container_js_head" />]]></replace>
     </modification>
     <modification template="MarkitUpIntegrator" modification_key="bbm_adv_miu_integration" description="BBM Advanced Bb Codes for Miu" execution_order="10" enabled="1" action="str_replace">
       <find><![CDATA[<xen:require css="MarkitUpIntegrator.css" />]]></find>

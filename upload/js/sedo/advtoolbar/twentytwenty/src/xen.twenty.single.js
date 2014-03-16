@@ -11,11 +11,25 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					diffPos = parseFloat(container.data('diffPos')),
 					img1 = container.find('img').eq(0),
 					img2 = container.find('img').eq(1),
-					imgWidth1 = img1.width(img1.data('width')),
-					imgWidth2 = img2.width(img2.data('width')),
-					widestWidth = (imgWidth1 > imgWidth2) ? imgWidth1 : imgWidth2;
-						
-				container.width(widestWidth);
+					imgWidth1 = parseInt(img1.data('width')),
+					imgWidth2 = parseInt(img2.data('width')),
+					parentWidth = container.parents('.adv_bimg_block').width();
+
+				if(imgWidth1 > parentWidth){
+					imgWidth1 = parentWidth;
+					img1.attr('data-width', imgWidth1);
+				}
+
+				if(imgWidth2 > parentWidth){
+					imgWidth2 = parentWidth;				
+					img2.attr('data-width', imgWidth2);
+				}
+
+				img1.width(imgWidth1);
+				img2.width(imgWidth2);
+					
+				var widestWidth = (imgWidth1 > imgWidth2) ? imgWidth1 : imgWidth2;
+				container.width(widestWidth).attr('data-width', widestWidth);
 		
 				var sliderPct = (diffPos) ? diffPos : 0.5,
 					sliderOrientation = (container.hasClass('DiffV')) ? 'vertical' : 'horizontal';
