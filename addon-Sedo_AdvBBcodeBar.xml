@@ -3648,7 +3648,10 @@ p.info span
 		<div id="xenpane_bimg_attach">
 			<div class="quattro_bimg_attach_wrapper">
 				 <xen:foreach loop="$imgAttachments" value="$attachment">
-				 	<div class="quattro_bimg_attach"><img src="{$attachment.thumbnailUrl}" data-attachid="{$attachment.attachment_id}" alt="{$attachment.attachment_id}" /></div>			 	
+				 	<div class="quattro_bimg_attach">
+						<img src="{$attachment.thumbnailUrl}" data-attachid="{$attachment.attachment_id}" alt="{$attachment.attachment_id}" />
+						<div class="attach_id">{xen:phrase id}: {$attachment.attachment_id}</div>
+					</div>			 	
 				 </xen:foreach>
 			</div>
 		</div>
@@ -3870,8 +3873,11 @@ p.info span
 }
 
 
-.mce-xen-body .quattro_bimg_attach > img {
+.mce-xen-body .quattro_bimg_attach {
 	float: left;
+}
+
+.mce-xen-body .quattro_bimg_attach > img {
 	border: 1pt solid grey;
 	margin: 2px;
 	padding: 5px;
@@ -3882,6 +3888,16 @@ p.info span
 	border-color: red;
 }
 
+
+.mce-xen-body .quattro_bimg_attach .attach_id {
+	bottom: 15px;
+	color: #808080;
+	font-size: 7pt;
+	position: relative;
+	right: 7px;
+	text-align: right;
+	text-shadow: -1px 1px 1px #fff;
+}
 
 .mce-xen-body dd.dd_inline > * {
 	display: inline-block;
@@ -3894,7 +3910,8 @@ p.info span
 
 .mce-xen-body select#adv_bimg_diff_pos option{
 	padding: 1px;
-}]]></template>
+}
+]]></template>
     <template title="quattro_dialog_bbm_adv_encadre" version_id="30" version_string="3.5.0.1"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_encadre.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/encadre.js" />
