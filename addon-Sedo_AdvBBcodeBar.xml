@@ -5392,7 +5392,7 @@ p.info span
 .advbbcodebar_article div.adv_source{
 	{xen:property advbbcodebar_article_source}
 }]]></template>
-    <template title="sedo_adv_bimg" version_id="33" version_string="3.6.0"><![CDATA[<xen:if is="{$options.diffMode}">
+    <template title="sedo_adv_bimg" version_id="34" version_string="3.6.1"><![CDATA[<xen:if is="{$options.diffMode}">
 	<xen:if is="{$xenOptions.AdvBBcodeBar_bimg_moveev_load} != 2">
 		<xen:comment>Load this if move script disable or if only in the header</xen:comment>
 		<xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
@@ -5494,13 +5494,17 @@ p.info span
 		</xen:if>
 	</div>
 </div>]]></template>
-    <template title="sedo_adv_bimg.css" version_id="32" version_string="3.5.2"><![CDATA[.adv_bimg_block {
+    <template title="sedo_adv_bimg.css" version_id="34" version_string="3.6.1"><![CDATA[.adv_bimg_block {
 	display:block;
 	z-index:1;
 }
 
 .adv_bimg_block.responsive .adv_bimg {
 	max-width: {$xenOptions.sedo_adv_responsive_maxwidth}px;
+}
+
+.adv_bimg_block.responsive.compare .adv_bimg {
+	max-width: 100%;
 }
 
 .adv_bimg {

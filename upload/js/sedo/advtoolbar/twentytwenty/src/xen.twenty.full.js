@@ -600,7 +600,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					img2 = container.find('img').eq(1),
 					imgWidth1 = parseInt(img1.data('width')),
 					imgWidth2 = parseInt(img2.data('width')),
-					parentWidth = container.parents('.adv_bimg_block').width();
+					parentWidth = container.parents('.adv_bimg_block').addClass('compare').width();
 
 				if(parentWidth != 0){
 					if(imgWidth1 > parentWidth){
