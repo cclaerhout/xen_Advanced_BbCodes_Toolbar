@@ -516,7 +516,15 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 
 	public static function parseTagGview(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
 	{
+		$content = trim($content);
 		$xenOptions = XenForo_Application::get('options');
+		$googleDocKey = 'https://docs.google.com/document/';
+		$pubKey = '/pub';		
+
+		$googleDocKey = 'https://docs.google.com/document/';
+		$googleDocKeyLength = 33;
+		$isGoogleDoc = (strpos($content, $googleDocKey) !== false);
+		$checkPublishState = false;
 
 		/*Manage & confirm options*/
 		$width = $xenOptions->AdvBBcodeBar_gview_width;
@@ -524,7 +532,34 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['height'] = $xenOptions->AdvBBcodeBar_gview_height;
 
 		/*Manage Content*/
-		if(preg_match('#https://docs\.google\.com/viewer\?(authuser=.+)#i', $content, $url))
+		if($isGoogleDoc)
+		{
+			$checkPublishState = strpos($content, $pubKey);
+			$endStringLength = strlen(substr($content, $checkPublishState));
+			
+			if($checkPublishState !== false)
+			{
+				/* --- Alternative method ---
+					$targetLength = strlen($content) - $endStringLength - $googleDocKeyLength;
+					$content = substr($content, $googleDocKeyLength, $targetLength);
+				*/
+				$content = substr($content, $googleDocKeyLength, -$endStringLength);
+
+				$content .= '/pub?embedded=true';
+				$checkPublishState = true;
+			}
+			elseif(preg_match('#https://docs\.google\.com/document/([\w]{1,9}/[\w]+)#', $content, $match))
+			{
+				$content = $match[1];
+				$content .= '/pub?embedded=true';
+				$checkPublishState = true;
+			}
+			else
+			{
+				$checkPublishState = false;			
+			}
+		}
+		elseif(preg_match('#https://docs\.google\.com/viewer\?(authuser=.+)#i', $content, $url))
 		{
 			$content = $url[1];
 		}
@@ -538,8 +573,9 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		{
 			$caption = ( isset($options[1]) ) ? $options[1] : new XenForo_Phrase('Sedo_AdvBBcodeBar_text_gview');			
 			$parentClass->addWrapper('spoiler', $caption); 
-		}		
-		/* Responsive Management */
+		}
+			
+		/*Responsive Management*/
 		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		$options['responsiveMode'] = $useResponsiveMode;
 		
@@ -547,6 +583,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		{
 			$options['width'] = '100%';
 		}
+		
+		/*General options*/
+		$options['isGoogleDoc'] = $isGoogleDoc;
+		$options['isValidGoogleDoc'] = $checkPublishState;
 	}	
 	
 	public static function parseTagLatex(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)

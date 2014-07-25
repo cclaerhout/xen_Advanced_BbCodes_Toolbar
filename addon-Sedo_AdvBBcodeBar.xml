@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.6.1" version_id="34" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.6.2" version_id="35" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -628,7 +628,7 @@ If the above option is set on 'no', the title of slide 1 will be displayed with 
     <phrase title="option_AdvBBcodeBar_accordion_tag" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[[Accordion BBcode] Tag]]></phrase>
     <phrase title="option_AdvBBcodeBar_accordion_tag_explain" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[With TinyMCE Quattro the accordion, tabs and slider Bb Codes are using a same orphan button. If you have modified the tags of these Bb Codes you also need to modify the tags here. Default: <b>accordion</b>.]]></phrase>
     <phrase title="option_AdvBBcodeBar_bimg_caption_fallback" version_id="33" version_string="3.6.0"><![CDATA[[Bimg] Caption fallback?]]></phrase>
-    <phrase title="option_AdvBBcodeBar_bimg_caption_fallback_explain" version_id="33" version_string="3.6.0"><![CDATA[If no caption is there, this option will display a fallback caption inviting the reader to click on the picture to display it with its full dimension? P.S: the caption fallback is not available with some settings.]]></phrase>
+    <phrase title="option_AdvBBcodeBar_bimg_caption_fallback_explain" version_id="34" version_string="3.6.1"><![CDATA[If the image has no caption, this option will display a fallback caption inviting the reader to click on the picture to display its full dimensions. P.S: the caption fallback is not available with some settings.]]></phrase>
     <phrase title="option_AdvBBcodeBar_bimg_moveev_load" version_id="33" version_string="3.6.0"><![CDATA[[Bimg] Comparaison tool - Move event load]]></phrase>
     <phrase title="option_AdvBBcodeBar_bimg_moveev_load_explain" version_id="33" version_string="3.6.0"><![CDATA[This option lets you configure how to load (or not to load) the <a  href="https://github.com/stephband/jquery.event.move" target="_blank">"Move event" script</a> required for the Image comparaison tool provided by the script <a href="http://zurb.com/playground/twentytwenty" target="_blank">Twenty twenty</a>. If you have already integrated it your header, don't load it again.]]></phrase>
     <phrase title="option_AdvBBcodeBar_bimg_yellowpic" version_id="33" version_string="3.6.0"><![CDATA[[Bimg] Do you want to use the Yellow Picture?]]></phrase>
@@ -936,6 +936,7 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="sedo_advbb_slides_configuration" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Configuration]]></phrase>
     <phrase title="sedo_adv_bimg_after" version_id="32" version_string="3.5.2"><![CDATA[After]]></phrase>
     <phrase title="sedo_adv_bimg_before" version_id="32" version_string="3.5.2"><![CDATA[Before]]></phrase>
+    <phrase title="sedo_adv_gdoc_invalid" version_id="34" version_string="3.6.1"><![CDATA[Invalid Google Doc URL]]></phrase>
     <phrase title="sedo_adv_grabber_curl" version_id="17" version_string="3.2.1"><![CDATA[cURL: [available]]]></phrase>
     <phrase title="sedo_adv_grabber_fgc" version_id="17" version_string="3.2.1"><![CDATA[file_get_contents: [available]]]></phrase>
     <phrase title="sedo_adv_grabber_manual_rss" version_id="17" version_string="3.2.1"><![CDATA[Manual RSS Linking]]></phrase>
@@ -5999,8 +6000,17 @@ p.info span
 .advbbcodebar_fieldset.bright {
 	margin-left:auto;
 }]]></template>
-    <template title="sedo_adv_gview" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_gview.css" />
-<iframe class="adv_gview {xen:if '{$options.responsiveMode}', 'responsive'}" src="https://docs.google.com/viewer?{xen:raw $content}" width="{$options.width}" height="{$options.height}"></iframe>]]></template>
+    <template title="sedo_adv_gview" version_id="34" version_string="3.6.1"><![CDATA[<xen:require css="sedo_adv_gview.css" />
+
+<xen:if is="{$options.isGoogleDoc}">
+	<xen:if is="{$options.isValidGoogleDoc}">
+		<iframe class="adv_gview {xen:if '{$options.responsiveMode}', 'responsive'}" src="https://docs.google.com/document/{xen:raw $content}" width="{$options.width}" height="{$options.height}"></iframe>
+	<xen:else />
+		<p style="font-style:italic">{xen:phrase sedo_adv_gdoc_invalid}</p>
+	</xen:if>
+<xen:else />
+	<iframe class="adv_gview {xen:if '{$options.responsiveMode}', 'responsive'}" src="https://docs.google.com/viewer?{xen:raw $content}" width="{$options.width}" height="{$options.height}"></iframe>
+</xen:if>]]></template>
     <template title="sedo_adv_gview.css" version_id="17" version_string="3.2.1"><![CDATA[.adv_gview{
 	border: none;
 }]]></template>
