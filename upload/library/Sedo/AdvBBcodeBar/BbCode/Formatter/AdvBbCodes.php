@@ -2,6 +2,12 @@
 
 class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 {
+	protected static $_parentClass;
+	public function __construct($parentClass)
+	{
+		self::$_parentClass = $parentClass;
+	}
+
 	public static function parseTagSpoilerbb(&$content, array &$options, &$templateName, &$fallBack, array $rendererStates, $parentClass)
 	{
 		$xenOptions = XenForo_Application::get('options');
@@ -291,7 +297,14 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
       		{
       			$directUrl = true;
       		}
-      		
+
+		//Image proxy options
+		$validUrl = self::getValidUrl($img);
+		if($directUrl && $validUrl)
+		{
+			$img = self::handleImageProxyOption($validUrl);
+		}
+
       		return array($img, $width, $directUrl);
 	}
 
@@ -1644,6 +1657,42 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$options['img_urlLink'] = $url . 's2000/' . $image;
 			$options['img_urlImg'] = $url . 's' . $width . '/' . $image;
 		}
+	}
+
+	public static function getValidUrl($url)
+	{
+		$output = self::$_parentClass->bbmProtectedBridge('getValidUrl', array($url));
+
+		if($output == -1)
+		{
+			$output = $url;
+		}
+		
+		return $output;			
+	}
+
+	public static function handleImageProxyOption($url)
+	{
+		$output = self::$_parentClass->bbmProtectedBridge('handleImageProxyOption', array($url));
+
+		if($output == -1)
+		{
+			$output = $url;
+		}
+		
+		return $output;
+	}
+	
+	public static function handleLinkProxyOption($url, $linkType)
+	{
+		$output = self::$_parentClass->bbmProtectedBridge('handleLinkProxyOption', array($url, $linkType));
+
+		if($output == -1)
+		{
+			$output = $url;
+		}
+		
+		return $output;		
 	}
 
 	public static function AioInstalled()
