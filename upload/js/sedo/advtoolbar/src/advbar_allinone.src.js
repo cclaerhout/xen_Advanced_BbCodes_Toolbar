@@ -83,11 +83,51 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		Tabs: function($e)
 		{
 			var $tabs = $e.children('.advtabs'),
-				$panes = $e.children('.advpanes').children('div');
+				$panes = $e.children('.advpanes').children('div'),
+				elementWidth = $e.width(),
+				panesHeight = $panes.height(),
+				tabsWidth = getTabsWidth(),				
+				tabsHeight = $tabs.first().height(),
+				tabsItems = $tabs.children().length,
+				tabsDelta = tabsHeight*(tabsItems-1);						
 
 			$tabs.tabs($panes);
 			$tabs.find('.openMe').trigger('click');
 			$e.find('.adv_tabs_link').click(function(){ return false; });
+
+			function getTabsWidth(){
+				var width = 0;
+				$tabs.children().each(function(){
+					width = width+$(this).width();
+				});
+				return width;
+			};
+
+			var adjustSize = function(){
+				var parentWidth = $e.parent().width();
+				
+				//Width manager
+				if(elementWidth > parentWidth){
+					$e.width(parentWidth);
+				}else{
+					$e.width(elementWidth);
+				}
+
+				//Tabs & height manager
+				if(tabsWidth > parentWidth){
+					$e.addClass('alter');
+					$panes.height(panesHeight-tabsDelta);
+				}else{
+					$e.removeClass('alter');
+					$panes.height(panesHeight);
+				}
+			};
+
+			$(window).resize(function() {
+				adjustSize(); 
+			});
+			
+			adjustSize();
 		},
 		Slider: function($e)
 		{

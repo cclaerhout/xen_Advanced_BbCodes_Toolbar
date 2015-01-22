@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.6.3" version_id="36" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.6.4" version_id="37" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -4707,7 +4707,7 @@ p.info span
 .mce-xen-body .adv_picasa #ctrl_interval_type{
 	text-align:center;
 }]]></template>
-    <template title="quattro_dialog_bbm_adv_slides" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="quattro_dialog.css" />
+    <template title="quattro_dialog_bbm_adv_slides" version_id="36" version_string="3.6.3"><![CDATA[<xen:require css="quattro_dialog.css" />
 <xen:require css="quattro_dialog_bbm_adv_slides.css" />
 <xen:require js="js/sedo/advtoolbar/tinyquattro/slides.js" />
 
@@ -6130,7 +6130,7 @@ p.info span
 	text-align: {$picasaAlign};
 }
 ]]></template>
-    <template title="sedo_adv_slider" version_id="31" version_string="3.5.1"><![CDATA[<xen:require css="sedo_adv_slider.css" />
+    <template title="sedo_adv_slider" version_id="36" version_string="3.6.3"><![CDATA[<xen:require css="sedo_adv_slider.css" />
 <xen:require js="js/sedo/advtoolbar/jqt_slider.js" />
 
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
@@ -6582,7 +6582,7 @@ p.info span
 	color:{xen:property contentText} !important;
 	background-color:{xen:property contentBackground} !important;
 }]]></template>
-    <template title="sedo_adv_tabs" version_id="31" version_string="3.5.1"><![CDATA[<xen:require css="sedo_adv_tabs.css" />
+    <template title="sedo_adv_tabs" version_id="36" version_string="3.6.3"><![CDATA[<xen:require css="sedo_adv_tabs.css" />
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
 	<xen:require js="js/sedo/advtoolbar/src/advbar_allinone.src.js" />	
 <xen:else />
@@ -6615,7 +6615,7 @@ p.info span
 		</xen:foreach>
 	</div>
 </noscript>]]></template>
-    <template title="sedo_adv_tabs.css" version_id="28" version_string="3.5.0 - step1"><![CDATA[.adv_tabs_wrapper{
+    <template title="sedo_adv_tabs.css" version_id="36" version_string="3.6.3"><![CDATA[.adv_tabs_wrapper{
 	{xen:property advbbcodebar_tabs_container}
 }
 
@@ -6650,11 +6650,16 @@ p.info span
 	margin:0 !important;
 	padding:0;
 	border-bottom:1px solid #666;
-	height:30px;
+	min-height:30px;
+}
+
+.adv_tabs_wrapper.alter ul.advtabs li {
+	float: none;
 }
 
 .adv_tabs_wrapper ul.advtabs li {
 	float:left;
+	height:30px;
 	text-indent:0;
 	padding:0;
 	margin:0 !important;
