@@ -83,17 +83,19 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		Tabs: function($e)
 		{
 			var $tabs = $e.children('.advtabs'),
-				$panes = $e.children('.advpanes').children('div'),
-				elementWidth = $e.width(),
-				panesHeight = $panes.height(),
-				tabsWidth = getTabsWidth(),				
-				tabsHeight = $tabs.first().height(),
-				tabsItems = $tabs.children().length,
-				tabsDelta = tabsHeight*(tabsItems-1);						
+				$panes = $e.children('.advpanes').children('div');
 
 			$tabs.tabs($panes);
 			$tabs.find('.openMe').trigger('click');
 			$e.find('.adv_tabs_link').click(function(){ return false; });
+
+			var elementWidth = $e.width(),
+				widthInPercent = $e.css('width').indexOf('%') !=-1,
+				panesHeight = $panes.height(),
+				tabsWidth = getTabsWidth(),				
+				tabsHeight = $tabs.first().height(),
+				tabsItems = $tabs.children().length,
+				tabsDelta = tabsHeight*(tabsItems-1);
 
 			function getTabsWidth(){
 				var width = 0;
@@ -103,14 +105,29 @@ if(typeof Sedo == 'undefined') Sedo = {};
 				return width;
 			};
 
-			var adjustSize = function(){
-				var parentWidth = $e.parent().width();
-				
-				//Width manager
-				if(elementWidth > parentWidth){
-					$e.width(parentWidth);
+			function getVisibleParent($src){
+				if($src.parent().is(':visible')) {
+					return $src.parent();
 				}else{
-					$e.width(elementWidth);
+					return getVisibleParent($src.parent());
+				}
+			}
+
+			var adjustSize = function(){
+				var $parent = getVisibleParent($e),
+					parentWidth = $parent.width()-2;
+					
+				if(!tabsWidth){
+					tabsWidth = getTabsWidth();
+				}
+
+				//Width manager
+				if(!widthInPercent){
+					if(elementWidth > parentWidth){
+						$e.width(parentWidth);
+					}else{
+						$e.width(elementWidth);
+					}
 				}
 
 				//Tabs & height manager
@@ -122,11 +139,38 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					$panes.height(panesHeight);
 				}
 			};
-
+			
+			/*For window resize*/
 			$(window).resize(function() {
 				adjustSize(); 
 			});
+
+			/*For nested tabs*/
+			$e.data('autoResize', adjustSize);
 			
+			$tabs.click(function(){
+				$panes.find('.adv_tabs_wrapper').each(function(){
+					var $this = $(this), 
+						autoResize = $this.data('autoResize');
+					
+					if($this.is(':visible') && typeof autoResize === 'function'){
+						autoResize();
+					}
+				});
+			});
+
+			/*For current tabs hidden by a parent tag*/
+			var isVisible = $e.is(':visible');
+
+			$e.parentsUntil('.messageText').click(function(){
+				var checkVisible = $e.is(':visible');
+				if(!isVisible && checkVisible){
+					adjustSize();			
+				}
+				isVisible = checkVisible;
+			});
+				
+			/*For current tabs*/
 			adjustSize();
 		},
 		Slider: function($e)
