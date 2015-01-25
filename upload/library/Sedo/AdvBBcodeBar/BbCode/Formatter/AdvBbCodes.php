@@ -846,7 +846,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		}
 		
 		/* Confirm Options */
-		$options['uniqid'] = uniqid('adv_accordion_');
+		$options['uniqid'] = $parentClass->uniqid('adv_accordion_');
 		$options['width'] = $width;
 		$options['widthType'] = $widthType;
 		$options['blockAlign'] = $blockAlign;
@@ -901,7 +901,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
      	 		$tagid = $parentClass->getTagExtra('tagid'); 	 		
      	 	}
 
-		$uniqid = ($postid) ? "adv_tabs_{$postid}_{$tagid}" : uniqid('adv_tabs_');
+		$uniqid = ($postid) ? "adv_tabs_{$postid}_{$tagid}" : $parentClass->uniqid('adv_tabs_');
 
 		/*Default Master Options*/
 		$width = $xenOptions->AdvBBcodeBar_tabs_default_width;
@@ -1108,7 +1108,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
      	 		$tagid = $parentClass->getTagExtra('tagid'); 	 		
      	 	}
 
-		$uniqid = ($postid) ? "adv_slider_{$postid}_{$tagid}" : uniqid('adv_slider_');
+		$uniqid = ($postid) ? "adv_slider_{$postid}_{$tagid}" : $parentClass->uniqid('adv_slider_');
 
 		/*Default Master Options*/
 		$width = $xenOptions->AdvBBcodeBar_slider_defaultwidth;
@@ -1579,7 +1579,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
       		
 		if(in_array($type, array('album', 'photo')))
 		{
-			$options['id'] = uniqid("picasa_$type");
+			$options['id'] = $parentClass->uniqid("picasa_$type");
 			$options['type'] = $type;
 			$options['width'] = $width;
 			$options['height'] = $height;
