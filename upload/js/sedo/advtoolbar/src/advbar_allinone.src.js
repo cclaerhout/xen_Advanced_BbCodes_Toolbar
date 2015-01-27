@@ -43,6 +43,10 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		{
 			var m = $e.attr('data-easing'), 
 				d = $e.attr('data-duration');
+				
+			var callback = function(e){
+				$(this).trigger('elementResized');
+			};
 
 			$e.children('dd:not(.AdvSlideOpen)').hide();
 			$e.children('dt').click(function(e)
@@ -58,10 +62,10 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					$this.addClass(activeClass);
 	
 					$('#' + src + '.adv_accordion > dd').removeClass(activeClass).slideUp(d, m);
-					$target.addClass(activeClass).slideDown(d, m);
+					$target.addClass(activeClass).slideDown(d, m, callback);
 				} else if($target.hasClass(activeClass)) {
 					$this.removeClass(activeClass);
-					$target.removeClass(activeClass).slideUp(d, m);
+					$target.removeClass(activeClass).slideUp(d, m, callback);
 				}
 			});
 		},
