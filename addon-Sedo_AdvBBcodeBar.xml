@@ -5826,6 +5826,7 @@ p.info span
 
 .adv_bimg_block.compare .caption_txt{
 	position: relative;
+	top: -18px;
 }]]></template>
     <template title="sedo_adv_encadre" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_encadre.css" />
 
