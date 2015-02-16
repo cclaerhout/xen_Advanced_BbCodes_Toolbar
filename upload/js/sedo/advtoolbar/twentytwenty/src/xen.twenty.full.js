@@ -22,7 +22,8 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					imgWidth2 = parseInt(img2.data('width')),
 					parentWrapper = container.parents('.adv_bimg_block').addClass('compare'),
 					parentWidth = parentWrapper.width(),
-					ratio = imgWidth1/100; //fluid
+					ratio = imgWidth1/100,//fluid
+					ovlPhrase = container.data('phrase').split('|');
 
 				container.addClass("twentytwenty-container").data('complete', 1);
 
@@ -88,8 +89,8 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					afterImg = container.find("img:last").addClass("twentytwenty-after");
 
 				var overlay = container.find(".twentytwenty-overlay");
-					overlay.append("<div class='twentytwenty-before-label'></div>");
-					overlay.append("<div class='twentytwenty-after-label'></div>");
+					overlay.append("<div class='twentytwenty-before-label-text'>"+ovlPhrase[0]+"</div><div class='twentytwenty-before-label'></div>");
+					overlay.append("<div class='twentytwenty-after-label-text'>"+ovlPhrase[1]+"</div><div class='twentytwenty-after-label'></div>");
 
 				/*Adjust slider function*/
 				var calcOffset = function(dimensionPct) {

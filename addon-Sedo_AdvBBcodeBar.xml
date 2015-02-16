@@ -934,7 +934,7 @@ The above list will tell you which methods is supported by your server. If none 
     <phrase title="sedo_advbb_latex_help" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Latex help]]></phrase>
     <phrase title="sedo_advbb_slides_builder" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Slides]]></phrase>
     <phrase title="sedo_advbb_slides_configuration" version_id="23" version_string="3.3.3 - Beta 3"><![CDATA[Configuration]]></phrase>
-    <phrase title="sedo_adv_bimg_after" version_id="32" version_string="3.5.2"><![CDATA[After]]></phrase>
+    <phrase title="sedo_adv_bimg_after" version_id="39" version_string="3.6.6"><![CDATA[After]]></phrase>
     <phrase title="sedo_adv_bimg_before" version_id="32" version_string="3.5.2"><![CDATA[Before]]></phrase>
     <phrase title="sedo_adv_gdoc_invalid" version_id="34" version_string="3.6.1"><![CDATA[Invalid Google Doc URL]]></phrase>
     <phrase title="sedo_adv_grabber_curl" version_id="17" version_string="3.2.1"><![CDATA[cURL: [available]]]></phrase>
@@ -5432,6 +5432,7 @@ p.info span
 						<div class="AdvBimgDiff {xen:if '{$options.diffVertical}', 'DiffV'} {xen:if '{$options.diffFluid}', 'Fluid'} twentytwenty-container" 
 							style="width:{$options.widthImg}"
 							{xen:if '{$options.diffPos}', 'data-diff-pos="{$options.diffPos}"'}
+							data-phrase="{xen:phrase sedo_adv_bimg_before}|{xen:phrase sedo_adv_bimg_after}"
 							data-width="{$options.diffWidestWidth}"
 						>
 							<img src="{xen:raw $options.diffModeData.img_1.url}" 
@@ -5451,6 +5452,7 @@ p.info span
 							style="width:{$options.widthImg}"
 							data-width="{$options.diffWidestWidth}"
 							{xen:if '{$options.diffPos}', 'data-diff-pos="{$options.diffPos}"'}
+							data-phrase="{xen:phrase sedo_adv_bimg_before}|{xen:phrase sedo_adv_bimg_after}"
 						>
       						<img src="{xen:raw $options.diffModeData.img_1.url}" 
       							data-width="{$options.diffModeData.img_1.width}" 
@@ -5614,13 +5616,19 @@ p.info span
 	transition-property: opacity;
 }
 
-.twentytwenty-before-label:before, .twentytwenty-after-label:before {
+.twentytwenty-before-label-text, .twentytwenty-after-label-text{
+	opacity: 0;
+}
+
+.twentytwenty-container :hover .twentytwenty-before-label-text,
+.twentytwenty-container :hover .twentytwenty-after-label-text {
 	color: white;
 	font-size: 13px;
 	letter-spacing: 0.1em;
+	opacity: 1;
 }
 
-.twentytwenty-before-label:before, .twentytwenty-after-label:before {
+.twentytwenty-before-label-text, .twentytwenty-after-label-text {
 	position: absolute;
 	background: rgba(255, 255, 255, 0.2);
 	line-height: 38px;
@@ -5630,12 +5638,12 @@ p.info span
 	border-radius: 2px;
 }
 
-.twentytwenty-horizontal .twentytwenty-before-label:before, .twentytwenty-horizontal .twentytwenty-after-label:before {
+.twentytwenty-horizontal .twentytwenty-before-label-text, .twentytwenty-horizontal .twentytwenty-after-label-text {
 	top: 50%;
 	margin-top: -19px;
 }
 
-.twentytwenty-vertical .twentytwenty-before-label:before, .twentytwenty-vertical .twentytwenty-after-label:before {
+.twentytwenty-vertical .twentytwenty-before-label-text, .twentytwenty-vertical .twentytwenty-after-label-text {
 	left: 50%;
 	margin-left: -45px;
 	text-align: center;
@@ -5690,30 +5698,24 @@ p.info span
 .twentytwenty-before-label {
 	opacity: 0;
 }
-	.twentytwenty-before-label:before {
-		content: "{xen:phrase sedo_adv_bimg_before}";
-	}
 
 .twentytwenty-after-label {
 	opacity: 0;
 }
-	.twentytwenty-after-label:before {
-		content: "{xen:phrase sedo_adv_bimg_after}";
-	}
 
-.twentytwenty-horizontal .twentytwenty-before-label:before {
+.twentytwenty-horizontal .twentytwenty-before-label-text {
 	left: 10px;
 }
 
-.twentytwenty-horizontal .twentytwenty-after-label:before {
+.twentytwenty-horizontal .twentytwenty-after-label-text {
 	right: 10px;
 }
 
-.twentytwenty-vertical .twentytwenty-before-label:before {
+.twentytwenty-vertical .twentytwenty-before-label-text {
 	top: 10px;
 }
 
-.twentytwenty-vertical .twentytwenty-after-label:before {
+.twentytwenty-vertical .twentytwenty-after-label-text {
 	bottom: 10px;
 }
 
