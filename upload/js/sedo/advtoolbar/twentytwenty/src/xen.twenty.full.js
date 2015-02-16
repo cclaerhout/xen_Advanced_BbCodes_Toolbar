@@ -9,24 +9,44 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		init: function($e)
 		{
 			$e.each(function() {
-				var container = $(this).addClass("twentytwenty-container");
-					diffPos = parseFloat(container.data('diffPos')),
+				var container = $(this),
 					img1 = container.find('img').eq(0),
-					img2 = container.find('img').eq(1),
+					img2 = container.find('img').eq(1);
+
+				if(img1.width() == 0 || container.data('complete') == 1){
+					return;	
+				}
+
+				var diffPos = parseFloat(container.data('diffPos')),
 					imgWidth1 = parseInt(img1.data('width')),
 					imgWidth2 = parseInt(img2.data('width')),
 					parentWrapper = container.parents('.adv_bimg_block').addClass('compare'),
 					parentWidth = parentWrapper.width(),
 					ratio = imgWidth1/100; //fluid
 
-				
+				container.addClass("twentytwenty-container").data('complete', 1);
+
 				var manageFluidWidth = function(){
 					if(!container.hasClass('Fluid')) return false;
 					parentWidth = parentWrapper.width();
-					imgWidth1 = parentWidth*ratio;
-					imgWidth2 = parentWidth*ratio;
+					
+					var tmpWidth = parentWidth*ratio,
+						imageRef = new Image(),
+						maxWidth, maxWidthImg1, maxWidthImg2;
+						
+	  				imageRef.src = img1.attr('src');
+	  				maxWidthImg1 = imageRef.width;
+	  				imageRef.src = img2.attr('src');
+	  				maxWidthImg2 = imageRef.width;
+	  				maxWidth = (maxWidthImg1 > maxWidthImg2) ? maxWidthImg1 : maxWidthImg2;
 
-					return parentWidth*ratio;
+	  				if(tmpWidth > maxWidth){
+	  					tmpWidth = maxWidth;
+	  				}
+	  				
+	  				imgWidth1 = imgWidth2 = tmpWidth;
+	  				
+					return tmpWidth;
 				}
 				
 				manageFluidWidth();
@@ -97,7 +117,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					adjustContainer(offset);
 				}
 		
-				$(window, slider).on('adjust.twentytwenty', function(e) {
+				$(window, slider).on('adjust', function(e) {
 					adjustSlider(sliderPct);
 				});
 
@@ -137,7 +157,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 				
 				resizeSlider();
 
-				$(window, container).on('resize.twentytwenty', function(e) {
+				$(window, container).on('resize', function(e) {
 					resizeSlider();
 				});
 
@@ -185,27 +205,28 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					event.preventDefault();
 				});
 			});
-
-
-			$(window).on('resize', function(e) {
-				$(window).trigger('resize.twentytwenty');
-			});			
 		},
-		reload: function() 
+		reload:function() 
 		{
 			$('.AdvBimgDiff').each(function(){
 				var $this = $(this);
 
 				if($this.height() == 0){
 					$this.find('img').load(function(){
-						$this.width($this.data('width')).trigger('adjust.twentytwenty');
+						$this.width($this.data('width')).trigger('adjust');
 					});
 				}
 			});
+		},
+		rebuild:function(e)
+		{
+			Sedo.TwentyX2.init($('.AdvBimgDiff'));
 		}
 	}
 
+
 	XenForo.register('.AdvBimgDiff', 'Sedo.TwentyX2.init');
 	$(document).on('XenForoActivate', Sedo.TwentyX2.reload);
+	$(window).on('sedoRebuild',Sedo.TwentyX2.rebuild);
 }
 (jQuery, this, document);

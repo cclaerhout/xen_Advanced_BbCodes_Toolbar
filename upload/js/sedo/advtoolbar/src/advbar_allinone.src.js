@@ -43,10 +43,6 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		{
 			var m = $e.attr('data-easing'), 
 				d = $e.attr('data-duration');
-				
-			var callback = function(e){
-				$(this).trigger('elementResized');
-			};
 
 			$e.children('dd:not(.AdvSlideOpen)').hide();
 			$e.children('dt').click(function(e)
@@ -62,10 +58,10 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					$this.addClass(activeClass);
 	
 					$('#' + src + '.adv_accordion > dd').removeClass(activeClass).slideUp(d, m);
-					$target.addClass(activeClass).slideDown(d, m, callback);
+					$target.addClass(activeClass).slideDown(d, m);
 				} else if($target.hasClass(activeClass)) {
 					$this.removeClass(activeClass);
-					$target.removeClass(activeClass).slideUp(d, m, callback);
+					$target.removeClass(activeClass).slideUp(d, m);
 				}
 			});
 		},
@@ -161,6 +157,14 @@ if(typeof Sedo == 'undefined') Sedo = {};
 						autoResize();
 					}
 				});
+			});
+			
+			/*Needed for redraw*/
+			$tabs.children().click(function(e){
+				var $pane = $panes.eq($(this).index()),
+					ev = $.Event('sedoRebuild', { $container: $pane, originalEvent: e } );
+					
+				$(window).trigger(ev);
 			});
 
 			/*For current tabs hidden by a parent tag*/
