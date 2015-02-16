@@ -234,6 +234,6 @@ if(typeof Sedo == 'undefined') Sedo = {};
 
 	XenForo.register('.AdvBimgDiff', 'Sedo.TwentyX2.init');
 	$(document).on('XenForoActivate', Sedo.TwentyX2.reload);
-	$(window).on('sedoRebuild',Sedo.TwentyX2.rebuild);
+	$(window).on('load sedoRebuild',Sedo.TwentyX2.rebuild);
 }
 (jQuery, this, document);
