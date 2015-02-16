@@ -1,3 +1,4 @@
+/*Twentytwenty + XenForo Integration*/
 if(typeof Sedo == 'undefined') Sedo = {};
 !function($, window, document, _undefined)
 {    
@@ -12,8 +13,22 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					img2 = container.find('img').eq(1),
 					imgWidth1 = parseInt(img1.data('width')),
 					imgWidth2 = parseInt(img2.data('width')),
-					parentWidth = container.parents('.adv_bimg_block').addClass('compare').width();
+					parentWrapper = container.parents('.adv_bimg_block').addClass('compare'),
+					parentWidth = parentWrapper.width(),
+					ratio = imgWidth1/100; //fluid
 
+				
+				var manageFluidWidth = function(){
+					if(!container.hasClass('Fluid')) return false;
+					parentWidth = parentWrapper.width();
+					imgWidth1 = parentWidth*ratio;
+					imgWidth2 = parentWidth*ratio;
+
+					return parentWidth*ratio;
+				}
+				
+				manageFluidWidth();
+				
 				if(parentWidth != 0){
 					if(imgWidth1 > parentWidth){
 						imgWidth1 = parentWidth;
@@ -28,16 +43,17 @@ if(typeof Sedo == 'undefined') Sedo = {};
 
 				img1.width(imgWidth1);
 				img2.width(imgWidth2);
-					
+
 				var widestWidth = (imgWidth1 > imgWidth2) ? imgWidth1 : imgWidth2;
 				container.width(widestWidth).attr('data-width', widestWidth);
-		
+
 				var sliderPct = (diffPos) ? diffPos : 0.5,
 					sliderOrientation = (container.hasClass('DiffV')) ? 'vertical' : 'horizontal';
 					
 				var beforeDirection = (sliderOrientation === 'vertical') ? 'down' : 'left',
 					afterDirection = (sliderOrientation === 'vertical') ? 'up' : 'right';
-			
+
+				/*Build slider*/
 				container.wrap("<div class='twentytwenty-wrapper twentytwenty-" + sliderOrientation + "'></div>");
 				container.append("<div class='twentytwenty-overlay'></div>");
 				container.append("<div class='twentytwenty-handle'></div>");
@@ -53,6 +69,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					overlay.append("<div class='twentytwenty-before-label'></div>");
 					overlay.append("<div class='twentytwenty-after-label'></div>");
 		
+				/*Adjust slider function*/
 				var calcOffset = function(dimensionPct) {
 					var w = beforeImg.width(), h = beforeImg.height();
 					return {
@@ -71,19 +88,66 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					}
 					container.css("height", offset.h);
 				};
-		
+
 				var adjustSlider = function(pct) {
 					var offset = calcOffset(pct);
 					slider.css((sliderOrientation==="vertical") ? "top" : "left", (sliderOrientation==="vertical") ? offset.ch : offset.cw);
 					adjustContainer(offset);
 				}
 		
-				$(window, slider).on("resize.twentytwenty", function(e) {
+				$(window, slider).on('adjust.twentytwenty', function(e) {
 					adjustSlider(sliderPct);
 				});
-		
+
+				adjustSlider(sliderPct);
+
+				/*Resize slider function*/
+				var resizeSlider = function(){
+					var parentWrapperWidth = parentWrapper.parent().width(),
+						containerWidth = container.width(),
+						widestImg = (imgWidth1 > imgWidth2) ? img1 : img2,
+						widestImgRealWidth = widestImg.width(),
+						overlay = container.find('.twentytwenty-overlay');
+
+					if(container.hasClass('Fluid')){
+						var newWidth = manageFluidWidth();
+						img1.width(newWidth);
+						img2.width(newWidth);
+						container.width(newWidth);
+						adjustSlider(sliderPct);						
+						return;
+					}
+
+					if(containerWidth < parentWrapperWidth){
+					
+						if(containerWidth < widestWidth){
+							container.width(parentWrapperWidth);
+							overlay.width(parentWrapperWidth);
+							adjustSlider(sliderPct);
+						};
+						return;
+					}
+					
+					container.width(parentWrapperWidth)
+					overlay.width(parentWrapperWidth);
+					adjustSlider(sliderPct);		
+				};
+				
+				resizeSlider();
+
+				$(window, container).on('resize.twentytwenty', function(e) {
+					resizeSlider();
+				});
+
+				/*External call*/
+				container.data('sedoTwenty', {
+					'adjustSlider':adjustSlider,
+					'resizeSlider': resizeSlider
+				});
+
+				/*Events*/		
 				var offsetX = 0, imgWidth = 0;
-			
+
 				slider.on("movestart", function(e) {
 					if (((e.distX > e.distY && e.distX < -e.distY) || (e.distX < e.distY && e.distX > -e.distY)) && sliderOrientation !== 'vertical') {
 						e.preventDefault();
@@ -118,9 +182,12 @@ if(typeof Sedo == 'undefined') Sedo = {};
 				container.find("img").on("mousedown", function(event) {
 					event.preventDefault();
 				});
-		
-				$(window).trigger("resize.twentytwenty");
 			});
+
+
+			$(window).on('resize', function(e) {
+				$(window).trigger('resize.twentytwenty');
+			});			
 		},
 		reload: function() 
 		{
@@ -129,7 +196,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 
 				if($this.height() == 0){
 					$this.find('img').load(function(){
-						$this.width($this.data('width')).trigger('resize.twentytwenty');
+						$this.width($this.data('width')).trigger('adjust.twentytwenty');
 					});
 				}
 			});

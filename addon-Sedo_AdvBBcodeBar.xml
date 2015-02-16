@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.6.5" version_id="38" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.6.6" version_id="39" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -5393,7 +5393,7 @@ p.info span
 .advbbcodebar_article div.adv_source{
 	{xen:property advbbcodebar_article_source}
 }]]></template>
-    <template title="sedo_adv_bimg" version_id="35" version_string="3.6.2"><![CDATA[<xen:if is="{$options.diffMode}">
+    <template title="sedo_adv_bimg" version_id="38" version_string="3.6.5"><![CDATA[<xen:if is="{$options.diffMode}">
 	<xen:if is="{$xenOptions.AdvBBcodeBar_bimg_moveev_load} != 2">
 		<xen:comment>Load this if move script disable or if only in the header</xen:comment>
 		<xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
@@ -5429,7 +5429,7 @@ p.info span
 			<xen:if is="{$options.parentUrl}">
 				<a class="externalLink adv_bimg_nolb" target="_blank" href="{$options.parentUrl}">
 					<xen:if is="{$options.diffMode}">
-						<div class="AdvBimgDiff {xen:if '{$options.diffVertical}', 'DiffV'} twentytwenty-container" 
+						<div class="AdvBimgDiff {xen:if '{$options.diffVertical}', 'DiffV'} {xen:if '{$options.diffFluid}', 'Fluid'} twentytwenty-container" 
 							style="width:{$options.widthImg}"
 							{xen:if '{$options.diffPos}', 'data-diff-pos="{$options.diffPos}"'}
 							data-width="{$options.diffWidestWidth}"
@@ -5447,7 +5447,7 @@ p.info span
 				</a>
 			<xen:else />
       				<xen:if is="{$options.diffMode}">
-					<div class="AdvBimgDiff {xen:if '{$options.diffVertical}', 'DiffV'} twentytwenty-container" 
+					<div class="AdvBimgDiff {xen:if '{$options.diffVertical}', 'DiffV'} {xen:if '{$options.diffFluid}', 'Fluid'} twentytwenty-container" 
 							style="width:{$options.widthImg}"
 							data-width="{$options.diffWidestWidth}"
 							{xen:if '{$options.diffPos}', 'data-diff-pos="{$options.diffPos}"'}

@@ -244,6 +244,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['diffPos'] = $diffPos;
 		$options['diffVertical'] = $diffVertical;
 		$options['diffWidestWidth'] = $diffWidestWidth;
+		$options['diffFluid'] = ($widthType == '%');
 
 		/* Responsive Management */
 		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
