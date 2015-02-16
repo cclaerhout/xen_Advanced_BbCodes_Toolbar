@@ -11,7 +11,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					img1 = container.find('img').eq(0),
 					img2 = container.find('img').eq(1);
 
-				if(img1.width() <= 2 || container.data('complete') == 1){
+				if(img1.width() <= 2 || img1.height() <= 2 || container.data('complete') == 1){
 					return;	
 				}
 
@@ -25,7 +25,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 				container.addClass("twentytwenty-container").data('complete', 1);
 
 				var manageFluidWidth = function(){
-					if(!container.hasClass('Fluid')) return false;
+					if(!container.hasClass('Fluid')) return;
 					parentWidth = parentWrapper.width();
 					
 					var tmpWidth = parentWidth*ratio,
@@ -43,7 +43,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 	  				}
 	  				
 	  				imgWidth1 = imgWidth2 = tmpWidth;
-	  				
+  				
 					return tmpWidth;
 				}
 				
@@ -84,14 +84,21 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		
 				var beforeImg = container.find("img:first").addClass("twentytwenty-before"),
 					afterImg = container.find("img:last").addClass("twentytwenty-after");
-			
+
 				var overlay = container.find(".twentytwenty-overlay");
 					overlay.append("<div class='twentytwenty-before-label'></div>");
 					overlay.append("<div class='twentytwenty-after-label'></div>");
-		
+
 				/*Adjust slider function*/
 				var calcOffset = function(dimensionPct) {
 					var w = beforeImg.width(), h = beforeImg.height();
+					if(h < 2){
+						//No idea why it sometimes occurs
+						var imageRef = new Image();
+						imageRef.src = beforeImg.attr("src");
+						h = imageRef.height*(w/imageRef.width);
+					}
+					
 					return {
 						w: w+"px",
 						h: h+"px",
@@ -115,7 +122,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					adjustContainer(offset);
 				}
 		
-				$(window, slider).on('adjust', function(e) {
+				$(window, slider).on('adjustTwenty', function(e) {
 					adjustSlider(sliderPct);
 				});
 
@@ -161,8 +168,8 @@ if(typeof Sedo == 'undefined') Sedo = {};
 
 				/*External call*/
 				container.data('sedoTwenty', {
-					'adjustSlider':adjustSlider,
-					'resizeSlider': resizeSlider
+					'adjustTwenty':adjustSlider,
+					'resizeTwenty': resizeSlider
 				});
 
 				/*Events*/		
@@ -211,7 +218,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 
 				if($this.height() == 0){
 					$this.find('img').load(function(){
-						$this.width($this.data('width')).trigger('adjust');
+						$this.width($this.data('width')).trigger('adjustTwenty');
 					});
 				}
 			});

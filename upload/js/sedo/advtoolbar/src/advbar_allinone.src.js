@@ -62,7 +62,11 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					$this.addClass(activeClass);
 	
 					$('#' + src + '.adv_accordion > dd').removeClass(activeClass).slideUp(d, m);
-					$target.addClass(activeClass).slideDown(d, m);
+					
+					$target.addClass(activeClass).slideDown(d, m, function(){
+						var ev = $.Event('sedoRebuild', { $container: $target, originalEvent: e } );
+						$(window).trigger(ev);	
+					});
 				} else if($target.hasClass(activeClass)) {
 					$this.removeClass(activeClass);
 					$target.removeClass(activeClass).slideUp(d, m);
