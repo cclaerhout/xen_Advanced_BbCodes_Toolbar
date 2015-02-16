@@ -13,7 +13,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					img1 = container.find('img').eq(0),
 					img2 = container.find('img').eq(1);
 
-				if(img1.width() == 0 || container.data('complete') == 1){
+				if(img1.width() <= 2 || container.data('complete') == 1){
 					return;	
 				}
 

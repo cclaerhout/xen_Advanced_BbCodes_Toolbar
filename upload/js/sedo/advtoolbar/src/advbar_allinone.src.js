@@ -13,7 +13,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 
 			$e.children('.adv_spoilerbb_content_box').children('div.'+noscriptClass).hide().removeClass(noscriptClass);
 
-			$boxdisplay.click(function() {
+			$boxdisplay.click(function(e) {
 				var $this = $(this);
 				if($this.hasClass('active')) {
 					$e.find('img, iframe').each(function(){
@@ -26,7 +26,11 @@ if(typeof Sedo == 'undefined') Sedo = {};
 			
 					$this.hide().removeClass('active');
 					$this.next().show().addClass('active');
-					$this.parent().next().children('div').show(d, m);
+					$this.parent().next().children('div').show(d, m, function(){
+						var ev = $.Event('sedoRebuild', { $container: $this, originalEvent: e } );
+						$(window).trigger(ev);	
+					});
+					
 				}
 			});		
 	

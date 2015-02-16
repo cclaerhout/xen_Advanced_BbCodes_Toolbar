@@ -1,2 +1,230 @@
 /*Twentytwenty + XenForo Integration*/
-typeof Sedo=="undefined"&&(Sedo={}),!function(n,t,i){Sedo.TwentyX2={init:function(i){i.each(function(){var i=n(this),c=i.find("img").eq(0),l=i.find("img").eq(1),b,y,o,v,w,p;if(c.width()!=0&&i.data("complete")!=1){var d=parseFloat(i.data("diffPos")),u=parseInt(c.data("width")),e=parseInt(l.data("width")),k=i.parents(".adv_bimg_block").addClass("compare"),s=k.width(),it=u/100;i.addClass("twentytwenty-container").data("complete",1),b=function(){if(!i.hasClass("Fluid"))return!1;s=k.width();var n=s*it,t=new Image,r,f,o;return t.src=c.attr("src"),f=t.width,t.src=l.attr("src"),o=t.width,r=f>o?f:o,n>r&&(n=r),u=e=n,n},b(),s!=0&&(u>s&&(u=s,c.attr("data-width",u)),e>s&&(e=s,l.attr("data-width",e))),c.width(u),l.width(e),y=u>e?u:e,i.width(y).attr("data-width",y);var r=d?d:.5,f=i.hasClass("DiffV")?"vertical":"horizontal",rt=f==="vertical"?"down":"left",ut=f==="vertical"?"up":"right";i.wrap("<div class='twentytwenty-wrapper twentytwenty-"+f+"'></div>"),i.append("<div class='twentytwenty-overlay'></div>"),i.append("<div class='twentytwenty-handle'></div>"),o=i.find(".twentytwenty-handle"),o.append("<span class='twentytwenty-"+rt+"-arrow'></span>"),o.append("<span class='twentytwenty-"+ut+"-arrow'></span>");var a=i.find("img:first").addClass("twentytwenty-before"),ft=i.find("img:last").addClass("twentytwenty-after"),g=i.find(".twentytwenty-overlay");g.append("<div class='twentytwenty-before-label'></div>"),g.append("<div class='twentytwenty-after-label'></div>");var nt=function(n){var t=a.width(),i=a.height();return{w:t+"px",h:i+"px",cw:n*t+"px",ch:n*i+"px"}},tt=function(n){f==="vertical"?a.css("clip","rect(0,"+n.w+","+n.ch+",0)"):a.css("clip","rect(0,"+n.cw+","+n.h+",0)"),i.css("height",n.h)},h=function(n){var t=nt(n);o.css(f==="vertical"?"top":"left",f==="vertical"?t.ch:t.cw),tt(t)};n(t,o).on("adjust",function(){h(r)});h(r),v=function(){var n=k.parent().width(),f=i.width(),s=u>e?c:l,a=s.width(),o=i.find(".twentytwenty-overlay"),t;if(i.hasClass("Fluid")){t=b(),c.width(t),l.width(t),i.width(t),h(r);return}if(f<n){f<y&&(i.width(n),o.width(n),h(r));return}i.width(n),o.width(n),h(r)},v();n(t,i).on("resize",function(){v()});i.data("sedoTwenty",{adjustSlider:h,resizeSlider:v}),w=0,p=0;o.on("movestart",function(n){(n.distX>n.distY&&n.distX<-n.distY||n.distX<n.distY&&n.distX>-n.distY)&&f!=="vertical"?n.preventDefault():(n.distX<n.distY&&n.distX<-n.distY||n.distX>n.distY&&n.distX>-n.distY)&&f==="vertical"&&n.preventDefault(),i.addClass("active"),w=i.offset().left,offsetY=i.offset().top,p=a.width(),imgHeight=a.height()});o.on("moveend",function(){i.removeClass("active")});o.on("move",function(n){i.hasClass("active")&&(r=f==="vertical"?(n.pageY-offsetY)/imgHeight:(n.pageX-w)/p,r<0&&(r=0),r>1&&(r=1),h(r))});i.find("img").on("mousedown",function(n){n.preventDefault()})}})},reload:function(){n(".AdvBimgDiff").each(function(){var t=n(this);t.height()==0&&t.find("img").load(function(){t.width(t.data("width")).trigger("adjust")})})},rebuild:function(){Sedo.TwentyX2.init(n(".AdvBimgDiff"))}},XenForo.register(".AdvBimgDiff","Sedo.TwentyX2.init");n(i).on("XenForoActivate",Sedo.TwentyX2.reload);n(t).on("sedoRebuild",Sedo.TwentyX2.rebuild)}(jQuery,this,document);
+if(typeof Sedo == 'undefined') Sedo = {};
+!function($, window, document, _undefined)
+{    
+	Sedo.TwentyX2 = 
+	{
+		init: function($e)
+		{
+			$e.each(function() {
+				var container = $(this),
+					img1 = container.find('img').eq(0),
+					img2 = container.find('img').eq(1);
+
+				if(img1.width() <= 2 || container.data('complete') == 1){
+					return;	
+				}
+
+				var diffPos = parseFloat(container.data('diffPos')),
+					imgWidth1 = parseInt(img1.data('width')),
+					imgWidth2 = parseInt(img2.data('width')),
+					parentWrapper = container.parents('.adv_bimg_block').addClass('compare'),
+					parentWidth = parentWrapper.width(),
+					ratio = imgWidth1/100; //fluid
+
+				container.addClass("twentytwenty-container").data('complete', 1);
+
+				var manageFluidWidth = function(){
+					if(!container.hasClass('Fluid')) return false;
+					parentWidth = parentWrapper.width();
+					
+					var tmpWidth = parentWidth*ratio,
+						imageRef = new Image(),
+						maxWidth, maxWidthImg1, maxWidthImg2;
+						
+	  				imageRef.src = img1.attr('src');
+	  				maxWidthImg1 = imageRef.width;
+	  				imageRef.src = img2.attr('src');
+	  				maxWidthImg2 = imageRef.width;
+	  				maxWidth = (maxWidthImg1 > maxWidthImg2) ? maxWidthImg1 : maxWidthImg2;
+
+	  				if(tmpWidth > maxWidth){
+	  					tmpWidth = maxWidth;
+	  				}
+	  				
+	  				imgWidth1 = imgWidth2 = tmpWidth;
+	  				
+					return tmpWidth;
+				}
+				
+				manageFluidWidth();
+				
+				if(parentWidth != 0){
+					if(imgWidth1 > parentWidth){
+						imgWidth1 = parentWidth;
+						img1.attr('data-width', imgWidth1);
+					}
+
+					if(imgWidth2 > parentWidth){
+						imgWidth2 = parentWidth;
+						img2.attr('data-width', imgWidth2);
+					}
+				}
+
+				img1.width(imgWidth1);
+				img2.width(imgWidth2);
+
+				var widestWidth = (imgWidth1 > imgWidth2) ? imgWidth1 : imgWidth2;
+				container.width(widestWidth).attr('data-width', widestWidth);
+
+				var sliderPct = (diffPos) ? diffPos : 0.5,
+					sliderOrientation = (container.hasClass('DiffV')) ? 'vertical' : 'horizontal';
+					
+				var beforeDirection = (sliderOrientation === 'vertical') ? 'down' : 'left',
+					afterDirection = (sliderOrientation === 'vertical') ? 'up' : 'right';
+
+				/*Build slider*/
+				container.wrap("<div class='twentytwenty-wrapper twentytwenty-" + sliderOrientation + "'></div>");
+				container.append("<div class='twentytwenty-overlay'></div>");
+				container.append("<div class='twentytwenty-handle'></div>");
+		
+				var slider = container.find(".twentytwenty-handle");
+				slider.append("<span class='twentytwenty-" + beforeDirection + "-arrow'></span>");
+				slider.append("<span class='twentytwenty-" + afterDirection + "-arrow'></span>");
+		
+				var beforeImg = container.find("img:first").addClass("twentytwenty-before"),
+					afterImg = container.find("img:last").addClass("twentytwenty-after");
+			
+				var overlay = container.find(".twentytwenty-overlay");
+					overlay.append("<div class='twentytwenty-before-label'></div>");
+					overlay.append("<div class='twentytwenty-after-label'></div>");
+		
+				/*Adjust slider function*/
+				var calcOffset = function(dimensionPct) {
+					var w = beforeImg.width(), h = beforeImg.height();
+					return {
+						w: w+"px",
+						h: h+"px",
+						cw: (dimensionPct*w)+"px",
+						ch: (dimensionPct*h)+"px"
+					};
+				};
+		
+				var adjustContainer = function(offset) {
+					if (sliderOrientation === 'vertical') {
+						beforeImg.css("clip", "rect(0,"+offset.w+","+offset.ch+",0)");
+					} else {
+						beforeImg.css("clip", "rect(0,"+offset.cw+","+offset.h+",0)");
+					}
+					container.css("height", offset.h);
+				};
+
+				var adjustSlider = function(pct) {
+					var offset = calcOffset(pct);
+					slider.css((sliderOrientation==="vertical") ? "top" : "left", (sliderOrientation==="vertical") ? offset.ch : offset.cw);
+					adjustContainer(offset);
+				}
+		
+				$(window, slider).on('adjust', function(e) {
+					adjustSlider(sliderPct);
+				});
+
+				adjustSlider(sliderPct);
+
+				/*Resize slider function*/
+				var resizeSlider = function(){
+					var parentWrapperWidth = parentWrapper.parent().width(),
+						containerWidth = container.width(),
+						widestImg = (imgWidth1 > imgWidth2) ? img1 : img2,
+						widestImgRealWidth = widestImg.width(),
+						overlay = container.find('.twentytwenty-overlay');
+
+					if(container.hasClass('Fluid')){
+						var newWidth = manageFluidWidth();
+						img1.width(newWidth);
+						img2.width(newWidth);
+						container.width(newWidth);
+						adjustSlider(sliderPct);						
+						return;
+					}
+
+					if(containerWidth < parentWrapperWidth){
+					
+						if(containerWidth < widestWidth){
+							container.width(parentWrapperWidth);
+							overlay.width(parentWrapperWidth);
+							adjustSlider(sliderPct);
+						};
+						return;
+					}
+					
+					container.width(parentWrapperWidth)
+					overlay.width(parentWrapperWidth);
+					adjustSlider(sliderPct);		
+				};
+				
+				resizeSlider();
+
+				$(window, container).on('resize', function(e) {
+					resizeSlider();
+				});
+
+				/*External call*/
+				container.data('sedoTwenty', {
+					'adjustSlider':adjustSlider,
+					'resizeSlider': resizeSlider
+				});
+
+				/*Events*/		
+				var offsetX = 0, imgWidth = 0;
+
+				slider.on("movestart", function(e) {
+					if (((e.distX > e.distY && e.distX < -e.distY) || (e.distX < e.distY && e.distX > -e.distY)) && sliderOrientation !== 'vertical') {
+						e.preventDefault();
+					} else if (((e.distX < e.distY && e.distX < -e.distY) || (e.distX > e.distY && e.distX > -e.distY)) && sliderOrientation === 'vertical') {
+						e.preventDefault();
+					}
+		
+					container.addClass("active");
+					offsetX = container.offset().left;
+					offsetY = container.offset().top;
+					imgWidth = beforeImg.width(); 
+					imgHeight = beforeImg.height();	    
+				});
+		
+				slider.on("moveend", function(e) {
+					container.removeClass("active");
+				});
+		
+				slider.on("move", function(e) {
+					if(container.hasClass("active")) {
+						sliderPct = (sliderOrientation === 'vertical') ? (e.pageY-offsetY)/imgHeight : (e.pageX-offsetX)/imgWidth;
+			    			if (sliderPct < 0) {
+							sliderPct = 0;
+						}
+						if (sliderPct > 1) {
+							sliderPct = 1;
+						}
+						adjustSlider(sliderPct);
+					}
+				});
+		
+				container.find("img").on("mousedown", function(event) {
+					event.preventDefault();
+				});
+			});
+		},
+		reload:function() 
+		{
+			$('.AdvBimgDiff').each(function(){
+				var $this = $(this);
+
+				if($this.height() == 0){
+					$this.find('img').load(function(){
+						$this.width($this.data('width')).trigger('adjust');
+					});
+				}
+			});
+		},
+		rebuild:function(e)
+		{
+			Sedo.TwentyX2.init($('.AdvBimgDiff'));
+		}
+	}
+
+
+	XenForo.register('.AdvBimgDiff', 'Sedo.TwentyX2.init');
+	$(document).on('XenForoActivate', Sedo.TwentyX2.reload);
+	$(window).on('sedoRebuild',Sedo.TwentyX2.rebuild);
+}
+(jQuery, this, document);
