@@ -5393,7 +5393,7 @@ p.info span
 .advbbcodebar_article div.adv_source{
 	{xen:property advbbcodebar_article_source}
 }]]></template>
-    <template title="sedo_adv_bimg" version_id="38" version_string="3.6.5"><![CDATA[<xen:if is="{$options.diffMode}">
+    <template title="sedo_adv_bimg" version_id="39" version_string="3.6.6"><![CDATA[<xen:if is="{$options.diffMode}">
 	<xen:if is="{$xenOptions.AdvBBcodeBar_bimg_moveev_load} != 2">
 		<xen:comment>Load this if move script disable or if only in the header</xen:comment>
 		<xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
@@ -5418,7 +5418,7 @@ p.info span
 	<div class="adv_bimg {$options.blockAlign} {xen:if '!{$options.hasCaption}', 'text_center'}" style="width:{$options.width}{$options.widthType};">
 		<xen:if is="{$options.hasCaption} AND {$options.caption.position} == 'top'">
 			<xen:if is="{$options.caption.type} == 'inside'">
-				<div class="adv_caption caption_inside" style="width:{$options.width}{$options.widthType};">
+				<div class="adv_caption caption_inside" style="width:{$options.widthImg};">
 					<div class="caption_txt caption_txt_inside" style="text-align:{$options.caption.align};">{xen:raw $options.caption.text}</div>
 				</div>
 			<xen:else />
@@ -5471,7 +5471,7 @@ p.info span
 		<br />
 		<xen:if is="{$options.hasCaption} AND {$options.caption.position} == 'bottom'">
 			<xen:if is="{$options.caption.type} == 'inside'">
-				<div class="adv_caption caption_inside" style="width:{$options.width}{$options.widthType}; bottom:{xen:if '{$options.isBadIE}', '0', '5px'}">
+				<div class="adv_caption caption_inside" style="width:{$options.widthImg}; {xen:if '{$options.isBadIE}', ' bottom:0'}">
 					<div class="caption_txt caption_txt_inside" style="text-align:{$options.caption.align};">{xen:raw $options.caption.text}</div>
 				</div>
 			<xen:else />
@@ -5495,7 +5495,7 @@ p.info span
 		</xen:if>
 	</div>
 </div>]]></template>
-    <template title="sedo_adv_bimg.css" version_id="35" version_string="3.6.2"><![CDATA[.adv_bimg_block {
+    <template title="sedo_adv_bimg.css" version_id="39" version_string="3.6.6"><![CDATA[.adv_bimg_block {
 	display:block;
 	z-index:1;
 }
@@ -5548,6 +5548,7 @@ p.info span
 .adv_bimg .caption_inside {
 	position:absolute;
 	z-index:5;
+	bottom: 5px;
 	padding:1px 0 3px 0; 
 	background: {xen:property adv_bimg_caption_background};
 }
@@ -5569,7 +5570,7 @@ p.info span
 .ugc .adv_bimg a:link, .ugc .adv_bimg a:visited{
 	padding: 0;
 }]]></template>
-    <template title="sedo_adv_bimg_twenty.css" version_id="32" version_string="3.5.2"><![CDATA[.twentytwenty-horizontal .twentytwenty-handle:before, .twentytwenty-horizontal .twentytwenty-handle:after, .twentytwenty-vertical .twentytwenty-handle:before, .twentytwenty-vertical .twentytwenty-handle:after {
+    <template title="sedo_adv_bimg_twenty.css" version_id="39" version_string="3.6.6"><![CDATA[.twentytwenty-horizontal .twentytwenty-handle:before, .twentytwenty-horizontal .twentytwenty-handle:after, .twentytwenty-vertical .twentytwenty-handle:before, .twentytwenty-vertical .twentytwenty-handle:after {
 	content: " ";
 	display: block;
 	background: {xen:helper bbm_color_hexa, {xen:property adv_bimg_diff_cursor_color}};
@@ -5813,7 +5814,19 @@ p.info span
 	bottom: 50%;
 	margin-bottom: -17px;
 }
-]]></template>
+
+.adv_bimg_block.compare .caption_inside{
+	bottom: 20px;
+	z-index: 40;
+}
+
+.adv_bimg_block.compare .caption_txt_inside{
+	top: 1px
+}
+
+.adv_bimg_block.compare .caption_txt{
+	position: relative;
+}]]></template>
     <template title="sedo_adv_encadre" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_encadre.css" />
 
 <xen:if is="{$options.skin2}">
