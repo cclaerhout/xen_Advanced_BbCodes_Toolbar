@@ -68,6 +68,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 	{
 		$xenOptions = XenForo_Application::get('options');
 		$visitor = XenForo_Visitor::getInstance();
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		
 		/* Default Options */
 		$width = $xenOptions->AdvBBcodeBar_imgdefault;
@@ -152,6 +153,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			{
 				 $noLightbox = true;
 			}
+			elseif($option == 'no-mobile')
+			{
+				 $useResponsiveMod = false;
+			}			
 			elseif($option == 'diff-v' || $option == 'diff-vertical')
 			{
 				$diffVertical = true;
@@ -227,7 +232,6 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			$diffVertical = false;
 			list($content, $width, $directUrl) = self::_attachManager($content, $width, $parentClass);
 		}
-
 		/* Confirm Options */
 		$options['width'] = $width;
 		$options['widthType'] = $widthType;
@@ -247,7 +251,6 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['diffFluid'] = ($widthType == '%');
 
 		/* Responsive Management */
-		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		$options['responsiveMode'] = $useResponsiveMode;
 		
 		if($useResponsiveMode)

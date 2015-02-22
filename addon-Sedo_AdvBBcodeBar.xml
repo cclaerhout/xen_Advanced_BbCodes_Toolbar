@@ -5393,7 +5393,13 @@ p.info span
 .advbbcodebar_article div.adv_source{
 	{xen:property advbbcodebar_article_source}
 }]]></template>
-    <template title="sedo_adv_bimg" version_id="39" version_string="3.6.6"><![CDATA[<xen:if is="{$options.diffMode}">
+    <template title="sedo_adv_bimg" version_id="39" version_string="3.6.6"><![CDATA[<xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
+	<xen:require js="js/sedo/advtoolbar/src/advbar_allinone.src.js" />	
+<xen:else />
+	<xen:require js="js/sedo/advtoolbar/advbar_allinone.js" />
+</xen:if>
+
+<xen:if is="{$options.diffMode}">
 	<xen:if is="{$xenOptions.AdvBBcodeBar_bimg_moveev_load} != 2">
 		<xen:comment>Load this if move script disable or if only in the header</xen:comment>
 		<xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">

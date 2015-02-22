@@ -324,6 +324,29 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					$this.find('.advAutoWidth, .imageMode').width(width);
 				}
 	      		});
+		},
+		Bimg:function($container)
+		{
+			var $bimgContent = $container.children();
+			$bimgContent.data('maxResize', $bimgContent.width());
+
+			function resizeBimg(){
+				var containerWidth = $container.width(),
+					bimgContentWidth = $bimgContent.width(),
+					bimgContentMaxWidth = $bimgContent.data('maxResize');
+				
+				if(bimgContentWidth >= containerWidth){
+					$bimgContent.width(containerWidth);
+				}else{
+					if(bimgContentWidth != bimgContentMaxWidth){
+						$bimgContent.width(bimgContentMaxWidth);
+					}
+				}
+			};
+
+			$(window).on('resize', function(e) {
+				resizeBimg();
+			});			
 		}
 	};
 	
@@ -333,6 +356,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 	
 	xenRegister('.AdvFieldsetTrigger', 'FieldsetFix');
 	xenRegister('.adv_accordion', 'Accordion');
+	xenRegister('.adv_bimg_block', 'Bimg');
 	xenRegister('.AdvSpoilerbbCommand', 'Spoilerbb');
 	xenRegister('.adv_tabs_wrapper', 'Tabs');
 	xenRegister('.adv_slider_wrapper', 'Slider');
