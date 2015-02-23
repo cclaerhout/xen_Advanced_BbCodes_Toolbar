@@ -5836,24 +5836,24 @@ p.info span
 	position: relative;
 	top: -18px;
 }]]></template>
-    <template title="sedo_adv_encadre" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:require css="sedo_adv_encadre.css" />
+    <template title="sedo_adv_encadre" version_id="39" version_string="3.6.6"><![CDATA[<xen:require css="sedo_adv_encadre.css" />
 
 <xen:if is="{$options.skin2}">
 	<div class="advbbcodebar_encadre_skin2 {$options.floatClass} {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};">
 		<div class="adv_enc_fieldset">
-			<div class="adv_enc_title">{xen:if '{$options.title}', '{xen:raw $options.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_encadre}'}</div>
+			<div class="adv_enc_title {$options.titlePosition}">{xen:if '{$options.title}', '{xen:raw $options.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_encadre}'}</div>
 			<div class="adv_enc_content">{xen:raw $content}</div>
 		</div>
 	</div>
 <xen:else/>
 	<div class="advbbcodebar_encadre {$options.floatClass} {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};">
-		<div class="adv_enc_abovefieldset">{xen:if '{$options.title}', '{xen:raw $options.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_encadre}'}</div>
+		<div class="adv_enc_abovefieldset {$options.titlePosition}">{xen:if '{$options.title}', '{xen:raw $options.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_encadre}'}</div>
 		<div class="adv_enc_fieldset">
 			<div class="adv_enc_content">{xen:raw $content}</div>
 		</div>
 	</div>
 </xen:if>]]></template>
-    <template title="sedo_adv_encadre.css" version_id="28" version_string="3.5.0 - step1"><![CDATA[.advbbcodebar_encadre.responsive,
+    <template title="sedo_adv_encadre.css" version_id="39" version_string="3.6.6"><![CDATA[.advbbcodebar_encadre.responsive,
 .advbbcodebar_encadre_skin2.responsive {
 	max-width: {$xenOptions.sedo_adv_responsive_maxwidth}px;
 	margin-bottom: 10px;
@@ -5901,6 +5901,18 @@ p.info span
 	{xen:property advbbcodebar_encadre_title}
 }
 
+.advbbcodebar_encadre .adv_enc_abovefieldset.left{
+	text-align: left;
+}
+
+.advbbcodebar_encadre .adv_enc_abovefieldset.center{
+	text-align: center;
+}
+
+.advbbcodebar_encadre .adv_enc_abovefieldset.right{
+	text-align: right;
+}
+
 .advbbcodebar_encadre_skin2{
 	{xen:property advbbcodebar_encadre_wrapper_skin2}
 }
@@ -5910,6 +5922,18 @@ p.info span
 
 .advbbcodebar_encadre_skin2 .adv_enc_title{
 	{xen:property advbbcodebar_encadre_title_skin2}
+}
+
+.advbbcodebar_encadre_skin2 .adv_enc_title.left{
+	text-align: left;
+}
+
+.advbbcodebar_encadre_skin2 .adv_enc_title.center{
+	text-align: center;
+}
+
+.advbbcodebar_encadre_skin2 .adv_enc_title.right{
+	text-align: right;
 }]]></template>
     <template title="sedo_adv_fieldset" version_id="28" version_string="3.5.0 - step1"><![CDATA[<xen:if is="{$options.cssIE}">
 	<xen:require css="sedo_adv_fieldset_ie.css" />
