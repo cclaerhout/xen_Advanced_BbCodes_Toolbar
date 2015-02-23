@@ -155,7 +155,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			}
 			elseif($option == 'no-mobile')
 			{
-				 $useResponsiveMod = false;
+				 $useResponsiveMode = false;
 			}			
 			elseif($option == 'diff-v' || $option == 'diff-vertical')
 			{
@@ -320,8 +320,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$width = $xenOptions->AdvBBcodeBar_encdefault;
 		$widthType = $xenOptions->AdvBBcodeBar_encdefault_defaultwidth_unit;
 		$floatClass = 'fright';
+		$titlePosition = 'left';
 		$skin2 = false;
 		$title = '';
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 
 		/* Browse Options */
 		foreach($options as $option)
@@ -350,7 +352,23 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			elseif($option == 'fright')
 			{
 				$floatClass= 'fright';	
-			}						
+			}
+			elseif($option == 'left')
+			{
+				$titlePosition = 'left';
+			}				
+			elseif($option == 'center')
+			{
+				$titlePosition = 'center';
+			}
+			elseif($option == 'right')
+			{
+				$titlePosition = 'right';
+			}
+			elseif($option == 'no-mobile')
+			{
+				 $useResponsiveMode = false;
+			}			
 			elseif(!empty($option))
 			{
 				$title = $original;
@@ -379,9 +397,9 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['floatClass'] = $floatClass;
 		$options['skin2'] = $skin2;
 		$options['title'] = $title;
+		$options['titlePosition'] = $titlePosition;
 
 		/* Responsive Management */
-		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		$options['responsiveMode'] = $useResponsiveMode;
 		
 		if($useResponsiveMode)
@@ -399,6 +417,8 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$sourceText = false;
 		$source = '';
 		$url = '';
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
+		
 
 		/* Get Option */
 		$source_data = ( isset($options[1]) ) ? $options[1] : '';
@@ -415,6 +435,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				$sourceText = true;
 				$url = $source_data;
 			}
+			elseif($option == 'no-mobile')
+			{
+				 $useResponsiveMode = false;
+			}
 			elseif(preg_match('#[\s]*({URL=.+?})[\s]*#ui', $source_data))
 			{
 				$sourceText = true;
@@ -429,7 +453,6 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['badIE'] = BBM_Helper_BbCodes::isBadIE();
 
 		/* Responsive Management */
-		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		$options['responsiveMode'] = $useResponsiveMode;
 		
 		if($useResponsiveMode)
@@ -446,6 +469,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$width = $xenOptions->AdvBBcodeBar_fieldsetdefault;
 		$widthType = $xenOptions->AdvBBcodeBar_fieldsetdefault_width_unit;
 		$blockAlign = 'bleft';
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 
 		/* Check if browser is IE */
 		if( isset($visitor->getBrowser['isIE']))
@@ -493,6 +517,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			{
 				$blockAlign = 'bright';
 			}
+			elseif($option == 'no-mobile')
+			{
+				 $useResponsiveMode = false;
+			}
 			elseif(!empty($option))
 			{
 				$title = $original;
@@ -519,7 +547,6 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['cssIE'] = BBM_Helper_BbCodes::isBadIE();
 
 		/* Responsive Management */
-		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		$options['responsiveMode'] = $useResponsiveMode;
 		
 		if($useResponsiveMode)
@@ -703,6 +730,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$widthType = $xenOptions->AdvBBcodeBar_accordion_defaultwidth_unit;	
 		$blockAlign = 'bleft';
 		$globalHeight = false;
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		
 		/*Browse Master Options*/
 		foreach($options as $option)
@@ -751,6 +779,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			elseif($option == 'fright')
 			{
 				$blockAlign = 'fright';
+			}
+			elseif($option == 'no-mobile')
+			{
+				 $useResponsiveMode = false;
 			}
 		}
 
@@ -857,7 +889,6 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['slides'] = $slides;
 
 		/* Responsive Management */
-		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		$options['responsiveMode'] = $useResponsiveMode;
 		
 		if($useResponsiveMode)
@@ -912,6 +943,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$widthType = $xenOptions->AdvBBcodeBar_tabs_defaultwidth_unit;
 		$blockAlign = 'bleft';
 		$globalHeight = $xenOptions->AdvBBcodeBar_tabs_defaultheight;
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		
 		/*Browse Master Options*/
 		foreach($options as $option)
@@ -960,6 +992,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			elseif($option == 'fright')
 			{
 				$blockAlign = 'fright';
+			}
+			elseif($option == 'no-mobile')
+			{
+				 $useResponsiveMode = false;
 			}
 		}
 
@@ -1063,7 +1099,6 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['panes'] = $panes;
 
 		/* Responsive Management */
-		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		$options['responsiveMode'] = $useResponsiveMode;
 		
 		if($useResponsiveMode)
@@ -1125,6 +1160,7 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$interval = ($xenOptions->AdvBBcodeBar_slider_interval_default == 3000) ? false : $xenOptions->AdvBBcodeBar_slider_interval_default;
 		$num = false;
 		$noclick = false;
+		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		
 		/*Browse Master Options*/
 		foreach($options as $option)
@@ -1197,6 +1233,10 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 			elseif($option == 'noclick')
 			{
 				$noclick = true;
+			}
+			elseif($option == 'no-mobile')
+			{
+				 $useResponsiveMode = false;
 			}		
 		}
 
@@ -1338,7 +1378,6 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 		$options['noclick'] = $noclick;
 
 		/* Responsive Management */
-		$useResponsiveMode = BBM_Helper_BbCodes::useResponsiveMode();
 		$options['responsiveMode'] = $useResponsiveMode;
 		
 		if($useResponsiveMode)
