@@ -327,28 +327,83 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		},
 		Bimg:function($container)
 		{
-			var $bimgContent = $container.children();
-			$bimgContent.data('maxResize', $bimgContent.width());
+			var $bimgContent = $container.children(),
+				$img = $container.find('img'),
+				imgSrc = $img.attr('src'),
+				imageRef = new Image(),
+				imageFluid = $container.hasClass('Fluid'),
+				isTwenty =  $container.find('.twentytwenty-container').length,
+				maxResize = $container.data('width');
+
+			if(imageFluid || !$('html').hasClass('Responsive')) return;
+
+			var setMaxSize = function(resizeOversized){
+				imageRef.src = imgSrc;
+				$bimgContent.data('realMaxResize', imageRef.width);
+				$bimgContent.data('maxResize', maxResize);
+				
+				if(resizeOversized && (maxResize > imageRef.width || $img.width() > imageRef.width)){
+					$img.css('maxWidth', imageRef.width);
+				}
+			}
+
+			setMaxSize();
+
+			var tools = new Sedo.AdvBbcodesTools();
 
 			function resizeBimg(){
-				var containerWidth = $container.width(),
-					bimgContentWidth = $bimgContent.width(),
-					bimgContentMaxWidth = $bimgContent.data('maxResize');
-				
-				if(bimgContentWidth >= containerWidth){
-					$bimgContent.width(containerWidth);
-				}else{
-					if(bimgContentWidth != bimgContentMaxWidth){
-						$bimgContent.width(bimgContentMaxWidth);
-					}
-				}
+				tools.resize($container, $bimgContent, maxResize);
 			};
 
-			$(window).on('resize', function(e) {
-				resizeBimg();
-			});			
+			$(window, $container).on('resize', resizeBimg);
 		}
 	};
+
+
+	Sedo.AdvBbcodesTools = function(data){ this.__construct(data); };
+	Sedo.AdvBbcodesTools.prototype =
+	{
+		__construct: function(data){},
+		getSafeBodyWidth: function(){
+			return $('body').width()-this.getBodyOverflow();
+		},
+		getBodyOverflow: function(){
+			return parseInt($('body').prop('scrollWidth'))-$('body').width();
+		},
+		getSafestElWidth:function($el, $el2)
+		{
+			var ovFl = this.getBodyOverflow(),
+				e1Width = $el.width() - ovFl,
+				e2Width = ($el2 == _undefined) ? this.getSafeBodyWidth() : $el2.width() - ovFl;
+
+			return (e1Width < e2Width) ? e1Width : e2Width;
+		},
+		resize:function($container, $content, contentMaxResize)
+		{
+			var triggerWidth = this.getSafestElWidth($container),
+				elContentWidth = $content.outerWidth();
+
+			if(typeof contentMaxResize == 'undefined'){
+				contentMaxResize = triggerWidth;
+			}
+
+			if(elContentWidth >= triggerWidth){
+				if(triggerWidth <= contentMaxResize){
+					$content.width(triggerWidth);
+				}else{
+					$content.width(contentMaxResize);
+				}
+			}else{
+				if(triggerWidth <= contentMaxResize){
+					$content.width(triggerWidth);
+				}else
+				{
+					$content.width(contentMaxResize);
+				}
+			}		
+		}
+	}
+	
 	
 	var xenRegister = function(el, advBbCodesFct){
 		XenForo.register(el, 'Sedo.AdvBbcodes.'+advBbCodesFct);

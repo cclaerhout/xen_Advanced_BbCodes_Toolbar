@@ -5420,7 +5420,7 @@ p.info span
 
 <xen:require css="sedo_adv_bimg.css" />
 
-<div class="adv_bimg_block {xen:if '{$options.responsiveMode}', 'responsive'}">
+<div class="adv_bimg_block{xen:if '{$options.responsiveMode}', ' responsive'}{xen:if '{$options.widthType} == "%"', ' Fluid'}" data-width="{$options.width}">
 	<div class="adv_bimg {$options.blockAlign} {xen:if '!{$options.hasCaption}', 'text_center'}" style="width:{$options.width}{$options.widthType};">
 		<xen:if is="{$options.hasCaption} AND {$options.caption.position} == 'top'">
 			<xen:if is="{$options.caption.type} == 'inside'">
