@@ -356,6 +356,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 			};
 
 			$(window, $container).on('resize', resizeBimg);
+			$(window, $container).on('load', resizeBimg);
 		}
 	};
 
