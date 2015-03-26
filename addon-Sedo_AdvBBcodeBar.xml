@@ -5566,6 +5566,10 @@ p.info span
 	color:{xen:property adv_bimg_caption_text};
 }
 
+.adv_bimg a.LbTrigger{
+	margin:0;
+}
+
 .adv_bimg a.adv_bimg_nolb{
 	display:block;
 }
