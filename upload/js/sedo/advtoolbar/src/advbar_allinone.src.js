@@ -99,11 +99,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 
 			var elementWidth = $e.width(),
 				widthInPercent = $e.css('width').indexOf('%') !=-1,
-				panesHeight = $panes.height(),
-				tabsWidth = getTabsWidth(),				
-				tabsHeight = $tabs.first().height(),
-				tabsItems = $tabs.children().length,
-				tabsDelta = tabsHeight*(tabsItems-1);
+				panesHeight = $panes.height();
 
 			function getTabsWidth(){
 				var width = 0;
@@ -121,14 +117,16 @@ if(typeof Sedo == 'undefined') Sedo = {};
 				}
 			}
 
+			function checkPanesHeight(height){
+				var minValue = 38; // min value for scrollbar to be visible
+				if(height < minValue) return minValue;
+				return height;
+			}
+
 			var adjustSize = function(){
 				var $parent = getVisibleParent($e),
 					parentWidth = $parent.width()-2;
 					
-				if(!tabsWidth){
-					tabsWidth = getTabsWidth();
-				}
-
 				//Width manager
 				if(!widthInPercent){
 					if(elementWidth > parentWidth){
@@ -139,11 +137,16 @@ if(typeof Sedo == 'undefined') Sedo = {};
 				}
 
 				//Tabs & height manager
+				var tabsWidth = getTabsWidth(), deltaHeight;
+				console.log(tabsWidth, parentWidth);
 				if(tabsWidth > parentWidth){
 					$e.addClass('alter');
-					$panes.height(panesHeight-tabsDelta);
+					$panes.height(0);
+					deltaHeight = checkPanesHeight(panesHeight-$tabs.height());
+					$panes.height(deltaHeight);
 				}else{
 					$e.removeClass('alter');
+					deltaHeight = checkPanesHeight(panesHeight);
 					$panes.height(panesHeight);
 				}
 			};
