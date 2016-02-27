@@ -99,6 +99,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 
 			var elementWidth = $e.width(),
 				prevElementWidth = 0,
+				prevElementHeight = 0,
 				widthInPercent = $e.css('width').indexOf('%') !=-1,
 				panesHeight = $panes.height();
 
@@ -125,12 +126,15 @@ if(typeof Sedo == 'undefined') Sedo = {};
 			}
 
 			var adjustSize = function(){
+				var elementHeight = $e.height();
+				if (elementHeight == 0){
+					return false;
+				}
+				heightChanged = prevElementHeight != elementHeight;
+				prevElementHeight = elementHeight;
+
 				var $parent = getVisibleParent($e),
 					parentWidth = $parent.width()-2;
-
-				 if ($e.height() == 0){
-					return false;
-				 }
 
 				//Width manager
 				var maxWidth = 0;
@@ -167,7 +171,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					}
 				}
 
-				if ($flexLayoutEnabled && widthChanged) {
+				if ($flexLayoutEnabled && (widthChanged || heightChanged)) {
 					var maxHeight = 0;
 					$panes.css({ width:maxWidth, height: 'auto' }).each(function() {
 						maxHeight = Math.max($(this).height(), maxHeight);
