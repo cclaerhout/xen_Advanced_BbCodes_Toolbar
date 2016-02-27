@@ -91,7 +91,15 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		Tabs: function($e)
 		{
 			var $tabs = $e.children('.advtabs'),
-				$panes = $e.children('.advpanes').children('div');
+				$panes = $e.children('.advpanes').children('div'),
+                $flexLayoutEnabled = $e.hasClass('flex');
+
+            if ($flexLayoutEnabled) {
+                var maxHeight = 0;
+                $panes.css({ height: 'auto' }).each(function() {
+                    maxHeight = Math.max($(this).outerHeight(), maxHeight);
+                }).css('height', maxHeight);
+            }
 
 			$tabs.tabs($panes);
 			$tabs.find('.openMe').trigger('click');
@@ -141,13 +149,19 @@ if(typeof Sedo == 'undefined') Sedo = {};
 				console.log(tabsWidth, parentWidth);
 				if(tabsWidth > parentWidth){
 					$e.addClass('alter');
-					$panes.height(0);
-					deltaHeight = checkPanesHeight(panesHeight-$tabs.height());
-					$panes.height(deltaHeight);
+                    if (!$flexLayoutEnabled)
+                    {
+                        $panes.height(0);
+                        deltaHeight = checkPanesHeight(panesHeight-$tabs.height());
+                        $panes.height(deltaHeight);
+                    }
 				}else{
 					$e.removeClass('alter');
-					deltaHeight = checkPanesHeight(panesHeight);
-					$panes.height(panesHeight);
+                    if (!$flexLayoutEnabled)
+                    {
+                        deltaHeight = checkPanesHeight(panesHeight);
+                        $panes.height(panesHeight);
+                    }
 				}
 			};
 			
