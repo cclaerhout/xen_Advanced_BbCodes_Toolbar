@@ -92,21 +92,15 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		{
 			var $tabs = $e.children('.advtabs'),
 				$panes = $e.children('.advpanes').children('div'),
-                $flexLayoutEnabled = $e.hasClass('flex');
-
-            if ($flexLayoutEnabled) {
-                var maxHeight = 0;
-                $panes.css({ height: 'auto' }).each(function() {
-                    maxHeight = Math.max($(this).outerHeight(), maxHeight);
-                }).css('height', maxHeight);
-            }
-
+                $flexLayoutEnabled = $e.hasClass('flex'),
+                widthChanged = true;
 			$tabs.tabs($panes);
 			$tabs.find('.openMe').trigger('click');
 			$e.find('.adv_tabs_link').click(function(){ return false; });
 
 			var elementWidth = $e.width(),
-				widthInPercent = $e.css('width').indexOf('%') !=-1,
+				prevElementWidth = 0,
+                widthInPercent = $e.css('width').indexOf('%') !=-1,
 				panesHeight = $panes.height();
 
 			function getTabsWidth(){
@@ -134,35 +128,52 @@ if(typeof Sedo == 'undefined') Sedo = {};
 			var adjustSize = function(){
 				var $parent = getVisibleParent($e),
 					parentWidth = $parent.width()-2;
-					
+
 				//Width manager
+                var maxWidth = 0;
 				if(!widthInPercent){
 					if(elementWidth > parentWidth){
-						$e.width(parentWidth);
+                        maxWidth = parentWidth;
 					}else{
-						$e.width(elementWidth);
+						maxWidth = elementWidth;
 					}
+                    widthChanged = prevElementWidth != maxWidth;
+                    prevElementWidth = maxWidth;
+                    $e.width(maxWidth);
 				}
 
 				//Tabs & height manager
 				var tabsWidth = getTabsWidth(), deltaHeight;
 				console.log(tabsWidth, parentWidth);
+                if (!$flexLayoutEnabled && panesHeight == 0){
+                    panesHeight = $panes.height();
+                }
 				if(tabsWidth > parentWidth){
 					$e.addClass('alter');
-                    if (!$flexLayoutEnabled)
-                    {
+                    if (!$flexLayoutEnabled) {
                         $panes.height(0);
                         deltaHeight = checkPanesHeight(panesHeight-$tabs.height());
                         $panes.height(deltaHeight);
                     }
 				}else{
 					$e.removeClass('alter');
-                    if (!$flexLayoutEnabled)
-                    {
+                    if (!$flexLayoutEnabled) {
                         deltaHeight = checkPanesHeight(panesHeight);
                         $panes.height(panesHeight);
                     }
 				}
+                
+                if ($flexLayoutEnabled && widthChanged) {
+                    if ($e.height() == 0){
+                        prevElementWidth = 0;
+                        setTimeout(adjustSize, 1);
+                    }else {
+                        var maxHeight = 0;
+                        $panes.css({ width:maxWidth, height: 'auto' }).each(function() {
+                            maxHeight = Math.max($(this).height(), maxHeight);
+                        }).andSelf().css('height', maxHeight);
+                    }
+                }
 			};
 			
 			/*For window resize*/
