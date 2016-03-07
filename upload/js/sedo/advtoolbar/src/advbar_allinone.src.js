@@ -1,11 +1,11 @@
 if(typeof Sedo == 'undefined') Sedo = {};
 !function($, window, document, _undefined)
-{    
-	Sedo.AdvBbcodes = 
+{
+	Sedo.AdvBbcodes =
 	{
 		Spoilerbb: function($e)
 		{
-			var m = $e.attr('data-easing'), 
+			var m = $e.attr('data-easing'),
 				d = $e.attr('data-duration'),
 				noscriptClass = 'adv_spoilerbb_content_noscript',
 				$boxdisplay = $e.children('.adv_spoilerbb_title').children('input.adv_spoiler_display').show().addClass('active');
@@ -23,17 +23,17 @@ if(typeof Sedo == 'undefined') Sedo = {};
 							$img.data('spoilerSrc', '')
 						}
 					});
-			
+
 					$this.hide().removeClass('active');
 					$this.next().show().addClass('active');
 					$this.parent().next().children('div').show(d, m, function(){
 						var ev = $.Event('sedoRebuild', { $container: $this, originalEvent: e } );
-						$(window).trigger(ev);	
+						$(window).trigger(ev);
 					});
-					
+
 				}
-			});		
-	
+			});
+
 			$boxhidden.click(function() {
 				var $this = $(this);
 				if($this.hasClass('active')) {
@@ -45,7 +45,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		},
 		Accordion: function($e)
 		{
-			var m = $e.attr('data-easing'), 
+			var m = $e.attr('data-easing'),
 				d = $e.attr('data-duration');
 
 			$e.children('dd:not(.AdvSlideOpen)').hide();
@@ -56,16 +56,16 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					src = $this.parent().attr('id'),
 					$target = $this.next(),
 					activeClass = 'AdvSlideActive';
-	
+
 				if(!$target.hasClass(activeClass)) {
-					$('#' + src + '.adv_accordion > dt').removeClass(activeClass);         
+					$('#' + src + '.adv_accordion > dt').removeClass(activeClass);
 					$this.addClass(activeClass);
-	
+
 					$('#' + src + '.adv_accordion > dd').removeClass(activeClass).slideUp(d, m);
-					
+
 					$target.addClass(activeClass).slideDown(d, m, function(){
 						var ev = $.Event('sedoRebuild', { $container: $target, originalEvent: e } );
-						$(window).trigger(ev);	
+						$(window).trigger(ev);
 					});
 				} else if($target.hasClass(activeClass)) {
 					$this.removeClass(activeClass);
@@ -76,14 +76,14 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		FieldsetFix: function($e)
 		{
 			/***
-			 * Simple FIX for IE 
+			 * Simple FIX for IE
 			 * Doesn't work with IE 6 => must use CSS fix
 			 **/
 			var $fieldset = $e.children('fieldset'),
 				$legend = $fieldset.children('legend'),
 				width_fieldset = $fieldset.width(),
 				width_legend = $legend.width();
-	
+
 			if(width_legend > width_fieldset){
 				$legend.width(width_fieldset);
 			}
@@ -91,13 +91,15 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		Tabs: function($e)
 		{
 			var $tabs = $e.children('.advtabs'),
-				$panes = $e.children('.advpanes').children('div');
-
+				$panes = $e.children('.advpanes').children('div'),
+				$flexLayoutEnabled = $e.hasClass('flex');
 			$tabs.tabs($panes);
 			$tabs.find('.openMe').trigger('click');
 			$e.find('.adv_tabs_link').click(function(){ return false; });
 
 			var elementWidth = $e.width(),
+				prevElementWidth = 0,
+				prevElementHeight = 0,
 				widthInPercent = $e.css('width').indexOf('%') !=-1,
 				panesHeight = $panes.height();
 
@@ -124,57 +126,83 @@ if(typeof Sedo == 'undefined') Sedo = {};
 			}
 
 			var adjustSize = function(){
+				var elementHeight = $e.height();
+				if (elementHeight == 0){
+					return false;
+				}
+				heightChanged = prevElementHeight != elementHeight;
+				prevElementHeight = elementHeight;
+
 				var $parent = getVisibleParent($e),
 					parentWidth = $parent.width()-2;
-					
+
 				//Width manager
+				var maxWidth = 0;
+				var widthChanged = true;
 				if(!widthInPercent){
 					if(elementWidth > parentWidth){
-						$e.width(parentWidth);
+						maxWidth = parentWidth;
 					}else{
-						$e.width(elementWidth);
+						maxWidth = elementWidth;
 					}
+					widthChanged = prevElementWidth != maxWidth;
+					prevElementWidth = maxWidth;
+					$e.width(maxWidth);
 				}
 
 				//Tabs & height manager
 				var tabsWidth = getTabsWidth(), deltaHeight;
 				console.log(tabsWidth, parentWidth);
+				if (!$flexLayoutEnabled && panesHeight == 0){
+					panesHeight = $panes.height();
+				}
 				if(tabsWidth > parentWidth){
 					$e.addClass('alter');
-					$panes.height(0);
-					deltaHeight = checkPanesHeight(panesHeight-$tabs.height());
-					$panes.height(deltaHeight);
+					if (!$flexLayoutEnabled) {
+						$panes.height(0);
+						deltaHeight = checkPanesHeight(panesHeight-$tabs.height());
+						$panes.height(deltaHeight);
+					}
 				}else{
 					$e.removeClass('alter');
-					deltaHeight = checkPanesHeight(panesHeight);
-					$panes.height(panesHeight);
+					if (!$flexLayoutEnabled) {
+						deltaHeight = checkPanesHeight(panesHeight);
+						$panes.height(panesHeight);
+					}
+				}
+
+				if ($flexLayoutEnabled && (widthChanged || heightChanged)) {
+					var maxHeight = 0;
+					$panes.css({ width:maxWidth, height: 'auto' }).each(function() {
+						maxHeight = Math.max($(this).height(), maxHeight);
+					}).andSelf().css('height', maxHeight);
 				}
 			};
-			
+
 			/*For window resize*/
 			$(window).resize(function() {
-				adjustSize(); 
+				adjustSize();
 			});
 
 			/*For nested tabs*/
 			$e.data('autoResize', adjustSize);
-			
+
 			$tabs.click(function(){
 				$panes.find('.adv_tabs_wrapper').each(function(){
-					var $this = $(this), 
+					var $this = $(this),
 						autoResize = $this.data('autoResize');
-					
+
 					if($this.is(':visible') && typeof autoResize === 'function'){
 						autoResize();
 					}
 				});
 			});
-			
+
 			/*Needed for redraw*/
 			$tabs.children().click(function(e){
 				var $pane = $panes.eq($(this).index()),
 					ev = $.Event('sedoRebuild', { $container: $pane, originalEvent: e } );
-					
+
 				$(window).trigger(ev);
 			});
 
@@ -184,20 +212,21 @@ if(typeof Sedo == 'undefined') Sedo = {};
 			$e.parentsUntil('.messageText').click(function(){
 				var checkVisible = $e.is(':visible');
 				if(!isVisible && checkVisible){
-					adjustSize();			
+					prevElementWidth = 0;
+					adjustSize();
 				}
 				isVisible = checkVisible;
 			});
-				
+
 			/*For current tabs*/
 			adjustSize();
 		},
 		Slider: function($e)
 		{
-			var self = Sedo.AdvBbcodes, 
-				toAutoplay = [], 
+			var self = Sedo.AdvBbcodes,
+				toAutoplay = [],
 				imgToLoad = [];
-			
+
 			$e.each(function(i){
 				var $this = $(this),
 					$slider_tabs = $this.children('.advslidestabs'),
@@ -212,13 +241,13 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					interval = parseInt($e.attr('data-interval'));
 
 				interval = (isNaN(interval)) ? 3000 : interval;
-			
+
 				/*Image Mode - Resize & Loader*/
 				if($images.length > 0){
 
 					$images.load(function(){
 						var $that = $(this), $slide;
-						
+
 						if($that.parents('.imageMode').hasClass('outside')){
 							$slide = $that.parents('.advslides');
 						}else{
@@ -229,7 +258,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 						imageRef.src = $that.attr("src");
 
 						$that.parent().siblings('.adv_slide_mask').hide();//hide mask
-						
+
 						var h = imageRef.height, w = imageRef.width, sh = $slide.height(), sw = $slide.width(), ratio, fh, fw;
 
 						//@Src: http://gabrieleromanato.name/jquery-resize-images-proportionally
@@ -244,7 +273,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 							if(!$that.hasClass('full'))
 								fw = w * ratio;
 						}
-						
+
 						$that.css({'width': fw, 'height': fh})
 					})
 					.error(function(e){
@@ -262,19 +291,19 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					onBeforeClick: function(ev,i) {
 						/*	Add an active class to the pane being processed
 							A css with a relative position will be applied
-							The relative position allows to get the parent block width 
+							The relative position allows to get the parent block width
 							where as the absolution position avoid any glitches during transitions
 						*/
 						this.getCurrentPane().hide(); //to avoid extra glitches - P.S the current pane is in fact the futur previous pane
 						this.getPanes().removeClass('active').eq(i).addClass('active');
-						
+
 						var $z = this.getPanes().eq(i);
 							$w = this.getTabs().parent();
 
 						if($z.hasClass('imageMode'))
 							$w.addClass('imageMenu');
 						else
-							$w.removeClass('imageMenu');						
+							$w.removeClass('imageMenu');
 					}
 				}).slideshow({
 					prev:'.adv_backward',
@@ -282,7 +311,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					interval: interval,
 					clickable: autoclick
 				});
-				
+
 				 /* Open another slide than the first one */
 				$slider_tabs.children('.open').trigger('click');
 
@@ -291,10 +320,10 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					toAutoplay[i] = $slider_tabs.get(0);
 				}
 			});
-				
+
 			/* Autowidth function (for % sliders) */
 			self.SliderAutoWidth();
-	
+
 			$(window).resize(function() {
 				 self.SliderAutoWidth();
 			});
@@ -308,7 +337,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 
 			/* Play & stop functions */
 			var $slider_tabs = $e.children('.advslidestabs');
-			
+
 			$slider_tabs.children('.play').click(function(e){
 				$(this).parent().data('slideshow').play();
 			});
@@ -344,7 +373,7 @@ if(typeof Sedo == 'undefined') Sedo = {};
 				imageRef.src = imgSrc;
 				$bimgContent.data('realMaxResize', imageRef.width);
 				$bimgContent.data('maxResize', maxResize);
-				
+
 				if(resizeOversized && (maxResize > imageRef.width || $img.width() > imageRef.width)){
 					$img.css('maxWidth', imageRef.width);
 				}
@@ -404,15 +433,15 @@ if(typeof Sedo == 'undefined') Sedo = {};
 				{
 					$content.width(contentMaxResize);
 				}
-			}		
+			}
 		}
 	}
-	
-	
+
+
 	var xenRegister = function(el, advBbCodesFct){
 		XenForo.register(el, 'Sedo.AdvBbcodes.'+advBbCodesFct);
 	}
-	
+
 	xenRegister('.AdvFieldsetTrigger', 'FieldsetFix');
 	xenRegister('.adv_accordion', 'Accordion');
 	xenRegister('.adv_bimg_block', 'Bimg');

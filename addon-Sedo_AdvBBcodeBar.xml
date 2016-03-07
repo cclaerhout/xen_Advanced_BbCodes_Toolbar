@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.7.0" version_id="40" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
+<addon addon_id="Sedo_AdvBBcodeBar" title="Bb Codes &amp; Buttons Manager - Advanced Bb Codes" version_string="3.7.1" version_id="41" url="http://xenforo.com/community/resources/623" install_callback_class="" install_callback_method="" uninstall_callback_class="" uninstall_callback_method="">
   <admin_navigation/>
   <admin_permissions/>
   <admin_style_properties>
@@ -18,6 +18,12 @@
   <email_template_modifications/>
   <optiongroups>
     <group group_id="AdvBBcodeBar" display_order="13214" debug_only="0"/>
+    <option option_id="AdvBBcodeBar_FlexLayout" edit_format="onoff" data_type="boolean" can_backup="1">
+      <default_value>0</default_value>
+      <edit_format_params></edit_format_params>
+      <sub_options></sub_options>
+      <relation group_id="AdvBBcodeBar" display_order="110"/>
+    </option>
     <option option_id="AdvBBcodeBar_JsMiu" edit_format="radio" data_type="boolean" can_backup="1">
       <default_value>1</default_value>
       <edit_format_params>1={xen:phrase AdvBBcodeBar_Options_Yes}
@@ -660,6 +666,8 @@ With the default XenForo configuration, if a visitor or a member in a forum can'
     <phrase title="option_AdvBBcodeBar_fieldsetmax_px" version_id="6" version_string="3.2"><![CDATA[[Fieldset BBcode] Max Width Attribute (px)]]></phrase>
     <phrase title="option_AdvBBcodeBar_fieldsetmax_px_explain" version_id="6" version_string="3.2"><![CDATA[Enter max width for the fieldset bbcode. Unit is <b>pixel</b>. Do not precise "px" !
 <br />(Default value: 800)]]></phrase>
+    <phrase title="option_AdvBBcodeBar_FlexLayout" version_id="41" version_string="3.7.1"><![CDATA[Flex Layout]]></phrase>
+    <phrase title="option_AdvBBcodeBar_FlexLayout_explain" version_id="41" version_string="3.7.1"><![CDATA[Enables the use of flex* properties for dynamic layout. Required a relatively recent browser.]]></phrase>
     <phrase title="option_AdvBBcodeBar_gview_height" version_id="0" version_string=""><![CDATA[[Gview BBcode] Height]]></phrase>
     <phrase title="option_AdvBBcodeBar_gview_height_explain" version_id="6" version_string="3.2"><![CDATA[Gview BBcode height can only be set up here (not in bbcode options). <b>Unit is pixel</b>. Do not precise "px" !<br /> (Default value: 780)]]></phrase>
     <phrase title="option_AdvBBcodeBar_gview_spoilerbox" version_id="0" version_string=""><![CDATA[[Gview BBcode] Spoiler Wrapped]]></phrase>
@@ -6632,16 +6640,20 @@ p.info span
 	color:{xen:property contentText} !important;
 	background-color:{xen:property contentBackground} !important;
 }]]></template>
-    <template title="sedo_adv_tabs" version_id="36" version_string="3.6.3"><![CDATA[<xen:require css="sedo_adv_tabs.css" />
+    <template title="sedo_adv_tabs" version_id="41" version_string="3.7.1"><![CDATA[<xen:require css="sedo_adv_tabs.css" />
 <xen:if is="{$xenOptions.AdvBBcodeBar_debug_devmode}">
 	<xen:require js="js/sedo/advtoolbar/src/advbar_allinone.src.js" />	
 <xen:else />
 	<xen:require js="js/sedo/advtoolbar/advbar_allinone.js" />
 </xen:if>
 
+<xen:if is="{$xenOptions.AdvBBcodeBar_FlexLayout}">
+<xen:set var="$panesHeight">{$options.height}</xen:set>
+<xen:else />
 <xen:set var="$panesHeight">{xen:calc '{$options.height}-({xen:property advbbcodebar_tabs_title.height}+{xen:property advbbcodebar_tabs_content.padding-top} + {xen:property advbbcodebar_tabs_content.padding-bottom})'}</xen:set>
+</xen:if>
 
-<div id="{$options.uniqid}" class="adv_tabs_wrapper {$options.blockAlign} JsOnly {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};height:{$options.height}px">
+<div id="{$options.uniqid}" class="adv_tabs_wrapper {xen:if {$xenOptions.AdvBBcodeBar_FlexLayout}, 'flex'} {$options.blockAlign} JsOnly {xen:if '{$options.responsiveMode}', 'responsive'}" style="width:{$options.width}{$options.widthType};{xen:if '!{$xenOptions.AdvBBcodeBar_FlexLayout}', 'height:{$options.height}px'}">
 	<ul class="advtabs">
 		<xen:foreach loop="$options.tabs" value="$tab" i="$i" count="$total">
 			<li><a class="{xen:if '{$tab.open}', 'openMe'}" href="#{$options.uniqid}_{$i}" style="text-align:{$tab.align}">{xen:if '{$tab.title}', '{xen:raw $tab.title}', '{xen:phrase Sedo_AdvBBcodeBar_text_tab}{$i}'}</a></li>
@@ -6650,7 +6662,7 @@ p.info span
 
 	<div class="advpanes">
 		<xen:foreach loop="$options.panes" value="$pane" i="$i" count="$total">
-			<div style="height:{$panesHeight}px">{xen:raw $pane.content}</div>
+			<div style="{xen:if {$xenOptions.AdvBBcodeBar_FlexLayout}, 'max-'}height:{$options.height}px">{xen:raw $pane.content}</div>
 		</xen:foreach>
 	</div>
 </div>
@@ -6665,7 +6677,69 @@ p.info span
 		</xen:foreach>
 	</div>
 </noscript>]]></template>
-    <template title="sedo_adv_tabs.css" version_id="36" version_string="3.6.3"><![CDATA[.adv_tabs_wrapper{
+    <template title="sedo_adv_tabs.css" version_id="41" version_string="3.7.1"><![CDATA[.adv_tabs_wrapper.flex{
+	display: flex ;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-webkit-flex-direction: column ;
+	    -ms-flex-direction: column ;
+	        flex-direction: column ;
+	-webkit-flex-basis: auto ;
+	    -ms-flex-preferred-size: auto ;
+	        flex-basis: auto ;
+	max-width: 100% ;
+}
+
+.adv_tabs_wrapper.flex .advpanes{
+	display: inline-flex ;
+	-webkit-flex-basis: auto ;
+	    -ms-flex-preferred-size: auto ;
+	        flex-basis: auto ;
+}
+
+.adv_tabs_wrapper.flex ul.advtabs {
+	display: -webkit-inline-box;
+	display: -webkit-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+	max-width: 100%;
+	-webkit-flex-wrap: wrap;
+	    -ms-flex-wrap: wrap;
+	        flex-wrap: wrap;
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+	-webkit-flex-shrink: 0;
+	    -ms-flex-negative: 0;
+	        flex-shrink: 0;
+	overflow: hidden ;
+}
+
+.adv_tabs_wrapper.flex ul.advtabs li {
+	max-width: 100%;
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+	-webkit-flex-shrink: 0;
+	    -ms-flex-negative: 0;
+	        flex-shrink: 0;
+	overflow: hidden ;
+}
+
+.adv_tabs_wrapper.alter.flex ul.advtabs li {
+	-webkit-box-flex: 1;
+	-webkit-flex-grow: 1;
+	    -ms-flex-positive: 1;
+	        flex-grow: 1;
+	-webkit-flex-shrink: 0;
+	    -ms-flex-negative: 0;
+	        flex-shrink: 0;
+	max-width: 100%;
+	overflow: hidden ;
+}
+.adv_tabs_wrapper{
 	{xen:property advbbcodebar_tabs_container}
 }
 
