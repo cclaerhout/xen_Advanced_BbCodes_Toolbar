@@ -435,10 +435,6 @@ class Sedo_AdvBBcodeBar_BbCode_Formatter_AdvBbCodes
 				$sourceText = true;
 				$url = $source_data;
 			}
-			elseif($option == 'no-mobile')
-			{
-				 $useResponsiveMode = false;
-			}
 			elseif(preg_match('#[\s]*({URL=.+?})[\s]*#ui', $source_data))
 			{
 				$sourceText = true;
