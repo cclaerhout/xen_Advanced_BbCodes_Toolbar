@@ -6662,7 +6662,7 @@ p.info span
 
 	<div class="advpanes">
 		<xen:foreach loop="$options.panes" value="$pane" i="$i" count="$total">
-			<div style="{xen:if {$xenOptions.AdvBBcodeBar_FlexLayout}, 'max-'}height:{$options.height}px">{xen:raw $pane.content}</div>
+			<div style="height:{$options.height}px">{xen:raw $pane.content}</div>
 		</xen:foreach>
 	</div>
 </div>
