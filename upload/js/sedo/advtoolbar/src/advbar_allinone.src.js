@@ -198,7 +198,6 @@ if(typeof Sedo == 'undefined') Sedo = {};
 			$e.parentsUntil('.messageText').click(function(){
 				var checkVisible = $e.is(':visible');
 				if(!isVisible && checkVisible){
-					prevElementWidth = 0;
 					adjustSize();
 				}
 				isVisible = checkVisible;
