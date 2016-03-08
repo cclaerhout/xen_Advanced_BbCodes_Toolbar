@@ -98,8 +98,6 @@ if(typeof Sedo == 'undefined') Sedo = {};
 			$e.find('.adv_tabs_link').click(function(){ return false; });
 
 			var elementWidth = $e.width(),
-				prevElementWidth = 0,
-				prevElementHeight = 0,
 				widthInPercent = $e.css('width').indexOf('%') !=-1,
 				panesHeight = $panes.height();
 
@@ -130,23 +128,18 @@ if(typeof Sedo == 'undefined') Sedo = {};
 				if (elementHeight == 0){
 					return false;
 				}
-				heightChanged = prevElementHeight != elementHeight;
-				prevElementHeight = elementHeight;
 
 				var $parent = getVisibleParent($e),
 					parentWidth = $parent.width()-2;
 
 				//Width manager
-				var maxWidth = 0;
-				var widthChanged = true;
-				if(!widthInPercent){
-					if(elementWidth > parentWidth){
+				if(!widthInPercent && !$flexLayoutEnabled){
+					var maxWidth = 0;
+                    if(elementWidth > parentWidth){
 						maxWidth = parentWidth;
 					}else{
 						maxWidth = elementWidth;
 					}
-					widthChanged = prevElementWidth != maxWidth;
-					prevElementWidth = maxWidth;
 					$e.width(maxWidth);
 				}
 
@@ -169,13 +162,6 @@ if(typeof Sedo == 'undefined') Sedo = {};
 						deltaHeight = checkPanesHeight(panesHeight);
 						$panes.height(panesHeight);
 					}
-				}
-
-				if ($flexLayoutEnabled && (widthChanged || heightChanged)) {
-					var maxHeight = 0;
-					$panes.css({ width:maxWidth, height: 'auto' }).each(function() {
-						maxHeight = Math.max($(this).height(), maxHeight);
-					}).andSelf().css('height', maxHeight);
 				}
 			};
 
