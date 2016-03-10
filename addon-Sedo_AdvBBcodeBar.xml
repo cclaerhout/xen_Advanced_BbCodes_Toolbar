@@ -667,7 +667,9 @@ With the default XenForo configuration, if a visitor or a member in a forum can'
     <phrase title="option_AdvBBcodeBar_fieldsetmax_px_explain" version_id="6" version_string="3.2"><![CDATA[Enter max width for the fieldset bbcode. Unit is <b>pixel</b>. Do not precise "px" !
 <br />(Default value: 800)]]></phrase>
     <phrase title="option_AdvBBcodeBar_FlexLayout" version_id="41" version_string="3.7.1"><![CDATA[Flex Layout]]></phrase>
-    <phrase title="option_AdvBBcodeBar_FlexLayout_explain" version_id="41" version_string="3.7.1"><![CDATA[Enables the use of flex* properties for dynamic layout. Required a relatively recent browser.]]></phrase>
+    <phrase title="option_AdvBBcodeBar_FlexLayout_explain" version_id="41" version_string="3.7.1"><![CDATA[Enables the use of flex* properties for dynamic layout. Required a relatively recent browser with CSS3 support.<br/>
+<br/>
+This is experimental, and currently is only applicable to tab and will cause them to display and behave differently.]]></phrase>
     <phrase title="option_AdvBBcodeBar_gview_height" version_id="0" version_string=""><![CDATA[[Gview BBcode] Height]]></phrase>
     <phrase title="option_AdvBBcodeBar_gview_height_explain" version_id="6" version_string="3.2"><![CDATA[Gview BBcode height can only be set up here (not in bbcode options). <b>Unit is pixel</b>. Do not precise "px" !<br /> (Default value: 780)]]></phrase>
     <phrase title="option_AdvBBcodeBar_gview_spoilerbox" version_id="0" version_string=""><![CDATA[[Gview BBcode] Spoiler Wrapped]]></phrase>
