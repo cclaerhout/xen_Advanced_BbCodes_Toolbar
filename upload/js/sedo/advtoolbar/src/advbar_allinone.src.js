@@ -92,7 +92,10 @@ if(typeof Sedo == 'undefined') Sedo = {};
 		{
 			var $tabs = $e.children('.advtabs'),
 				$panes = $e.children('.advpanes').children('div'),
-				$flexLayoutEnabled = $e.hasClass('flex');
+				tools = new Sedo.AdvBbcodesTools(),
+				flexSupport = tools.flexSupport(),
+				flexLayoutEnabled = (!flexSupport) ? false : $e.hasClass('flex');
+
 			$tabs.tabs($panes);
 			$tabs.find('.openMe').trigger('click');
 			$e.find('.adv_tabs_link').click(function(){ return false; });
@@ -133,9 +136,9 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					parentWidth = $parent.width()-2;
 
 				//Width manager
-				if(!widthInPercent && !$flexLayoutEnabled){
+				if(!widthInPercent && !flexLayoutEnabled){
 					var maxWidth = 0;
-                    if(elementWidth > parentWidth){
+					if(elementWidth > parentWidth){
 						maxWidth = parentWidth;
 					}else{
 						maxWidth = elementWidth;
@@ -145,20 +148,22 @@ if(typeof Sedo == 'undefined') Sedo = {};
 
 				//Tabs & height manager
 				var tabsWidth = getTabsWidth(), deltaHeight;
+
 				console.log(tabsWidth, parentWidth);
-				if (!$flexLayoutEnabled && panesHeight == 0){
+				
+				if (!flexLayoutEnabled && panesHeight == 0){
 					panesHeight = $panes.height();
 				}
 				if(tabsWidth > parentWidth){
 					$e.addClass('alter');
-					if (!$flexLayoutEnabled) {
+					if (!flexLayoutEnabled) {
 						$panes.height(0);
 						deltaHeight = checkPanesHeight(panesHeight-$tabs.height());
 						$panes.height(deltaHeight);
 					}
 				}else{
 					$e.removeClass('alter');
-					if (!$flexLayoutEnabled) {
+					if (!flexLayoutEnabled) {
 						deltaHeight = checkPanesHeight(panesHeight);
 						$panes.height(panesHeight);
 					}
@@ -419,6 +424,21 @@ if(typeof Sedo == 'undefined') Sedo = {};
 					$content.width(contentMaxResize);
 				}
 			}
+		},
+		flexSupport:function()
+		{
+			//src: http://stackoverflow.com/questions/26761298/detecting-flex-wrap-support-in-browsers || http://ryanmorr.com/detecting-css-style-support/
+			var d = document.documentElement.style;
+			
+			if(typeof Sedo._flexSupport !== 'undefined') return Sedo._flexSupport;
+			
+			if (('flexWrap' in d) || ('WebkitFlexWrap' in d) || ('msFlexWrap' in d)){
+				Sedo._flexSupport = true;
+				return true;
+			}
+			
+			Sedo._flexSupport = false;
+			return false;
 		}
 	}
 
