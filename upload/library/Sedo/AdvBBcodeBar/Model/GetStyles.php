@@ -9,7 +9,7 @@
             foreach ($this->getDbStyles() AS $style)
             {
 		$Styles[] = array(
-		'label' => $style['title'],
+		'label' => filter_var($style['title', FILTER_SANITIZE_STRING),
 		'value' => $style['style_id'],
 		'selected' => in_array($style['style_id'], $selectedStyleIds)
                 );
