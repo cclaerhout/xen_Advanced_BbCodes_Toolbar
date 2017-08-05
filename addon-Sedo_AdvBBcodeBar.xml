@@ -1137,8 +1137,8 @@ Default value: 35px.]]></phrase>
     <property property_name="adv_highlight_normal_tags_close" property_type="scalar" definition="1" group_name="AdvBBcodeBar_Style" title="Normal Tags Highlighting [CLOSE]" description="Highlight all normal tags [tag]...[/tag]. Example: [article]content[/article] or [article=option1]content[/article]" css_components="" scalar_type="color" scalar_parameters="" display_order="125" sub_group="adv_highlight"><![CDATA[@primaryLighter]]></property>
     <property property_name="adv_highlight_special_tags_close" property_type="scalar" definition="1" group_name="AdvBBcodeBar_Style" title="Special Tags Highlighting [CLOSE]" description="Highlight all {tag}...{/tags} in bbcode options. For example: &lt;br /&gt;&#10;[article={b}Title{/b}]content[/article]" css_components="" scalar_type="color" scalar_parameters="" display_order="135" sub_group="adv_highlight"><![CDATA[@secondaryLight]]></property>
     <property property_name="advbbcodebar_latex_img" property_type="css" definition="1" group_name="AdvBBcodeBar_Style" title="[LATEX] Img" description="If you use the '\reverse' Mimetex Latex command, you might need to set a border here." css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="150" sub_group=""><![CDATA[{"border-color":"black","border-style":"none","border-width":"0","extra":"vertical-align: middle;","margin-all":"10px","padding-all":"0"}]]></property>
-    <property property_name="advbbcodebar_accordion_wrapper" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[ACCORDION] Container" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="160" sub_group=""><![CDATA[{"border-bottom-color":"@primaryLightish","border-bottom-style":"solid","border-bottom-width":"1px","border-top-color":"@primaryLightish","border-top-style":"solid","border-top-width":"1px","margin-left":"0 !important"}]]></property>
-    <property property_name="advbbcodebar_accordion_content" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[ACCORDION] Main Content" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="170" sub_group=""><![CDATA[{"background-color":"@primaryContent.background-color","border-left-color":"@primaryLightish","border-left-style":"solid","border-left-width":"1px","border-right-color":"@primaryLightish","border-right-style":"solid","border-right-width":"1px","extra":"position: relative;\n\/*IE7*\/","margin-left":"0 !important","padding-all":"6px"}]]></property>
+    <property property_name="advbbcodebar_accordion_wrapper" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[ACCORDION] Container" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="160" sub_group=""><![CDATA[{"border-bottom-color":"@primaryLightish","border-bottom-style":"solid","border-bottom-width":"1px","border-top-color":"@primaryLightish","border-top-style":"solid","border-top-width":"1px","extra":"margin-left: 0 !important;"}]]></property>
+    <property property_name="advbbcodebar_accordion_content" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[ACCORDION] Main Content" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="170" sub_group=""><![CDATA[{"background-color":"@primaryContent.background-color","border-left-color":"@primaryLightish","border-left-style":"solid","border-left-width":"1px","border-right-color":"@primaryLightish","border-right-style":"solid","border-right-width":"1px","extra":"margin-left: 0 !important;\nposition: relative;\n\/*IE7*\/","padding-all":"6px"}]]></property>
     <property property_name="advbbcodebar_accordion_title" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[ACCORDION] Title" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="180" sub_group=""><![CDATA[{"background-color":"@primaryLighter","background-image":"@imagePath\/xenforo\/gradients\/category-23px-light.png","background-position":"top","background-repeat":"repeat-x","border-bottom-color":"@primaryLightest","border-bottom-style":"double","border-bottom-width":"1px","border-left-color":"@primaryLightish","border-left-style":"solid","border-left-width":"1px","border-right-color":"@primaryLightish","border-right-style":"solid","border-right-width":"1px","color":"rgb(0, 0, 0)","extra":"cursor: pointer;\nposition: relative;\n*zoom: 1;\n\/*IE6*\/","font-size":"13px","font-variant":"small-caps","font-weight":"bold","padding-all":"6px"}]]></property>
     <property property_name="advbbcodebar_accordion_title_hover" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[ACCORDION] Title hover" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="190" sub_group=""><![CDATA[{"background-color":"rgb(226, 228, 229)","background-image":"@imagePath\/xenforo\/gradients\/category-23px-light.png","background-position":"top","background-repeat":"repeat-x"}]]></property>
     <property property_name="adv_template_stretchedtitlefield_width" property_type="scalar" definition="1" group_name="AdvBBcodeBar_Style" title="Editor Pop-up Stretched 'Title' field width" description="Do not change this value, except if you're using a translation of this addon and you're having display problems once the 'Title' field is stretched.&#10;Default value: 320px." css_components="" scalar_type="number" scalar_parameters="" display_order="400" sub_group="adv_popupfields"><![CDATA[320px]]></property>
@@ -1159,7 +1159,7 @@ Default value: 35px.]]></phrase>
     <property property_name="advbbcodebar_tabs_container" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Container" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="250" sub_group=""><![CDATA[{"margin-bottom":"5px"}]]></property>
     <property property_name="advbbcodebar_tabs_title" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Title" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="260" sub_group=""><![CDATA[{"background-color":"@primaryLightish","background-image":"@imagePath\/xenforo\/gradients\/category-23px-light.png","background-position":"top","background-repeat":"repeat-x","border-bottom-left-radius":"0","border-bottom-right-radius":"0","border-bottom-style":"none","border-color":"@primaryMedium","border-style":"solid","border-top-left-radius":"5px","border-top-right-radius":"5px","border-width":"1pt","color":"@contentText","extra":"display: block;\nmin-width: 100px;\nline-height: 30px;\ntext-align: center;\nposition: relative;\ntop: 1px;","font-size":"11px","height":"30px","margin-all":"0px","padding-bottom":"0px","padding-left":"6px","padding-right":"6px","padding-top":"0px","text-decoration":{"none":"none"}}]]></property>
     <property property_name="advbbcodebar_tabs_content" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Content" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="270" sub_group=""><![CDATA[{"background-color":"@primaryLighterStill","border-bottom-left-radius":"5px","border-bottom-right-radius":"5px","border-color":"#999","border-style":"solid","border-top-color":"@contentText","border-top-style":"none","border-top-width":"0","border-width":"1px","font-size":"14px","padding-bottom":"15px","padding-left":"10px","padding-right":"10px","padding-top":"15px"}]]></property>
-    <property property_name="advbbcodebar_tabs_title_hoveractive" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Title (hover/active)" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="265" sub_group=""><![CDATA[{"background-color":"@primaryLighterStill","background-image":"@imagePath\/xenforo\/gradients\/category-23px-light.png","background-position":"top","background-repeat":"repeat-x","extra":"cursor: default !important;","font-weight":"bold"}]]></property>
+    <property property_name="advbbcodebar_tabs_title_hoveractive" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[TABS] Title (hover/active)" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="265" sub_group=""><![CDATA[{"background-color":"@primaryLighterStill","background-image":"@imagePath\/xenforo\/gradients\/category-23px-light.png","background-position":"top","background-repeat":"repeat-x","font-weight":"bold"}]]></property>
     <property property_name="advbbcodebar_slider_nav_buttons" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Navig buttons" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="310" sub_group=""><![CDATA[{"background-color":"@primaryMedium","background-image":"@imagePath\/xenforo\/gradients\/form-button-white-25px.png","background-position":"top","background-repeat":"repeat-x","border-bottom-color":"@primaryMedium","border-color":"@primaryLightish","border-radius":"5px","border-style":"solid","border-width":"1px","color":"@textCtrlBackground","extra":"display: block;\ntext-align: center;\nbox-shadow: 0px 1px 2px 0px rgb(79,79,89);\ntext-shadow: 0px -1px 2px white;\noutline: none;\nline-height: 23px;\nbox-sizing: border-box;\ncursor: pointer;\nz-index: 30;","font-family":"Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif","font-size":"20px","height":"26px","padding-bottom":"0","padding-left":"6px","padding-right":"6px","padding-top":"0"}]]></property>
     <property property_name="advbbcodebar_slider_nav_buttons_hover" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Navig buttons - hover" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="315" sub_group=""><![CDATA[{"background-color":"@primaryLightish","border-bottom-color":"@primaryLightish","border-color":"@primaryLight","extra":"box-shadow: 0px 1px 2px 0px rgb(79,79,89);"}]]></property>
     <property property_name="advbbcodebar_slider_nav_buttons_active" property_type="css" definition="1" group_name="AdvBBcodeBar_Style_2" title="[SLIDER] Navig buttons - active" description="" css_components="text,background,border,layout,extra" scalar_type="" scalar_parameters="" display_order="320" sub_group=""><![CDATA[{"background-color":"@secondaryLight","border-color":"@secondaryLighter","border-top-color":"@secondaryLightest","extra":"box-shadow: 0px 1px 2px 0px rgb(242, 242, 242);\noutline: 0;"}]]></property>
@@ -5306,7 +5306,7 @@ p.info span
 <xen:else />
 	no slide
 </xen:if>]]></template>
-    <template title="sedo_adv_accordion.css" version_id="17" version_string="3.2.1"><![CDATA[.adv_accordion {
+    <template title="sedo_adv_accordion.css" version_id="41" version_string="3.7.1"><![CDATA[.adv_accordion {
 	{xen:property advbbcodebar_accordion_wrapper}
 }
 
@@ -5318,7 +5318,7 @@ p.info span
 	border-bottom: 0 !important;
 }
 
-.adv_accordion dt:hover,.adv_accordion dt.active {
+.adv_accordion dt:hover,.adv_accordion dt.AdvSlideActive {
 	{xen:property advbbcodebar_accordion_title_hover}
 }
 
@@ -6775,7 +6775,7 @@ p.info span
 	list-style:none !important;
 	margin:0 !important;
 	padding:0;
-	border-bottom:1px solid #666;
+/*	border-bottom:1px solid #666; */
 	min-height:30px;
 }
 
@@ -6795,9 +6795,6 @@ p.info span
 
 .adv_tabs_wrapper ul.advtabs a {
 		{xen:property advbbcodebar_tabs_title}
-		{xen:helper cssImportant,
-			{xen:property advbbcodebar_tabs_title.border}}
-		}
 }
 
 .adv_tabs_wrapper ul.advtabs a:active {
@@ -6809,10 +6806,11 @@ p.info span
 }
 
 ul.advtabs a:hover,  ul.advtabs a:focus{
-	box-shadow:none;
+	{xen:property advbbcodebar_tabs_title_hoveractive}
 }
 
 .adv_tabs_wrapper ul.advtabs a.current, ul.advtabs a.current:hover,  ul.advtabs a.current:focus,  ul.advtabs li.current a {
+cursor: default !important;
 {xen:property advbbcodebar_tabs_title_hoveractive}
 } 
 
